@@ -1,8 +1,9 @@
-var express = require('express');
+var express = require("express");
 var app = express();
 
-app.use(express.static(__dirname + '/../client'));
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000.');
+app.get("/",function(req,res){
+        res.send("<h1>Hello from EC2</h1>");
 });
+
+app.listen(80);
