@@ -16,11 +16,32 @@ var artyomStop = () => {
   artyom.say('Sayanara.');
 };
 
+
+
 artyom.addCommands([
   {
     indexes: ['hello', 'what\s up'],
     action: (i) => {
       artyom.say('Hi there. I hope your day is going well.');
+    }
+  },
+  {
+    indexes: ['charlie'],
+    action: (i) => {
+      //notification;
+      var options = {
+        type: "image",
+        title: "my notifications",
+        message: "my name is charlie and I am ballin",
+        iconUrl: "dash.gif",
+        imageUrl: "charlie.jpg"
+      }
+
+      function callback() {
+        console.log('ayeee');
+      }
+
+      chrome.notifications.create(options, callback);
     }
   },
   {

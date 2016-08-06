@@ -5,13 +5,12 @@
   "version": "1.0.0",
   "browser_action": {
     "default_title": "RCR",
-    "default_popup": "popup.html"
-  },
-  "background": {
-    "scripts": ["./client/public/dist/bundle.js", "./client/src/scripts/commands.js"],
-    "persistent": false
+    "default_popup": "./client/src/chrome/popup.html"
   },
   "chrome_url_overrides": {
     "newtab": "./client/src/index.html"
-  }
+  },
+  "permissions": [
+    "notifications"
+  ]
 }
