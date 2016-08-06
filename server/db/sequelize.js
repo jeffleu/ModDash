@@ -8,7 +8,7 @@ const sequelize = new Sequelize('postgres://localhost:5432/nmodb');\
 //   dialect: 'postgres',
 //   protocol: 'postgres',
 //   port: 5432,
-//   host: 'ec2-52-24-208-121.us-west-2.compute.amazonaws.com',
+//   host: 'nmodb.cqdxw6kmfwjk.us-west-2.rds.amazonaws.com:5432',
 //   dialectOptions: {
 //     ssl: true,
 //   },
