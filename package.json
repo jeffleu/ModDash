@@ -4,14 +4,10 @@
   "description": "Customizable dashboard and widgets with voice commands",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run build; gulp copy",
     "start": "nodemon server/server.js",
     "dev:hot": "nodemon server/server.js & webpack --watch & open -a \"Google Chrome\" http://localhost:3000",
-    "dev": "webpack-dev-server --content-base client/public",
-    "build:client": "node_modules/.bin/webpack",
-    "build": "npm run build:client",
     "initDB": "sh server/db/dbinit.sh",
-    "web": "webpack --watch"
+    "build": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -39,7 +35,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "aws-sdk": "^2.4.10",
+    "aws-sdk": "^2.4.13",
     "axios": "^0.13.1",
     "body-parser": "^1.15.2",
     "classnames": "^2.2.5",
