@@ -5,5 +5,6 @@ module.exports = db.define('user', {
   lastName: Sequelize.STRING,
   firstName: Sequelize.STRING,
   email: Sequelize.STRING,
-  oauthToken: Sequelize.STRING
+  refreshToken: Sequelize.STRING,
+  accessToken: Sequelize.STRING
 });

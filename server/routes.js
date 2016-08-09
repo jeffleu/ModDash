@@ -11,6 +11,6 @@ router.get('/auth', function(req, res) {
 
 router.get('/authCallback', User.createUser);
 
-// router.post('/calendar', Calendar.createEvent); 
+router.post('/calendar', Calendar.createEvent);
 
 module.exports = router;
