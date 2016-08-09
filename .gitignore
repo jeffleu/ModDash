@@ -4,3 +4,6 @@
 #private keys#
 .env
 NMO.pem
+
+
+npm-debug.log
