@@ -37,6 +37,7 @@
   "dependencies": {
     "aws-sdk": "^2.4.13",
     "axios": "^0.13.1",
+    "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
     "classnames": "^2.2.5",
     "cookie-session": "^2.0.0-alpha.1",
