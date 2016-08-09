@@ -32,13 +32,27 @@ Attachment.belongsTo(Event);
 Event.hasMany(Attachment);
 
 // Sync tables
-User.sync();
-Event.sync();
-Calendar.sync();
-GuestList.sync();
-GuestListUser.sync();
-Travel.sync();
-Attachment.sync();
+User.sync()
+.then(function() {
+  Event.sync()
+})
+.then(function() {
+  Calendar.sync()
+})
+.then(function() {
+  GuestList.sync()
+})
+.then(function() {
+  GuestListUser.sync()
+})
+.then(function() {
+  Travel.sync()
+})
+.then(function() {
+  Attachment.sync()
+})
+.catch((err) => {console.warn('error in syncing')})
+;
 
 module.exports = {
   User: User,
