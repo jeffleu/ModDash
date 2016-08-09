@@ -25,7 +25,8 @@ const createUser = function(req, res) {
       if (err) {
         return console.log('An error occured', err);
       }
-        console.log(profile);
+      console.log(profile);
+      // BUG: this does not return email
       User.create({
         lastName: profile.name.familyName,
         firstName: profile.name.givenName,
