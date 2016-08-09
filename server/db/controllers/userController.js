@@ -29,7 +29,8 @@ const createUser = function(req, res) {
       User.create({
         lastName: profile.name.familyName,
         firstName: profile.name.givenName,
-        oauthToken: tokens.refresh_token
+        refreshToken: tokens.refresh_token,
+        accessToken: tokens.access_token
       })
     });
   });
