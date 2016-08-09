@@ -1,5 +1,8 @@
-// var $ = require('jquery');
+/*******************
+  HELPER FUNCTIONS
+*******************/
 
+// Start listening for voice commands
 var artyomStart = () => {
   artyom.initialize({
     lang: 'en-GB', // More languages are documented in the library
@@ -8,52 +11,91 @@ var artyomStart = () => {
     listen: true // Start listening when this function is triggered
   });
 
-  artyom.say('What\'s up? Do you need something from me?');
+  artyom.say('What can I do for you today?');
 };
 
+// Stop listening for voice commands
 var artyomStop = () => {
   artyom.fatality();
-  artyom.say('Sayanara.');
+  artyom.say('Goodbye.');
 };
 
+// Get current time
+var getTime = () => {
+  var date = Date().slice(16, Date().length - 15);
+  var hours = date.slice(0, 2);
+  var minutes = date.slice(3, 5);
+  var amPm;
+
+  if (hours >= 12) {
+    amPm = 'PM';
+    hours = hours - 12;
+  } else {
+    amPm = 'AM';
+  }
+
+  return `${hours} ${minutes} ${amPm}`;
+};
+
+// Get current date
+var getDate = () => {
+  var date = Date().slice(0, 15);
+  var day = date.slice(0, 3);
+  var month = date.slice(4, 7);
+  var dateNum = Number(date.slice(8, 10));
+
+  var months = {
+    'Jan': 'January',
+    'Feb': 'February',
+    'Mar': 'March',
+    'Apr': 'April',
+    'May': 'May',
+    'Jun': 'June',
+    'Jul': 'July',
+    'Aug': 'August',
+    'Sept': 'September',
+    'Oct': 'October',
+    'Nov': 'Novermber',
+    'Dec': 'December'
+  };
+
+  var days = {
+    'Mon': 'Monday',
+    'Tue': 'Tuesday',
+    'Wed': 'Wednesday',
+    'Thu': 'Thursday',
+    'Fri': 'Friday',
+    'Sat': 'Saturday',
+    'Sun': 'Sunday'
+  };
+
+  day = days[day];
+  month = months[month];
+
+  return `${day} ${month} ${dateNum}`;
+};
+
+/******************
+  ARTYOM COMMANDS
+******************/
 
 
 artyom.addCommands([
   {
-    indexes: ['hello', 'what\s up'],
+    indexes: ['hello', 'what\'s up'],
     action: (i) => {
       artyom.say('Hi there. I hope your day is going well.');
     }
   },
   {
-    indexes: ['charlie'],
-    action: (i) => {
-      //notification;
-      var options = {
-        type: "image",
-        title: "my notifications",
-        message: "my name is charlie and I am ballin",
-        iconUrl: "dash.gif",
-        imageUrl: "charlie.jpg"
-      }
-
-      function callback() {
-        console.log('ayeee');
-      }
-
-      chrome.notifications.create(options, callback);
-    }
+    indexes: ['stop listening'],
+    action: (i) => { artyomStop() }
   },
   {
-    indexes: ['Shut up', 'Be quiet', 'Stop listening'],
+    indexes: ['render spotify playlist'],
     action: (i) => {
-      artyom.fatality();
-      artyom.say('All I hear is blah blah blah. I\'m going to stop listening now.');
-    }
-  },
-  {
-    indexes: ['render Spotify playlist'],
-    action: (i) => {
+      artyom.say('Rendering Spotify playlist.');
+
       $playlist = $('<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Ababybluejeff%3Aplaylist%3A6toivxuv2M1tBLjLWZwf3d" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
       $playlist.appendTo($('#main1'));
     }
@@ -67,58 +109,15 @@ artyom.addCommands([
     }
   },
   {
-    indexes: ['What time is it', 'time'],
+    indexes: ['what time is it'],
     action: (i) => {
-      var date = Date().slice(16, Date().length - 15);
-
-      var hours = date.slice(0, 2);
-      var minutes = date.slice(3, 5);
-      var amPm;
-
-      if (hours > 12) {
-        amPm = 'PM';
-        hours = hours - 12;
-      } else {
-        amPm = 'AM';
-      }
-
-      artyom.say(`Time for you to get a watch. Just kidding. It is currently ${hours} ${minutes} ${amPm}`);
+      artyom.say(`It is currently ${getTime()}.`);
     }
   },
   {
-    indexes: ['What\'s the date today', 'date'],
+    indexes: ['what\'s the date today'],
     action: (i) => {
-      var date = Date().slice(0, 15);
-      var day = date.slice(0, 3);
-      var month = date.slice(4, 7);
-      var dateNum = Number(date.slice(8, 10));
-
-      var monthsAndDays = {
-        'Jan': 'January',
-        'Feb': 'February',
-        'Mar': 'March',
-        'Apr': 'April',
-        'May': 'May',
-        'Jun': 'June',
-        'Jul': 'July',
-        'Aug': 'August',
-        'Sept': 'September',
-        'Oct': 'October',
-        'Nov': 'Novermber',
-        'Dec': 'December',
-        'Mon': 'Monday',
-        'Tue': 'Tuesday',
-        'Wed': 'Wednesday',
-        'Thu': 'Thursday',
-        'Fri': 'Friday',
-        'Sat': 'Saturday',
-        'Sun': 'Sunday'
-      };
-
-      day = monthsAndDays[day];
-      month = monthsAndDays[month];
-
-      artyom.say(`Today is ${day}, ${month} ${dateNum}`);
+      artyom.say(`Today is ${getDate()}.`);
     }
   },
   {
