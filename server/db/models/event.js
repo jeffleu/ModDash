@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../db/db.js');
+const db = require('../db.js');
 
 module.exports = db.define('event', {
   googleCalendarEventId: Sequelize.INTEGER,
