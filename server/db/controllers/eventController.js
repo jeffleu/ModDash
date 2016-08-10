@@ -1,25 +1,28 @@
-const models = require('../models/models');
-const googleOAuth = require('./../../setup/googleOAuth.js');
-const google = require('googleapis');
-const calendar = google.calendar('v3');
-const plus = google.plus('v1');
+const Event = models.Event;
+// const User = require('./userController');
+// const google = require('googleapis');
+// var calendar = google.calendar('v3');
+// const googleOAuth = require('./../../setup/googleOAuth');
+// var oauth2Client = googleOAuth.oauth2Client;
 
-var oauth2Client = googleOAuth.oauth2Client;
-
-const postEventToApi = function(req, res) {
-  console.log('body', req.body.summary);
-
-  const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body}
-  oauth2Client.setCredentials()
-  calendar.acl.insert(params, function(err, data) {
-    if(err) {
-      console.log('did not insert to cal', err);
-    } else {
-      console.log('data', data);
-    }
-  })
+const insertEvent = function(data) {
+  Event.findOrCreate({
+    where: {googleCalendarEventId: data.id},
+    defaults: {
+      name: data.summary,
+      eventUrl: data.htmlLink,
+      startDateTime: data.start.dateTime,
+      endDateTime: data.end.dateTime,
+      recurrence: JSON.stringify(data.recurrence),
+      // currently not checking for recurrence since the calendar events query has "single events: true" which lists every single event
+      location: data.location,
+      description: data.description
+    }})
+  .spread(function(event, created) {
+    console.log(created, ': event was created');
+  });
 }
 
 module.exports = {
-  postEventToApi
-};
+  insertEvent
+}

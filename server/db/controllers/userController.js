@@ -1,6 +1,6 @@
 const models = require('../models/models');
 const User = models.User;
-const googleOAuth = require('./../../setup/googleOAuth.js');
+const googleOAuth = require('./../../setup/googleOAuth');
 const google = require('googleapis');
 const plus = google.plus('v1');
 
@@ -38,6 +38,13 @@ const createUser = function(req, res) {
   res.send('Thank you for authorization!');
 };
 
+const getUserTokens = function(id){
+  return User.findOne({
+    where: { id: id }
+  })
+}
+
 module.exports = {
-  createUser
+  createUser,
+  getUserTokens
 };
