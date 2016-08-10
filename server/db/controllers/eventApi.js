@@ -4,8 +4,7 @@ const googleOAuth = require('./../../setup/googleOAuth.js');
 const google = require('googleapis');
 const calendar = google.calendar('v3');
 const plus = google.plus('v1');
-const gcal = require('google-calendar');
-const insertEvent = require('./eventController');
+const Event = require('./eventController');
 var oauth2Client = googleOAuth.oauth2Client;
 
 
@@ -31,7 +30,7 @@ const postEventToApi = function(req, res) {
           console.log('data', data);
         }
       });
-      insertEvent.insertEvent(req.body);
+      Event.insertEvent(req.body);
 
     });
   });
