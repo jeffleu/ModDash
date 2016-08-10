@@ -45,7 +45,7 @@ const getAll = function (req, res) {
   });
 };
 
-getAll();
+// getAll();
 //^^ fetching all event data but this call needs to happen elsewhere on a timer or by something invoking it
 
 module.exports = {
