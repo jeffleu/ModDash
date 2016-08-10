@@ -62,7 +62,7 @@ class App extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <button type='submit'>Submit</button>
+          <input type='submit'></input>
         </form>
       </div>
     )
