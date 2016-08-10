@@ -8,6 +8,8 @@ var oauth2Client = googleOAuth.oauth2Client;
 const Event = require('./eventController');
 
 
+// this is more of a utility function than a controller function since it's not doing anything with the Calendar model at all. 
+// need to move it later, thanks to Derek for catching this.
 const getAll = function (req, res) {
   var userId = 2
   User.getUserTokens(userId)
