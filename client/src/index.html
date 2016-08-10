@@ -13,6 +13,7 @@
 		<link rel="stylesheet" type='text/css' href="./styles/style.css" />
 		<!-- <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script> -->
 		<script src="jquery.js"></script>
+		<script src="lib/chrono.js"></script>
 		<script src="lib/artyom.min.js"></script>
 		<script src="./scripts/commands.js"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
@@ -58,7 +59,9 @@
 							</header>
 							<div class="content">
 								<form>
-									<input type="text" placeholder="Voice input here">
+									<input type="text" class="form-event" placeholder="Event">
+									<input type="text" class="form-datetime" placeholder="Date/time">
+									<input type="text" class="form-location" placeholder="Location">
 									
 								</form>
 <!-- 								<p>Lorem ipsum dolor sit amet nullam consequat<br />
@@ -232,6 +235,7 @@
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script> -->
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="https://cdn.jsdelivr.net/chrono/VERSION/chrono.min.js"></script>
       <script src="../public/dist/bundle.js"></script>
 	</body>
 </html>
