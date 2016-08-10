@@ -1,3 +1,4 @@
+const models = require('../models/models');
 const Event = models.Event;
 // const User = require('./userController');
 // const google = require('googleapis');

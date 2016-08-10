@@ -3,6 +3,12 @@ let newEvents = [];
 let ids = [];
 let latestId;
 
+var socket = io('http://localhost');
+socket.on('news', function (data) {
+  console.log(data);
+  socket.emit('my other event', { my: 'data' });
+});
+
 
 function fetchData(data) {
   for (var i = 0; i < data.items.length; i++) {

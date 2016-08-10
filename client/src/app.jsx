@@ -1,44 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-var event = {
-    'summary': 'Suyash Kale Birthday', // here comes the title of you event;
-    'location': 'Sai Kripa Colony, Scheme No 171, Indore, Madhya Pradesh', // location, you can find the exact location here;
-    'description': "A chance to hear more about Google's developer products.",
-    'start': { // here comes the event's start time details;
-        'dateTime': '2015-05-28T09:00:00-07:00', // date and time for the event;
-        'timeZone': 'America/Los_Angeles' // time zone for the event;
-    },
-    'end': { // here comes the event's end time details;
-        'dateTime': '2015-05-28T17:00:00-07:00', // date and time for the event;
-        'timeZone': 'America/Los_Angeles' // time zone for the event;
-    }
-  };
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       event: {
-        'summary': 'Suyash Kale Birthday', // here comes the title of you event;
-        'location': 'Sai Kripa Colony, Scheme No 171, Indore, Madhya Pradesh', // location, you can find the exact location here;
-        'description': "A chance to hear more about Google's developer products.",
-        'start': { // here comes the event's start time details;
-            'dateTime': '2015-05-28T09:00:00-07:00', // date and time for the event;
-            'timeZone': 'America/Los_Angeles' // time zone for the event;
+        'summary': 'Google I/O 2015',
+        'location': '800 Howard St., San Francisco, CA 94103',
+        'description': 'A chance to hear more about Google\'s developer products.',
+        'start': {
+          'dateTime': '2016-08-10T09:00:00-07:00',
+          'timeZone': 'America/Los_Angeles'
         },
-        'end': { // here comes the event's end time details;
-            'dateTime': '2015-05-28T17:00:00-07:00', // date and time for the event;
-            'timeZone': 'America/Los_Angeles' // time zone for the event;
+        'end': {
+          'dateTime': '2016-08-11T17:00:00-07:00',
+          'timeZone': 'America/Los_Angeles'
+        },
+        'recurrence': [
+          'RRULE:FREQ=DAILY;COUNT=2'
+        ],
+        'attendees': [
+          {'email': 'lpage@example.com'},
+          {'email': 'sbrin@example.com'}
+        ],
+        'reminders': {
+          'useDefault': false,
+          'overrides': [
+            {'method': 'email', 'minutes': 24 * 60},
+            {'method': 'popup', 'minutes': 10}
+          ]
         }
       }
     }
-    var event = this.state.event;
   }
 
 
   handleSubmit(e) {
+    var event = this.state.event;
     console.log('event', event);
     e.preventDefault();
     fetch('http://localhost:9000/api/calendar/addEvent', {
@@ -62,7 +61,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <input type='submit'></input>
         </form>
       </div>

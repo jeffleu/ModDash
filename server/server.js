@@ -4,6 +4,16 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./db/db.js');
 const router = require('./routes');
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+
+io.on('connection', function(socket) {
+  socket.emit('news', {hello: 'world'});
+  socket.on('my other event', function(data) {
+    console.log(data);
+  })
+})
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
