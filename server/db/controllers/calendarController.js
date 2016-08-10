@@ -9,7 +9,9 @@ const Event = require('./eventController');
 
 
 const getAll = function (req, res) {
-  User.getUserTokens(2)
+  var userId = 2
+  User.getUserTokens(userId)
+  // ^^ hardcoded right now, but this needs to be changed to the correct user id.
   .then(data => {
     oauth2Client.setCredentials({
       refresh_token: data.dataValues.refreshToken
@@ -44,6 +46,7 @@ const getAll = function (req, res) {
 };
 
 getAll();
+//^^ fetching all event data but this call needs to happen elsewhere on a timer or by something invoking it
 
 module.exports = {
   getAll
