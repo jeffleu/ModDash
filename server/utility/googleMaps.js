@@ -37,7 +37,8 @@ const getInitialTravelTime = function(eventId) {
   })
 };
 
-// getInitialTravelTime(30);
+
+// [5, 27, 53, 131, 79, 157, 183, 106, 1, 28, 54, 132, 80].forEach((item) => {getInitialTravelTime(item)});
 
 module.exports = {
   getInitialTravelTime
