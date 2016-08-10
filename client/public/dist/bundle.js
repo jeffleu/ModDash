@@ -136,7 +136,11 @@
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.handleSubmit.bind(this) },
-	          _react2.default.createElement('input', { type: 'submit' })
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit' },
+	            'Submit'
+	          )
 	        )
 	      );
 	    }
