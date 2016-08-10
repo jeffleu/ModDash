@@ -9,7 +9,9 @@ var oauth2Client = googleOAuth.oauth2Client;
 const pubnub = require('./../../pubnub.js')
 
 const postEventToApi = function(req, res) {
-  var id = 2;
+
+  console.log('body', req.body);
+  var userId = 2;
   User.getUserTokens(2)
     .then(data => {
       oauth2Client.setCredentials({
@@ -43,6 +45,7 @@ const postEventToApi = function(req, res) {
           );
         }
       });
+      Event.insertEvent(req.body, userId);
     });
 }
 
