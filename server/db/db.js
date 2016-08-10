@@ -8,7 +8,7 @@ const db = new Sequelize('nevermissout', process.env.PSQL_username, process.env.
   host: 'nevermissout.cqdxw6kmfwjk.us-west-2.rds.amazonaws.com',
   port: 5432,
   dialectOptions: { ssl: true },
-  // logging: false,
+  logging: false,
   define: { timestamps: true }
 });
 
