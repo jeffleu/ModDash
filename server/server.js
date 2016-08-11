@@ -5,8 +5,7 @@ const bodyParser = require('body-parser');
 const db = require('./db/db.js');
 const router = require('./routes');
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
-
+const pubnub = require ('./pubnub');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,9 +26,6 @@ app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname + '/../client/src/index.html'));
 });
 
-
 server.listen(9000, () => {
   console.log('listening to port 9000');
 });
-
-module.exports.io = io;
