@@ -4,13 +4,16 @@
   "description": "Quickly switch to other open tabs with just your keyboard",
   "version": "1.0.0",
   "background": {
-    "page": "./client/src/chrome/background.html"
+    "page": "/client/src/chrome/background.html"
   },
   "chrome_url_overrides": {
     "newtab": "./client/src/index.html"
   },
   "permissions": [
-    "notifications"
+    "notifications",
+    "background",
+    "http://*",
+    "https://*"
   ],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "content_security_policy": " script-src 'self' 'http://localhost:9000/socket.io/socket.io.js' 'unsafe-eval'; object-src 'self' "
 }

@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: [path.resolve(__dirname, 'client', 'src', 'app.jsx'), 'whatwg-fetch'],
+  entry: [path.resolve(__dirname, 'client', 'src', 'components', 'app.jsx'), 'whatwg-fetch'],
   output: {
     path: './client/public/dist',
     filename: 'bundle.js'

@@ -8,13 +8,6 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 
-io.on('connection', function(socket) {
-  socket.emit('news', {hello: 'world'});
-  socket.on('my other event', function(data) {
-    console.log(data);
-  })
-})
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/src')));
@@ -35,6 +28,8 @@ app.get('*', (req, res)=>{
 });
 
 
-app.listen(9000, () => {
+server.listen(9000, () => {
   console.log('listening to port 9000');
 });
+
+module.exports.io = io;
