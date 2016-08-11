@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import CalendarForm from './CalendarForm.jsx';
-import Time from '/Time.jsx';
+import Time from './Time.jsx';
 
 class App extends React.Component {
 
