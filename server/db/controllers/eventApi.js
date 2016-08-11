@@ -5,9 +5,8 @@ const google = require('googleapis');
 const calendar = google.calendar('v3');
 const plus = google.plus('v1');
 const Event = require('./eventController');
-const socket = require('./../../server');
 var oauth2Client = googleOAuth.oauth2Client;
-
+const pubnub = require('./../../pubnub.js')
 
 
 const postEventToApi = function(req, res) {
@@ -29,10 +28,18 @@ const postEventToApi = function(req, res) {
           console.log('did not insert to cal', err);
         } else {
           console.log('event saved to g cal!');
-          socket.io.on('connection', function(socket) {
-            socket.emit('newEvent', data);
-          })
-
+          pubnub.publish(
+            {
+              message: data,
+              channel: 'eventAdded',
+              sendByPost: false, // true to send via post
+              storeInHistory: false, //override default storage options
+              meta: {} // publish extra meta with the request
+            },
+            function (status, response) {
+                // handle status, response
+            }
+          ); 
         }
       });
       Event.insertEvent(req.body);
