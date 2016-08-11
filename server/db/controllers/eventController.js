@@ -7,6 +7,7 @@ const Event = models.Event;
 // var oauth2Client = googleOAuth.oauth2Client;
 
 const insertEvent = function(data) {
+  console.log('whats in here', data);
   Event.findOrCreate({
     where: {googleCalendarEventId: data.id},
     defaults: {
