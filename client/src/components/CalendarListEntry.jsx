@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CalendarListEntry = (props) => {
+const CalendarEntry = (props) => {
   console.log('list entry ', props.event);
   const getTime = (time) => {
     console.log(time.length);
@@ -37,4 +37,4 @@ const CalendarListEntry = (props) => {
   )
 }
 
-export default CalendarListEntry;
+export default CalendarEntry;

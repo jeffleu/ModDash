@@ -1,5 +1,5 @@
 import React from 'react';
-import CalendarListEntry from './CalendarListEntry.jsx';
+import CalendarEntry from './CalendarListEntry.jsx';
 const moment = require('moment');
 
 class Calendar extends React.Component {
@@ -17,7 +17,7 @@ class Calendar extends React.Component {
       <div className='Calendar'>
         Today's Events
         {this.props.events.map(event =>
-          <CalendarListEntry event={event} />
+          <CalendarEntry event={event} />
         )}
       </div>
     )
