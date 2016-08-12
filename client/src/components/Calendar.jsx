@@ -1,5 +1,5 @@
 import React from 'react';
-import CalendarEntry from './CalendarListEntry.jsx';
+import CalendarEntry from './CalendarEntry.jsx';
 const moment = require('moment');
 
 class Calendar extends React.Component {
