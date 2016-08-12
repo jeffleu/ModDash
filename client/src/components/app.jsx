@@ -13,8 +13,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      events = []
     }
+  }
+
+  addEventChange(event) {
+    this.setState({
+      this.state
+    })
   }
 
   render() {
