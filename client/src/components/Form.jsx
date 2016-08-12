@@ -28,6 +28,7 @@ class Form extends React.Component {
     this.props.commands.artyomStart();
   }
 
+  // Update Form's state on input form change
   handleChange(e) {
     var className = e.target.className;
     var value = e.target.value;
@@ -76,6 +77,7 @@ class Form extends React.Component {
     if ( this.state.startDate === moment().format('YYYY-MM-DD') ) {
       this.props.updateEvent(this.state);
     }
+    
     // Clear state which the form's values are pointing to
     this.setState({
       summary: '',
