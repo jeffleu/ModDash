@@ -19,7 +19,7 @@ class App extends React.Component {
 
   addEventChange(event) {
     this.setState({
-      events: this.state.concat(event)
+      events: this.state.events.concat([event])
     })
   }
 
@@ -30,10 +30,10 @@ class App extends React.Component {
           <Time />
         </div>
         <div>
-          <Calendar />
+          <Form updateEvent={this.addEventChange.bind(this)} commands={commands}/>
         </div>
         <div>
-          <Form commands={commands}/>
+          <Calendar events={this.state.events} />
         </div>
       </div>
     );

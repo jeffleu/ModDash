@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 class Form extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Form extends React.Component {
 
     // Set up commands
     this.props.commands.addCommands(this.props.commands.commands);
-    
+
     // Start artyom listener
     this.props.commands.artyomStart();
   }
@@ -35,7 +36,7 @@ class Form extends React.Component {
 
     if (className === 'form-event') {
       this.setState({
-        summary: value 
+        summary: value
       });
     } else if (className === 'form-location') {
       this.setState({
@@ -55,7 +56,7 @@ class Form extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     // TO DO: Use geolocation to update timeZone automatically
 
@@ -72,7 +73,9 @@ class Form extends React.Component {
         timeZone: 'America/Los_Angeles'
       }
     };
-
+    if ( this.state.startDate === moment().format('YYYY-MM-DD') ) {
+      this.props.updateEvent(this.state);
+    }
     // Clear state which the form's values are pointing to
     this.setState({
       summary: '',
@@ -98,6 +101,7 @@ class Form extends React.Component {
     }).catch((err) => {
       console.log('err', err);
     });
+
   }
 
   render() {

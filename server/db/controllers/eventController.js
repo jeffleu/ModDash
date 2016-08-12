@@ -35,6 +35,8 @@ const retrieveEvent = function(id) {
   })
 }
 
+const retrieveDayEvent = function()
+
 module.exports = {
   insertEvent,
   retrieveEvent
