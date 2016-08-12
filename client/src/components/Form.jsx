@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 class Form extends React.Component {
   constructor(props) {
@@ -72,8 +73,9 @@ class Form extends React.Component {
         timeZone: 'America/Los_Angeles'
       }
     };
-
-    this.props.updateEvent(this.state);
+    if ( this.state.startDate === moment().format('YYYY-MM-DD') ) {
+      this.props.updateEvent(this.state);
+    }
     // Clear state which the form's values are pointing to
     this.setState({
       summary: '',

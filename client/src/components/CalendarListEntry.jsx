@@ -3,10 +3,13 @@ import React from 'react';
 const CalendarListEntry = (props) => {
   console.log('list entry ', props.event);
   const getTime = (time) => {
-    const date = time.slice(16, time.length - 18);
-    let hours = date.slice(0, 2);
-    let minutes = date.slice(3, 5);
+    console.log(time.length);
+    // const date = time.slice(0, time.length - 18);
+    let hours = time.slice(0, 2);
+    let minutes = time.slice(3, 5);
     let amPm;
+    console.log('hours', hours);
+    console.log('minutes', minutes);
 
     if (hours >= 12) {
       amPm = 'PM';
@@ -15,12 +18,10 @@ const CalendarListEntry = (props) => {
       amPm = 'AM';
     }
 
-    return `${hours} ${minutes} ${amPm}`;
+    return `${hours}: ${minutes} ${amPm}`;
   };
 
   let start = getTime(props.event.startTime)
-  console.log('time', start);
-
   return (
     <div className='event-entry'>
       <div className='summary'>
