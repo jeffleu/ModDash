@@ -35936,7 +35936,7 @@
 /* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var require;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;"use strict";
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;"use strict";
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -40032,9 +40032,21 @@
 	var fillOutForm = function fillOutForm(wildcard) {
 	  // Separate event name, date/time and location
 	  var split = wildcard.split(' at ');
+	  var eventName = split[0];
+	  var location = void 0;
+	  var dateObject = void 0;
+
+	  if (Chrono.parse(split[1]).length === 1) {
+	    dateObject = Chrono.parse(split[1])[0].start;
+	    location = split[2];
+	  } else if (Chrono.parse(split[2]).length === 1) {
+	    dateObject = Chrono.parse(split[2])[0].start;
+	    location = split[1];
+	  } else if (Chrono.parse(split[1]).length === 0 || Chrono.parse(split[2]).length === 0) {
+	    console.warn('Command can be said in two ways:\n [event] at [date/time] at [location]\n [event] at [location] at [date/time]');
+	  }
 
 	  // Parse date/time information into object
-	  var dateObject = Chrono.parse(split[1])[0].start;
 	  var date = Object.assign(dateObject.impliedValues, dateObject.knownValues);
 
 	  // Add leading zeroes to month/day if less than 10
@@ -40048,8 +40060,8 @@
 
 	  // Generate form data object to pass to this.setState
 	  var formInfo = {
-	    summary: split[0],
-	    location: split[2],
+	    summary: eventName,
+	    location: location,
 	    startDate: date.year + '-' + date.month + '-' + date.day,
 	    startTime: time,
 	    endDate: date.year + '-' + date.month + '-' + date.day,
@@ -40058,7 +40070,7 @@
 
 	  handleFormData(formInfo);
 
-	  artyom.say('Added ' + split[0] + ' at ' + split[2] + ' to the calendar.');
+	  artyom.say('Added ' + eventName + ' at ' + location + ' to the calendar.');
 	};
 
 	/********************************************************
