@@ -1,90 +1,43 @@
+var pubnub = PUBNUB({
+  subscribe_key: 'sub-c-db638056-601a-11e6-9bf3-02ee2ddab7fe',
 
-// let newEvents = [];
-// let ids = [];
-// let latestId;
-
-
-var socket = io.connect('http://localhost:9000');
-socket.on('newEvent', function (data) {
-  console.log('did it get here', data);
-
-  var notify = {
-    type: 'basic',
-    title: 'Your Calendar Event Has Been Added!',
-    message: data.location + '\n' + data.start.dateTime + ' - ' + data.end.dateTime,
-    iconUrl: 'sonic-sega.png',
-    buttons: [{
-      title: 'Click To See Details'
-    }]
-  };
-
-  chrome.notifications.onButtonClicked.addListener(function() {
-    window.open(data.htmlLink);
-  });
-
-  chrome.notifications.create(notify, function() {
-    console.log('sucess!');
-  });
+  error: function (error) {
+    console.log('Error:', error);
+  },
+  message: function( message, env, channel ){
+    console.log('pubnub message', message)
+  },
+  connect: function(){
+    console.log("Connected")
+  },
+  disconnect: function(){
+    console.log("Disconnected")
+  },
+  reconnect: function(){
+    console.log("Reconnected")
+  }
 });
 
 
+pubnub.subscribe ({
+  channel: 'eventAdded',
+  message: function(data){
+    var notify = {
+      type: 'basic',
+      title: 'Your Calendar Event Has Been Added!',
+      message: data.location + '\n' + data.start.dateTime + ' - ' + data.end.dateTime,
+      iconUrl: 'sonic-sega.png',
+      buttons: [{
+        title: 'Click To See Details'
+      }]
+    };
 
-// chrome.notifications.onButtonClicked.addListener(function() {
-//   window.open(data.htmlLink);
-// });
+    chrome.notifications.onButtonClicked.addListener(function() {
+      window.open(data.htmlLink);
+    });
 
-
-
-// function fetchData(data) {
-//   for (var i = 0; i < data.items.length; i++) {
-//     ids[i] = data.items[i].id;
-//     events[i] = {'time': data.items[i].start.dateTime + ' - ' + data.items[i].end.dateTime, 'location': data.items[i].location, 'link': data.items[i].htmlLink}
-//   }
-//
-//   if(latestId === ids[0]) {
-//     // no update
-//   } else if (latestId === undefined) {
-//     // first run browser session
-//     latestId = ids[0];
-//   } else if (latestId !== ids[0]) {
-//     for (var j = 0; j <= ids.length; j++) {
-//       if(latestId === ids[j]) {
-//         break;
-//       } else {
-//         newEvents[j] = events[j];
-//       }
-//     }
-//     latestId = ids[0];
-//   }
-//
-//   console.log('newEvents', newEvents);
-//   if (newEvents.length === 0) {
-//     // do nothing
-//   } else {
-//     for (var h = 0; h < newEvents.length; h++) {
-//       var event = {
-//         type: 'basic',
-//         title: 'New Calendar Event Added!',
-//         meesage: newEvents[i].time + '\n' + newEvents[i].location,
-//         buttons: [{
-//           title: "Click to See Details",
-//
-//         }],
-//         iconUrl: 'charlie.jpg'
-//       };
-//       chrome.notifications.onButtonClicked.addListener(function() {
-//         window.open(newEvents[i].link)
-//       })
-//       chrome.notifications.create(event);
-//     }
-//   }
-// }
-
-
-// time start and end
-// location
-// confirm saved to calendar
-// need summary
-
-
-// setInterval(fetchData(calendarData), 2000);
+    chrome.notifications.create(notify, function() {
+      console.log('successfully created notification!');
+    });
+  }
+});
