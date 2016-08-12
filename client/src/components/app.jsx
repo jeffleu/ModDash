@@ -2,34 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Time from './Time.jsx';
 import Calendar from './Calendar.jsx'
+import Form from './Form.jsx';
+import Chrono from '../lib/chrono.min.js';
+import artyom from '../lib/artyom.min.js';
+import $ from '../lib/jquery.js';
+const commands = require('../scripts/commands.js');
+
 
 class App extends React.Component {
   constructor(props) {
-      super(props);
+    super(props);
+    this.state = {
+
+    }
   }
-
-
-    // handleSubmit(e) {
-    //   var event = this.state.event;
-    //   console.log('event', event);
-    //   e.preventDefault();
-    //   fetch('http://localhost:9000/api/calendar/addEvent', {
-    //     method: 'POST',
-    //     body: JSON.stringify(event),
-    //     mode: 'cors-with-forced-preflight',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   }).then((res) => {
-    //     console.log('res', res);
-    //     return res.json();
-    //   }).then((data) => {
-    //     // do something
-    //     console.log('data', data);
-    //   }).catch((err) => {
-    //     console.log('err', err);
-    //   });
-    // }
 
   render() {
     return (
@@ -40,9 +26,14 @@ class App extends React.Component {
         <div>
           <Calendar />
         </div>
+        <div>
+          <Form commands={commands}/>
+        </div>
       </div>
-    )
+    );
   }
 }
-// console.log('am i getting here', ReactDOM);
+
+export default App;
+
 ReactDOM.render(<App />, document.getElementById('app'));
