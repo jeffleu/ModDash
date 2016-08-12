@@ -31,7 +31,6 @@ app.get('/', (req, res)=>{
   res.sendFile(path.join(__dirname + '/../client/src/index.html'));
 });
 
-// app.get('/api/')
 
 server.listen(9000, () => {
   console.log('Express is listening on port 9000.');

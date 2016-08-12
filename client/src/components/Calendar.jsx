@@ -16,8 +16,8 @@ class Calendar extends React.Component {
     return(
       <div className='Calendar'>
         Today's Events
-        {this.props.events.map(event =>
-          <CalendarEntry event={event} />
+        {this.props.events.map((event, i) =>
+          <CalendarEntry key={i} event={event} />
         )}
       </div>
     )
