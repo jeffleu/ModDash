@@ -30,5 +30,5 @@ app.get('/', (req, res)=>{
 
 
 server.listen(9000, () => {
-  console.log('listening to port 9000');
+  console.log('Express is listening on port 9000.');
 });

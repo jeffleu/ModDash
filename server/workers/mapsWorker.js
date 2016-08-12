@@ -10,7 +10,7 @@ const googleMaps = require('./../utility/googleMaps.js');
 // CARL IS CURRENTLY WORKING ON IT 
 const mongoConnectionString = process.env.MONGODB_URI;
 
-var agenda = new Agenda({db: {address: mongoConnectionString, collection: 'mapJobs'}});
+var agenda = new Agenda({db: {address: mongoConnectionString, collection: 'mapJobs', options: {server:{auto_reconnect:true}}}});
 
 // const getTravels = function() {
 //   Travel.getAllTravel()
@@ -81,11 +81,12 @@ agenda.define('send notification', function(job, done) {
 
 agenda.on('ready', function() {
   // getTravels();
+  console.log('Agenda is connected to Heroku mongodb.');
   agenda.start();
 });
 
 agenda.on('error', function(err) {
-  console.warn('error', err);
+  console.warn('Error in Agenda connecting to Heroku mongodb:\n', err);
 });
 
 module.exports = agenda;
