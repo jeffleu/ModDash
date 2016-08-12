@@ -1,31 +1,34 @@
-/*******************
+const Chrono = require('../lib/chrono.min.js');
+const $ = require('../lib/jquery.js');
+
+/********************************************************
   HELPER FUNCTIONS
-*******************/
+********************************************************/
 
 // Start listening for voice commands
-var artyomStart = () => {
+const artyomStart = () => {
   artyom.initialize({
-    lang: 'en-GB', // More languages are documented in the library
-    continuous: true, //if you have https connection, you can activate continuous mode
-    debug: true, //Show everything in the console
-    listen: true // Start listening when this function is triggered
+    lang: 'en-GB',
+    continuous: true,
+    debug: true,
+    listen: true
   });
 
-  artyom.say('What can I do for you today?');
+  artyom.say('Started listening.');
 };
 
 // Stop listening for voice commands
-var artyomStop = () => {
+const artyomStop = () => {
   artyom.fatality();
   artyom.say('Goodbye.');
 };
 
 // Get current time
-var getTime = () => {
-  var date = Date().slice(16, Date().length - 15);
-  var hours = date.slice(0, 2);
-  var minutes = date.slice(3, 5);
-  var amPm;
+const getTime = () => {
+  const date = Date().slice(16, Date().length - 15);
+  let hours = date.slice(0, 2);
+  let minutes = date.slice(3, 5);
+  let amPm;
 
   if (hours >= 12) {
     amPm = 'PM';
@@ -38,13 +41,13 @@ var getTime = () => {
 };
 
 // Get current date
-var getDate = () => {
-  var date = Date().slice(0, 15);
-  var day = date.slice(0, 3);
-  var month = date.slice(4, 7);
-  var dateNum = Number(date.slice(8, 10));
+const getDate = () => {
+  const date = Date().slice(0, 15);
+  let day = date.slice(0, 3);
+  let month = date.slice(4, 7);
+  let dateNum = Number(date.slice(8, 10));
 
-  var months = {
+  let months = {
     'Jan': 'January',
     'Feb': 'February',
     'Mar': 'March',
@@ -59,7 +62,7 @@ var getDate = () => {
     'Dec': 'December'
   };
 
-  var days = {
+  let days = {
     'Mon': 'Monday',
     'Tue': 'Tuesday',
     'Wed': 'Wednesday',
@@ -75,18 +78,48 @@ var getDate = () => {
   return `${day} ${month} ${dateNum}`;
 };
 
-/******************
+// Function that will take formData
+let handleFormData = () => {
+  throw new Error('Missing callback function for onFillOutForm!');
+};
+
+const fillOutForm = (wildcard) => {
+  // Separate event name, date/time and location
+  let split = wildcard.split(' at ');
+
+  // Parse date/time information into object
+  let dateObject = Chrono.parse(split[1])[0].start;
+  let date = Object.assign(dateObject.impliedValues, dateObject.knownValues);
+  
+  // Add leading zeroes to month/day if less than 10
+  (date.month < 10) ? date.month = `0${date.month}` : date.month = `${date.month}`;
+  (date.day < 10) ? date.day = `0${date.day}` : date.day = `${date.day}`;
+  
+  // Add leading zeroes to hour/minute if less than 10
+  let time = '';
+  (date.hour < 10) ? time += `0${date.hour}:` : time += `${date.hour}:`;
+  (date.minute < 10) ? time += `0${date.minute}` : time += `${date.minute} `;
+
+  // Generate form data object to pass to this.setState
+  let formInfo = {
+    summary: split[0],
+    location: split[2],
+    startDate: `${date.year}-${date.month}-${date.day}`,
+    startTime: time,
+    endDate: `${date.year}-${date.month}-${date.day}`,
+    endTime: time
+  };
+
+  handleFormData(formInfo);
+
+  artyom.say(`Added ${split[0]} at ${split[2]} to the calendar.`);
+};
+
+/********************************************************
   ARTYOM COMMANDS
-******************/
+********************************************************/
 
-
-artyom.addCommands([
-  {
-    indexes: ['hello', 'what\'s up'],
-    action: (i) => {
-      artyom.say('Hi there. I hope your day is going well.');
-    }
-  },
+const commands = [
   {
     indexes: ['stop listening'],
     action: (i) => { artyomStop() }
@@ -95,7 +128,7 @@ artyom.addCommands([
     indexes: ['render spotify playlist'],
     action: (i) => {
       artyom.say('Rendering Spotify playlist.');
-
+      
       $playlist = $('<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Ababybluejeff%3Aplaylist%3A6toivxuv2M1tBLjLWZwf3d" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
       $playlist.appendTo($('#main1'));
     }
@@ -110,15 +143,11 @@ artyom.addCommands([
   },
   {
     indexes: ['what time is it'],
-    action: (i) => {
-      artyom.say(`It is currently ${getTime()}.`);
-    }
+    action: (i) => { artyom.say(`It is currently ${getTime()}.`) }
   },
   {
     indexes: ['what\'s the date today'],
-    action: (i) => {
-      artyom.say(`Today is ${getDate()}.`);
-    }
+    action: (i) => { artyom.say(`Today is ${getDate()}.`) }
   },
   {
     indexes: ['* I choose you'],
@@ -145,17 +174,33 @@ artyom.addCommands([
   {
     indexes: ['open *'],
     smart: true,
-    action: (i, wildcard) => {
-      window.open(`http://${wildcard}`);
-    }
+    action: (i, wildcard) => { window.open(`http://${wildcard}`) }
   },
   {
     indexes: ['search YouTube for *'],
     smart: true,
+    action: (i, wildcard) => { window.open(`https://www.youtube.com/results?search_query=${wildcard}`) }
+  },
+  {
+    indexes: ['create event *'],
+    smart: true,
     action: (i, wildcard) => {
-      window.open(`https://www.youtube.com/results?search_query=${wildcard}`);
+      fillOutForm(wildcard);
     }
   }
-]);
+];
 
-artyomStart();
+/********************************************************
+  EXPORTS
+********************************************************/
+
+module.exports = {
+  artyomStart: artyomStart,
+  artyomStop: artyomStop,
+  fillOutForm: fillOutForm,
+  addCommands: artyom.addCommands,
+  commands: commands,
+  onFillOutForm: function(callback) {
+    handleFormData = callback;
+  }
+};
