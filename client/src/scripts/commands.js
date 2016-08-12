@@ -90,11 +90,11 @@ const fillOutForm = (wildcard) => {
   // Parse date/time information into object
   let dateObject = Chrono.parse(split[1])[0].start;
   let date = Object.assign(dateObject.impliedValues, dateObject.knownValues);
-  
+
   // Add leading zeroes to month/day if less than 10
   (date.month < 10) ? date.month = `0${date.month}` : date.month = `${date.month}`;
   (date.day < 10) ? date.day = `0${date.day}` : date.day = `${date.day}`;
-  
+
   // Add leading zeroes to hour/minute if less than 10
   let time = '';
   (date.hour < 10) ? time += `0${date.hour}:` : time += `${date.hour}:`;
@@ -128,7 +128,7 @@ const commands = [
     indexes: ['render spotify playlist'],
     action: (i) => {
       artyom.say('Rendering Spotify playlist.');
-      
+
       $playlist = $('<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Ababybluejeff%3Aplaylist%3A6toivxuv2M1tBLjLWZwf3d" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
       $playlist.appendTo($('#main1'));
     }

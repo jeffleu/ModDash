@@ -7,7 +7,7 @@
     "page": "/client/src/chrome/background.html"
   },
   "chrome_url_overrides": {
-    "newtab": "./client/src/index.html"
+    "newtab": "./client/public/dist/index.html"
   },
   "permissions": [
     "notifications",
