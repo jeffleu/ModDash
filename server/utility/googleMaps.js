@@ -30,6 +30,8 @@ const getInitialTravelTime = function(event) {
         var distance = body.rows[0].elements[0].distance;
         var duration = body.rows[0].elements[0].duration;
 
+        duration = duration || {value: 0}
+
         // add data to Travel table, see /db/controllers/travelController
         Travel.initiateTravel(event, (duration.value * 1000)); // convert seconds to milliseconds
       }
