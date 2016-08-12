@@ -3,9 +3,10 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./db/db.js');
-const router = require('./routes');
-const server = require('http').Server(app);
+const server = app.listen(9000);
 const io = require('socket.io')(server);
+const router = require('./routes');
+const controller = require('./db/controllers/eventApi');
 
 
 app.use(bodyParser.json());
@@ -23,10 +24,12 @@ app.all('/api/*', function(req, res, next) {
 })
 app.use('/api', router);
 
-app.get('*', (req, res)=>{
+app.get('/', (req, res)=>{
   res.sendFile(path.join(__dirname + '/../client/src/index.html'));
 });
-
+// app.set('socketsio', io);
+// io.on('connection', function(socket) {
+// });
 
 server.listen(9000, () => {
   console.log('listening to port 9000');

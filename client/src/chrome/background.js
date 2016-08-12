@@ -5,33 +5,25 @@
 
 
 var socket = io.connect('http://localhost:9000');
-socket.on('newEvent', function (data) {
+socket.on('test', function (data) {
   console.log('did it get here', data);
 
   var notify = {
     type: 'basic',
     title: 'Your Calendar Event Has Been Added!',
-    message: data.location + '\n' + data.start.dateTime + ' - ' + data.end.dateTime,
-    iconUrl: 'sonic-sega.png',
-    buttons: [{
-      title: 'Click To See Details'
-    }]
+    message: data,
+    iconUrl: 'sonic-sega.png'
   };
 
-  chrome.notifications.onButtonClicked.addListener(function() {
-    window.open(data.htmlLink);
-  });
+  // chrome.notifications.onButtonClicked.addListener(function() {
+  //   window.open(data.htmlLink);
+  // });
 
   chrome.notifications.create(notify, function() {
     console.log('sucess!');
   });
 });
 
-
-
-// chrome.notifications.onButtonClicked.addListener(function() {
-//   window.open(data.htmlLink);
-// });
 
 
 
