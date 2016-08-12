@@ -1,12 +1,10 @@
 var pubnub = PUBNUB({
   subscribe_key: 'sub-c-db638056-601a-11e6-9bf3-02ee2ddab7fe',
-  // publish_key: '',
-  // ssl: true
+
   error: function (error) {
     console.log('Error:', error);
   },
   message: function( message, env, channel ){
-    // RECEIVED A MESSAGE.
     console.log('pubnub message', message)
   },
   connect: function(){
@@ -39,15 +37,7 @@ pubnub.subscribe ({
     });
 
     chrome.notifications.create(notify, function() {
-      console.log('sucess!');
+      console.log('successfully created notification!');
     });
   }
 });
-
-
-// time start and end
-// location
-// confirm saved to calendar
-// need summary
-
-
