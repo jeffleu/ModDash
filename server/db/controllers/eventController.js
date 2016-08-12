@@ -33,11 +33,9 @@ const retrieveEvent = function(id) {
   return Event.findOne({
     where: {id: id}
   })
-}
-
-const retrieveDayEvent = function()
+};
 
 module.exports = {
   insertEvent,
   retrieveEvent
-}
+};
