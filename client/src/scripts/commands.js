@@ -90,6 +90,7 @@ const fillOutForm = (wildcard) => {
   let location;
   let dateObject;
 
+  // Set location and dateObject depending on the order of command
   if (Chrono.parse(split[1]).length === 1) {
     dateObject = Chrono.parse(split[1])[0].start;
     location = split[2];
@@ -110,7 +111,7 @@ const fillOutForm = (wildcard) => {
   // Add leading zeroes to hour/minute if less than 10
   let time = '';
   (date.hour < 10) ? time += `0${date.hour}:` : time += `${date.hour}:`;
-  (date.minute < 10) ? time += `0${date.minute}` : time += `${date.minute} `;
+  (date.minute < 10) ? time += `0${date.minute}` : time += `${date.minute}`;
 
   // Generate form data object to pass to this.setState
   let formInfo = {
@@ -124,7 +125,15 @@ const fillOutForm = (wildcard) => {
 
   handleFormData(formInfo);
 
-  artyom.say(`Added ${eventName} at ${location} to the calendar.`);
+  // artyom.say(`Added ${eventName} at ${location} to the calendar. If everything on the form looks good, say "Looks good" to submit the form.`);
+};
+
+let handleVoiceSubmit = () => {
+
+};
+
+const voiceSubmit = () => {
+
 };
 
 /********************************************************
@@ -199,6 +208,12 @@ const commands = [
     action: (i, wildcard) => {
       fillOutForm(wildcard);
     }
+  },
+  {
+    indexes: ['looks good', 'add to calendar'],
+    action: (i) => {
+      // need to call function that will call 
+    }
   }
 ];
 
@@ -212,7 +227,10 @@ module.exports = {
   fillOutForm: fillOutForm,
   addCommands: artyom.addCommands,
   commands: commands,
-  onFillOutForm: function(callback) {
+  onFillOutForm: (callback) => {
     handleFormData = callback;
+  },
+  onVoiceSubmit: (callback) => {
+    // need callback to equal handleSubmit
   }
 };
