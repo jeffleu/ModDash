@@ -52,16 +52,31 @@ agenda.define('send notification', function(job, done) {
 
   // after sending notification, agenda.cancel
   var travelId = job.attrs.data.data.id;
-  agenda.cancel({data: {id: travelId}});
-
 
   console.log('sending notification to user to leave now for event:', job.attrs.data);
+
+  agenda.cancel({"_id": job._id}, function(err, jobs) {
+    console.log('canceled job after notification was sent', jobs); 
+  })
   done();
 });
 
 
+// agenda.define('delete job', function(job, done) {
+//   agenda.jobs({'data': {'id': '4'}}, function(err, jobs) {
+//     console.log('looking for jobs');
+//     console.log(jobs);
+//   })
+//   //   // Work with jobs (see below)
+//   // });
+//   // agenda.cancel({data: {id: travelId}});  
+// });
+
+// agenda.cancel({"name": "delete job"}, function(err, jobs) {
+//   console.log(jobs);
+// })
+
 agenda.on('ready', function() {
-  // agenda.schedule('in 5 minutes', 'send notification', {data: 'data'});
   // getTravels();
   agenda.start();
 });
