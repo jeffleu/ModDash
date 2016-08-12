@@ -9,6 +9,9 @@ const pubnub = require ('./pubnub');
 
 const mapsWorker = require('./workers/mapsWorker');
 
+// https://github.com/foreverjs/forever
+// use forever.js to restart the server if it crashes. 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/public/dist/')));
