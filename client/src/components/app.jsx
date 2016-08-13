@@ -32,12 +32,29 @@ class App extends React.Component {
             eventName: event.name,
             location: event.location,
             startTime: event.startdatetime,
-            eventUrl: event.eventUrl
+            eventUrl: event.eventUrl,
+            eventId: event.googleCalendarEventId
           };
         });
 
+        // Get all event times
+        let times = eventList.reduce((array, event) => {
+          return array.concat(event.startTime);
+        }, []);
+
+        // Sort event times in chronological order
+        times.sort((a, b) => {
+          return new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`);
+        });
+
+        // Sort events based on start time
+        let sortedEvents = eventList.reduce((sortedArray, event) => {
+          sortedArray[times.indexOf(event.startTime)] = event;
+          return sortedArray;
+        }, []);
+
         this.setState({
-          events: eventList          
+          events: sortedEvents
         });
       })
       .catch((err) => {
