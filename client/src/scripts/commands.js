@@ -125,18 +125,17 @@ const fillOutForm = (wildcard) => {
 
   handleFormData(formInfo);
 
-  // artyom.say(`Added ${eventName} at ${location} to the calendar. If everything on the form looks good, say "Looks good" to submit the form.`);
-  artyom.say('If everything in the form looks good, say add to calendar');
+  // artyom.say(`Added ${eventName} at ${location} to the calendar. If everything on the form looks good, say add to calendar.`);
 };
 
-let handleVoiceSubmit = () => {
-  throw new Error('Missing callback function for onVoiceSubmit!');
-};
+// let handleVoiceSubmit = () => {
+//   throw new Error('Missing callback function for onVoiceSubmit!');
+// };
 
-const voiceSubmit = () => {
-  console.log('Inside voiceSubmit');
-  handleVoiceSubmit();
-};
+// const voiceSubmit = () => {
+//   console.log('Inside voiceSubmit');
+//   handleVoiceSubmit();
+// };
 
 /********************************************************
   ARTYOM COMMANDS
@@ -210,14 +209,14 @@ const commands = [
     action: (i, wildcard) => {
       fillOutForm(wildcard);
     }
-  },
-  {
-    indexes: ['looks good', 'add to calendar'],
-    action: (i) => {
-      console.log('Inside artyom command');
-      voiceSubmit();
-    }
   }
+  // {
+  //   indexes: ['looks good', 'add to calendar'],
+  //   action: (i) => {
+  //     console.log('Inside artyom command');
+  //     voiceSubmit();
+  //   }
+  // }
 ];
 
 /********************************************************
@@ -232,8 +231,8 @@ module.exports = {
   commands: commands,
   onFillOutForm: (callback) => {
     handleFormData = callback;
-  },
-  onVoiceSubmit: (callback) => {
-    handleVoiceSubmit = callback;
   }
+  // onVoiceSubmit: (callback) => {
+  //   handleVoiceSubmit = callback;
+  // }
 };

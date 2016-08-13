@@ -17,37 +17,31 @@ class App extends React.Component {
     }
   }
 
-  addEventChange(event) {
+  appendEvent(event) {
     this.setState({
       events: this.state.events.concat([event])
-    })
+    });
   }
 
   componentDidMount() {
-    console.log('am i here');
     fetch('http://localhost:9000/api/calendar/getEvent')
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
-        console.log('Successfully retrieved data!');
-
         let eventList = data.map((event) => {
-          var obj = {};
-          obj['summary'] = event.name;
-          obj['location'] = event.location;
-          obj['start'] = event.startdatetime;
-          return obj;
+          return {
+            eventName: event.name,
+            location: event.location,
+            startTime: event.startdatetime,
+            eventUrl: event.eventUrl
+          };
         });
 
-        console.log('About to set state to:', eventList);
-
-    
-
-        console.log('Finished setting state:', this.state);
+        this.setState({
+          events: eventList          
+        });
       })
       .catch((err) => {
-        console.log('did not get todays events', err);
+        console.log('Error retrieving events', err);
       })
   }
 
@@ -58,7 +52,7 @@ class App extends React.Component {
           <Time />
         </div>
         <div>
-          <Form updateEvent={this.addEventChange.bind(this)} commands={commands}/>
+          <Form appendEvent={this.appendEvent.bind(this)} commands={commands}/>
         </div>
         <div>
           <Calendar events={this.state.events} />
