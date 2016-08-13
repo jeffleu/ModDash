@@ -32,8 +32,7 @@ class App extends React.Component {
             eventName: event.name,
             location: event.location,
             startTime: event.startdatetime,
-            eventUrl: event.eventUrl,
-            eventId: event.googleCalendarEventId
+            eventUrl: event.eventUrl
           };
         });
 
