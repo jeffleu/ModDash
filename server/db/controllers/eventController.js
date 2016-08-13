@@ -57,8 +57,16 @@ const retrieveDayEvent = function(req, res) {
   })
 }
 
+const retrieveDayEvent = () => {
+  sequelize.query(`SELECT * FROM events`).
+    spread(data, metadata, (data) => {
+
+    });
+};
+
 module.exports = {
   insertEvent,
   retrieveEvent,
   retrieveDayEvent
-}
+};
+

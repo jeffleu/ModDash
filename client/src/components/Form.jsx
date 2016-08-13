@@ -21,6 +21,10 @@ class Form extends React.Component {
       this.setState(formData);
     });
 
+    this.props.commands.onVoiceSubmit(() => {
+      this.handleSubmit(e);
+    });
+
     // Set up commands
     this.props.commands.addCommands(this.props.commands.commands);
 
@@ -77,7 +81,7 @@ class Form extends React.Component {
     if ( this.state.startDate === moment().format('YYYY-MM-DD') ) {
       this.props.updateEvent(this.state);
     }
-    
+
     // Clear state which the form's values are pointing to
     this.setState({
       summary: '',
@@ -103,7 +107,6 @@ class Form extends React.Component {
     }).catch((err) => {
       console.log('err', err);
     });
-
   }
 
   render() {
