@@ -1,22 +1,25 @@
 const models = require('../models/models');
 const Event = models.Event;
-const Sequelize = require('sequelize');
 const googleMaps = require('./../../utility/googleMaps');
-// const User = require('./userController');
+const moment = require('moment');
+const zone = require('moment-timezone');
+const sequelize = require('../db.js');
+// const User = require('./userController');,
 // const google = require('googleapis');
 // var calendar = google.calendar('v3');
 // const googleOAuth = require('./../../setup/googleOAuth');
 // var oauth2Client = googleOAuth.oauth2Client;
 
 const insertEvent = function(data, userId) {
+  console.log('in here', data);
   Event.findOrCreate({
     where: {googleCalendarEventId: data.id},
     defaults: {
       userId: userId,
       name: data.summary,
       eventUrl: data.htmlLink,
-      startDateTime: data.start.dateTime,
-      endDateTime: data.end.dateTime,
+      startdatetime: data.start.dateTime,
+      enddatetime: data.end.dateTime,
       recurrence: JSON.stringify(data.recurrence),
       // currently not checking for recurrence since the calendar events query has "single events: true" which lists every single event
       location: data.location,
@@ -37,26 +40,21 @@ const retrieveEvent = function(id) {
 }
 
 const retrieveDayEvent = function(req, res) {
-//   // let date = new Date();
-//   // let lastMidnight = date.setHours(0,0,0,0).toUTCString();
-//   // let nextMidnight = date.setHours(24,0,0,0);
-//   // var start = new Date();
-//   // start.setHours(0,0,0,0);
-//   //
-//   // var end = new Date();
-//   // end.setHours(23,59,59,999);
-//   //
-//   // var now = new Date();
-//   //   console.log('now', now);
-//   // console.log('end', end.toUTCString());
-  var day = new Date();
-  Event.findAll({
-
+  var now = moment().utcOffset(0000).format('YYYY-MM-DD HH:mm') + ':00+00';
+  var nextMidnight = moment();
+  nextMidnight  = nextMidnight.add(1, 'days');
+  nextMidnight = nextMidnight.format('YYYY-MM-DD');
+  console.log('next', nextMidnight);
+  // var now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+  console.log('now', now);
+  var queryString = `SELECT * FROM events WHERE startdatetime BETWEEN '${now}' AND '${nextMidnight} 06:59:00+00'`;
+  sequelize.query(queryString)
+  .spread((datas, metadata) => {
+    datas.forEach((data) => {
+      data.startdatetime = moment(data.startdatetime).format('LT');
     })
-    .then(function (result) {
-    // do stuff here
-    console.log('result', result);
-  });
+    res.send(datas);
+  })
 }
 
 module.exports = {
