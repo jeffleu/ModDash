@@ -32,19 +32,19 @@ class App extends React.Component {
       .then((data) => {
         console.log('Successfully retrieved data!');
 
-        let eventList = data.map((event) => {
-          var obj = {};
-          obj['summary'] = event.name;
-          obj['location'] = event.location;
-          obj['start'] = event.startdatetime;
-          return obj;
-        });
-
-        console.log('About to set state to:', eventList);
-
-    
-
-        console.log('Finished setting state:', this.state);
+        // let eventList = data.map((event) => {
+        //   var obj = {};
+        //   obj['summary'] = event.name;
+        //   obj['location'] = event.location;
+        //   obj['start'] = event.startdatetime;0
+        //   return obj;
+        // });
+        //
+        // console.log('About to set state to:', eventList);
+        //
+        //
+        //
+        // console.log('Finished setting state:', this.state);
       })
       .catch((err) => {
         console.log('did not get todays events', err);

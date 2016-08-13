@@ -27,6 +27,7 @@ const postEventToApi = function(req, res) {
     .then(() => {
       const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body};
       calendar.events.insert(params, function(err, data) {
+        console.log('inserting data', data);
         if(err) {
           console.log('did not insert to cal', err);
         } else {
@@ -41,6 +42,7 @@ const postEventToApi = function(req, res) {
             },
             function (status, response) {
                 // handle status, response
+                console.log('sent to client');
             }
           );
         }

@@ -40,21 +40,21 @@ const retrieveEvent = function(id) {
 }
 
 const retrieveDayEvent = function(req, res) {
-  var now = moment().utcOffset(0000).format('YYYY-MM-DD HH:mm') + ':00+00';
-  var nextMidnight = moment();
-  nextMidnight  = nextMidnight.add(1, 'days');
-  nextMidnight = nextMidnight.format('YYYY-MM-DD');
-  console.log('next', nextMidnight);
-  // var now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-  console.log('now', now);
-  var queryString = `SELECT * FROM events WHERE startdatetime BETWEEN '${now}' AND '${nextMidnight} 06:59:00+00'`;
-  sequelize.query(queryString)
-  .spread((datas, metadata) => {
-    datas.forEach((data) => {
-      data.startdatetime = moment(data.startdatetime).format('LT');
-    })
-    res.send(datas);
-  })
+  // var now = moment().utcOffset(0000).format('YYYY-MM-DD HH:mm') + ':00+00';
+  // var nextMidnight = moment();
+  // nextMidnight  = nextMidnight.add(1, 'days');
+  // nextMidnight = nextMidnight.format('YYYY-MM-DD');
+  // console.log('next', nextMidnight);
+  // // var now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+  // console.log('now', now);
+  // var queryString = `SELECT * FROM events WHERE startdatetime BETWEEN '${now}' AND '${nextMidnight} 06:59:00+00'`;
+  // sequelize.query(queryString)
+  // .spread((datas, metadata) => {
+  //   datas.forEach((data) => {
+  //     data.startdatetime = moment(data.startdatetime).format('LT');
+  //   })
+  //   res.send(datas);
+  // })
 }
 
 module.exports = {
