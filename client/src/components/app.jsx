@@ -82,15 +82,20 @@ class App extends React.Component {
   render() {
     return (
       <div>
+       
         <div>
           <Time />
         </div>
         <div>
-          <Form appendEvent={this.appendEvent.bind(this)} commands={commands}/>
-        </div>
-        <div>
           <Calendar events={this.state.events} />
         </div>
+        <br />
+        <br />
+        <br />
+        <div>
+          <Form appendEvent={this.appendEvent.bind(this)} commands={commands}/>
+        </div>
+
       </div>
     );
   }
