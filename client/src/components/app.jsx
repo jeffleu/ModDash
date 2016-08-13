@@ -23,6 +23,20 @@ class App extends React.Component {
     })
   }
 
+  componentDidMount() {
+    console.log('am i here');
+    fetch('http://localhost:9000/api/calendar/getEvent')
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log('whats in here', data);
+      })
+      .catch((err) => {
+        console.log('did not get todays events', err);
+      })
+  }
+
   render() {
     return (
       <div>
