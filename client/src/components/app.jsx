@@ -57,12 +57,6 @@ class App extends React.Component {
           events: sortedEvents
         });
 
-        // Sort events based on start time
-        let sortedEvents = eventList.reduce((sortedArray, event) => {
-          sortedArray[times.indexOf(event.startTime)] = event;
-          return sortedArray;
-        }, []);
-
         this.setState({ events: sortedEvents });
       })
       .catch((err) => {
