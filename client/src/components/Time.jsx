@@ -15,7 +15,7 @@ class Time extends React.Component {
   tick() {
     var time = moment(new Date());
     this.setState({
-      time: time.format('h:mm:ss A')
+      time: time.format('h:mm:ss a')
     })
   }
 

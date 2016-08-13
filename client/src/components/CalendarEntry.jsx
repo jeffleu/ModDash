@@ -12,10 +12,10 @@ const CalendarEntry = (props) => {
     console.log('minutes', minutes);
 
     if (hours >= 12) {
-      amPm = 'PM';
+      amPm = 'pm';
       hours = hours - 12;
     } else {
-      amPm = 'AM';
+      amPm = 'am';
     }
 
     return `${hours}:${minutes} ${amPm}`;
@@ -28,7 +28,7 @@ const CalendarEntry = (props) => {
         {start}
       </div>
       <div className='event-summary-location'>
-        {props.event.summary} at {props.event.location}
+        {props.event.eventName} at {props.event.location}
       </div>
     </div>
   )
