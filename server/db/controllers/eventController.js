@@ -37,24 +37,21 @@ const retrieveEvent = function(id) {
 }
 
 const retrieveDayEvent = function(req, res) {
-  // let date = new Date();
-  // let lastMidnight = date.setHours(0,0,0,0).toUTCString();
-  // let nextMidnight = date.setHours(24,0,0,0);
-  // var start = new Date();
-  // start.setHours(0,0,0,0);
-  //
-  // var end = new Date();
-  // end.setHours(23,59,59,999);
-  //
-  // var now = new Date();
-  //   console.log('now', now);
-  // console.log('end', end.toUTCString());
+//   // let date = new Date();
+//   // let lastMidnight = date.setHours(0,0,0,0).toUTCString();
+//   // let nextMidnight = date.setHours(24,0,0,0);
+//   // var start = new Date();
+//   // start.setHours(0,0,0,0);
+//   //
+//   // var end = new Date();
+//   // end.setHours(23,59,59,999);
+//   //
+//   // var now = new Date();
+//   //   console.log('now', now);
+//   // console.log('end', end.toUTCString());
   var day = new Date();
   Event.findAll({
-    where: {  startDateTime: {
-      between: [Date.parse('2016-08-08'), new Date()]
-        } 
-      }
+
     })
     .then(function (result) {
     // do stuff here

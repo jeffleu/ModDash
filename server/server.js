@@ -27,10 +27,9 @@ app.all('/api/*', function(req, res, next) {
 })
 app.use('/api', router);
 
-app.get('/', (req, res)=>{
-  res.sendFile(path.join(__dirname + '/../client/src/index.html'));
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname + '/../client/public/dist/index.html'));
 });
-
 
 server.listen(9000, () => {
   console.log('Express is listening on port 9000.');
