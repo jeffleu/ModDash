@@ -10,7 +10,7 @@ const artyomStart = () => {
   artyom.initialize({
     lang: 'en-GB',
     continuous: true,
-    debug: true,
+    debug: false,
     listen: true
   });
 
@@ -212,7 +212,7 @@ const commands = [
   {
     indexes: ['looks good', 'add to calendar'],
     action: (i) => {
-      // need to call function that will call 
+      // need to call function that will call
     }
   }
 ];

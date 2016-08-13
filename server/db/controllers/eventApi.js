@@ -44,8 +44,8 @@ const postEventToApi = function(req, res) {
             }
           );
         }
+        Event.insertEvent(data, userId);
       });
-      Event.insertEvent(req.body, userId);
     });
 }
 

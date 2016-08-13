@@ -3,6 +3,7 @@ const router = require('express').Router();
 const User = require('./db/controllers/userController.js');
 const Calendar = require('./db/controllers/calendarController.js');
 const InsertEvent = require('./db/controllers/eventApi.js');
+const CalendarEvents = require('./db/controllers/eventController.js');
 const GoogleAuthUrl = require('./setup/googleOAuth').url;
 require('dotenv').config();
 const GoogleMaps = require('./utility/googleMaps');
@@ -15,6 +16,9 @@ router.get('/auth', function(req, res) {
 router.get('/authCallback', User.createUser);
 
 router.post('/calendar/addEvent', InsertEvent.postEventToApi);
+
+router.get('/calendar/getEvent', CalendarEvents.retrieveDayEvent);
+
 router.get('/calendar', Calendar.getAll);
 
 
