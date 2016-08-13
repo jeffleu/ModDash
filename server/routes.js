@@ -8,7 +8,6 @@ const GoogleAuthUrl = require('./setup/googleOAuth').url;
 require('dotenv').config();
 const GoogleMaps = require('./utility/googleMaps');
 
-
 router.get('/auth', function(req, res) {
   res.redirect(GoogleAuthUrl);
 });
@@ -16,10 +15,7 @@ router.get('/auth', function(req, res) {
 router.get('/authCallback', User.createUser);
 
 router.post('/calendar/addEvent', InsertEvent.postEventToApi);
-
 router.get('/calendar/getEvent', CalendarEvents.retrieveDayEvent);
-
 router.get('/calendar', Calendar.getAll);
-
 
 module.exports = router;
