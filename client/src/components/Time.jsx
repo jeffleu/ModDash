@@ -25,7 +25,7 @@ class Time extends React.Component {
   }
 
   render() {
-    console.log(this.state.date);
+    // console.log(this.state.date);
     // const time = moment().format(this.state.date);
     // const time = moment().format()
     return(

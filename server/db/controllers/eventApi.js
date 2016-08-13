@@ -10,7 +10,7 @@ const pubnub = require('./../../pubnub.js')
 
 const postEventToApi = function(req, res) {
 
-  console.log('body', req.body);
+  // console.log('body', req.body);
   var userId = 2;
   User.getUserTokens(2)
     .then(data => {
@@ -27,7 +27,7 @@ const postEventToApi = function(req, res) {
     .then(() => {
       const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body};
       calendar.events.insert(params, function(err, data) {
-        console.log('inserting data', data);
+        // console.log('inserting data', data);
         if(err) {
           console.log('did not insert to cal', err);
         } else {
