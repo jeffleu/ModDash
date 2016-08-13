@@ -22,16 +22,18 @@ var pubnub = PUBNUB({
 pubnub.subscribe ({
   channel: 'eventAdded',
   message: function(data){
+    let start = moment(data.start.dateTime).format('LT');
+    let end = moment(data.end.dateTime).format('LT');
+    console.log('start', start);
     var notify = {
       type: 'basic',
       title: 'Your Calendar Event Has Been Added!',
-      message: data.location + '\n' + data.start.dateTime + ' - ' + data.end.dateTime,
-      iconUrl: 'sonic-sega.png',
+      message: data.location + '\n' + start + ' - ' + end,
+      iconUrl: 'sonic-dash.gif',
       buttons: [{
-        title: 'Click To See Details'
+        title: 'Click To See Event Details'
       }]
     };
-
     chrome.notifications.onButtonClicked.addListener(function() {
       window.open(data.htmlLink);
     });
@@ -51,7 +53,7 @@ pubnub.subscribe ({
       message: `Looks like there might be traffic, and it will take ${Math.ceil(((data.initialEstimate / 60) / 1000))} minutes to get there`,
       iconUrl: 'sonic-sega.png',
       buttons: [{
-        title: 'Click To See Details'
+        title: 'Click To See Map Details'
       }]
     };
 

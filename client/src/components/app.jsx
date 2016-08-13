@@ -37,7 +37,7 @@ class App extends React.Component {
         });
 
         this.setState({
-          events: eventList          
+          events: eventList
         });
       })
       .catch((err) => {

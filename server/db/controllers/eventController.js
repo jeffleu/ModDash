@@ -51,7 +51,7 @@ const retrieveDayEvent = (req, res) => {
     datas.forEach((data) => {
       data.startdatetime = moment(data.startdatetime).format('LT');
     });
-    
+
     res.send(datas);
   });
 };
@@ -61,4 +61,3 @@ module.exports = {
   retrieveEvent,
   retrieveDayEvent
 };
-
