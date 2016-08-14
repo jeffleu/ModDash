@@ -6,9 +6,7 @@ const bodyParser = require('body-parser');
 const db = require('./db/db.js');
 const router = require('./routes');
 const server = require('http').Server(app);
-const pubnub = require ('./pubnub');
 
-const mapsWorker = require('./workers/mapsWorker');
 
 // https://github.com/foreverjs/forever
 // use forever.js to restart the server if it crashes.

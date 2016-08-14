@@ -7,8 +7,8 @@ const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
 const addTravel = require('./utility/addTravel');
 
-
-var setupSchedule = function(req, res) {
+// put this elsewhere later, but for now keep it here to understand what is happening. first we add event, and then we add travel. see utility functions
+var addEventAndAddTravel = function(req, res) {
   addEvent(req, res)
   .spread((event, created) => {
     console.log(event); 
@@ -23,7 +23,7 @@ router.get('/auth', function(req, res) {
 router.get('/authCallback', User.createUser);
 // this is tricky to fix, probably want to serve up a static page
 
-router.post('/calendar/addEvent', setupSchedule);
+router.post('/calendar/addEvent', addEventAndAddTravel);
 router.get('/calendar/getEvent', CalendarEvents.retrieveDayEvent);
 router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
 

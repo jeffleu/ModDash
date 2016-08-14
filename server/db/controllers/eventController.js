@@ -21,12 +21,6 @@ const insertEvent = (data, userId) => {
         description: data.description
       }
   })
-  // .spread((event, created) => {
-  //   console.log(created, ': event was created');
-
-  //   // query Google Maps for initial travel time, see utility/googleMaps
-  //   // googleMaps.getInitialTravelTime(event);
-  // });
 }
 
 const retrieveEvent = (id) => {
