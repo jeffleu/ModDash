@@ -6,7 +6,7 @@ const zone = require('moment-timezone');
 const sequelize = require('../db.js');
 
 const insertEvent = (data, userId) => {
-  Event.findOrCreate({
+  return Event.findOrCreate({
     where: {
       googleCalendarEventId: data.id},
       defaults: {
@@ -21,12 +21,12 @@ const insertEvent = (data, userId) => {
         description: data.description
       }
   })
-  .spread((event, created) => {
-    console.log(created, ': event was created');
+  // .spread((event, created) => {
+  //   console.log(created, ': event was created');
 
-    // query Google Maps for initial travel time, see utility/googleMaps
-    googleMaps.getInitialTravelTime(event);
-  });
+  //   // query Google Maps for initial travel time, see utility/googleMaps
+  //   // googleMaps.getInitialTravelTime(event);
+  // });
 }
 
 const retrieveEvent = (id) => {

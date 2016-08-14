@@ -12,7 +12,7 @@ calendar.events.list = Promise.promisify(calendar.events.list);
 // need to move it later, thanks to Derek for catching this.
 const getAllEventsFromCalendar = function (req, res) {
   var userId = 2
-  UserController.getUserTokens(userId)
+  return UserController.getUserTokens(userId)
   // ^^ hardcoded right now, but this needs to be changed to the correct user id.
   .then(data => {
     calendar.events.list({
