@@ -1,6 +1,5 @@
 const models = require('../models/models');
 const Event = models.Event;
-const googleMaps = require('./../../utility/googleMaps');
 const moment = require('moment');
 const zone = require('moment-timezone');
 const sequelize = require('../db.js');

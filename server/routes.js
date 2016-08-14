@@ -6,13 +6,17 @@ const GoogleAuthUrl = require('./setup/googleOAuth').url;
 const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
 const addTravel = require('./utility/addTravel');
+const queryTraffic = require('./workers/queryTraffic');
 
-// put this elsewhere later, but for now keep it here to understand what is happening. first we add event, and then we add travel. see utility functions
+// put this parent function elsewhere later, but for now keep it here to understand what is happening. 
+// first add event, then add travel, then set up queryTraffic worker
 var addEventAndAddTravel = function(req, res) {
   addEvent(req, res)
   .spread((event, created) => {
-    console.log(event); 
-    addTravel(event); 
+    return addTravel(event); 
+  })
+  .then(travel => {
+    queryTraffic(travel);
   })
 }
 

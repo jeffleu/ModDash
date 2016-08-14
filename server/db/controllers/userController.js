@@ -28,6 +28,7 @@ const createUser = function(req, res) {
       })
     });
   });
+  // TO DO: probaby serve up static page here instead
   res.send('Thank you for authorization!');
 };
 
