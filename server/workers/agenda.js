@@ -1,12 +1,8 @@
 const Agenda = require('agenda'); 
-// const User = require('./../db/controllers/userController');
-// const Travel = require('./../db/controllers/travelController');
-
 
 const mongoConnectionString = process.env.MONGODB_URI;
 
 var agenda = new Agenda({db: {address: mongoConnectionString, collection: 'mapJobs', options: {server:{auto_reconnect:true}}}});
-
 
 agenda.on('ready', function() {
   // getTravels();
@@ -16,6 +12,10 @@ agenda.on('ready', function() {
 
 agenda.on('error', function(err) {
   console.warn('Error in Agenda connecting to Heroku mongodb:\n', err);
+});
+
+agenda.on('fail', function(err, job) {
+  console.log("Job failed with error: %s", err.message);
 });
 
 module.exports = agenda;

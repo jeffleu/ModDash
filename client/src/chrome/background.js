@@ -47,6 +47,9 @@ pubnub.subscribe ({
 pubnub.subscribe ({
   channel: 'timeToLeave',
   message: function(data){
+    // TODO: FIX BUG - data is not being parsed correctly for the notification
+    console.log(data);
+    data = JSON.parse(data);
     var notify = {
       type: 'basic',
       title: `Time to Leave for ${data.destination}!`,
