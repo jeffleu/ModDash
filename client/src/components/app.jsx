@@ -18,13 +18,9 @@ class App extends React.Component {
     }
   }
 
-  appendEvent(event) {
-    this.setState({
-      events: this.state.events.concat([event])
-    });
-  }
+  fetchAndUpdateEvents() {
+    console.log('Events updated!');
 
-  componentDidMount() {
     fetch('http://localhost:9000/api/calendar/getEvent')
       .then((res) => res.json())
       .then((data) => {
@@ -37,50 +33,60 @@ class App extends React.Component {
           };
         });
 
-        // Get all event times
-        let times = eventList.reduce((array, event) => {
-          return array.concat(event.startTime);
-        }, []);
-
-        // Sort event times in chronological order
-        times.sort((a, b) => {
-          return new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`);
-        });
-
-        // Sort events based on start time
-        let sortedEvents = eventList.reduce((sortedArray, event) => {
-          sortedArray[times.indexOf(event.startTime)] = event;
-          return sortedArray;
-        }, []);
-
-        this.setState({
-          events: sortedEvents
-        });
-
-        this.setState({ events: sortedEvents });
+        this.sortAndUpdateEvents(eventList);
       })
       .catch((err) => {
         console.log('Error retrieving events', err);
-      })
+      }) 
+  }
+
+  // addOneEvent(event) {
+  //   var slice = this.state.events.slice()
+  //   var newList = slice.concat(event);
+
+  //   sortAndUpdateEvents(newList);
+  // }
+
+  sortAndUpdateEvents(eventList) {
+    // Get all event times
+    let times = eventList.reduce((array, event) => {
+      return array.concat(event.startTime);
+    }, []);
+
+    // Sort event times in chronological order
+    times.sort((a, b) => {
+      return new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`);
+    });
+
+    // TO DO: Bug fix - if events are at the same time, the last 
+    // event with the same time will overwrite the first one
+
+    // Sort events based on start time
+    let sortedEvents = eventList.reduce((sortedArray, event) => {
+      sortedArray[times.indexOf(event.startTime)] = event;
+      return sortedArray;
+    }, []);
+
+    // Update the state with sorted events
+    this.setState({ events: sortedEvents });
+  }
+
+  componentDidMount() {
+    this.fetchAndUpdateEvents();
   }
 
   render() {
     return (
       <div>
-       
         <div>
           <Time />
         </div>
         <div>
           <Calendar events={this.state.events} />
         </div>
-        <br />
-        <br />
-        <br />
         <div>
-          <Form appendEvent={this.appendEvent.bind(this)} commands={commands}/>
+          <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands}/>
         </div>
-
       </div>
     );
   }

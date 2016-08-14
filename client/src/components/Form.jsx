@@ -71,7 +71,7 @@ class Form extends React.Component {
 
     // TO DO: Use geolocation to update timeZone automatically
 
-    // Create event object with this.state
+    // Create event object with Form's state
     var event = {
       summary: this.state.summary,
       location: this.state.location,
@@ -84,10 +84,6 @@ class Form extends React.Component {
         timeZone: 'America/Los_Angeles'
       }
     };
-    
-    if ( this.state.startDate === moment().format('YYYY-MM-DD') ) {
-      this.props.appendEvent(this.state);
-    }
 
     // Clear state which the form's values are pointing to
     this.setState({
@@ -110,12 +106,14 @@ class Form extends React.Component {
       return res.json();
     }).then((data) => {
       // do something
-      console.log('data', data);
+      console.log('Data from post', data.dataValues);
     }).catch((err) => {
-      console.log('err', err);
+      console.log('ERROR!', err);
     });
 
     this.closeModal();
+
+    this.props.refreshEvents();
   }
 
   openModal() {

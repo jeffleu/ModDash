@@ -173,28 +173,6 @@ const commands = [
     action: (i) => { artyom.say(`Today is ${getDate()}.`) }
   },
   {
-    indexes: ['* I choose you'],
-    smart: true,
-    action: (i, wildcard) => {
-      wildcard = wildcard.toLowerCase();
-
-      artyom.say(`Looking for ${wildcard} in the database. One moment please.`);
-
-      $.ajax({
-        url: `http://pokeapi.co/api/v2/pokemon/${wildcard}`,
-        method: 'GET',
-        success: (data) => {
-          artyom.say(`Here is all the data on ${wildcard}`);
-          console.log('Pokemon data:', data);
-        },
-        error: (error) => {
-          artyom.say('Error retrieving Pokemon.');
-          console.log('Error retrieving Pokemon', error);
-        }
-      });
-    }
-  },
-  {
     indexes: ['open *'],
     smart: true,
     action: (i, wildcard) => { window.open(`http://${wildcard}`) }
@@ -205,23 +183,10 @@ const commands = [
     action: (i, wildcard) => { window.open(`https://www.youtube.com/results?search_query=${wildcard}`) }
   },
   {
-    indexes: ['create event *'],
+    indexes: ['create event *', 'add event *', 'make event *'],
     smart: true,
     action: (i, wildcard) => {
       fillOutForm(wildcard);
-    }
-  },
-  {
-    indexes: ['add event *'],
-    smart: true,
-    action: (i, wildcard) => {
-      fillOutForm(wildcard);
-    }
-  },
-  {
-    indexes: ['looks good', 'add to calendar'],
-    action: (i) => {
-      // need to call function that will call 
     }
   }
   // {

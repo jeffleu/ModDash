@@ -7,8 +7,6 @@ class Time extends React.Component {
     this.state = {
       time: '',
       date: moment().format('dddd, MMMM D')
-
-      // date: moment().format('dddd MMMM Do YYYY')
     }
   }
 
