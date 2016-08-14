@@ -1,5 +1,5 @@
 const agenda = require('./agenda');
-const pubnub = require('./../pubnub');
+const pubnub = require('./../setup/pubnub');
 
 
 agenda.define('send leave notification', function(job, done) {

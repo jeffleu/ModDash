@@ -4,7 +4,7 @@ const google = require('googleapis');
 const calendar = google.calendar('v3');
 const EventController = require('./../db/controllers/eventController');
 var oauth2Client = googleOAuth.oauth2Client;
-const pubnub = require('./../pubnub.js')
+const pubnub = require('./../setup/pubnub.js')
 
 const Promise = require('bluebird');
 calendar.events.insert = Promise.promisify(calendar.events.insert);
