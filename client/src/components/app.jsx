@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   fetchAndUpdateEvents() {
-    console.log('fetchAndUpdateEvents invoked!');
+    console.log('Events updated!');
 
     fetch('http://localhost:9000/api/calendar/getEvent')
       .then((res) => res.json())
@@ -78,7 +78,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-       
         <div>
           <Time />
         </div>
