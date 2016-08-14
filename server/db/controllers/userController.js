@@ -42,6 +42,17 @@ const getUserTokens = function(id){
   return User.findOne({
     where: { id: id }
   })
+  .then(data => {
+    oauth2Client.setCredentials({
+      refresh_token: data.dataValues.refreshToken
+    });
+    oauth2Client.refreshAccessToken((err, tokens) => {
+      oauth2Client.setCredentials({
+        access_token: tokens.access_token,
+        refresh_token: tokens.refresh_token
+      });
+    });
+  });
 }
 
 module.exports = {

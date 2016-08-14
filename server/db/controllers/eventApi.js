@@ -13,42 +13,31 @@ const postEventToApi = function(req, res) {
   // console.log('body', req.body);
   var userId = 2;
   User.getUserTokens(2)
-    .then(data => {
-      oauth2Client.setCredentials({
-        refresh_token: data.dataValues.refreshToken
+  .then(data => {
+    const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body};
+    calendar.events.insert(params, function(err, data) {
+      // console.log('inserting data', data);
+      if(err) {
+        console.log('did not insert to cal', err);
+      } else {
+        console.log('event saved to g cal!');
+        pubnub.publish(
+          {
+            message: data,
+            channel: 'eventAdded',
+            sendByPost: false, // true to send via post
+            storeInHistory: false, //override default storage options
+            meta: {} // publish extra meta with the request
+          },
+          function (status, response) {
+              // handle status, response
+              console.log('sent to client');
+          }
+        );
+      }
+      Event.insertEvent(data, userId);
     });
-      oauth2Client.refreshAccessToken((err, tokens) => {
-        oauth2Client.setCredentials({
-          access_token: tokens.access_token,
-          refresh_token: tokens.refresh_token
-        })
-      })
-    })
-    .then(() => {
-      const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body};
-      calendar.events.insert(params, function(err, data) {
-        // console.log('inserting data', data);
-        if(err) {
-          console.log('did not insert to cal', err);
-        } else {
-          console.log('event saved to g cal!');
-          pubnub.publish(
-            {
-              message: data,
-              channel: 'eventAdded',
-              sendByPost: false, // true to send via post
-              storeInHistory: false, //override default storage options
-              meta: {} // publish extra meta with the request
-            },
-            function (status, response) {
-                // handle status, response
-                console.log('sent to client');
-            }
-          );
-        }
-        Event.insertEvent(data, userId);
-      });
-    });
+  });
 }
 
 module.exports = {
