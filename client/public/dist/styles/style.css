@@ -3,7 +3,7 @@ body {
 }
 
 /*
-for adding background, do something like url(), no-repeat, center, center, fixed; add this as a background div. 
+for adding background, do something like url(), no-repeat, center, center, fixed; add this as a background div.
 */
 
 .today {
@@ -51,6 +51,7 @@ for adding background, do something like url(), no-repeat, center, center, fixed
 }
 
 .calendar-title {
+  padding-top: 20px;
   font-size: 350%;
   font-weight: 400;
   text-align: center;
@@ -110,7 +111,7 @@ input {
   left: 30%;
   right: 30%;
   bottom: 35%;
-  /*border: 1px, dotted, black;*/  
+  /*border: 1px, dotted, black;*/
   background-color: paleturquoise;
 }
 
