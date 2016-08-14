@@ -8,6 +8,9 @@ const Event = require('./eventController');
 var oauth2Client = googleOAuth.oauth2Client;
 const pubnub = require('./../../pubnub.js')
 
+const Promise = require('bluebird');
+calendar.events.insert = Promise.promisify(calendar.events.insert);
+
 const postEventToApi = function(req, res) {
 
   // console.log('body', req.body);
@@ -15,30 +18,36 @@ const postEventToApi = function(req, res) {
   User.getUserTokens(2)
   .then(data => {
     const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body};
-    calendar.events.insert(params, function(err, data) {
-      // console.log('inserting data', data);
-      if(err) {
-        console.log('did not insert to cal', err);
-      } else {
-        console.log('event saved to g cal!');
-        pubnub.publish(
-          {
-            message: data,
-            channel: 'eventAdded',
-            sendByPost: false, // true to send via post
-            storeInHistory: false, //override default storage options
-            meta: {} // publish extra meta with the request
-          },
-          function (status, response) {
-              // handle status, response
-              console.log('sent to client');
-          }
-        );
-      }
+    calendar.events.insert(params)
+    .then(data => {
+      pubnub.publish(
+        {
+          message: data,
+          channel: 'eventAdded',
+          sendByPost: false, // true to send via post
+          storeInHistory: false, //override default storage options
+          meta: {} // publish extra meta with the request
+        },
+        function (status, response) {
+            // handle status, response
+            console.log('sent to client');
+        }
+      );
+      return data; 
+    })
+    .then(data => {
       Event.insertEvent(data, userId);
-    });
+    })
+    //   , function(err, data) {
+    //   // console.log('inserting data', data);
+    //   if(err) {
+    //     console.log('did not insert to cal', err);
+    //   } else {
+    //     console.log('event saved to g cal!');
+    //   }
+    // });
   });
-}
+};
 
 module.exports = {
   postEventToApi
