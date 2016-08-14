@@ -26,9 +26,12 @@ const getTrafficTime = function(event) {
     // var distance = body.rows[0].elements[0].distance;
     var duration = body.rows[0].elements[0].duration;
     var traffic = duration.value * 1000; // convert seconds to milliseconds
-    console.log('got the traffic time', traffic / 1000);
+    console.log('got the traffic time in seconds:', traffic / 1000);
     var notificationTime = new Date(Date.parse(event.startdatetime) - (traffic + 300000));
-    return notificationTime;
+    return {
+      traffic,
+      notificationTime
+    };
   });
 };
 

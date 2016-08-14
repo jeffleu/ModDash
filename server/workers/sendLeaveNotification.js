@@ -7,7 +7,7 @@ agenda.define('send leave notification', function(job, done) {
   var event = job.attrs.data;
 
   pubnub.publish({
-    message: JSON.stringify(event), // third argument for schedule is data that is passed in as jobs.attrs.data
+    message: event,
     channel: 'timeToLeave',
     sendByPost: false, // true to send via post
     storeInHistory: false //override default storage options

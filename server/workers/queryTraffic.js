@@ -13,8 +13,9 @@ agenda.define('query traffic', function(job, done) {
   EventController.retrieveEvent(eventId)
   .then(event => {
     return getTrafficTime(event)
-    .then(notificationTime => {
-      sendLeaveNotification(notificationTime, event.dataValues);
+    .then(times => {
+      event.dataValues.traffic = times.traffic
+      sendLeaveNotification(times.notificationTime, event.dataValues);
       // schedule notification for leaving
     });
   })  
