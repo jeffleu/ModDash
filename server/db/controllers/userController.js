@@ -9,18 +9,11 @@ var oauth2Client = googleOAuth.oauth2Client;
 
 const createUser = function(req, res) {
   const code = req.query.code;
-  // console.log(code);
   oauth2Client.getToken(code, function (err, tokens) {
     if (err) {
       console.warn('error in getting Token', err);
     }
-
-    // console.log(tokens);
-
     oauth2Client.setCredentials(tokens);
-
-    // console.dir('oauth2Client', oauth2Client);
-
     plus.people.get({ userId: 'me', auth: oauth2Client }, function (err, profile) {
       if (err) {
         return console.log('An error occured', err);

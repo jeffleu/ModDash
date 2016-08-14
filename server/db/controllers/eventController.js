@@ -4,11 +4,6 @@ const googleMaps = require('./../../utility/googleMaps');
 const moment = require('moment');
 const zone = require('moment-timezone');
 const sequelize = require('../db.js');
-// const User = require('./userController');,
-// const google = require('googleapis');
-// var calendar = google.calendar('v3');
-// const googleOAuth = require('./../../setup/googleOAuth');
-// var oauth2Client = googleOAuth.oauth2Client;
 
 const insertEvent = (data, userId) => {
   Event.findOrCreate({

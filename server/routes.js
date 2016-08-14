@@ -5,8 +5,9 @@ const Calendar = require('./db/controllers/calendarController.js');
 const InsertEvent = require('./db/controllers/eventApi.js');
 const CalendarEvents = require('./db/controllers/eventController.js');
 const GoogleAuthUrl = require('./setup/googleOAuth').url;
-require('dotenv').config();
 const GoogleMaps = require('./utility/googleMaps');
+
+
 
 router.get('/auth', function(req, res) {
   res.redirect(GoogleAuthUrl);

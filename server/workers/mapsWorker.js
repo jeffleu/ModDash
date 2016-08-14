@@ -1,13 +1,10 @@
 const Agenda = require('agenda'); 
-require('dotenv').config();
 const User = require('./../db/controllers/userController');
 const Travel = require('./../db/controllers/travelController');
 const pubnub = require('./../pubnub.js');
 const googleMaps = require('./../utility/googleMaps.js');
 
 
-// NOTE: THIS MAY CRASH THE SERVER, THE MONGODB CONNECTION APPEARS TO BE UNSTABLE
-// CARL IS CURRENTLY WORKING ON IT 
 const mongoConnectionString = process.env.MONGODB_URI;
 
 var agenda = new Agenda({db: {address: mongoConnectionString, collection: 'mapJobs', options: {server:{auto_reconnect:true}}}});

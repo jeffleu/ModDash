@@ -1,8 +1,6 @@
 const Event = require('./../db/controllers/eventController');
 const Travel = require('./../db/controllers/travelController');
 const request = require('request');
-require('dotenv').config();
-
 
 const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 const origins = 'Hack Reactor, 944 Market St, San Francisco, CA 94102';

@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-require('dotenv').config();
 
 // Connect to database
 const db = new Sequelize('nevermissout', process.env.PSQL_username, process.env.PSQL_password, {
