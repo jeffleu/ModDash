@@ -23,8 +23,8 @@ const getInitialTravelTime = function(event) {
     };
     request(options, function (error, response, body) {
       // console.log(response.statusCode);
-      console.log('google maps body', body);
-      console.log('google maps res', response);
+      // console.log('google maps body', body);
+      // console.log('google maps res', response);
       if (!error && response.statusCode == 200) {
         // console.log(event, '(', destinations, ')');
         body = JSON.parse(body);
