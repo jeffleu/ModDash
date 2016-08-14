@@ -30,7 +30,7 @@ const addEvent = function(req, res) {
       },
       function (status, response) {
           // handle status, response
-          console.log('sent to client');
+          console.log('pubnub notification "eventAdded" was sent to client');
       }
     );
     return data;     

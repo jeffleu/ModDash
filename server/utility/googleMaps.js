@@ -1,42 +1,42 @@
 const Event = require('./../db/controllers/eventController');
-const Travel = require('./../db/controllers/travelController');
 const request = require('request');
 
 const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 const origins = 'Hack Reactor, 944 Market St, San Francisco, CA 94102';
 
-const getInitialTravelTime = function(event) {
-    var options = {
-      url,
-      qs: {
-        key: process.env.GOOGLE_MAPS_API_KEY,
-        origins: origins,
-        destinations: event.dataValues.location,
-        mode: 'driving',
-        arrival_time: event.dataValues.startdatetime,
-        // departure_time: 'now',
-        units: 'imperial'
-        // traffic_model: 'best_guess'
-      }
-    };
-    request(options, function (error, response, body) {
-      // console.log(response.statusCode);
-      // console.log('google maps body', body);
-      // console.log('google maps res', response);
-      if (!error && response.statusCode == 200) {
-        // console.log(event, '(', destinations, ')');
-        body = JSON.parse(body);
-        console.log(body.rows[0].elements[0]);
-        var distance = body.rows[0].elements[0].distance;
-        var duration = body.rows[0].elements[0].duration;
+// const Travel = require('./../db/controllers/travelController');
+// const getInitialTravelTime = function(event) {
+//     var options = {
+//       url,
+//       qs: {
+//         key: process.env.GOOGLE_MAPS_API_KEY,
+//         origins: origins,
+//         destinations: event.dataValues.location,
+//         mode: 'driving',
+//         arrival_time: event.dataValues.startdatetime,
+//         // departure_time: 'now',
+//         units: 'imperial'
+//         // traffic_model: 'best_guess'
+//       }
+//     };
+//     request(options, function (error, response, body) {
+//       // console.log(response.statusCode);
+//       // console.log('google maps body', body);
+//       // console.log('google maps res', response);
+//       if (!error && response.statusCode == 200) {
+//         // console.log(event, '(', destinations, ')');
+//         body = JSON.parse(body);
+//         console.log(body.rows[0].elements[0]);
+//         var distance = body.rows[0].elements[0].distance;
+//         var duration = body.rows[0].elements[0].duration;
 
-        duration = duration || {value: 0}
+//         duration = duration || {value: 0}
 
-        // add data to Travel table, see /db/controllers/travelController
-        Travel.initiateTravel(event, (duration.value * 1000)); // convert seconds to milliseconds
-      }
-    });
-};
+//         // add data to Travel table, see /db/controllers/travelController
+//         Travel.initiateTravel(event, (duration.value * 1000)); // convert seconds to milliseconds
+//       }
+//     });
+// };
 
 const getTrafficTime = function(eventId) {
   Event.retrieveEvent(eventId)
@@ -70,7 +70,7 @@ const getTrafficTime = function(eventId) {
 
 
 module.exports = {
-  getInitialTravelTime,
+  // getInitialTravelTime,
   getTrafficTime
 }
 
