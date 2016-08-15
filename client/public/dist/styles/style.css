@@ -2,7 +2,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
   background: 
-    url("https://unsplash.it/1280/676?random") 
+    url("https://unsplash.it/g/1440/900?random") 
     center center / 100% 100%
     fixed
 }
@@ -34,16 +34,17 @@ button {
 .date {
   font-size: 500%;
   font-weight: 500;
-
 }
 
 
 .time:hover {
-  background-color: paleturquoise;
+  background-color: black;
+  opacity: .80;
 }
 
 .date:hover {
-  background-color: paleturquoise;
+  background-color: black;
+  opacity: .80;
 }
 
 .calendar {
@@ -65,7 +66,8 @@ button {
 }
 
 .calendar-title:hover {
-  background-color: paleturquoise;
+  background-color: black;
+  opacity: .75;
 }
 
 .calendar-entry {
@@ -76,8 +78,8 @@ button {
 }
 
 .calendar-entry:hover {
-  background-color: paleturquoise;
-  opacity: 80%;
+  background-color: black;
+  opacity: .75;
 }
 
 .event-start {
@@ -88,16 +90,26 @@ button {
   font-size: 160%;
 }
 .event-link {
-  color: black;
+  color: white;
 }
 .event-link:hover {
-  color: blue;
+  color: aquamarine;
 }
 
-.form-button {
+.add-event {
   position: fixed;
   top: 2%;
   right: 2%;
+  width: 70px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  color: aquamarine;
+  background-color: black;
+}
+
+.add-event:hover {
+  cursor: pointer;
 }
 
 .event-url {
@@ -135,11 +147,11 @@ input {
 .ModalClass {
   position: absolute;
   top: 25%;
-  left: 30%;
-  right: 30%;
+  left: 32.5%;
+  right: 32.5%;
   bottom: 35%;
   /*border: 1px, dotted, black;*/
-  background-color: paleturquoise;
+  background-color: black;
 }
 
 .OverlayClass {
@@ -148,5 +160,6 @@ input {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: white;
+  /*background-color: white;*/
+  opacity: .90;
 }
