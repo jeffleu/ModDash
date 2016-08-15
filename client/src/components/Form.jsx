@@ -6,6 +6,7 @@ var Modal = require('react-modal');
 class Form extends React.Component {
   constructor(props) {
     super(props);
+    console.log('inside form', this.props.modalIsOpen)
 
     this.state = {
       summary: '',
@@ -14,10 +15,13 @@ class Form extends React.Component {
       startTime: '',
       endDate: '',
       endTime: '',
-      modalIsOpen: false
+      modalIsOpen: false,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+
   }
 
   componentDidMount() {
@@ -130,33 +134,39 @@ class Form extends React.Component {
 
   render() {
     return (
-      <Modal 
-        className="ModalClass"
-        overlayClassName="OverlayClass"
-        isOpen={this.state.modalIsOpen}
-        onRequestClose={this.closeModal}
-      >
-        <div>
-          <form className="calendar-form" onSubmit={this.handleSubmit}>
-            <div className="calendar-form-title"> How's this look? </div>
-            <div>
-              Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event" onChange={this.handleChange} />
-            </div>
-            <div>
-              Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location" onChange={this.handleChange} />
-            </div>
-            <div>
-              Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="Date" onChange={this.handleChange} />
-            </div>
-            <div>
-              Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="Time" onChange={this.handleChange} />
-            </div>
-            <div>
-              <input type="submit" value="Looks good!" onClick={this.handleSubmit} />
-            </div>
-          </form>
-        </div>
-      </Modal>
+      <div>
+      <div className='form-button'>
+        <button type="button" onClick={this.openModal}>Add event</button>
+      </div>
+        <Modal 
+          className="ModalClass"
+          overlayClassName="OverlayClass"
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+        >
+          <div>
+            <form className="calendar-form" onSubmit={this.handleSubmit}>
+              <div className="calendar-form-title"> How's this look? </div>
+              <div>
+                Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event" onChange={this.handleChange} />
+              </div>
+              <div>
+                Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location" onChange={this.handleChange} />
+              </div>
+              <div>
+                Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="Date" onChange={this.handleChange} />
+              </div>
+              <div>
+                Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="Time" onChange={this.handleChange} />
+              </div>
+              <div>
+                <button type="button" onClick={this.closeModal}> Nah </button>
+                <button type="submit" value="Looks good!" onClick={this.handleSubmit}>Looks Good </button>
+              </div>
+            </form>
+          </div>
+        </Modal>
+      </div>
     );
   }
 }
