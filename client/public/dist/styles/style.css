@@ -69,10 +69,6 @@ button {
   opacity: .75;
 }
 
-.calendar-label: {
-  align: right;
-}
-
 .calendar-entry {
   margin-top: 7.5px;
   margin-bottom: 7.5px;
