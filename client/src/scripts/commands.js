@@ -120,19 +120,17 @@ const fillOutForm = (wildcard) => {
   (date.hour < 10) ? time += `0${date.hour}:` : time += `${date.hour}:`;
   (date.minute < 10) ? time += `0${date.minute}` : time += `${date.minute}`;
 
-  console.log(`Event name: ${eventName}\nLocation: ${location}\nDate: ${date}\nTime: ${time}`);
+  // Generate form data object to pass to this.setState
+  let formInfo = {
+    summary: eventName,
+    location: location,
+    startDate: `${date.year}-${date.month}-${date.day}`,
+    startTime: time,
+    endDate: `${date.year}-${date.month}-${date.day}`,
+    endTime: time
+  };
 
-  // // Generate form data object to pass to this.setState
-  // let formInfo = {
-  //   summary: eventName,
-  //   location: location,
-  //   startDate: `${date.year}-${date.month}-${date.day}`,
-  //   startTime: time,
-  //   endDate: `${date.year}-${date.month}-${date.day}`,
-  //   endTime: time
-  // };
-
-  // handleFormData(formInfo);
+  handleFormData(formInfo);
 
   // artyom.say(`Added ${eventName} at ${location} to the calendar. If everything on the form looks good, say add to calendar.`);
 };
