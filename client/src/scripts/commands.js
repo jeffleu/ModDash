@@ -82,7 +82,7 @@ const getDate = () => {
 const capitalizeEveryWord = (string) => {
   return string.split(' ').reduce((output, word) => {
     return output += `${word[0].toUpperCase()}${word.slice(1, word.length)} `;
-  }, '');
+  }, '').trim();
 };
 
 // Function that will take formData
@@ -171,7 +171,7 @@ const commands = [
     }
   },
   {
-    indexes: ['what time is it'],
+    indexes: ['wWat time is it'],
     action: (i) => { artyom.say(`It is currently ${getTime()}.`) }
   },
   {
@@ -179,14 +179,20 @@ const commands = [
     action: (i) => { artyom.say(`Today is ${getDate()}.`) }
   },
   {
-    indexes: ['open *'],
+    indexes: ['open *', 'go to *'],
     smart: true,
-    action: (i, wildcard) => { window.open(`http://${wildcard}`) }
+    action: (i, wildcard) => {
+      artyom.say(`Opening ${wildcard.replace('.', ' dot ')}.`);
+      window.open(`http://${wildcard}`)
+    }
   },
   {
     indexes: ['search YouTube for *'],
     smart: true,
-    action: (i, wildcard) => { window.open(`https://www.youtube.com/results?search_query=${wildcard}`) }
+    action: (i, wildcard) => {
+      artyom.say(`Searching YouTube for ${wildcard}.`);
+      window.open(`https://www.youtube.com/results?search_query=${wildcard}`)
+    }
   },
   {
     indexes: ['create event *', 'add event *', 'make event *'],
