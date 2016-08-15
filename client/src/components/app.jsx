@@ -58,8 +58,6 @@ class App extends React.Component {
 
     // Update the state with sorted events
     this.setState({ events: sortedEvents });
-
-    console.log('Events updated!');
   }
 
   componentDidMount() {

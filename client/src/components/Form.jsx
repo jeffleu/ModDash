@@ -108,15 +108,13 @@ class Form extends React.Component {
       console.log('res', res);
       return res.json();
     }).then((data) => {
-      // do something
-      console.log('Data from post', data.dataValues);
+      // Refreshes today's events in order including new event that was just added
+      this.props.refreshEvents();
     }).catch((err) => {
       console.log('ERROR!', err);
     });
 
     this.closeModal();
-
-    this.props.refreshEvents();
   }
 
   openModal() {

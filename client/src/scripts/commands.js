@@ -10,7 +10,7 @@ const artyomStart = () => {
   artyom.initialize({
     lang: 'en-GB',
     continuous: true,
-    debug: true,
+    debug: false,
     listen: true
   });
 
