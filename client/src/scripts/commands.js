@@ -78,6 +78,13 @@ const getDate = () => {
   return `${day} ${month} ${dateNum}`;
 };
 
+// Capitalizes every word in a given string
+const capitalizeEveryWord = (string) => {
+  return string.split(' ').reduce((output, word) => {
+    return output += `${word[0].toUpperCase()}${word.slice(1, word.length)} `;
+  }, '');
+};
+
 // Function that will take formData
 let handleFormData = () => {
   throw new Error('Missing callback function for onFillOutForm!');
@@ -86,18 +93,17 @@ let handleFormData = () => {
 const fillOutForm = (wildcard) => {
   // Separate event name, date/time and location
   let split = wildcard.split(' at ');
-  let eventName = split[0];
+  let eventName = capitalizeEveryWord(split[0]);
   let location;
-  // TO DO: uppercase first letter of each word in eventName & location
   let dateObject;
 
   // Set location and dateObject depending on the order of command
   if (Chrono.parse(split[1]).length === 1) {
     dateObject = Chrono.parse(split[1])[0].start;
-    location = split[2];
+    location = capitalizeEveryWord(split[2]);
   } else if (Chrono.parse(split[2]).length === 1) {
     dateObject = Chrono.parse(split[2])[0].start;
-    location = split[1];
+    location = capitalizeEveryWord(split[1]);
   } else if (Chrono.parse(split[1]).length === 0 || Chrono.parse(split[2]).length === 0) {
     console.warn(`Command can be said in two ways:\n [event] at [date/time] at [location]\n [event] at [location] at [date/time]`);
   }
@@ -114,17 +120,19 @@ const fillOutForm = (wildcard) => {
   (date.hour < 10) ? time += `0${date.hour}:` : time += `${date.hour}:`;
   (date.minute < 10) ? time += `0${date.minute}` : time += `${date.minute}`;
 
-  // Generate form data object to pass to this.setState
-  let formInfo = {
-    summary: eventName,
-    location: location,
-    startDate: `${date.year}-${date.month}-${date.day}`,
-    startTime: time,
-    endDate: `${date.year}-${date.month}-${date.day}`,
-    endTime: time
-  };
+  console.log(`Event name: ${eventName}\nLocation: ${location}\nDate: ${date}\nTime: ${time}`);
 
-  handleFormData(formInfo);
+  // // Generate form data object to pass to this.setState
+  // let formInfo = {
+  //   summary: eventName,
+  //   location: location,
+  //   startDate: `${date.year}-${date.month}-${date.day}`,
+  //   startTime: time,
+  //   endDate: `${date.year}-${date.month}-${date.day}`,
+  //   endTime: time
+  // };
+
+  // handleFormData(formInfo);
 
   // artyom.say(`Added ${eventName} at ${location} to the calendar. If everything on the form looks good, say add to calendar.`);
 };
