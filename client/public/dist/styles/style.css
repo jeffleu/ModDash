@@ -36,7 +36,6 @@ button {
   font-weight: 500;
 }
 
-
 .time:hover {
   background-color: black;
   opacity: .80;
@@ -68,6 +67,10 @@ button {
 .calendar-title:hover {
   background-color: black;
   opacity: .75;
+}
+
+.calendar-label: {
+  align: right;
 }
 
 .calendar-entry {

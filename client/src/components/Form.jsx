@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 var Modal = require('react-modal');
 
-
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -17,11 +16,11 @@ class Form extends React.Component {
       endTime: '',
       modalIsOpen: false,
     }
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-
   }
 
   componentDidMount() {

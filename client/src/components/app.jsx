@@ -19,8 +19,6 @@ class App extends React.Component {
   }
 
   fetchAndUpdateEvents() {
-    console.log('Events updated!');
-
     fetch('http://localhost:9000/api/calendar/getEvent')
       .then((res) => res.json())
       .then((data) => {
@@ -40,13 +38,6 @@ class App extends React.Component {
       }) 
   }
 
-  // addOneEvent(event) {
-  //   var slice = this.state.events.slice()
-  //   var newList = slice.concat(event);
-
-  //   sortAndUpdateEvents(newList);
-  // }
-
   sortAndUpdateEvents(eventList) {
     // Get all event times
     let times = eventList.reduce((array, event) => {
@@ -54,11 +45,9 @@ class App extends React.Component {
     }, []);
 
     // Sort event times in chronological order
-    times.sort((a, b) => {
-      return new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`);
-    });
+    times.sort((a, b) => new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`));
 
-    // TO DO: Bug fix - if events are at the same time, the last 
+    // TO DO: Bug fix - if there are multiple events are at the same time, the last 
     // event with the same time will overwrite the first one
 
     // Sort events based on start time
@@ -69,6 +58,8 @@ class App extends React.Component {
 
     // Update the state with sorted events
     this.setState({ events: sortedEvents });
+
+    console.log('Events updated!');
   }
 
   componentDidMount() {
