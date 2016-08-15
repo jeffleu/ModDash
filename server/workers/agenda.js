@@ -18,6 +18,10 @@ agenda.on('fail', function(err, job) {
   console.log("Job failed with error: %s", err.message);
 });
 
+agenda.on('success', function(job) {
+  console.log('Successfully completed job:', job.attrs);
+})
+
 module.exports = agenda;
 
 
