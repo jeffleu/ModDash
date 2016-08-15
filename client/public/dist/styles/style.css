@@ -1,5 +1,11 @@
-body {
+body button {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+button {
+  font-size: 100%;
+  font-weight: 100;
+  margin: 2px;
 }
 
 /*
@@ -88,6 +94,12 @@ for adding background, do something like url(), no-repeat, center, center, fixed
   color: blue;
 }
 
+.form-button {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+}
+
 .calendar-form {
   /*margin: auto;*/
   width: 100%;
@@ -109,6 +121,11 @@ input {
   font-weight: 100;
   font-size: 100%;
   margin-bottom: 3px;
+}
+
+.nah {
+  font-weight: 100;
+  font-size: 100%;
 }
 
 .ModalClass {
