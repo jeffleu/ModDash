@@ -1,5 +1,10 @@
-body button {
+body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+  background: 
+    url("https://unsplash.it/1280/676?random") 
+    center center / 100% 100%
+    fixed
 }
 
 button {
@@ -7,10 +12,6 @@ button {
   font-weight: 100;
   margin: 2px;
 }
-
-/*
-for adding background, do something like url(), no-repeat, center, center, fixed; add this as a background div.
-*/
 
 .today {
   position: absolute;
@@ -81,7 +82,6 @@ for adding background, do something like url(), no-repeat, center, center, fixed
 
 .event-start {
   font-size: 200%;
-
 }
 
 .event-summary-location {
@@ -98,6 +98,10 @@ for adding background, do something like url(), no-repeat, center, center, fixed
   position: fixed;
   top: 2%;
   right: 2%;
+}
+
+.event-url {
+  font-color: white;
 }
 
 .calendar-form {
