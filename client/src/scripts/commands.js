@@ -171,7 +171,7 @@ const commands = [
     }
   },
   {
-    indexes: ['wWat time is it'],
+    indexes: ['what time is it'],
     action: (i) => { artyom.say(`It is currently ${getTime()}.`) }
   },
   {
