@@ -51,7 +51,7 @@ pubnub.subscribe ({
     var notify = {
       type: 'basic',
       title: `Time to Leave for ${data.location}!`,
-      message: `Looks like there might be traffic, and it will take ${Math.ceil(((data.traffic / 60) / 1000))} minutes to get there`,
+      message: `Looks like there might be traffic, and it will take ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
       iconUrl: 'sonic-sega.png',
       buttons: [{
         title: 'Click To See Map Details'
