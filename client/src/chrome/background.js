@@ -48,6 +48,7 @@ pubnub.subscribe ({
   channel: 'timeToLeave',
   message: function(data){
     // TODO: FIX BUG - data is not being parsed correctly for the notification
+    console.log('gmap', data);
     var notify = {
       type: 'basic',
       title: `Time to Leave for ${data.location}!`,
