@@ -1,7 +1,6 @@
 const google = require('googleapis');
 const calendar = google.calendar('v3');
 const plus = google.plus('v1');
-require('dotenv').config();
 
 
 var OAuth2 = google.auth.OAuth2;

@@ -47,10 +47,11 @@ pubnub.subscribe ({
 pubnub.subscribe ({
   channel: 'timeToLeave',
   message: function(data){
+    // TODO: FIX BUG - data is not being parsed correctly for the notification
     var notify = {
       type: 'basic',
-      title: `Time to Leave for ${data.destination}!`,
-      message: `Looks like there might be traffic, and it will take ${Math.ceil(((data.initialEstimate / 60) / 1000))} minutes to get there`,
+      title: `Time to Leave for ${data.location}!`,
+      message: `Looks like there might be traffic, and it will take ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
       iconUrl: 'sonic-sega.png',
       buttons: [{
         title: 'Click To See Map Details'

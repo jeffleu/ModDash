@@ -40,11 +40,11 @@ for adding background, do something like url(), no-repeat, center, center, fixed
 }
 
 .calendar {
-  position: relative;
+  position: absolute;
   /*display: block;*/
-  top: 60%;
+  top: 35%;
   left: 50%;
-  transform: translateX(-50%) translateY(55%);
+  transform: translateX(-50%);
   width: 30%;
   margin-top: 20px;
   /*text-align: center;*/
@@ -80,6 +80,12 @@ for adding background, do something like url(), no-repeat, center, center, fixed
 
 .event-summary-location {
   font-size: 160%;
+}
+.event-link {
+  color: black;
+}
+.event-link:hover {
+  color: blue;
 }
 
 .calendar-form {

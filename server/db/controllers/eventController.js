@@ -1,17 +1,11 @@
 const models = require('../models/models');
 const Event = models.Event;
-const googleMaps = require('./../../utility/googleMaps');
 const moment = require('moment');
 const zone = require('moment-timezone');
-const sequelize = require('../db.js');
-// const User = require('./userController');,
-// const google = require('googleapis');
-// var calendar = google.calendar('v3');
-// const googleOAuth = require('./../../setup/googleOAuth');
-// var oauth2Client = googleOAuth.oauth2Client;
+const db = require('../db.js');
 
 const insertEvent = (data, userId) => {
-  Event.findOrCreate({
+  return Event.findOrCreate({
     where: {
       googleCalendarEventId: data.id},
       defaults: {
@@ -26,12 +20,6 @@ const insertEvent = (data, userId) => {
         description: data.description
       }
   })
-  .spread((event, created) => {
-    console.log(created, ': event was created');
-
-    // query Google Maps for initial travel time, see utility/googleMaps
-    googleMaps.getInitialTravelTime(event);
-  });
 }
 
 const retrieveEvent = (id) => {
@@ -40,13 +28,14 @@ const retrieveEvent = (id) => {
   });
 };
 
+// this should be factored out into just doing the db query. the req, res should be in a parent utility function
 const retrieveDayEvent = (req, res) => {
   var nowInUTC = moment().utcOffset(0000).subtract(7, 'hours').format('YYYY-MM-DD HH:mm') + ':00+00';
   var midnightInUTC = moment().add(1, 'days').format('YYYY-MM-DD') + ' 06:59:00+00';
 
   // Get all events for today (events in DB are in UTC time)
   var queryString = `SELECT * FROM events WHERE startdatetime BETWEEN '${nowInUTC}' AND '${midnightInUTC}'`;
-  sequelize.query(queryString)
+  db.query(queryString)
   .spread((datas, metadata) => {
     datas.forEach((data) => {
       data.startdatetime = moment(data.startdatetime).format('LT');

@@ -1,13 +1,12 @@
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./db/db.js');
 const router = require('./routes');
 const server = require('http').Server(app);
-const pubnub = require ('./pubnub');
 
-const mapsWorker = require('./workers/mapsWorker');
 
 // https://github.com/foreverjs/forever
 // use forever.js to restart the server if it crashes.
@@ -23,7 +22,7 @@ app.all('/api/*', function(req, res, next) {
   if (req.method.toLowerCase() !== "options") {
    return next();
   }
-  return res.send(204);
+  return res.sendStatus(204);
 })
 app.use('/api', router);
 
