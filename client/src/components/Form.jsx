@@ -135,8 +135,8 @@ class Form extends React.Component {
   render() {
     return (
       <div>
-      <div className='form-button'>
-        <button type="button" onClick={this.openModal}>Add event</button>
+      <div className='add-event' onClick={this.openModal}>
+        Add event
       </div>
         <Modal 
           className="ModalClass"
