@@ -2,7 +2,7 @@ const models = require('../models/models');
 const Event = models.Event;
 const moment = require('moment');
 const zone = require('moment-timezone');
-const sequelize = require('../db.js');
+const db = require('../db.js');
 
 const insertEvent = (data, userId) => {
   return Event.findOrCreate({
@@ -28,13 +28,14 @@ const retrieveEvent = (id) => {
   });
 };
 
+// this should be factored out into just doing the db query. the req, res should be in a parent utility function
 const retrieveDayEvent = (req, res) => {
   var nowInUTC = moment().utcOffset(0000).subtract(7, 'hours').format('YYYY-MM-DD HH:mm') + ':00+00';
   var midnightInUTC = moment().add(1, 'days').format('YYYY-MM-DD') + ' 06:59:00+00';
 
   // Get all events for today (events in DB are in UTC time)
   var queryString = `SELECT * FROM events WHERE startdatetime BETWEEN '${nowInUTC}' AND '${midnightInUTC}'`;
-  sequelize.query(queryString)
+  db.query(queryString)
   .spread((datas, metadata) => {
     datas.forEach((data) => {
       data.startdatetime = moment(data.startdatetime).format('LT');

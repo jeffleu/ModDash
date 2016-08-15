@@ -6,7 +6,7 @@ const plus = google.plus('v1');
 
 var oauth2Client = googleOAuth.oauth2Client;
 
-
+// this should be refactored into just User.create; the getToken and plus.people.get should be refactored into a utility function
 const createUser = function(req, res) {
   const code = req.query.code;
   oauth2Client.getToken(code, function (err, tokens) {

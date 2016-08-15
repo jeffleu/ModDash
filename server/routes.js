@@ -13,9 +13,11 @@ const queryTraffic = require('./workers/queryTraffic');
 var addEventAndAddTravel = function(req, res) {
   addEvent(req, res)
   .spread((event, created) => {
+    console.log('event was added, now adding travel');
     return addTravel(event); 
   })
   .then(travel => {
+    console.log('travel was added, now scheduling queryTraffic worker');
     queryTraffic(travel);
   })
 }
