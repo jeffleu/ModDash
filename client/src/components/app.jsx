@@ -27,7 +27,7 @@ class App extends React.Component {
       fetch('http://localhost:9000/api/users/getGeolocation')
         .then((res) => res.json())
           .then((data) => {
-            // If geolocation doesn't match geolocation in DB, then update
+            // If current geolocation doesn't match geolocation in DB, then update DB
             if (data.geolocation !== geolocation) {
               this.updateGeolocation(geolocation);
             } else {
@@ -74,21 +74,21 @@ class App extends React.Component {
   fetchAndUpdateEvents() {
     fetch('http://localhost:9000/api/calendar/getEvent')
       .then((res) => res.json())
-      .then((data) => {
-        let eventList = data.map((event) => {
-          return {
-            eventName: event.name,
-            location: event.location,
-            startTime: event.startdatetime,
-            eventUrl: event.eventUrl
-          };
-        });
+        .then((data) => {
+          let eventList = data.map((event) => {
+            return {
+              eventName: event.name,
+              location: event.location,
+              startTime: event.startdatetime,
+              eventUrl: event.eventUrl
+            };
+          });
 
-        this.sortAndUpdateEvents(eventList);
-      })
-      .catch((err) => {
-        console.log('Error retrieving events', err);
-      }) 
+          this.sortAndUpdateEvents(eventList);
+        })
+        .catch((err) => {
+          console.log('Error retrieving events', err);
+        }); 
   }
 
   sortAndUpdateEvents(eventList) {
@@ -114,10 +114,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // Get today's events and update event list
     this.fetchAndUpdateEvents();
-
-    // Get user's geolocation on load
     this.getGeolocation();
 
     // Checks for user's geolocation every 10 minutes

@@ -60,14 +60,9 @@ const getGeolocation = (id) => {
 const updateUserGeolocation = (id, geolocation) => {
   return User.update(
     { geolocation: geolocation },
-    { where: {id : id} })
-      .then((result) => { 
-        return result;
-      })
-      .catch((err) => {
-        console.log('Error updating user\'s geolocation\n', err);
-        return err;
-      });
+    { where: {id : id} })  
+      .then((result) => result)
+      .catch((err) => err);
 };
 
 module.exports = {

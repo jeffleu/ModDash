@@ -5,12 +5,8 @@ const updateGeolocation = (req, res) => {
   var userId = 2;
 
   return UserController.updateUserGeolocation(userId, req.body.geolocation)
-    .then((result) => {
-      res.sendStatus(200);
-    })
-    .catch((err) => {
-      res.sendStatus(404);
-    });
+    .then((result) => { res.sendStatus(200); })
+    .catch((err) => { res.sendStatus(404); });
 };
 
 module.exports = updateGeolocation;
