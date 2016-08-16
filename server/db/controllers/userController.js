@@ -50,6 +50,7 @@ const getUserTokens = function(id) {
   });
 };
 
+<<<<<<< 812f1883822f2cb1f4a9bba21d5c809fe5b582c4
 const getGeolocation = (id) => {
   return User.findOne(
     { attributes: ['geolocation']},
@@ -63,11 +64,21 @@ const updateUserGeolocation = (id, geolocation) => {
     { where: {id : id} })  
       .then((result) => result)
       .catch((err) => err);
+=======
+const getUserData = (id) => {
+  return User.findOne({
+    where: {id: id}
+  });
+>>>>>>> Implemented getGeolocation function that retrieves user's geolocation from DB.
 };
 
 module.exports = {
   createUser,
   getUserTokens,
+<<<<<<< 812f1883822f2cb1f4a9bba21d5c809fe5b582c4
   getGeolocation,
   updateUserGeolocation
+=======
+  getUserData
+>>>>>>> Implemented getGeolocation function that retrieves user's geolocation from DB.
 };

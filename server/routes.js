@@ -6,8 +6,12 @@ const GoogleAuthUrl = require('./setup/googleOAuth').url;
 const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
 const addTravel = require('./utility/addTravel');
+<<<<<<< 812f1883822f2cb1f4a9bba21d5c809fe5b582c4
 const getUserGeolocation = require('./utility/getUserGeoLocation');
 const updateGeolocation = require('./utility/updateGeolocation');
+=======
+const getUserInfo = require('./utility/getUserInfo');
+>>>>>>> Implemented getGeolocation function that retrieves user's geolocation from DB.
 const queryTraffic = require('./workers/queryTraffic');
 
 // put this parent function elsewhere later, but for now keep it here to understand what is happening. 
@@ -37,8 +41,13 @@ router.post('/calendar/addEvent', addEventAndAddTravel);
 router.get('/calendar/getEvent', CalendarEvents.retrieveDayEvent);
 router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
 
+<<<<<<< 812f1883822f2cb1f4a9bba21d5c809fe5b582c4
 // User Routes
 router.get('/users/getGeolocation', getUserGeolocation);
 router.post('/users/updateGeolocation', updateGeolocation);
+=======
+// IN PROGRESS: Get user data
+router.get('/users/getData', getUserInfo);
+>>>>>>> Implemented getGeolocation function that retrieves user's geolocation from DB.
 
 module.exports = router;
