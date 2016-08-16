@@ -8,10 +8,6 @@ import artyom from '../lib/artyom.min.js';
 import $ from '../lib/jquery.js';
 const commands = require('../scripts/commands.js');
 const Modal = require('react-modal');
-<<<<<<< 812f1883822f2cb1f4a9bba21d5c809fe5b582c4
-=======
-const Promise = require('bluebird');
->>>>>>> Implemented getGeolocation function that retrieves user's geolocation from DB.
 
 class App extends React.Component {
   constructor(props) {
@@ -27,7 +23,6 @@ class App extends React.Component {
     const geoSuccess = (position) => {
       let geolocation = `${position.coords.latitude} ${position.coords.longitude}`;
 
-<<<<<<< 812f1883822f2cb1f4a9bba21d5c809fe5b582c4
       fetch('http://localhost:9000/api/users/getGeolocation')
         .then((res) => res.json())
           .then((data) => {
@@ -40,26 +35,6 @@ class App extends React.Component {
           })
           .catch((err) => {
             console.log('Error retrieving user\'s geolocation from database.\n', err);
-=======
-      fetch('http://localhost:9000/api/users/getData')
-        .then((res) => res.json())
-          .then((data) => {
-            console.log('[getGeolocation]: Received data from database!', data);
-
-            if (data.geolocation === null || data.geolocation !== geolocation) {
-              console.log('Is the geolocation updated yet?\n', geolocation);
-              console.log('Geolocation is null!\n', data.geolocation);
-
-              // Update geolocation in database (need to write updateGeolocation function)
-              // updateGeolocation(geolocation);
-            } else {
-              console.log('Geolocation has not changed.');
-            }
-          })
-          .catch((err) => {
-            console.log('Error retrieving user info from database\n', err);
->>>>>>> Implemented getGeolocation function that retrieves user's geolocation from DB.
-          });
     };
 
     const geoError = (error) => {
@@ -77,7 +52,6 @@ class App extends React.Component {
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
   }
 
-<<<<<<< 812f1883822f2cb1f4a9bba21d5c809fe5b582c4
   updateGeolocation(geolocation) {
     fetch('http://localhost:9000/api/users/updateGeolocation', {
       method: 'POST',
@@ -94,11 +68,6 @@ class App extends React.Component {
       console.log('An error occurred while updating geolocation.');
     });
   }
-=======
-  // updateGeolocation(geolocation) {
-
-  // }
->>>>>>> Implemented getGeolocation function that retrieves user's geolocation from DB.
 
   fetchAndUpdateEvents() {
     fetch('http://localhost:9000/api/calendar/getEvent')
