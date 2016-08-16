@@ -5,9 +5,8 @@ const EventController = require('./../db/controllers/eventController');
 
 
 const recurringCheck = function(event) {
-  console.log('inside recurringCheck');
-  
-  var timeToCheckAgain = 180000; // 3 min
+  console.log('inside recurringCheck');  
+  const timeToCheckAgain = 180000; // 3 min
   getTrafficTime(event)
   .then(times => {
     if (Date.now() + times.traffic + 300000 >= Date.parse(event.dataValues.startdatetime)) {
@@ -15,9 +14,9 @@ const recurringCheck = function(event) {
       event.dataValues.traffic = times.traffic;
       sendLeaveNotification(times.notificationTime, event.dataValues);
     } else {
-      console.log('traffic is not over start time, setTimeout');
+      console.log('traffic is not over start time, do setTimeout to make another check in 3 minutes');
       setTimeout(function() {
-        console.log('setTimeout triggered 1 minute later');
+        console.log('setTimeout recurringCheck triggered 3 minute later');
         recurringCheck(event);
       }, timeToCheckAgain);
     }

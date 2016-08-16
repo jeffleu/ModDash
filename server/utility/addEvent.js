@@ -11,7 +11,7 @@ calendar.events.insert = Promise.promisify(calendar.events.insert);
 
 const addEvent = function(req, res) {
   var userId = 2;
-  return UserController.getUserTokens(2)
+  return UserController.getUserTokens(userId)
   .then(data => {
     const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body};
     return params;
