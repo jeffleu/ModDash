@@ -35,6 +35,7 @@ class App extends React.Component {
           })
           .catch((err) => {
             console.log('Error retrieving user\'s geolocation from database.\n', err);
+          });
     };
 
     const geoError = (error) => {
@@ -112,7 +113,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchAndUpdateEvents(); 
+    this.fetchAndUpdateEvents();
     this.getGeolocation();
 
     // Checks for user's geolocation every 10 minutes
