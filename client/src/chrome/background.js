@@ -1,3 +1,4 @@
+
 var pubnub = PUBNUB({
   subscribe_key: 'sub-c-db638056-601a-11e6-9bf3-02ee2ddab7fe',
 
@@ -17,11 +18,6 @@ var pubnub = PUBNUB({
     console.log("Reconnected")
   }
 });
-// var map;
-//
-// function initMap() {
-//   ma[ ]
-// }
 
 pubnub.subscribe ({
   channel: 'eventAdded',
@@ -54,10 +50,11 @@ pubnub.subscribe ({
     // TODO: FIX BUG - data is not being parsed correctly for the notification
     console.log('origin', data.origin)
     console.log('destination', data.location);
+    let start = moment(data.startdatetime).format('LT');
     var notify = {
       type: 'basic',
-      title: `Time to Leave for ${data.location}!`,
-      message: `Looks like there might be traffic, and it will take ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
+      title: `Time to Leave for ${data.name} at ${data.location}!`,
+      message: `Your event is at ${start}, and it will take ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
       iconUrl: 'sonic-sega.png',
       // global variable that holds the gmail url
       buttons: [{
