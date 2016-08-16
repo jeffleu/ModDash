@@ -195,6 +195,14 @@ const commands = [
     }
   },
   {
+    indexes: ['search Amazon for *'],
+    smart: true,
+    action: (i, wildcard) => {
+      artyom.say(`Searching Amazon for ${wildcard}.`);
+      window.open(`https://www.amazon.com/s/ref=nb_sb_noss_2/180-3667157-6088933?url=search-alias%3Daps&field-keywords=${wildcard}`);
+    }
+  },
+  {
     indexes: ['create event *', 'add event *', 'make event *'],
     smart: true,
     action: (i, wildcard) => {
@@ -215,11 +223,11 @@ const commands = [
 ********************************************************/
 
 module.exports = {
-  artyomStart: artyomStart,
-  artyomStop: artyomStop,
+  artyomStart,
+  artyomStop,
   // fillOutForm: fillOutForm,
   addCommands: artyom.addCommands,
-  commands: commands,
+  commands,
   onFillOutForm: (callback) => {
     handleFormData = callback;
   }
