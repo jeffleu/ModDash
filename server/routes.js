@@ -6,6 +6,7 @@ const GoogleAuthUrl = require('./setup/googleOAuth').url;
 const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
 const addTravel = require('./utility/addTravel');
+const getUserInfo = require('./utility/getUserInfo');
 const queryTraffic = require('./workers/queryTraffic');
 
 // put this parent function elsewhere later, but for now keep it here to understand what is happening. 
@@ -32,5 +33,8 @@ router.get('/authCallback', User.createUser);
 router.post('/calendar/addEvent', addEventAndAddTravel);
 router.get('/calendar/getEvent', CalendarEvents.retrieveDayEvent);
 router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
+
+// IN PROGRESS: Get user data
+router.get('/users/getData', getUserInfo);
 
 module.exports = router;

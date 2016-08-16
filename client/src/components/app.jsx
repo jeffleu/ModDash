@@ -8,7 +8,7 @@ import artyom from '../lib/artyom.min.js';
 import $ from '../lib/jquery.js';
 const commands = require('../scripts/commands.js');
 const Modal = require('react-modal');
-
+const Promise = require('bluebird');
 
 class App extends React.Component {
   constructor(props) {
@@ -19,34 +19,49 @@ class App extends React.Component {
   }
 
   getGeolocation() {
-    let startPos;
     let geoOptions = { timeout: 10000 };
     
     const geoSuccess = (position) => {
-      startPos = position;
-      console.log(`Latitude: ${startPos.coords.latitude}\nLongitude: ${startPos.coords.longitude}`);
+      let geolocation = `${position.coords.latitude} ${position.coords.longitude}`;
+
+      fetch('http://localhost:9000/api/users/getData')
+        .then((res) => res.json())
+          .then((data) => {
+            console.log('[getGeolocation]: Received data from database!', data);
+
+            if (data.geolocation === null || data.geolocation !== geolocation) {
+              console.log('Is the geolocation updated yet?\n', geolocation);
+              console.log('Geolocation is null!\n', data.geolocation);
+
+              // Update geolocation in database (need to write updateGeolocation function)
+              // updateGeolocation(geolocation);
+            } else {
+              console.log('Geolocation has not changed.');
+            }
+          })
+          .catch((err) => {
+            console.log('Error retrieving user info from database\n', err);
+          });
     };
 
     const geoError = (error) => {
       if (error.code === 0) {
-        console.log(`Error occurred: unknown error`);
+        console.log(`Geolocation error occurred: unknown error`);
       } else if (error.code === 1) {
-        console.log(`Error occurred: permission denied`);
+        console.log(`Geolocation error occurred: permission denied`);
       } else if (error.code === 2) {
-        console.log(`Error occurred: position unavailable`);
+        console.log(`Geolocation error occurred: position unavailable`);
       } else if (error.code === 3) {
-        console.log(`Error occurred: timed out`);
+        console.log(`Geolocation error occurred: timed out`);
       }
     };
 
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
-
-    // Check database for user's previous geolocation
-      // If it's different, update geolocation by POSTing to user table
-
-
-
   }
+
+  // updateGeolocation(geolocation) {
+
+  // }
 
   fetchAndUpdateEvents() {
     fetch('http://localhost:9000/api/calendar/getEvent')

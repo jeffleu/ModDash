@@ -7,7 +7,6 @@ const db = require('./db/db.js');
 const router = require('./routes');
 const server = require('http').Server(app);
 
-
 // https://github.com/foreverjs/forever
 // use forever.js to restart the server if it crashes.
 
@@ -24,6 +23,7 @@ app.all('/api/*', function(req, res, next) {
   }
   return res.sendStatus(204);
 })
+
 app.use('/api', router);
 
 app.get('*', (req, res)=>{
