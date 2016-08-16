@@ -8,7 +8,6 @@ import artyom from '../lib/artyom.min.js';
 import $ from '../lib/jquery.js';
 const commands = require('../scripts/commands.js');
 const Modal = require('react-modal');
-const Promise = require('bluebird');
 
 class App extends React.Component {
   constructor(props) {
