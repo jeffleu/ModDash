@@ -17,7 +17,11 @@ var pubnub = PUBNUB({
     console.log("Reconnected")
   }
 });
-
+// var map;
+//
+// function initMap() {
+//   ma[ ]
+// }
 
 pubnub.subscribe ({
   channel: 'eventAdded',
@@ -48,19 +52,21 @@ pubnub.subscribe ({
   channel: 'timeToLeave',
   message: function(data){
     // TODO: FIX BUG - data is not being parsed correctly for the notification
-    console.log('gmap', data);
+    console.log('origin', data.origin)
+    console.log('destination', data.location);
     var notify = {
       type: 'basic',
       title: `Time to Leave for ${data.location}!`,
       message: `Looks like there might be traffic, and it will take ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
       iconUrl: 'sonic-sega.png',
+      // global variable that holds the gmail url
       buttons: [{
         title: 'Click To See Map Details'
       }]
     };
 
     chrome.notifications.onButtonClicked.addListener(function() {
-      window.open(data.htmlLink);
+      window.open(`https://www.google.com/maps/dir/${data.origin}/${data.location}`);
     });
 
     chrome.notifications.create(notify, function() {

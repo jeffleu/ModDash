@@ -1,11 +1,14 @@
 const agenda = require('./agenda');
 const pubnub = require('./../setup/pubnub');
-
+const origin = '944 Market St San Francisco, CA 94102';
+const Gmap = require('../utility/getMapDetails');
 
 agenda.define('send leave notification', function(job, done) {
   // use pubnub to send notification
+  job.attrs.data.origin = origin;
   var event = job.attrs.data;
-  console.log('google map job', job);
+
+  // console.log('am i getting map direction data', mapData);
   pubnub.publish({
     message: event,
     channel: 'timeToLeave',
@@ -30,6 +33,7 @@ agenda.define('send leave notification', function(job, done) {
 
 const sendLeaveNotification = function(notificationTime, eventData) {
   console.log('scheduling a leave notification for event', eventData.name, 'at',  notificationTime)
+  // pubnub publish
   agenda.schedule(notificationTime, 'send leave notification', eventData);
 }
 

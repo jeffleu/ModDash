@@ -4,8 +4,6 @@ const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 const origins = 'Hack Reactor, 944 Market St, San Francisco, CA 94102';
 
 const getTrafficTime = function(event) {
-  var glink = event;
-  console.log('gmap api', glink);
   var startTime = event.dataValues.startdatetime
   var options = {
     url,
