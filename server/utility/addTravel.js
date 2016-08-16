@@ -27,10 +27,9 @@ const addTravel = function(event) {
     var body = JSON.parse(body);
     // console.log(body.rows[0].elements[0]);
     // var distance = body.rows[0].elements[0].distance;
-    console.log('request promist body', body);
     var duration = body.rows[0].elements[0].duration;
     var value = 0;
-    if (duration) {
+    if (duration && duration.value) {
       value = duration.value;
     }
     return value;
@@ -40,7 +39,6 @@ const addTravel = function(event) {
     return TravelController.initiateTravel(event, (value * 1000)); // convert seconds to milliseconds
   })
   .spread((travel, created) => {
-    console.log('travel was created:', created);
     return travel;
   });
 };
