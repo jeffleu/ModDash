@@ -1,7 +1,6 @@
 const agenda = require('./agenda');
 const pubnub = require('./../setup/pubnub');
 const origin = '944 Market St San Francisco, CA 94102';
-const Gmap = require('../utility/getMapDetails');
 
 agenda.define('send leave notification', function(job, done) {
   // use pubnub to send notification

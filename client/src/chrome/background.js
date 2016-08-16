@@ -54,7 +54,7 @@ pubnub.subscribe ({
     var notify = {
       type: 'basic',
       title: `Time to Leave for ${data.name} at ${data.location}!`,
-      message: `Your event is at ${start}, and it will take ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
+      message: `Your event is at ${start}, and it will take about ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
       iconUrl: 'sonic-sega.png',
       // global variable that holds the gmail url
       buttons: [{
