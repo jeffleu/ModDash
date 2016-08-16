@@ -7,7 +7,7 @@ import Chrono from '../lib/chrono.min.js';
 import artyom from '../lib/artyom.min.js';
 import $ from '../lib/jquery.js';
 const commands = require('../scripts/commands.js');
-var Modal = require('react-modal');
+const Modal = require('react-modal');
 
 
 class App extends React.Component {
@@ -16,6 +16,36 @@ class App extends React.Component {
     this.state = {
       events: []
     }
+  }
+
+  getGeolocation() {
+    let startPos;
+    let geoOptions = { timeout: 10000 };
+    
+    const geoSuccess = (position) => {
+      startPos = position;
+      console.log(`Latitude: ${startPos.coords.latitude}\nLongitude: ${startPos.coords.longitude}`);
+    };
+
+    const geoError = (error) => {
+      if (error.code === 0) {
+        console.log(`Error occurred: unknown error`);
+      } else if (error.code === 1) {
+        console.log(`Error occurred: permission denied`);
+      } else if (error.code === 2) {
+        console.log(`Error occurred: position unavailable`);
+      } else if (error.code === 3) {
+        console.log(`Error occurred: timed out`);
+      }
+    };
+
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+
+    // Check database for user's previous geolocation
+      // If it's different, update geolocation by POSTing to user table
+
+
+
   }
 
   fetchAndUpdateEvents() {
@@ -61,7 +91,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // Get today's events and update event list
     this.fetchAndUpdateEvents();
+
+    // Get user's geolocation on load
+    this.getGeolocation();
+
+    // Checks for user's geolocation every 10 minutes
+    setInterval(() => {
+      this.getGeolocation();
+    }, 600000);
   }
 
   render() {

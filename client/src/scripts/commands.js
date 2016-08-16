@@ -10,7 +10,7 @@ const artyomStart = () => {
   artyom.initialize({
     lang: 'en-GB',
     continuous: true,
-    debug: true,
+    debug: false,
     listen: true
   });
 
@@ -31,8 +31,8 @@ const getTime = () => {
   let amPm;
 
   if (hours >= 12) {
-    amPm = 'PM';
     hours = hours - 12;
+    amPm = 'PM';
   } else {
     amPm = 'AM';
   }
