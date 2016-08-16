@@ -6,7 +6,8 @@ const GoogleAuthUrl = require('./setup/googleOAuth').url;
 const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
 const addTravel = require('./utility/addTravel');
-const getUserInfo = require('./utility/getUserInfo');
+const getUserGeolocation = require('./utility/getUserGeoLocation');
+const updateGeolocation = require('./utility/updateGeolocation');
 const queryTraffic = require('./workers/queryTraffic');
 
 // put this parent function elsewhere later, but for now keep it here to understand what is happening. 
@@ -23,6 +24,7 @@ var addEventAndAddTravel = function(req, res) {
   })
 }
 
+// Authorization Routes
 router.get('/auth', function(req, res) {
   res.redirect(GoogleAuthUrl);
 });
@@ -30,11 +32,13 @@ router.get('/auth', function(req, res) {
 router.get('/authCallback', User.createUser);
 // this is tricky to fix, probably want to serve up a static page
 
+// Calendar Routes
 router.post('/calendar/addEvent', addEventAndAddTravel);
 router.get('/calendar/getEvent', CalendarEvents.retrieveDayEvent);
 router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
 
-// IN PROGRESS: Get user data
-router.get('/users/getData', getUserInfo);
+// User Routes
+router.get('/users/getGeolocation', getUserGeolocation);
+router.post('/users/updateGeolocation', updateGeolocation);
 
 module.exports = router;

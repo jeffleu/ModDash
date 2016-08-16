@@ -50,14 +50,29 @@ const getUserTokens = function(id) {
   });
 };
 
-const getUserData = (id) => {
-  return User.findOne({
-    where: {id: id}
-  });
+const getGeolocation = (id) => {
+  return User.findOne(
+    { attributes: ['geolocation']},
+    { where: {id: id} }
+  );
+};
+
+const updateUserGeolocation = (id, geolocation) => {
+  return User.update(
+    { geolocation: geolocation },
+    { where: {id : id} })
+      .then((result) => { 
+        return result;
+      })
+      .catch((err) => {
+        console.log('Error updating user\'s geolocation\n', err);
+        return err;
+      });
 };
 
 module.exports = {
   createUser,
   getUserTokens,
-  getUserData
+  getGeolocation,
+  updateUserGeolocation
 };

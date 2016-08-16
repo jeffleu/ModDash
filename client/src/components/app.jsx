@@ -24,23 +24,18 @@ class App extends React.Component {
     const geoSuccess = (position) => {
       let geolocation = `${position.coords.latitude} ${position.coords.longitude}`;
 
-      fetch('http://localhost:9000/api/users/getData')
+      fetch('http://localhost:9000/api/users/getGeolocation')
         .then((res) => res.json())
           .then((data) => {
-            console.log('[getGeolocation]: Received data from database!', data);
-
-            if (data.geolocation === null || data.geolocation !== geolocation) {
-              console.log('Is the geolocation updated yet?\n', geolocation);
-              console.log('Geolocation is null!\n', data.geolocation);
-
-              // Update geolocation in database (need to write updateGeolocation function)
-              // updateGeolocation(geolocation);
+            // If geolocation doesn't match geolocation in DB, then update
+            if (data.geolocation !== geolocation) {
+              this.updateGeolocation(geolocation);
             } else {
-              console.log('Geolocation has not changed.');
+              console.log('Geolocation not updated as current geolocation has not changed.');
             }
           })
           .catch((err) => {
-            console.log('Error retrieving user info from database\n', err);
+            console.log('Error retrieving user\'s geolocation from database.\n', err);
           });
     };
 
@@ -59,9 +54,22 @@ class App extends React.Component {
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
   }
 
-  // updateGeolocation(geolocation) {
-
-  // }
+  updateGeolocation(geolocation) {
+    fetch('http://localhost:9000/api/users/updateGeolocation', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ geolocation })
+    })
+    .then((success) => {
+      console.log('Geolocation was successfully updated!');
+    })
+    .catch((err) => {
+      console.log('An error occurred while updating geolocation.');
+    });
+  }
 
   fetchAndUpdateEvents() {
     fetch('http://localhost:9000/api/calendar/getEvent')
