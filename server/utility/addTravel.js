@@ -6,6 +6,8 @@ const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
 
 const addTravel = function(event) {
+
+  // Try to refactor out below as getTrafficTime is basically doing the same thing
   //////////////////////////////////////////////////////////
   var options = {
     url,
