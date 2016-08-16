@@ -30,7 +30,7 @@ describe('server', () => {
 
   describe('/api/calendar/addEvent', () => {
     it('should return the calendar data object', (done) => {
-      // this does not insert the event into the database, it only inserts the event into the calendar, not sure why 
+      // depending on how long the server is running, it will add the event into the database, and do the rest of the work but done() is called after getting back the response from Google Calendar API. 
       var body = {
         summary: 'Ballin at the Park',
         location: 'Golden Gate Park, San Francisco', 
@@ -57,6 +57,22 @@ describe('server', () => {
       })
     });
   });
+
+  describe('/api/calendar/getDayEvents', () => {
+
+    // in the future, should test to make sure the events are for the right day, could maybe do a string comparison with Date.now()
+    it('should return the events for today', (done) => {
+      request(server)
+      .get('/api/calendar/getDayEvents')
+      .expect(200)
+      .end((err, res) => {
+        expect(res.body[0]).to.have.property('id');
+        expect(res.body[0]).to.have.property('googleCalendarEventId');
+        expect(res.body).to.be.instanceof(Array);
+        done();
+      })
+    });
+  })
 
 
 })

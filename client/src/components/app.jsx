@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   fetchAndUpdateEvents() {
-    fetch('http://localhost:9000/api/calendar/getEvent')
+    fetch('http://localhost:9000/api/calendar/getDayEvents')
       .then((res) => res.json())
         .then((data) => {
           let eventList = data.map((event) => {

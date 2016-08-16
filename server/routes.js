@@ -38,8 +38,10 @@ router.get('/authCallback', User.createUser);
 
 // Calendar Routes
 router.post('/calendar/addEvent', addEventAndAddTravel);
-router.get('/calendar/getEvent', getDayEvents);
-router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
+router.get('/calendar/getDayEvents', getDayEvents);
+
+// this endpoint is not doing anything, it was just to trigger a function to fetch all of the user's events in the calendar, but we can do this on the auth callback page or elsewhere
+// router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
 
 // User Routes
 router.get('/users/getGeolocation', getUserGeolocation);

@@ -38,9 +38,6 @@ const addEvent = function(req, res) {
     return data;     
   })
   .then(data => {
-    return data;
-  })
-  .then(data => {
     return EventController.insertEvent(data, userId);
   })
   .catch(err => {
