@@ -36,6 +36,7 @@ const addEvent = function(req, res) {
     return data;     
   })
   .then(data => {
+    res.sendStatus(201);
     res.send(data);
     return data;
   })

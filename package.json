@@ -4,6 +4,7 @@
   "description": "Customizable dashboard and widgets with voice commands",
   "main": "index.js",
   "scripts": {
+    "test": "mocha tests",
     "start": "nodemon server/server.js",
     "dev:hot": "nodemon server/server.js & webpack --watch & open -a \"Google Chrome\" http://localhost:3000",
     "initDB": "sh server/db/dbinit.sh",
