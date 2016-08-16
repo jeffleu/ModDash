@@ -113,7 +113,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchAndUpdateEvents();
+    this.fetchAndUpdateEvents(); 
     this.getGeolocation();
 
     // Checks for user's geolocation every 10 minutes

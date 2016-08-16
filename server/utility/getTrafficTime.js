@@ -5,6 +5,7 @@ const origins = 'Hack Reactor, 944 Market St, San Francisco, CA 94102';
 
 const getTrafficTime = function(event) {
   var startTime = event.dataValues.startdatetime
+
   var options = {
     url,
     qs: {
