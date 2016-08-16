@@ -29,8 +29,10 @@ const addTravel = function(event) {
     // var distance = body.rows[0].elements[0].distance;
     console.log('request promist body', body);
     var duration = body.rows[0].elements[0].duration;
-    console.log('request promist body duration', duration);
-    var value = duration.value || 0
+    var value = 0;
+    if (duration) {
+      value = duration.value;
+    }
     return value;
   })
   .then(value => {
