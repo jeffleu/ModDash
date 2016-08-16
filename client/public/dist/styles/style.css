@@ -1,5 +1,10 @@
-body button {
+body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+  background: 
+    url("https://unsplash.it/g/1440/900?random") 
+    center center / 100% 100%
+    fixed
 }
 
 button {
@@ -7,10 +12,6 @@ button {
   font-weight: 100;
   margin: 2px;
 }
-
-/*
-for adding background, do something like url(), no-repeat, center, center, fixed; add this as a background div.
-*/
 
 .today {
   position: absolute;
@@ -33,16 +34,16 @@ for adding background, do something like url(), no-repeat, center, center, fixed
 .date {
   font-size: 500%;
   font-weight: 500;
-
 }
 
-
 .time:hover {
-  background-color: paleturquoise;
+  background-color: black;
+  opacity: .80;
 }
 
 .date:hover {
-  background-color: paleturquoise;
+  background-color: black;
+  opacity: .80;
 }
 
 .calendar {
@@ -64,7 +65,8 @@ for adding background, do something like url(), no-repeat, center, center, fixed
 }
 
 .calendar-title:hover {
-  background-color: paleturquoise;
+  background-color: black;
+  opacity: .75;
 }
 
 .calendar-entry {
@@ -75,29 +77,42 @@ for adding background, do something like url(), no-repeat, center, center, fixed
 }
 
 .calendar-entry:hover {
-  background-color: paleturquoise;
-  opacity: 80%;
+  background-color: black;
+  opacity: .75;
 }
 
 .event-start {
   font-size: 200%;
-
 }
 
 .event-summary-location {
   font-size: 160%;
 }
 .event-link {
-  color: black;
+  color: white;
 }
 .event-link:hover {
-  color: blue;
+  color: aquamarine;
 }
 
-.form-button {
+.add-event {
   position: fixed;
   top: 2%;
   right: 2%;
+  width: 70px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  color: aquamarine;
+  background-color: black;
+}
+
+.add-event:hover {
+  cursor: pointer;
+}
+
+.event-url {
+  font-color: white;
 }
 
 .calendar-form {
@@ -131,11 +146,11 @@ input {
 .ModalClass {
   position: absolute;
   top: 25%;
-  left: 30%;
-  right: 30%;
+  left: 32.5%;
+  right: 32.5%;
   bottom: 35%;
   /*border: 1px, dotted, black;*/
-  background-color: paleturquoise;
+  background-color: black;
 }
 
 .OverlayClass {
@@ -144,5 +159,6 @@ input {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: white;
+  /*background-color: white;*/
+  opacity: .90;
 }

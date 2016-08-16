@@ -78,6 +78,13 @@ const getDate = () => {
   return `${day} ${month} ${dateNum}`;
 };
 
+// Capitalizes every word in a given string
+const capitalizeEveryWord = (string) => {
+  return string.split(' ').reduce((output, word) => {
+    return output += `${word[0].toUpperCase()}${word.slice(1, word.length)} `;
+  }, '').trim();
+};
+
 // Function that will take formData
 let handleFormData = () => {
   throw new Error('Missing callback function for onFillOutForm!');
@@ -86,18 +93,17 @@ let handleFormData = () => {
 const fillOutForm = (wildcard) => {
   // Separate event name, date/time and location
   let split = wildcard.split(' at ');
-  let eventName = split[0];
+  let eventName = capitalizeEveryWord(split[0]);
   let location;
-  // TO DO: uppercase first letter of each word in eventName & location
   let dateObject;
 
   // Set location and dateObject depending on the order of command
   if (Chrono.parse(split[1]).length === 1) {
     dateObject = Chrono.parse(split[1])[0].start;
-    location = split[2];
+    location = capitalizeEveryWord(split[2]);
   } else if (Chrono.parse(split[2]).length === 1) {
     dateObject = Chrono.parse(split[2])[0].start;
-    location = split[1];
+    location = capitalizeEveryWord(split[1]);
   } else if (Chrono.parse(split[1]).length === 0 || Chrono.parse(split[2]).length === 0) {
     console.warn(`Command can be said in two ways:\n [event] at [date/time] at [location]\n [event] at [location] at [date/time]`);
   }
@@ -173,14 +179,28 @@ const commands = [
     action: (i) => { artyom.say(`Today is ${getDate()}.`) }
   },
   {
-    indexes: ['open *'],
+    indexes: ['open *', 'go to *'],
     smart: true,
-    action: (i, wildcard) => { window.open(`http://${wildcard}`) }
+    action: (i, wildcard) => {
+      artyom.say(`Opening ${wildcard.replace('.', ' dot ')}.`);
+      window.open(`http://${wildcard}`)
+    }
   },
   {
     indexes: ['search YouTube for *'],
     smart: true,
-    action: (i, wildcard) => { window.open(`https://www.youtube.com/results?search_query=${wildcard}`) }
+    action: (i, wildcard) => {
+      artyom.say(`Searching YouTube for ${wildcard}.`);
+      window.open(`https://www.youtube.com/results?search_query=${wildcard}`)
+    }
+  },
+  {
+    indexes: ['search Amazon for *'],
+    smart: true,
+    action: (i, wildcard) => {
+      artyom.say(`Searching Amazon for ${wildcard}.`);
+      window.open(`https://www.amazon.com/s/ref=nb_sb_noss_2/180-3667157-6088933?url=search-alias%3Daps&field-keywords=${wildcard}`);
+    }
   },
   {
     indexes: ['create event *', 'add event *', 'make event *'],
@@ -203,11 +223,11 @@ const commands = [
 ********************************************************/
 
 module.exports = {
-  artyomStart: artyomStart,
-  artyomStop: artyomStop,
+  artyomStart,
+  artyomStop,
   // fillOutForm: fillOutForm,
   addCommands: artyom.addCommands,
-  commands: commands,
+  commands,
   onFillOutForm: (callback) => {
     handleFormData = callback;
   }
