@@ -11,8 +11,9 @@ calendar.events.insert = Promise.promisify(calendar.events.insert);
 
 const addEvent = function(req, res) {
   var userId = 2;
+
   return UserController.getUserTokens(userId)
-  .then(data => {
+  .then(() => {
     const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body};
     return params;
   })
@@ -20,6 +21,7 @@ const addEvent = function(req, res) {
     return calendar.events.insert(params)
   })
   .then(data => {
+    res.send(data);
     pubnub.publish(
       {
         message: data,
@@ -36,12 +38,13 @@ const addEvent = function(req, res) {
     return data;     
   })
   .then(data => {
-    res.sendStatus(201);
-    res.send(data);
     return data;
   })
   .then(data => {
     return EventController.insertEvent(data, userId);
+  })
+  .catch(err => {
+    console.warn('error in addEvent utility function', err);
   });
 };
 

@@ -24,7 +24,11 @@ var addEventAndAddTravel = function(req, res) {
   })
 }
 
+router.get('/test', function(req, res) {
+  res.sendStatus(200);
+});
 // Authorization Routes
+
 router.get('/auth', function(req, res) {
   res.redirect(GoogleAuthUrl);
 });
