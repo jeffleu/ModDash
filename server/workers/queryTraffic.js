@@ -32,16 +32,16 @@ agenda.define('query traffic', function(job, done) {
   var eventId = travel.eventId;
   EventController.retrieveEvent(eventId)
   .then(event => {
-    console.log('event', event);
-    return getTrafficTime(event)
-    .then(times => {
-      event.dataValues.traffic = times.traffic
-      sendLeaveNotification(times.notificationTime, event.dataValues);
-      // schedule notification for leaving
-    });
+    console.log('checking for traffic for event:', event.dataValues.name)
+    recurringCheck(event);
+    // console.log('event', event);
+    // return getTrafficTime(event)
+    // .then(times => {
+    //   event.dataValues.traffic = times.traffic
+    //   sendLeaveNotification(times.notificationTime, event.dataValues);
+    //   // schedule notification for leaving
+    // });
   })
-    // console.log('checking for traffic for event:', event.dataValues.name)
-    // recurringCheck(event);
     // return getTrafficTime(event)
     // .then(times => {
       // event.dataValues.traffic = times.traffic
@@ -62,7 +62,3 @@ const queryTraffic = function (travel) {
 }
 
 module.exports = queryTraffic;
-<<<<<<< 328d1d2b38c02d59c02d8dcb182b25628b642a86
-=======
-
->>>>>>> add recurring check for traffic before scheduling the notification to be sent
