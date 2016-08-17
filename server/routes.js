@@ -1,13 +1,13 @@
 const path = require('path');
 const router = require('express').Router();
 const User = require('./db/controllers/userController.js');
-const CalendarEvents = require('./db/controllers/eventController.js');
 const GoogleAuthUrl = require('./setup/googleOAuth').url;
 const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
 const addTravel = require('./utility/addTravel');
 const getUserGeolocation = require('./utility/getUserGeoLocation');
 const updateGeolocation = require('./utility/updateGeolocation');
+const getDayEvents = require('./utility/getDayEvents');
 const queryTraffic = require('./workers/queryTraffic');
 
 // put this parent function elsewhere later, but for now keep it here to understand what is happening. 
@@ -24,7 +24,11 @@ var addEventAndAddTravel = function(req, res) {
   })
 }
 
+router.get('/test', function(req, res) {
+  res.sendStatus(200);
+});
 // Authorization Routes
+
 router.get('/auth', function(req, res) {
   res.redirect(GoogleAuthUrl);
 });
@@ -34,8 +38,10 @@ router.get('/authCallback', User.createUser);
 
 // Calendar Routes
 router.post('/calendar/addEvent', addEventAndAddTravel);
-router.get('/calendar/getEvent', CalendarEvents.retrieveDayEvent);
-router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
+router.get('/calendar/getDayEvents', getDayEvents);
+
+// this endpoint is not doing anything, it was just to trigger a function to fetch all of the user's events in the calendar, but we can do this on the auth callback page or elsewhere
+// router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
 
 // User Routes
 router.get('/users/getGeolocation', getUserGeolocation);
