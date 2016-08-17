@@ -28,11 +28,11 @@ const createUser = function(req, res) {
       })
     });
   });
-  // TO DO: probaby serve up static page here instead
+  // TO DO: Probably serve up static splash page here instead.
   res.send('Thank you for authorization!');
 };
 
-const getUserTokens = function(id){
+const getUserTokens = function(id) {
   return User.findOne({
     where: { id: id }
   })
@@ -40,6 +40,7 @@ const getUserTokens = function(id){
     oauth2Client.setCredentials({
       refresh_token: data.dataValues.refreshToken
     });
+
     oauth2Client.refreshAccessToken((err, tokens) => {
       oauth2Client.setCredentials({
         access_token: tokens.access_token,
@@ -47,9 +48,26 @@ const getUserTokens = function(id){
       });
     });
   });
-}
+};
+
+const getGeolocation = (id) => {
+  return User.findOne(
+    { attributes: ['geolocation']},
+    { where: {id: id} }
+  );
+};
+
+const updateUserGeolocation = (id, geolocation) => {
+  return User.update(
+    { geolocation: geolocation },
+    { where: {id : id} })  
+      .then((result) => result)
+      .catch((err) => err);
+};
 
 module.exports = {
   createUser,
-  getUserTokens
+  getUserTokens,
+  getGeolocation,
+  updateUserGeolocation
 };

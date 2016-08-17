@@ -6,6 +6,9 @@ const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
 
 const addTravel = function(event) {
+
+  // Try to refactor out below as getTrafficTime is basically doing the same thing
+  //////////////////////////////////////////////////////////
   var options = {
     url,
     qs: {
@@ -33,6 +36,8 @@ const addTravel = function(event) {
       value = duration.value;
     }
     return value;
+
+    //////////////////////////////////////////////////////
   })
   .then(value => {
     // add data to Travel table, see /db/controllers/travelController

@@ -5,7 +5,6 @@ var Modal = require('react-modal');
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    console.log('inside form', this.props.modalIsOpen)
 
     this.state = {
       summary: '',
@@ -46,7 +45,7 @@ class Form extends React.Component {
     var className = e.target.className;
     var value = e.target.value;
 
-    // TO DO: Change default event time to an hour, but need to change date as well if event goes past midnight
+    // TO DO: Change default event time to an hour, but need to change date as well if event goes past midnight (use MomentJS)
 
     if (className === 'form-event') {
       this.setState({

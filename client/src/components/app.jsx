@@ -7,8 +7,7 @@ import Chrono from '../lib/chrono.min.js';
 import artyom from '../lib/artyom.min.js';
 import $ from '../lib/jquery.js';
 const commands = require('../scripts/commands.js');
-var Modal = require('react-modal');
-
+const Modal = require('react-modal');
 
 class App extends React.Component {
   constructor(props) {
@@ -21,21 +20,21 @@ class App extends React.Component {
   fetchAndUpdateEvents() {
     fetch('http://localhost:9000/api/calendar/getEvent')
       .then((res) => res.json())
-      .then((data) => {
-        let eventList = data.map((event) => {
-          return {
-            eventName: event.name,
-            location: event.location,
-            startTime: event.startdatetime,
-            eventUrl: event.eventUrl
-          };
-        });
+        .then((data) => {
+          let eventList = data.map((event) => {
+            return {
+              eventName: event.name,
+              location: event.location,
+              startTime: event.startdatetime,
+              eventUrl: event.eventUrl
+            };
+          });
 
-        this.sortAndUpdateEvents(eventList);
-      })
-      .catch((err) => {
-        console.log('Error retrieving events', err);
-      }) 
+          this.sortAndUpdateEvents(eventList);
+        })
+        .catch((err) => {
+          console.log('Error retrieving events', err);
+        }); 
   }
 
   sortAndUpdateEvents(eventList) {
