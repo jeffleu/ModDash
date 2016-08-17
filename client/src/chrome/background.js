@@ -1,4 +1,3 @@
-
 var pubnub = PUBNUB({
   subscribe_key: 'sub-c-db638056-601a-11e6-9bf3-02ee2ddab7fe',
 
@@ -71,3 +70,9 @@ pubnub.subscribe ({
     });
   }
 });
+
+
+
+
+
+
