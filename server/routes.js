@@ -10,13 +10,13 @@ const updateGeolocation = require('./utility/updateGeolocation');
 const getDayEvents = require('./utility/getDayEvents');
 const queryTraffic = require('./workers/queryTraffic');
 
-// put this parent function elsewhere later, but for now keep it here to understand what is happening. 
+// put this parent function elsewhere later, but for now keep it here to understand what is happening.
 // first add event, then add travel, then set up queryTraffic worker
 var addEventAndAddTravel = function(req, res) {
   addEvent(req, res)
   .spread((event, created) => {
     console.log('event was added, now adding travel');
-    return addTravel(event); 
+    return addTravel(event);
   })
   .then(travel => {
     console.log('travel was added, now scheduling queryTraffic worker');
@@ -32,6 +32,15 @@ router.get('/test', function(req, res) {
 router.get('/auth', function(req, res) {
   res.redirect(GoogleAuthUrl);
 });
+
+// router.post('/auth', function(req, res) {
+//   new User({googleid: req.googleid}).fetch()
+//     .then((found) => {
+//       req.session.userId = found.attributes.id;
+//     }) else {
+//       res.redirect('/auth')
+//     }
+// })
 
 router.get('/authCallback', User.createUser);
 // this is tricky to fix, probably want to serve up a static page

@@ -4,11 +4,37 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./db/db.js');
+const session = require('express-session')
+
 const router = require('./routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/public/dist/')));
+
+var allowCrossDomain = function(req, res, next) {
+  var allowedHost = [
+    'http://localhost',
+    'http://localhost:9000',
+    'chrome-extension://mmkkaemmkkepkfmikokadcjhnjonikld'
+  ];
+
+  if(allowedHost.indexOf(req.headers.origin) !== -1) {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', req.headers.origin)
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+    next();
+  } else {
+    console.log('FAILED the Cors origin test:', req.session.username);
+    res.send(401, {auth: false});
+  }
+}
+
+  app.use(session({secret: 'secret',
+  resave: false,
+  saveUninitialized: true}));
+  app.use(allowCrossDomain);
 
 app.all('/api/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -22,7 +48,15 @@ app.all('/api/*', function(req, res, next) {
 app.use('/api', router);
 
 app.get('*', (req, res)=>{
-  res.sendFile(path.join(__dirname + '/../client/public/dist/index.html'));
+  // google username
+  // if (typeof req.session.Id !== 'undefined') {
+  //   console.log('verified login: ', req.session.Id);
+  //   res.send({auth: true, id: req.session.id})
+    res.sendFile(path.join(__dirname + '/../client/public/dist/index.html'));
+  // } else {
+  //   res.send(401, {auth: false})
+  // }
+
 });
 
 module.exports = app;
