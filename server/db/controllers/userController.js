@@ -1,37 +1,21 @@
 const models = require('../models/models');
 const User = models.User;
-const googleOAuth = require('./../../setup/googleOAuth');
-const google = require('googleapis');
-const plus = google.plus('v1');
 
-var oauth2Client = googleOAuth.oauth2Client;
 
-// this should be refactored into just User.create; the getToken and plus.people.get should be refactored into a utility function
-const createUser = function(req, res) {
-  const code = req.query.code;
-  oauth2Client.getToken(code, function (err, tokens) {
-    if (err) {
-      console.warn('error in getting Token', err);
+// this should be refactored into findOrCreateUser (see eventController for the example of how to use findOrCreate). the (req, res) and oAuth should all be handled in the authCallback. 
+
+const findOrCreateUser = function(profile, tokens) {
+  return User.findOrCreate({
+    where: {
+      googleId: profile.id},
+    defaults: {
+    lastName: profile.name.familyName,
+    firstName: profile.name.givenName,
+    email: profile.emails[0].value,
+    refreshToken: tokens.refresh_token,
+    accessToken: tokens.access_token
     }
-    oauth2Client.setCredentials(tokens);
-    plus.people.get({ userId: 'me', auth: oauth2Client }, function (err, profile) {
-      if (err) {
-        return console.log('An error occured', err);
-      }
-      console.log('new user signing in with profile:', profile);
-
-      User.create({
-        lastName: profile.name.familyName,
-        firstName: profile.name.givenName,
-        email: profile.emails[0].value,
-        refreshToken: tokens.refresh_token,
-        accessToken: tokens.access_token
-      });
-
-    });
   });
-  // TO DO: Probably serve up static splash page here instead.
-  res.send('Thank you for authorization!');
 };
 
 const getUserTokens = function(id) {
@@ -68,7 +52,7 @@ const updateUserGeolocation = (id, geolocation) => {
 };
 
 module.exports = {
-  createUser,
+  findOrCreateUser,
   getUserTokens,
   getGeolocation,
   updateUserGeolocation

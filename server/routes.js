@@ -1,6 +1,5 @@
 const path = require('path');
 const router = require('express').Router();
-const User = require('./db/controllers/userController.js');
 const GoogleAuthUrl = require('./setup/googleOAuth').url;
 const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
@@ -8,6 +7,7 @@ const addTravel = require('./utility/addTravel');
 const getUserGeolocation = require('./utility/getUserGeoLocation');
 const updateGeolocation = require('./utility/updateGeolocation');
 const getDayEvents = require('./utility/getDayEvents');
+const authCallback = require('./utility/authCallback');
 const queryTraffic = require('./workers/queryTraffic');
 
 // put this parent function elsewhere later, but for now keep it here to understand what is happening. 
@@ -33,8 +33,7 @@ router.get('/auth', function(req, res) {
   res.redirect(GoogleAuthUrl);
 });
 
-router.get('/authCallback', User.createUser);
-// this is tricky to fix, probably want to serve up a static page
+router.get('/authCallback', authCallback);
 
 // Calendar Routes
 router.post('/calendar/addEvent', addEventAndAddTravel);
