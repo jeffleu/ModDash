@@ -18,14 +18,16 @@ const createUser = function(req, res) {
       if (err) {
         return console.log('An error occured', err);
       }
-      // console.log(profile);
-      // BUG: this does not return email
+      console.log('new user signing in with profile:', profile);
+
       User.create({
         lastName: profile.name.familyName,
         firstName: profile.name.givenName,
+        email: profile.emails[0].value,
         refreshToken: tokens.refresh_token,
         accessToken: tokens.access_token
-      })
+      });
+
     });
   });
   // TO DO: Probably serve up static splash page here instead.
