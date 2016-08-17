@@ -28,11 +28,11 @@ const createUser = function(req, res) {
       })
     });
   });
-  // TO DO: probaby serve up static page here instead
+  // TO DO: Probably serve up static splash page here instead.
   res.send('Thank you for authorization!');
 };
 
-const getUserTokens = function(id){
+const getUserTokens = function(id) {
   return User.findOne({
     where: { id: id }
   })
@@ -40,6 +40,7 @@ const getUserTokens = function(id){
     oauth2Client.setCredentials({
       refresh_token: "AJilOCP9PWwuhSAzsZDci3nbZU2faYarOxm0UV2oAsxAch9UzARoRB8BTV5rsCiLftZIXTVt8iuDCX-0I4vKFwA58uW9v3VhcwRQfHte31hiYIJpCD_35PiG5bZ_3AvxMGqcNNM3xV89Jqd2X-Urbsowo85SX096VB7CW1dpFitC-F1ScYrmRyPj7T-YzvzaB4txXiqtj4WcnPVeN6DDZNMUdNKM9WeoNn0LrYGKhkgwgXWCaE98Ny-ihSoSP6FTXv62DcDHZnCdvFRvHP-MScqkdxtWRehhlyofH1TXyYht9g9qtuvAYrfTmrTYfjRLN7i0LDUnnUNzQAAn4lygHPW4XrTkO1rdI6_NcjOq5guOFCZ9hvydgtSWN4bDDwsYl5c8qy8fOW0m"
     });
+
     oauth2Client.refreshAccessToken((err, tokens) => {
       console.log('token', tokens);
       // oauth2Client.setCredentials({
@@ -48,9 +49,26 @@ const getUserTokens = function(id){
       // });
     });
   });
-}
+};
+
+const getGeolocation = (id) => {
+  return User.findOne(
+    { attributes: ['geolocation']},
+    { where: {id: id} }
+  );
+};
+
+const updateUserGeolocation = (id, geolocation) => {
+  return User.update(
+    { geolocation: geolocation },
+    { where: {id : id} })  
+      .then((result) => result)
+      .catch((err) => err);
+};
 
 module.exports = {
   createUser,
-  getUserTokens
+  getUserTokens,
+  getGeolocation,
+  updateUserGeolocation
 };
