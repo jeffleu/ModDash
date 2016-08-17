@@ -9,6 +9,24 @@ import $ from '../lib/jquery.js';
 const commands = require('../scripts/commands.js');
 var Modal = require('react-modal');
 
+var config = {
+  apiKey: "AIzaSyBGRSFx1SvHRBM6h-Dz6fQh-ln9ZMBwTXU",
+  authDomain: "nevermissout-1470699132302.firebaseapp.com",
+  databaseURL: "https://nevermissout-1470699132302.firebaseio.com",
+  storageBucket: "nevermissout-1470699132302.appspot.com",
+};
+firebase.initializeApp(config);
+
+window.onload = function() {
+  document.querySelector('#button').addEventListener("click", function() {
+    chrome.identity.getAuthToken({"interactive": true}, function(token) {
+      var credential = firebase.auth.GoogleAuthProvider.credential(null, token);
+      firebase.auth().signInWithCredential(credential);
+    })
+  })
+}
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +53,7 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log('Error retrieving events', err);
-      }) 
+      })
   }
 
   sortAndUpdateEvents(eventList) {
@@ -47,7 +65,7 @@ class App extends React.Component {
     // Sort event times in chronological order
     times.sort((a, b) => new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`));
 
-    // TO DO: Bug fix - if there are multiple events are at the same time, the last 
+    // TO DO: Bug fix - if there are multiple events are at the same time, the last
     // event with the same time will overwrite the first one
 
     // Sort events based on start time

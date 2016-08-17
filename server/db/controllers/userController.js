@@ -38,13 +38,14 @@ const getUserTokens = function(id){
   })
   .then(data => {
     oauth2Client.setCredentials({
-      refresh_token: data.dataValues.refreshToken
+      refresh_token: "AJilOCP9PWwuhSAzsZDci3nbZU2faYarOxm0UV2oAsxAch9UzARoRB8BTV5rsCiLftZIXTVt8iuDCX-0I4vKFwA58uW9v3VhcwRQfHte31hiYIJpCD_35PiG5bZ_3AvxMGqcNNM3xV89Jqd2X-Urbsowo85SX096VB7CW1dpFitC-F1ScYrmRyPj7T-YzvzaB4txXiqtj4WcnPVeN6DDZNMUdNKM9WeoNn0LrYGKhkgwgXWCaE98Ny-ihSoSP6FTXv62DcDHZnCdvFRvHP-MScqkdxtWRehhlyofH1TXyYht9g9qtuvAYrfTmrTYfjRLN7i0LDUnnUNzQAAn4lygHPW4XrTkO1rdI6_NcjOq5guOFCZ9hvydgtSWN4bDDwsYl5c8qy8fOW0m"
     });
     oauth2Client.refreshAccessToken((err, tokens) => {
-      oauth2Client.setCredentials({
-        access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token
-      });
+      console.log('token', tokens);
+      // oauth2Client.setCredentials({
+      //   access_token: tokens.access_token,
+      //   refresh_token: tokens.refresh_token
+      // });
     });
   });
 }
