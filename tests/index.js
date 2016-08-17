@@ -1,9 +1,12 @@
 const app = require('./../server/app.js');
 const chai = require('chai');
 const request = require('supertest');
+// const sinon = require('sinon');
+var addTravel = require('./../server/utility/addTravel.js');
 const expect = chai.expect;
 
-describe('server', () => {
+
+describe('server integration testing', () => {
   before((done) => {
     server = app.listen(3030, () => {
       console.log('Test server is listening on 3030');
@@ -32,14 +35,14 @@ describe('server', () => {
     it('should return the calendar data object', (done) => {
       // depending on how long the server is running, it will add the event into the database, and do the rest of the work but done() is called after getting back the response from Google Calendar API. 
       var body = {
-        summary: 'Ballin at the Park',
-        location: 'Golden Gate Park, San Francisco', 
+        summary: 'Chilling',
+        location: 'Sutro Baths, San Francisco', 
         start: {
-          dateTime: '2016-08-16T22:30:00-07:00',
+          dateTime: '2016-08-16T19:30:00-07:00',
           timeZone: 'America/Los_Angeles'
         },
         end: {
-          dateTime: '2016-08-16T23:30:00-07:00',
+          dateTime: '2016-08-16T20:30:00-07:00',
           timeZone: 'America/Los_Angeles'
         }
       };
@@ -53,7 +56,10 @@ describe('server', () => {
           console.log(err);
         }
         expect(res.body.status).to.equal('confirmed');
-        done();
+        setTimeout(() => {
+          // done is in setTimeout to let the rest of the larger function run
+          done();
+        }, 2000);
       })
     });
   });
