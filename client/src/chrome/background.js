@@ -70,9 +70,3 @@ pubnub.subscribe ({
     });
   }
 });
-
-
-
-
-
-
