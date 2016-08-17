@@ -7,30 +7,7 @@ import Chrono from '../lib/chrono.min.js';
 import artyom from '../lib/artyom.min.js';
 import $ from '../lib/jquery.js';
 const commands = require('../scripts/commands.js');
-<<<<<<< HEAD
-var Modal = require('react-modal');
-
-var config = {
-  apiKey: "AIzaSyBGRSFx1SvHRBM6h-Dz6fQh-ln9ZMBwTXU",
-  authDomain: "nevermissout-1470699132302.firebaseapp.com",
-  databaseURL: "https://nevermissout-1470699132302.firebaseio.com",
-  storageBucket: "nevermissout-1470699132302.appspot.com",
-};
-firebase.initializeApp(config);
-
-window.onload = function() {
-  document.querySelector('#button').addEventListener("click", function() {
-    chrome.identity.getAuthToken({"interactive": true}, function(token) {
-      var credential = firebase.auth.GoogleAuthProvider.credential(null, token);
-      firebase.auth().signInWithCredential(credential);
-    })
-  })
-}
-
-
-=======
 const Modal = require('react-modal');
->>>>>>> master
 
 class App extends React.Component {
   constructor(props) {
@@ -58,7 +35,7 @@ class App extends React.Component {
       .catch((err) => {
         console.log('Error retrieving events', err);
       })
-  
+
   }
 
   sortAndUpdateEvents(eventList) {
