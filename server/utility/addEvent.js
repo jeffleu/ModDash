@@ -9,10 +9,9 @@ const Promise = require('bluebird');
 
 calendar.events.insert = Promise.promisify(calendar.events.insert);
 
-const addEvent = (req, res) => {
-  // TO DO: User ID should NOT be hard coded.
-  // req.session.userId 
-  var userId = 2;
+
+const addEvent = function(req, res) {
+  var userId = req.userId;
 
   return UserController.getUserTokens(userId)
   .then(data => { return {calendarId: 'primary', auth: oauth2Client, resource: req.body}; })

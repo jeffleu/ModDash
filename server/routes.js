@@ -9,6 +9,7 @@ const updateGeolocation = require('./utility/updateGeolocation');
 const getDayEvents = require('./utility/getDayEvents');
 const authCallback = require('./utility/authCallback');
 const queryTraffic = require('./workers/queryTraffic');
+const extensionAuth = require('./utility/extensionAuth');
 
 // put this parent function elsewhere later, but for now keep it here to understand what is happening.
 // first add event, then add travel, then set up queryTraffic worker
@@ -45,5 +46,9 @@ router.get('/calendar/getDayEvents', getDayEvents);
 // User Routes
 router.get('/users/getGeolocation', getUserGeolocation);
 router.post('/users/updateGeolocation', updateGeolocation);
+
+
+// extensionAuth route
+router.post('/extensionAuth', extensionAuth);
 
 module.exports = router;

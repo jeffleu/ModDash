@@ -128,11 +128,33 @@ class Form extends React.Component {
     })
   }
 
+  login() {
+    chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+      console.log(token);
+      fetch('http://localhost:9000/api/extensionAuth', {
+        method: 'POST',
+        body: JSON.stringify({token: token}),
+        mode: 'cors-with-forced-preflight',
+        headers: {'Content-Type': 'application/json'}
+      })
+      .then(res => {
+        // console.log(res);
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+      });
+    });
+  }
+
   render() {
     return (
       <div>
       <div className='add-event' onClick={this.openModal}>
         Add event
+      </div>
+      <div onClick={this.login}>
+        Sign in
       </div>
         <Modal 
           className="ModalClass"
