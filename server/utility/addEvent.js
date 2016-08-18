@@ -18,6 +18,7 @@ const addEvent = (req, res) => {
   .then(params => calendar.events.insert(params))
   .then(data => {
     res.send(data);
+
     pubnub.publish(
       {
         message: data,
