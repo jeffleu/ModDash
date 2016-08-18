@@ -1,5 +1,3 @@
-// request
-// createOrFindUser = require(usercontroller).createorFindUser
 const UserController = require('./../db/controllers/userController.js');
 const googleOAuth = require('./../setup/googleOAuth');
 const google = require('googleapis');
@@ -41,51 +39,4 @@ const authCallback = function(req, res) {
       console.log('did not get users profile', err);
     })
   });
-  // res.send('Thank you for authorization!');
-
-    // promisify this probably, see addEvent for example
-
-    //  function (err, profile) {
-    //        if (err) {
-    //          return console.log('An error occured', err);
-    //        }
-    //        console.log('new user signing in with profile:', profile);
-    //      })
-
-    // function (err, profile) {
-    //   if (err) {
-    //     return console.log('An error occured', err);
-    //   }
-    //   console.log('new user signing in with profile:', profile);
-
-    //.then(profile) {
-    //   UserController.findOrCreateUser(profile, tokens); // user is either found (i.e. verified, or they are created)
-    //   .spread(user, created) {
-    //     // give them a session
-    //     // req.session to validate with googleID and maybe the pubnub identification ID as well
-      // }
-    //   // how to get access to tokens in this callback/promise?
-}
-
-  // TO DO: Probably serve up static splash page.
 module.exports = authCallback;
-
-
-// profile =
-// { kind: 'plus#person',
-//   etag: '"xw0en60W6-NurXn4VBU-CMjSPEw/63FtqRNt9nXs8OAYSaZnIOQfqFk"',
-//   gender: 'male',
-//   emails: [ { value: 'xazndynastyx@gmail.com', type: 'account' } ],
-//   objectType: 'person',
-//   id: '107567836317902297979',
-//   displayName: 'aZn DyNasTy',
-//   name: { familyName: 'DyNasTy', givenName: 'aZn' },
-//   url: 'https://plus.google.com/107567836317902297979',
-//   image:
-//    { url: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50',
-//      isDefault: true },
-//   isPlusUser: true,
-//   language: 'en',
-//   ageRange: { min: 21 },
-//   circledByCount: 0,
-//   verified: false }
