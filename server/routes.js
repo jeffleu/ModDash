@@ -32,7 +32,7 @@ router.get('/test', function(req, res) {
 router.get('/auth', function(req, res) {
   res.redirect(GoogleAuthUrl);
 });
-
+// google redirect after auth sign in to get code for access token/refresh token
 router.get('/authCallback', authCallback);
 
 // Calendar Routes

@@ -5,6 +5,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./db/db.js');
 const session = require('express-session')
+// const models = require('./db/models/models');
+// const Event = require('./db/')
 
 const router = require('./routes');
 
@@ -16,7 +18,7 @@ var allowCrossDomain = function(req, res, next) {
   var allowedHost = [
     'http://localhost',
     'http://localhost:9000',
-    'chrome-extension://mmkkaemmkkepkfmikokadcjhnjonikld'
+    'chrome-extension:// fmjmpkklgmmfnbfeembiokopaknddecl'
   ];
 
   if(allowedHost.indexOf(req.headers.origin) !== -1) {
@@ -34,7 +36,7 @@ var allowCrossDomain = function(req, res, next) {
   app.use(session({secret: 'secret',
   resave: false,
   saveUninitialized: true}));
-  app.use(allowCrossDomain);
+  // app.use(allowCrossDomain);
 
 app.all('/api/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -45,17 +47,17 @@ app.all('/api/*', function(req, res, next) {
   }
   return res.sendStatus(204);
 })
+
 app.use('/api', router);
 
-app.get('*', (req, res)=>{
+app.get('/', (req, res) => {
   // google username
-  // if (typeof req.session.Id !== 'undefined') {
-  //   console.log('verified login: ', req.session.Id);
-  //   res.send({auth: true, id: req.session.id})
+  console.log('req', req.session);
+  if (typeof req.session.googleid !== 'undefined') {
+    console.log('verified login: ', req.session.googleid);
     res.sendFile(path.join(__dirname + '/../client/public/dist/index.html'));
-  // } else {
-  //   res.send(401, {auth: false})
-  // }
+    res.send({auth: true, id: req.session.googleid})
+  }
 
 });
 

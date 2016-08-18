@@ -2,12 +2,12 @@ const models = require('../models/models');
 const User = models.User;
 
 
-// this should be refactored into findOrCreateUser (see eventController for the example of how to use findOrCreate). the (req, res) and oAuth should all be handled in the authCallback. 
+// this should be refactored into findOrCreateUser (see eventController for the example of how to use findOrCreate). the (req, res) and oAuth should all be handled in the authCallback.
 
 const findOrCreateUser = function(profile, tokens) {
   return User.findOrCreate({
     where: {
-      googleId: profile.id},
+      googleid: profile.id},
     defaults: {
     lastName: profile.name.familyName,
     firstName: profile.name.givenName,
