@@ -21,19 +21,27 @@ const authCallback = function(req, res) {
     .then((profile) => {
       UserController.findOrCreateUser(profile, tokens)
       .spread((user, created) => {
-        console.log('user', user);
-        console.log('created', created);
+        // console.log('user', user);
+        // console.log('created', created);
         // NOTE: REDIRECT THEM TO SPLASH PAGE HERE. 
         if(created) { // this is for new users
-        //   return req.session.regenerate(() => {
-        //     req.session.googleid = profile.id
-        //     res.redirect('/')
-        //   })
-        // } else {
-        //   if(req.session.googleid === profile.id) {
-        //     res.redirect('/');
-          // }
+          console.log('old session in web auth', req.session);
+          return req.session.regenerate(() => {
+            req.session.something = 'something';
+            req.session.googleid = profile.id;
+            req.session.userid = user.dataValues.id;
+            res.redirect('/')
+          });
+        } else {
+          req.session.googleid = profile.id;
+          req.session.userid = user.dataValues.id;
+          res.redirect('/')
         }
+        // } else {
+          // if(req.session.googleid === profile.id) {
+            // res.redirect('/');
+          // }
+        
       })
     })
     .catch(err => {

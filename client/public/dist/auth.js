@@ -14,3 +14,8 @@
 //     console.log(data);
 //   });
 // });
+
+chrome.cookies.get({
+  // url:
+  // name:
+});

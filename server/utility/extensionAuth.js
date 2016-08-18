@@ -25,7 +25,10 @@ const extensionAuth = function(req, res) {
         req.session.googleid = user.dataValues.googleid;
         req.session.userId = user.dataValues.id;
         console.log('new session\n', req.session)
+        res.sendStatus(200);
+        res.end('its over');
       });
+
     });
   })
   .catch(err => {

@@ -33,11 +33,25 @@ app.use(express.static(path.join(__dirname, '../client/public/dist/')));
 //   }
 // }
 
-app.use(session({secret: 'secret',
-resave: false,
-saveUninitialized: true,
-cookie: {httpOnly: false}
+app.use(session( {
+  secret: 'secret', 
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: false
+  }
 }));
+// app.use(session({
+//   secret: 'fdsjkarewqriupeuzvxc',
+//   resave: false,
+//   saveUninitialized: true,
+//   name: 'nevermissout', 
+//   // rolling: true,
+//   // domain: 'mcpcjaffcgoegpgojjnhepkbgmbipioi',
+//   cookie: {
+//     httpOnly: false,
+//     secure: false
+//   }
+// }));
   // app.use(allowCrossDomain);
 
 app.all('/api/*', function(req, res, next) {
@@ -54,7 +68,7 @@ app.use('/api', router);
 
 app.get('/', (req, res) => {
   // google username
-  console.log('req', req.session);
+  // console.log('req in every get', req.session);
   // if (typeof req.session.googleid !== 'undefined') {
   //   console.log('verified login: ', req.session.googleid);
   //   res.sendFile(path.join(__dirname + '/../client/public/dist/index.html'));
