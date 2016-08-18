@@ -18,7 +18,7 @@ const findOrCreateUser = function(profile, tokens) {
 };
 
 // this needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute.
-const getUserTokens = function(id) {
+const getUserTokens = (id) => {
   return User.findOne({
     where: { id: id }
   })
@@ -39,8 +39,8 @@ const getUserTokens = function(id) {
 
 const getGeolocation = (id) => {
   return User.findOne(
-    { attributes: ['geolocation']},
-    { where: {id: id} }
+    { attributes: ['geolocation'] },
+    { where: { id: id } }
   );
 };
 
