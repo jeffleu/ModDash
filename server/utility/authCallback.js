@@ -25,23 +25,18 @@ const authCallback = function(req, res) {
         // console.log('created', created);
         // NOTE: REDIRECT THEM TO SPLASH PAGE HERE. 
         if(created) { // this is for new users
-          console.log('old session in web auth', req.session);
-          return req.session.regenerate(() => {
-            req.session.something = 'something';
-            req.session.googleid = profile.id;
-            req.session.userid = user.dataValues.id;
+          // console.log('old session in web auth', req.session);
+          // return req.session.regenerate(() => {
+          //   req.session.something = 'something';
+          //   req.session.googleid = profile.id;
+          //   req.session.userid = user.dataValues.id;
             res.redirect('/')
-          });
+          // });
         } else {
-          req.session.googleid = profile.id;
-          req.session.userid = user.dataValues.id;
+          // req.session.googleid = profile.id;
+          // req.session.userid = user.dataValues.id;
           res.redirect('/')
-        }
-        // } else {
-          // if(req.session.googleid === profile.id) {
-            // res.redirect('/');
-          // }
-        
+        }        
       })
     })
     .catch(err => {

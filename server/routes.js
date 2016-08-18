@@ -9,7 +9,8 @@ const updateGeolocation = require('./utility/updateGeolocation');
 const getDayEvents = require('./utility/getDayEvents');
 const authCallback = require('./utility/authCallback');
 const queryTraffic = require('./workers/queryTraffic');
-const extensionAuth = require('./utility/extensionAuth');
+const jwt = require('jsonwebtoken')
+
 
 // put this parent function elsewhere later, but for now keep it here to understand what is happening.
 // first add event, then add travel, then set up queryTraffic worker
@@ -24,6 +25,26 @@ var addEventAndAddTravel = (req, res) => {
     queryTraffic(travel);
   })
 }
+
+router.use(function(req, res, next) {
+  var token = req.headers.authorization;
+  if (token) {
+      jwt.verify(token, process.env.JWT_SECRET, {issuer: 'NeverMissOut'}, function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token, please log-in again'})
+      } else {
+        console.log('decoded token object', decoded);
+        req.userId = decoded.userId;
+        next();
+      }
+    })
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided'
+    });
+  }
+})
 
 router.get('/test', function(req, res) {
   res.sendStatus(200);
@@ -47,8 +68,5 @@ router.get('/calendar/getDayEvents', getDayEvents);
 router.get('/users/getGeolocation', getUserGeolocation);
 router.post('/users/updateGeolocation', updateGeolocation);
 
-
-// extensionAuth route
-router.post('/extensionAuth', extensionAuth);
 
 module.exports = router;

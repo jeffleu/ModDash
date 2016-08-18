@@ -14,7 +14,7 @@
     "notifications",
     "background",
     "identity",
-    "cookies",
+    "storage",
     "geolocation"
   ],
   "oauth2": {

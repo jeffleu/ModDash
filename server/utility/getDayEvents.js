@@ -6,10 +6,11 @@ const getDayEvents = (req, res) => {
   // req.session.regenerate(() => {
     // req.session.something = 'something';
     // console.log('after regenerating', req.session);  
-    EventController.retrieveDayEvent()
-    .then(datas => {
-      res.send(datas);
-    });
+  var userId = req.userId
+  EventController.retrieveDayEvent(userId)
+  .then(datas => {
+    res.send(datas);
+  });
   // })
 }
 

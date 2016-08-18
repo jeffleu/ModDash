@@ -97,12 +97,18 @@ class Form extends React.Component {
       endTime: ''
     });
 
+    var token = localStorage.getItem('token');
+    console.log('got token for adding event', token);
+
     // Post event to Google Calendar API
     fetch('http://localhost:9000/api/calendar/addEvent', {
       method: 'POST',
       body: JSON.stringify(event),
       mode: 'cors-with-forced-preflight',
-      headers: {'Content-Type': 'application/json'}
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': token
+      }
     }).then((res) => {
       console.log('res', res);
       return res.json();
@@ -128,33 +134,13 @@ class Form extends React.Component {
     })
   }
 
-  login() {
-    chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-      console.log(token);
-      fetch('http://localhost:9000/api/extensionAuth', {
-        method: 'POST',
-        body: JSON.stringify({token: token}),
-        mode: 'cors-with-forced-preflight',
-        headers: {'Content-Type': 'application/json'}
-      })
-      .then(res => {
-        // console.log(res);
-        return res.json();
-      })
-      .then(data => {
-        console.log(data);
-      });
-    });
-  }
+  
 
   render() {
     return (
       <div>
       <div className='add-event' onClick={this.openModal}>
         Add event
-      </div>
-      <div onClick={this.login}>
-        Sign in
       </div>
         <Modal 
           className="ModalClass"

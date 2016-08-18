@@ -5,8 +5,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./db/db.js');
 const session = require('express-session')
-// const models = require('./db/models/models');
-// const Event = require('./db/')
+const extensionAuth = require('./utility/extensionAuth');
+
 
 const router = require('./routes');
 
@@ -33,13 +33,13 @@ app.use(express.static(path.join(__dirname, '../client/public/dist/')));
 //   }
 // }
 
-app.use(session( {
-  secret: 'secret', 
-  saveUninitialized: true,
-  cookie: {
-    httpOnly: false
-  }
-}));
+// app.use(session( {
+//   secret: 'secret', 
+//   saveUninitialized: true,
+//   cookie: {
+//     httpOnly: false
+//   }
+// }));
 // app.use(session({
 //   secret: 'fdsjkarewqriupeuzvxc',
 //   resave: false,
@@ -54,7 +54,7 @@ app.use(session( {
 // }));
   // app.use(allowCrossDomain);
 
-app.all('/api/*', function(req, res, next) {
+app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
@@ -66,15 +66,19 @@ app.all('/api/*', function(req, res, next) {
 
 app.use('/api', router);
 
-app.get('/', (req, res) => {
-  // google username
-  // console.log('req in every get', req.session);
-  // if (typeof req.session.googleid !== 'undefined') {
-  //   console.log('verified login: ', req.session.googleid);
-  //   res.sendFile(path.join(__dirname + '/../client/public/dist/index.html'));
-  //   res.send({auth: true, id: req.session.googleid})
-  // }
+// extensionAuth route
+app.post('/extensionAuth', extensionAuth);
 
-});
+
+// app.get('/', (req, res) => {
+//   // google username
+//   // console.log('req in every get', req.session);
+//   // if (typeof req.session.googleid !== 'undefined') {
+//   //   console.log('verified login: ', req.session.googleid);
+//   //   res.sendFile(path.join(__dirname + '/../client/public/dist/index.html'));
+//   //   res.send({auth: true, id: req.session.googleid})
+//   // }
+
+// });
 
 module.exports = app;
