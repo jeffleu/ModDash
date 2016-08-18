@@ -5,11 +5,11 @@ const UserController = require('./../db/controllers/userController');
 const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
 const addTravel = (event) => {
-  console.log('=========================== [addTravel]: event.dataValues (what is the userId???)\n', event.dataValues);
+  console.log('=========================== [addTravel]: event.dataValues\n', event.dataValues);
 
   return UserController.getGeolocation(event.dataValues.userId)
   .then((data) => {
-    console.log('========================= Data from getGeolocation (should have userId also)', data.dataValues);
+    console.log('========================= Data from getGeolocation (includes userId for now)', data.dataValues);
     return data.dataValues.geolocation;
   })
   .then((geolocation) => {

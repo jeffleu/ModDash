@@ -37,7 +37,7 @@ const getUserTokens = (id) => {
 };
 
 const getGeolocation = (id) => {
-  console.log('============== [userController]: Incoming ID (should be 2)', id);
+  console.log('============== [userController - getGeolocation]: userId =', id);
 
   return User.findOne(
     { attributes: ['id', 'geolocation'] },
