@@ -3,21 +3,29 @@ const User = models.User;
 const googleOAuth = require('./../../setup/googleOAuth');
 var oauth2Client = googleOAuth.oauth2Client;
 
-const findOrCreateUser = function(profile, tokens) {
+const findOrCreateUser = (profile, tokens) => {
   return User.findOrCreate({
+<<<<<<< 0a5347ff419a2d57b40e5396f815ded40edeafa6
     where: {
       googleid: profile.id},
+=======
+    where: { googleId: profile.id },
+>>>>>>> Resolved merge conflicts.
     defaults: {
-    lastName: profile.name.familyName,
-    firstName: profile.name.givenName,
-    email: profile.emails[0].value,
-    refreshToken: tokens.refresh_token,
-    accessToken: tokens.access_token
+      lastName: profile.name.familyName,
+      firstName: profile.name.givenName,
+      email: profile.emails[0].value,
+      refreshToken: tokens.refresh_token,
+      accessToken: tokens.access_token
     }
   });
 };
 
+<<<<<<< 0a5347ff419a2d57b40e5396f815ded40edeafa6
 // this needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute.
+=======
+// TO DO: This needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute. 
+>>>>>>> Resolved merge conflicts.
 const getUserTokens = (id) => {
   return User.findOne({
     where: { id: id }
