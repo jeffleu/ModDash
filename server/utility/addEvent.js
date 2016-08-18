@@ -11,6 +11,7 @@ calendar.events.insert = Promise.promisify(calendar.events.insert);
 
 const addEvent = (req, res) => {
   // TO DO: User ID should NOT be hard coded.
+  // req.session.userId 
   var userId = 2;
 
   return UserController.getUserTokens(userId)

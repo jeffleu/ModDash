@@ -5,8 +5,13 @@ const UserController = require('./../db/controllers/userController');
 const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
 const addTravel = (event) => {
+  console.log('=========================== [addTravel]: event.dataValues (what is the userId???)\n', event.dataValues);
+
   return UserController.getGeolocation(event.dataValues.userId)
-  .then((data) => data.dataValues.geolocation)
+  .then((data) => {
+    console.log('========================= Data from getGeolocation (should have userId also)', data.dataValues);
+    return data.dataValues.geolocation;
+  })
   .then((geolocation) => {
     var options = {
       url,
@@ -22,12 +27,17 @@ const addTravel = (event) => {
       }
     };
 
+    console.log('========================= [addTravel]: options\n', options);
+
     // Request to Google Maps API for travel data
     return requestPromise(options);
   })
   .then(body => {
     // requestPromise is tricky because not handling response or error/status code, just body
     var body = JSON.parse(body);
+
+    console.log('========================= [addTravel]: body', body);
+
     // console.log(body.rows[0].elements[0]);
     // var distance = body.rows[0].elements[0].distance;
     var duration = body.rows[0].elements[0].duration;

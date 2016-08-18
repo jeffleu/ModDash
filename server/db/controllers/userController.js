@@ -5,12 +5,7 @@ var oauth2Client = googleOAuth.oauth2Client;
 
 const findOrCreateUser = (profile, tokens) => {
   return User.findOrCreate({
-<<<<<<< 0a5347ff419a2d57b40e5396f815ded40edeafa6
-    where: {
-      googleid: profile.id},
-=======
     where: { googleId: profile.id },
->>>>>>> Resolved merge conflicts.
     defaults: {
       lastName: profile.name.familyName,
       firstName: profile.name.givenName,
@@ -21,11 +16,7 @@ const findOrCreateUser = (profile, tokens) => {
   });
 };
 
-<<<<<<< 0a5347ff419a2d57b40e5396f815ded40edeafa6
-// this needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute.
-=======
 // TO DO: This needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute. 
->>>>>>> Resolved merge conflicts.
 const getUserTokens = (id) => {
   return User.findOne({
     where: { id: id }
@@ -46,8 +37,10 @@ const getUserTokens = (id) => {
 };
 
 const getGeolocation = (id) => {
+  console.log('============== [userController]: Incoming ID (should be 2)', id);
+
   return User.findOne(
-    { attributes: ['geolocation'] },
+    { attributes: ['id', 'geolocation'] },
     { where: { id: id } }
   );
 };

@@ -29,9 +29,12 @@ agenda.define('query traffic', function(job, done) {
   // for now we are just going to query traffic once at the scheduled time, which is double the initial estimate
   var travel = job.attrs.data;
   var eventId = travel.eventId;
-  EventController.retrieveEvent(eventId)
+
+  console.log('============================ [queryTraffic]: travel', travel);
+
+  return EventController.retrieveEvent(eventId)
   .then(event => {
-    console.log('checking for traffic for event:', event.dataValues.name)
+    console.log('========================= Checking for traffic for event:', event.dataValues.name)
     recurringCheck(event);
     // console.log('event', event);
     // return getTrafficTime(event)
