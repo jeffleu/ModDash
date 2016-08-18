@@ -6,7 +6,7 @@ var oauth2Client = googleOAuth.oauth2Client;
 const findOrCreateUser = function(profile, tokens) {
   return User.findOrCreate({
     where: {
-      googleId: profile.id},
+      googleid: profile.id},
     defaults: {
     lastName: profile.name.familyName,
     firstName: profile.name.givenName,
@@ -17,7 +17,7 @@ const findOrCreateUser = function(profile, tokens) {
   });
 };
 
-// this needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute. 
+// this needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute.
 const getUserTokens = function(id) {
   return User.findOne({
     where: { id: id }
@@ -28,6 +28,7 @@ const getUserTokens = function(id) {
     });
 
     oauth2Client.refreshAccessToken((err, tokens) => {
+      console.log('token', tokens);
       oauth2Client.setCredentials({
         access_token: tokens.access_token,
         refresh_token: tokens.refresh_token
@@ -46,7 +47,7 @@ const getGeolocation = (id) => {
 const updateUserGeolocation = (id, geolocation) => {
   return User.update(
     { geolocation: geolocation },
-    { where: {id : id} })  
+    { where: {id : id} })
       .then((result) => result)
       .catch((err) => err);
 };

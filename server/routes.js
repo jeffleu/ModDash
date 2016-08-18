@@ -10,13 +10,13 @@ const getDayEvents = require('./utility/getDayEvents');
 const authCallback = require('./utility/authCallback');
 const queryTraffic = require('./workers/queryTraffic');
 
-// put this parent function elsewhere later, but for now keep it here to understand what is happening. 
+// put this parent function elsewhere later, but for now keep it here to understand what is happening.
 // first add event, then add travel, then set up queryTraffic worker
 var addEventAndAddTravel = function(req, res) {
   addEvent(req, res)
   .spread((event, created) => {
     console.log('event was added, now adding travel');
-    return addTravel(event); 
+    return addTravel(event);
   })
   .then(travel => {
     console.log('travel was added, now scheduling queryTraffic worker');
@@ -32,7 +32,7 @@ router.get('/test', function(req, res) {
 router.get('/auth', function(req, res) {
   res.redirect(GoogleAuthUrl);
 });
-
+// google redirect after auth sign in to get code for access token/refresh token
 router.get('/authCallback', authCallback);
 
 // Calendar Routes
