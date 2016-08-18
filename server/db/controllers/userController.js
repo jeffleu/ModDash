@@ -1,8 +1,7 @@
 const models = require('../models/models');
 const User = models.User;
-
-
-// this should be refactored into findOrCreateUser (see eventController for the example of how to use findOrCreate). the (req, res) and oAuth should all be handled in the authCallback. 
+const googleOAuth = require('./../../setup/googleOAuth');
+var oauth2Client = googleOAuth.oauth2Client;
 
 const findOrCreateUser = function(profile, tokens) {
   return User.findOrCreate({
@@ -18,6 +17,7 @@ const findOrCreateUser = function(profile, tokens) {
   });
 };
 
+// this needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute. 
 const getUserTokens = function(id) {
   return User.findOne({
     where: { id: id }
