@@ -32,7 +32,7 @@ const createUser = function(req, res) {
   res.send('Thank you for authorization!');
 };
 
-const getUserTokens = function(id) {
+const getUserTokens = (id) => {
   return User.findOne({
     where: { id: id }
   })
@@ -52,15 +52,15 @@ const getUserTokens = function(id) {
 
 const getGeolocation = (id) => {
   return User.findOne(
-    { attributes: ['geolocation']},
-    { where: {id: id} }
+    { attributes: ['geolocation'] },
+    { where: { id: id } }
   );
 };
 
 const updateUserGeolocation = (id, geolocation) => {
   return User.update(
-    { geolocation: geolocation },
-    { where: {id : id} })  
+    { geolocation },
+    { where: { id } })  
       .then((result) => result)
       .catch((err) => err);
 };
