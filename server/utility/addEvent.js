@@ -20,20 +20,26 @@ const addEvent = function(req, res) {
   })
   .then(data => {
     res.send(data);
+    
     // split pubnub functions into its own module
-    pubnub.publish(
-      {
-        message: data,
-        channel: 'eventAdded',
-        sendByPost: false, // true to send via post
-        storeInHistory: false, // override default storage options
-        meta: {} // publish extra meta with the request
-      },
-      (status, response) => {
-        // handle status, response
-        console.log('pubnub notification "eventAdded" was sent to client');
-      }
-    );
+    data.messageType = 'eventAdded';
+    UserController.getUser(userId)
+    .then(user => {
+      var channel = user.dataValues.pubnubid;
+      pubnub.publish(
+        {
+          message: data,
+          channel: channel,
+          sendByPost: false, // true to send via post
+          storeInHistory: false, // override default storage options
+          meta: {} // publish extra meta with the request
+        },
+        (status, response) => {
+          // handle status, response
+          console.log('pubnub notification "eventAdded" was sent to client');
+        }
+      );
+    });
 
     return data;     
   })

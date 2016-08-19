@@ -4,17 +4,18 @@ const UserController = require('../db/controllers/userController');
 const twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 agenda.define('send leave notification', function(job, done) {
-  return UserController.getGeolocation(job.attrs.data.userId)
-  .then((data) => data.dataValues.geolocation)
-  .then((geolocation) => {
-    job.attrs.data.origin = geolocation;
+  return UserController.getUser(job.attrs.data.userId)
+  .then((user) => {
+    job.attrs.data.origin = user.dataValues.geolocation;
+    var channel = user.dataValues.pubnubid;
 
     // Send notification through Pubnub
     var event = job.attrs.data;
-
+    event.messageType = 'timeToLeave';
+    
     pubnub.publish({
       message: event,
-      channel: 'timeToLeave',
+      channel: channel,
       sendByPost: false, // true to send via post
       storeInHistory: false // override default storage options
       // meta: { "cool": "meta" } // publish extra meta with the request

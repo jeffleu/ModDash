@@ -45,7 +45,6 @@ const getUserTokens = function(id) {
 
 const getGeolocation = (id) => {
   console.log('============== [userController - getGeolocation]: userId =', id);
-
   return User.findOne({
     where: {id: id},
     attributes: ['id', 'geolocation']
@@ -60,10 +59,27 @@ const updateUserGeolocation = (id, geolocation) => {
       .catch((err) => err);
 };
 
+const updatePubnub = (id, pubnubid) => {
+  return User.update(
+    { pubnubid: pubnubid },
+    { where: {id: id} })
+    .catch(err => {
+      console.log('failure to update pubnubid in user', err);
+    })
+}
+
+const getUser = (id) => {
+  return User.findOne(
+    { where: { id: id } }
+  );
+}
+
 module.exports = {
   findOrCreateUser,
   authUser,
   getUserTokens,
   getGeolocation,
-  updateUserGeolocation
+  updateUserGeolocation,
+  updatePubnub,
+  getUser
 };
