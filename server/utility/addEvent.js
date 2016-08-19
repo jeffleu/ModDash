@@ -1,20 +1,25 @@
 const EventController = require('../db/controllers').EventController;
 // const { EventController } = require('../db/controllers');
 const googleOAuth = require('../setup/googleOAuth.js');
-const google = require('googleapis');
-const calendar = google.calendar('v3');
+// const google = require('googleapis');
+// const calendar = google.calendar('v3');
 // var oauth2Client = googleOAuth.oauth2Client;
 const pubnub = require('../setup/pubnub.js')
-const Promise = require('bluebird');
+const googleCal = require('./calendar/googleCal')
+// const Promise = require('bluebird');
 
-calendar.events.insert = Promise.promisify(calendar.events.insert);
+// calendar.events.insert = Promise.promisify(calendar.events.insert);
 // function(userId, eventDetails);
 const addEvent = function(req, res) {
   // lines 15?-18 should be refactored into a calendar function
   return googleOAuth.getUserTokens(req.userId)
   .then((oauth2Client) => {
-    const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body}; 
-    return calendar.events.insert(params)
+    return googleCal.insertEvent(oauth2Client, req.body);
+    // .then(data => {
+    //   return data;
+    // });
+    // const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body}; 
+    // .insert(params)
     // turn this into a google calendar function module
   })
   .then(data => {
