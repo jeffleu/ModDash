@@ -19,7 +19,8 @@ class Login extends React.Component {
       })
       .then(data => {
         console.log('data back from extensionAuth', data);
-        localStorage.setItem('token', data.token)
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('channel', data.channel);
       });
     });
   }
