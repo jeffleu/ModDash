@@ -9,7 +9,7 @@ const addTravel = (event) => {
 
   return UserController.getGeolocation(event.dataValues.userId)
   .then((data) => {
-    console.log('========================= Data from getGeolocation (includes userId for now)', data.dataValues);
+    console.log('========================= [addTravel] Data from getGeolocation (includes userId for now)', data.dataValues);
     return data.dataValues.geolocation;
   })
   .then((geolocation) => {
