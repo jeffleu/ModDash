@@ -1,20 +1,15 @@
-const UserController = require('../db/controllers').UserController;
 const EventController = require('../db/controllers').EventController;
 // const { UserController, EventController } = require('../db/controllers');
 const google = require('googleapis');
 const calendar = google.calendar('v3');
 const googleOAuth = require('../setup/googleOAuth');
-const oauth2Client = googleOAuth.oauth2Client;
 const Promise = require('bluebird');
 
 calendar.events.list = Promise.promisify(calendar.events.list);
 
-// this is more of a utility function than a controller function since it's not doing anything with the Calendar model at all. 
-// need to move it later, thanks to Derek for catching this.
+// currently not in use, need to fix this
 const getAllEventsFromCalendar = function (req, res) {
-  var userId = 2;
-  return UserController.getUserTokens(userId)
-  // ^^ hardcoded right now, but this needs to be changed to the correct user id.
+  return googleOAuth.getUserTokens(req.userId)
   .then(data => {
     calendar.events.list({
       auth: oauth2Client,

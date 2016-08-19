@@ -5,7 +5,7 @@ const request = require('supertest');
 var addTravel = require('./../server/utility/addTravel.js');
 const expect = chai.expect;
 
-
+// TESTS ARE BROKEN BECAUSE NEED A TOKEN FOR API AUTH
 describe('server integration testing', () => {
   before((done) => {
     server = app.listen(3030, () => {

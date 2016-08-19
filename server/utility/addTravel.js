@@ -39,12 +39,11 @@ const addTravel = (event) => {
 
     console.log('========================= [addTravel]: body', body);
 
-    // console.log(body.rows[0].elements[0]);
-    // var distance = body.rows[0].elements[0].distance;
     var duration = body.rows[0].elements[0].duration;
     var value = 0;
 
-    if (duration && duration.value) {
+    // Might be a bug in here still if origin & destination are the same. 
+    if (duration) {
       value = duration.value;
     }
 

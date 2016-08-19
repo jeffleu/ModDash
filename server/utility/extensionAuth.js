@@ -1,25 +1,15 @@
 const UserController = require('../db/controllers').UserController;
 // const { UserController } = require('../db/controllers');
 const googleOAuth = require('./../setup/googleOAuth');
-const google = require('googleapis');
-const plus = google.plus('v1');
-const Promise = require('bluebird');
-plus.people.get = Promise.promisify(plus.people.get);
-var oauth2Client = googleOAuth.oauth2Client;
 const jwt = require('jsonwebtoken');
 const uuid = require('node-uuid');
 
 const extensionAuth = function(req, res) {
-  // do oAuth with the code that comes back from google
-  var token = req.body.token;
-  // console.log(token); 
-  oauth2Client.setCredentials(
-    {access_token: token});
-    // after getting tokens, do a call to googlePlus API for user details, get their googleID
-  plus.people.get({ userId: 'me', auth: oauth2Client })
+  // do oAuth with the token that comes back from google
+  googleOAuth.extensionIdentityAuth(req.body.token)
   .then(profile => {
+    console.log(`user ${profile.displayName} is doing extension auth`);
     // auth the user by checking their googleId against our user table's googleID
-    console.log(profile);
     UserController.authUser(profile)
     .then(user => {
       if (user) {
@@ -27,6 +17,7 @@ const extensionAuth = function(req, res) {
         var pubnubid = uuid.v4();
         UserController.updatePubnub(user.dataValues.id, pubnubid);
         
+        // put into jwt token module
         var tokenOptions = {
           issuer: 'NeverMissOut'
         }
