@@ -9,5 +9,6 @@ module.exports = db.define('user', {
   pubnubid: Sequelize.STRING,
   refreshToken: Sequelize.STRING,
   accessToken: Sequelize.STRING,
-  geolocation: Sequelize.STRING
+  geolocation: Sequelize.STRING,
+  transitmode: Sequelize.STRING
 });
