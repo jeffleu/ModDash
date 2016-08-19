@@ -37,7 +37,7 @@ const addEvent = function(req, res) {
 
     return data;     
   })
-  .then(data => EventController.insertEvent(data, userId) // make everything look like this 
+  .then(data => EventController.insertEvent(data, userId)) // make everything look like this 
   .catch(err => {
     console.warn('error in addEvent utility function', err);
   });
