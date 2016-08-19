@@ -6,7 +6,9 @@
 .env
 
 /client/.DS_STORE
-/public/dist/bundle.js
 /client/src/.DS_STORE
+/server/.DS_STORE
+/server/utility/.DS_STORE
+/public/dist/bundle.js
 
 npm-debug.log
