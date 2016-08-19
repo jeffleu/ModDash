@@ -22,7 +22,7 @@ agenda.define('send leave notification', function(job, done) {
 
     // Send text message via Twilio
     // TO DO: Phone number should NOT be hard coded.
-    newTwilioMessage('14158124699', event.name, event.traffic, event.location);
+    newTwilioMessage('14158124699', message.name, message.traffic, message.location);
 
     console.log('Sending notification to user to leave now for event:', message.name);
 
