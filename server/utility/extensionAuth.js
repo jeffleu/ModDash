@@ -14,9 +14,11 @@ const extensionAuth = function(req, res) {
     .then(user => {
       if (user) {
         // put into pubnub module
-        var pubnubid = uuid.v4();
-        UserController.updatePubnub(user.dataValues.id, pubnubid);
-        
+        var pubnubid = user.dataValues.pubnubid
+        if (!pubnubid) {
+          pubnubid = uuid.v4();
+          UserController.updatePubnub(user.dataValues.id, pubnubid);
+        }
         // put into jwt token module
         var tokenOptions = {
           issuer: 'NeverMissOut'

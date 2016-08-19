@@ -1,4 +1,6 @@
 const PubNub = require('pubnub');
+const UserController = require('../db/controllers').UserController;
+// // const { UserController } = require('../db/controllers');
 
 var pubnub = new PubNub({
     subscribeKey: process.env.PUBNUB_SUBSCRIBE_KEY,
@@ -10,6 +12,45 @@ var pubnub = new PubNub({
     presenceTimeout: 130,
     heartbeatInterval: 60
 })
+
+const publishEventAdded = (userId, message) => {
+  message.messageType = 'eventAdded';
+  UserController.getUser(userId)
+  .then(user => {
+    var channel = user.dataValues.pubnubid;
+    pubnub.publish({
+        message,
+        channel,
+        sendByPost: false, // true to send via post
+        storeInHistory: false, // override default storage options
+        meta: {} // publish extra meta with the request
+      },
+      (status, response) => {
+        // handle status, response
+        console.log('pubnub notification "eventAdded" was sent to client');
+      }
+    );
+  })
+  .catch(err => {
+    console.warn('did not find user in pubnub publishEventAdded');
+  });
+};
+
+const publishTimeToLeave = (channel, message) => {
+  message.messageType = 'timeToLeave';
+  pubnub.publish({
+    message,
+    channel,
+    sendByPost: false, // true to send via post
+    storeInHistory: false // override default storage options
+    // meta: { "cool": "meta" } // publish extra meta with the request
+    },
+    (status, response) => {
+      // Handle status and response
+      console.log('Map notification was created.')
+    }
+  );
+};
 
 // example of publishing a message
 // pubnub.publish(
@@ -25,4 +66,7 @@ var pubnub = new PubNub({
 //   }
 // ); 
 
-module.exports = pubnub;
+module.exports = {
+  publishEventAdded,
+  publishTimeToLeave
+};
