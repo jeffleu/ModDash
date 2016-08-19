@@ -1,5 +1,5 @@
-const models = require('../models/models');
-const Travel = models.Travel;
+const Travel = require('../models').Travel;
+// const { Travel } = require('../models');
 
 const initiateTravel = function(event, initialEstimate) {
   return Travel.findOrCreate({

@@ -1,5 +1,5 @@
-const EventController = require('./../db/controllers/eventController');
-
+const EventController = require('../db/controllers').EventController;
+// const { EventController } = require('../db/controllers');
 
 const getDayEvents = (req, res) => {
   // console.log('in get day events', req.session);

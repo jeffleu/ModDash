@@ -1,4 +1,5 @@
-const UserController = require('./../db/controllers/userController');
+const UserController = require('../db/controllers').UserController;
+// const { UserController } = require('../db/controllers');
 
 const getUserGeolocation = (req, res) => {
   return UserController.getGeolocation(req.userId)
