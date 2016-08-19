@@ -28,7 +28,7 @@ const addTravel = (event) => {
     };
 
     console.log('========================= [addTravel]: options\n', options);
-    
+
     // Request to Google Maps API for travel data
     return requestPromise(options);
   })
