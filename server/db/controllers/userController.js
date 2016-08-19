@@ -46,10 +46,10 @@ const getUserTokens = function(id) {
 const getGeolocation = (id) => {
   console.log('============== [userController - getGeolocation]: userId =', id);
 
-  return User.findOne(
-    { attributes: ['id', 'geolocation'] },
-    { where: { id: id } }
-  );
+  return User.findOne({
+    where: {id: id},
+    attributes: ['id', 'geolocation']
+  });
 };
 
 const updateUserGeolocation = (id, geolocation) => {

@@ -18,7 +18,6 @@ const jwt = require('jsonwebtoken')
 // put this parent function elsewhere later, but for now keep it here to understand what is happening.
 // first add event, then add travel, then set up queryTraffic worker
 var addEventAndAddTravel = (req, res) => {
-
 // this is a composition function 
   //addEvent should not handle req or res, 
 

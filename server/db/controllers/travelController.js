@@ -17,13 +17,13 @@ const initiateTravel = function(event, initialEstimate) {
       userId: event.userId
     }
   });
-}
+};
 
 const getAllTravel = function() {
   return Travel.findAll()
-}
+};
 
 module.exports = {
   initiateTravel,
   getAllTravel
-}
+};

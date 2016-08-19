@@ -34,7 +34,6 @@ const getGeolocation = () => {
   navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
 };
 
-
 const updateGeolocation = (geolocation) => {
   var token = localStorage.getItem('token');
 

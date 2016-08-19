@@ -86,6 +86,7 @@
     "sequelize": "^3.23.6",
     "shortid": "^2.2.6",
     "socket.io": "^1.4.8",
+    "twilio": "^2.9.2",
     "webpack": "^1.13.1",
     "whatwg-fetch": "^1.0.0"
   }
