@@ -14,6 +14,7 @@ const recurringCheck = function(event) {
       sendLeaveNotification(times.notificationTime, event.dataValues);
     } else {
       console.log('traffic is not over start time, do setTimeout to make another check in 3 minutes');
+      // polling is a time-sensitive way to query data 
       setTimeout(function() {
         console.log('setTimeout recurringCheck triggered 3 minute later');
         recurringCheck(event);

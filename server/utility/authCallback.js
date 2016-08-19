@@ -15,24 +15,28 @@ const authCallback = function(req, res) {
       console.warn('error in getting Token', err);
     }
     oauth2Client.setCredentials(tokens);
-    console.log('success token', tokens);
+    // console.log('success token', tokens);
     // after getting tokens, do a call to googlePlus API for user details, get their googleID
     plus.people.get({ userId: 'me', auth: oauth2Client })
     .then((profile) => {
       UserController.findOrCreateUser(profile, tokens)
       .spread((user, created) => {
-        console.log('user', user);
-        console.log('created', created);
+        // console.log('user', user);
+        // console.log('created', created);
+        // NOTE: REDIRECT THEM TO SPLASH PAGE HERE. 
         if(created) { // this is for new users
-          return req.session.regenerate(() => {
-            req.session.googleid = profile.id
+          // console.log('old session in web auth', req.session);
+          // return req.session.regenerate(() => {
+          //   req.session.something = 'something';
+          //   req.session.googleid = profile.id;
+          //   req.session.userid = user.dataValues.id;
             res.redirect('/')
-          })
+          // });
         } else {
-          if(req.session.googleid === profile.id) {
-            res.redirect('/');
-          }
-        }
+          // req.session.googleid = profile.id;
+          // req.session.userid = user.dataValues.id;
+          res.redirect('/')
+        }        
       })
     })
     .catch(err => {

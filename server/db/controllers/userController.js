@@ -1,11 +1,12 @@
 const models = require('../models/models');
 const User = models.User;
+// const { User } = require('../models'); // once models is renamed to index.js
 const googleOAuth = require('./../../setup/googleOAuth');
 var oauth2Client = googleOAuth.oauth2Client;
 
 const findOrCreateUser = (profile, tokens) => {
   return User.findOrCreate({
-    where: { googleId: profile.id },
+    where: { googleid: profile.id },
     defaults: {
       lastName: profile.name.familyName,
       firstName: profile.name.givenName,
@@ -16,8 +17,14 @@ const findOrCreateUser = (profile, tokens) => {
   });
 };
 
+const authUser = function(profile) {
+  return User.findOne({
+    where: {googleid: profile.id}
+  })
+}
+
 // TO DO: This needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute. 
-const getUserTokens = (id) => {
+const getUserTokens = function(id) {
   return User.findOne({
     where: { id: id }
   })
@@ -27,7 +34,7 @@ const getUserTokens = (id) => {
     });
 
     oauth2Client.refreshAccessToken((err, tokens) => {
-      console.log('token', tokens);
+      // console.log('token', tokens);
       oauth2Client.setCredentials({
         access_token: tokens.access_token,
         refresh_token: tokens.refresh_token
@@ -55,6 +62,7 @@ const updateUserGeolocation = (id, geolocation) => {
 
 module.exports = {
   findOrCreateUser,
+  authUser,
   getUserTokens,
   getGeolocation,
   updateUserGeolocation

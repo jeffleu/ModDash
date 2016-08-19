@@ -8,18 +8,19 @@ const pubnub = require('./../setup/pubnub.js')
 const Promise = require('bluebird');
 
 calendar.events.insert = Promise.promisify(calendar.events.insert);
-
-const addEvent = (req, res) => {
-  // TO DO: User ID should NOT be hard coded.
-  // req.session.userId 
-  var userId = 2;
+// function(userId, eventDetails);
+const addEvent = function(req, res) {
+  var userId = req.userId;
 
   return UserController.getUserTokens(userId)
-  .then(data => { return {calendarId: 'primary', auth: oauth2Client, resource: req.body}; })
-  .then(params => calendar.events.insert(params))
+  .then(data => { 
+    const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body}; 
+    return calendar.events.insert(params)
+    // turn this into a google calendar function module
+  })
   .then(data => {
     res.send(data);
-
+    // split pubnub functions into its own module
     pubnub.publish(
       {
         message: data,
@@ -36,7 +37,7 @@ const addEvent = (req, res) => {
 
     return data;     
   })
-  .then(data => EventController.insertEvent(data, userId))
+  .then(data => EventController.insertEvent(data, userId)) // make everything look like this 
   .catch(err => {
     console.warn('error in addEvent utility function', err);
   });
