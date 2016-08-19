@@ -6,20 +6,19 @@ const db = require('../db.js');
 
 const insertEvent = (data, userId) => {
   return Event.findOrCreate({
-    where: {
-      googleCalendarEventId: data.id},
-      defaults: {
-        userId: userId,
-        name: data.summary,
-        eventUrl: data.htmlLink,
-        startdatetime: data.start.dateTime,
-        enddatetime: data.end.dateTime,
-        // currently not checking for recurrence since the calendar events query has "single events: true" which lists every single event
-        recurrence: JSON.stringify(data.recurrence),
-        location: data.location,
-        description: data.description
-      }
-  })
+    where: { googleCalendarEventId: data.id },
+    defaults: {
+      userId,
+      name: data.summary,
+      eventUrl: data.htmlLink,
+      startdatetime: data.start.dateTime,
+      enddatetime: data.end.dateTime,
+      // currently not checking for recurrence since the calendar events query has "single events: true" which lists every single event
+      recurrence: JSON.stringify(data.recurrence),
+      location: data.location,
+      description: data.description
+    }
+  });
 }
 
 const retrieveEvent = (id) => {
@@ -27,7 +26,6 @@ const retrieveEvent = (id) => {
     where: {id: id}
   });
 };
-
 
 const retrieveDayEvent = () => {
   var nowInUTC = moment().utcOffset(0000).subtract(7, 'hours').format('YYYY-MM-DD HH:mm') + ':00+00';
@@ -42,7 +40,6 @@ const retrieveDayEvent = () => {
     });
 
     return datas;
-
   });
 };
 

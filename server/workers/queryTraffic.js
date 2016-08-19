@@ -3,7 +3,6 @@ const getTrafficTime = require('./../utility/getTrafficTime');
 const sendLeaveNotification = require ('./sendLeaveNotification');
 const EventController = require('./../db/controllers/eventController');
 
-
 const recurringCheck = function(event) {
   console.log('inside recurringCheck');  
   const timeToCheckAgain = 180000; // 3 min
@@ -29,9 +28,9 @@ agenda.define('query traffic', function(job, done) {
   // for now we are just going to query traffic once at the scheduled time, which is double the initial estimate
   var travel = job.attrs.data;
   var eventId = travel.eventId;
-  EventController.retrieveEvent(eventId)
+
+  return EventController.retrieveEvent(eventId)
   .then(event => {
-    console.log('checking for traffic for event:', event.dataValues.name)
     recurringCheck(event);
     // console.log('event', event);
     // return getTrafficTime(event)
@@ -51,7 +50,6 @@ agenda.define('query traffic', function(job, done) {
   // then agenda.cancel({id: jobiD}) or some other kind of identifier of the job we were doing
   done();
 });
-
 
 // function for scheduling the job
 const queryTraffic = function (travel) {

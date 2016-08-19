@@ -35,7 +35,6 @@ class App extends React.Component {
       .catch((err) => {
         console.log('Error retrieving events', err);
       })
-
   }
 
   sortAndUpdateEvents(eventList) {

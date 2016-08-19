@@ -12,11 +12,11 @@ const queryTraffic = require('./workers/queryTraffic');
 
 // put this parent function elsewhere later, but for now keep it here to understand what is happening.
 // first add event, then add travel, then set up queryTraffic worker
-var addEventAndAddTravel = function(req, res) {
+var addEventAndAddTravel = (req, res) => {
   addEvent(req, res)
   .spread((event, created) => {
-    console.log('event was added, now adding travel');
-    return addTravel(event);
+    console.log('event was added, now adding travel', event.dataValues);
+    return addTravel(event); 
   })
   .then(travel => {
     console.log('travel was added, now scheduling queryTraffic worker');

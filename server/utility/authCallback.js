@@ -39,4 +39,6 @@ const authCallback = function(req, res) {
       console.log('did not get users profile', err);
     })
   });
+};
+
 module.exports = authCallback;
