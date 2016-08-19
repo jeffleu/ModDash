@@ -6,7 +6,7 @@ var oauth2Client = googleOAuth.oauth2Client;
 
 const findOrCreateUser = (profile, tokens) => {
   return User.findOrCreate({
-    where: { googleId: profile.id },
+    where: { googleid: profile.id },
     defaults: {
       lastName: profile.name.familyName,
       firstName: profile.name.givenName,
