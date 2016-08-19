@@ -6,7 +6,7 @@ const db = require('../db.js');
 
 // rename these to queries/eventQueries
 // export all to index.js
-const insertEvent = (data, userId) => {
+const insertEvent = (userId, data) => {
   return Event.findOrCreate({
     where: {
       googleCalendarEventId: data.id

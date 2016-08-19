@@ -9,24 +9,11 @@ agenda.define('send leave notification', function(job, done) {
   return UserController.getUser(job.attrs.data.userId)
   .then((user) => {
     job.attrs.data.origin = user.dataValues.geolocation;
-    var channel = user.dataValues.pubnubid;
 
+    var channel = user.dataValues.pubnubid;
+    var message = job.attrs.data;
     // Send notification through Pubnub
-    var event = job.attrs.data;
-    event.messageType = 'timeToLeave';
-    
-    pubnub.publish({
-      message: event,
-      channel: channel,
-      sendByPost: false, // true to send via post
-      storeInHistory: false // override default storage options
-      // meta: { "cool": "meta" } // publish extra meta with the request
-      },
-      (status, response) => {
-        // Handle status and response
-        console.log('Map notification was created.')
-      }
-    );
+    pubnub.publishTimeToLeave(channel, message);
 
     // after sending notification, agenda.cancel
     // agenda.cancel({"_id": job._id}, function(err, jobs) {
@@ -37,7 +24,7 @@ agenda.define('send leave notification', function(job, done) {
     // TO DO: Phone number should NOT be hard coded.
     newTwilioMessage('14158124699', event.name, event.traffic, event.location);
 
-    console.log('Sending notification to user to leave now for event:', event.name);
+    console.log('Sending notification to user to leave now for event:', message.name);
 
     done();
   });
