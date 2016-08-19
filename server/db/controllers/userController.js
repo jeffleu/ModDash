@@ -65,13 +65,13 @@ const updatePubnub = (id, pubnubid) => {
     .catch(err => {
       console.log('failure to update pubnubid in user', err);
     })
-}
+};
 
 const getUser = (id) => {
   return User.findOne(
     { where: { id: id } }
   );
-}
+};
 
 module.exports = {
   findOrCreateUser,
