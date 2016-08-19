@@ -5,7 +5,9 @@ const requestPromise = require('request-promise');
 const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
 const getTrafficTime = function(event) {
-  // event.dataValues.userId
+
+  console.log('======================= []: event', event.dataValues);
+
   return UserController.getGeolocation(event.dataValues.userId)
   .then((data) => data.dataValues.geolocation)
   .then((geolocation) => {
