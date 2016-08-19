@@ -1,22 +1,32 @@
 const path = require('path');
 const router = require('express').Router();
-const GoogleAuthUrl = require('./setup/googleOAuth').url;
+//destructure with 
+//const {
+// addEvent, 
+// addTravel} = require(./utility/index.js)
 const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
 const addTravel = require('./utility/addTravel');
 const getUserGeolocation = require('./utility/getUserGeoLocation');
 const updateGeolocation = require('./utility/updateGeolocation');
 const getDayEvents = require('./utility/getDayEvents');
-const authCallback = require('./utility/authCallback');
 const queryTraffic = require('./workers/queryTraffic');
 const jwt = require('jsonwebtoken')
 
+//ALL ROUTES HERE
 
 // put this parent function elsewhere later, but for now keep it here to understand what is happening.
 // first add event, then add travel, then set up queryTraffic worker
 var addEventAndAddTravel = (req, res) => {
+
+// this is a composition function 
+  //addEvent should not handle req or res, 
+
+  // each function should be modular and pure. 
   addEvent(req, res)
+  // addEvent(userId, event)
   .spread((event, created) => {
+    // res.send('event was added')
     console.log('event was added, now adding travel', event.dataValues);
     return addTravel(event); 
   })
@@ -46,16 +56,10 @@ router.use(function(req, res, next) {
   }
 })
 
+// For testing purposes
 router.get('/test', function(req, res) {
   res.sendStatus(200);
 });
-// Authorization Routes
-
-router.get('/auth', function(req, res) {
-  res.redirect(GoogleAuthUrl);
-});
-// google redirect after auth sign in to get code for access token/refresh token
-router.get('/authCallback', authCallback);
 
 // Calendar Routes
 router.post('/calendar/addEvent', addEventAndAddTravel);

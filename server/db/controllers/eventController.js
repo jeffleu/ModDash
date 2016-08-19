@@ -4,11 +4,15 @@ const moment = require('moment');
 const zone = require('moment-timezone');
 const db = require('../db.js');
 
+// rename these to queries/eventQueries
+// export all to index.js
 const insertEvent = (data, userId) => {
   return Event.findOrCreate({
-    where: { googleCalendarEventId: data.id },
+    where: {
+      googleCalendarEventId: data.id
+    },
     defaults: {
-      userId,
+      userId: userId,
       name: data.summary,
       eventUrl: data.htmlLink,
       startdatetime: data.start.dateTime,
@@ -30,18 +34,20 @@ const retrieveEvent = (id) => {
 const retrieveDayEvent = (userId) => {
   var nowInUTC = moment().utcOffset(0000).subtract(7, 'hours').format('YYYY-MM-DD HH:mm') + ':00+00';
   var midnightInUTC = moment().add(1, 'days').format('YYYY-MM-DD') + ' 06:59:00+00';
-
-  // Get all events for today (events in DB are in UTC time)
-  var queryString = `SELECT * FROM events WHERE userId = '${userId}' AND startdatetime BETWEEN '${nowInUTC}' AND '${midnightInUTC}'`;
-  return db.query(queryString)
-  .spread((datas, metadata) => {
-    datas.forEach((data) => {
-      data.startdatetime = moment(data.startdatetime).format('LT');
-    });
-
-    return datas;
+  return Event.findAll({
+    where: {
+      userId: userId,
+      startdatetime: {$between: [nowInUTC, midnightInUTC]}
+    }
+  })
+  .then(events => {
+    events.forEach((event) => {
+      event = event.dataValues;
+      event.startdatetime = moment(event.startdatetime).format('LT');
+    })
+    return events;
   });
-};
+}
 
 module.exports = {
   insertEvent,

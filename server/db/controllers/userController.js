@@ -1,5 +1,6 @@
 const models = require('../models/models');
 const User = models.User;
+// const { User } = require('../models'); // once models is renamed to index.js
 const googleOAuth = require('./../../setup/googleOAuth');
 var oauth2Client = googleOAuth.oauth2Client;
 
