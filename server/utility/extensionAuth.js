@@ -1,4 +1,5 @@
-const UserController = require('./../db/controllers/userController.js');
+const UserController = require('../db/controllers').UserController;
+// const { UserController } = require('../db/controllers');
 const googleOAuth = require('./../setup/googleOAuth');
 const google = require('googleapis');
 const plus = google.plus('v1');
@@ -7,7 +8,6 @@ plus.people.get = Promise.promisify(plus.people.get);
 var oauth2Client = googleOAuth.oauth2Client;
 const jwt = require('jsonwebtoken');
 const uuid = require('node-uuid');
-
 
 const extensionAuth = function(req, res) {
   // do oAuth with the code that comes back from google
@@ -48,5 +48,6 @@ const extensionAuth = function(req, res) {
       message: 'please log in again'
     })
   })
-}
+};
+
 module.exports = extensionAuth;

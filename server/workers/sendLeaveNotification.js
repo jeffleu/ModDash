@@ -1,6 +1,7 @@
+const UserController = require('../db/controllers').UserController;
+// const { UserController } = require('../db/controllers');
 const agenda = require('./agenda');
 const pubnub = require('./../setup/pubnub');
-const UserController = require('../db/controllers/userController');
 const twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 agenda.define('send leave notification', function(job, done) {

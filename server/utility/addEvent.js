@@ -1,10 +1,11 @@
-const UserController = require('./../db/controllers/userController');
-const googleOAuth = require('./../setup/googleOAuth.js');
+const UserController = require('../db/controllers').UserController;
+const EventController = require('../db/controllers').EventController;
+// const { UserController, EventController } = require('../db/controllers');
+const googleOAuth = require('../setup/googleOAuth.js');
 const google = require('googleapis');
 const calendar = google.calendar('v3');
-const EventController = require('./../db/controllers/eventController');
 var oauth2Client = googleOAuth.oauth2Client;
-const pubnub = require('./../setup/pubnub.js')
+const pubnub = require('../setup/pubnub.js')
 const Promise = require('bluebird');
 
 calendar.events.insert = Promise.promisify(calendar.events.insert);
