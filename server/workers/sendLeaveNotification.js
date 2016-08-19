@@ -5,6 +5,7 @@ const pubnub = require('./../setup/pubnub');
 const twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 agenda.define('send leave notification', function(job, done) {
+  // Keep an eye on this, there may be a bug where multiple notifications are sent 
   return UserController.getUser(job.attrs.data.userId)
   .then((user) => {
     job.attrs.data.origin = user.dataValues.geolocation;
@@ -33,17 +34,17 @@ agenda.define('send leave notification', function(job, done) {
     // })
 
     // Send text message via Twilio
-    twilio.messages.create({
-      to: '14158124699',
-      from: process.env.TWILIO_PHONE_NUMBER,
-      body: `Better leave now for ${event.name}! It will take ${Math.floor(event.traffic / 60000)} minutes to get to ${event.location}.`,
-    }, function (err, message) {
-      if (!err) {
-        console.log('Twilio message successfully sent!')
-      } else {
-        console.log('Error sending Twilio message.\n', err);
-      }
-    });
+    // twilio.messages.create({
+    //   to: '14158124699',
+    //   from: process.env.TWILIO_PHONE_NUMBER,
+    //   body: `Better leave now for ${event.name}! It will take ${Math.floor(event.traffic / 60000)} minutes to get to ${event.location}.`,
+    // }, function (err, message) {
+    //   if (!err) {
+    //     console.log('Twilio message successfully sent!')
+    //   } else {
+    //     console.log('Error sending Twilio message.\n', err);
+    //   }
+    // });
 
     console.log('Sending notification to user to leave now for event:', event.name);
 
