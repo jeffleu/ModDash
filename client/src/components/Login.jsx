@@ -21,14 +21,21 @@ class Login extends React.Component {
         console.log('data back from extensionAuth', data);
         localStorage.setItem('token', data.token);
         localStorage.setItem('channel', data.channel);
+        location.reload();
       });
     });
   }
   
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('channel');
+    // need to tell backend that we have logged out and that the current subscribed channel is no longer valid and to start polling for a new channel
+    // or no log out button and they just have to uninstall the extension
     location.reload();
   }
+          // <div onClick={this.logout}>
+          // Log out
+          // </div>
 
   render() {
     if (!localStorage.getItem('token')) {
@@ -42,9 +49,6 @@ class Login extends React.Component {
     } else {
       return (
         <div>
-          <div onClick={this.logout}>
-          Log out
-          </div>
         </div>
       )
     }
