@@ -2,7 +2,7 @@ const UserController = require('../db/controllers').UserController;
 // const { UserController } = require('../db/controllers');
 const agenda = require('./agenda');
 const pubnub = require('./../setup/pubnub');
-const twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+const newTwilioMessage = require('../utility/notification/twilio');
 
 agenda.define('send leave notification', function(job, done) {
   // Keep an eye on this, there may be a bug where multiple notifications are sent 
@@ -34,17 +34,8 @@ agenda.define('send leave notification', function(job, done) {
     // })
 
     // Send text message via Twilio
-    // twilio.messages.create({
-    //   to: '14158124699',
-    //   from: process.env.TWILIO_PHONE_NUMBER,
-    //   body: `Better leave now for ${event.name}! It will take ${Math.floor(event.traffic / 60000)} minutes to get to ${event.location}.`,
-    // }, function (err, message) {
-    //   if (!err) {
-    //     console.log('Twilio message successfully sent!')
-    //   } else {
-    //     console.log('Error sending Twilio message.\n', err);
-    //   }
-    // });
+    // TO DO: Phone number should NOT be hard coded.
+    newTwilioMessage('14158124699', event.name, event.traffic, event.location);
 
     console.log('Sending notification to user to leave now for event:', event.name);
 
