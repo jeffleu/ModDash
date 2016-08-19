@@ -2,8 +2,6 @@ const UserController = require('../db/controllers').UserController;
 // const { UserController } = require('../db/controllers');
 const googleOAuth = require('../setup/googleOAuth');
 
-
-
 const authCallback = (req, res) => {
   googleOAuth.googleCalAuthCallback(req.query.code)
   .then((user) => {

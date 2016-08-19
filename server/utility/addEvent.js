@@ -4,17 +4,16 @@ const EventController = require('../db/controllers').EventController;
 const googleOAuth = require('../setup/googleOAuth.js');
 const google = require('googleapis');
 const calendar = google.calendar('v3');
-var oauth2Client = googleOAuth.oauth2Client;
+// var oauth2Client = googleOAuth.oauth2Client;
 const pubnub = require('../setup/pubnub.js')
 const Promise = require('bluebird');
 
 calendar.events.insert = Promise.promisify(calendar.events.insert);
 // function(userId, eventDetails);
 const addEvent = function(req, res) {
-  var userId = req.userId;
-
-  return UserController.getUserTokens(userId)
-  .then(data => { 
+  // lines 15?-18 should be refactored into a calendar function
+  return googleOAuth.getUserTokens(req.userId)
+  .then((oauth2Client) => {
     const params = {calendarId: 'primary', auth: oauth2Client, resource: req.body}; 
     return calendar.events.insert(params)
     // turn this into a google calendar function module

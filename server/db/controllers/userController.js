@@ -1,7 +1,7 @@
 const User = require('../models').User;
 // const { User } = require('../models');
-const googleOAuth = require('./../../setup/googleOAuth');
-var oauth2Client = googleOAuth.oauth2Client;
+// const googleOAuth = require('./../../setup/googleOAuth');
+// var oauth2Client = googleOAuth.oauth2Client;
 
 const findOrCreateUser = (profile, tokens) => {
   return User.findOrCreate({
@@ -23,24 +23,24 @@ const authUser = function(profile) {
 }
 
 // TO DO: This needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute. 
-const getUserTokens = function(id) {
-  return User.findOne({
-    where: { id: id }
-  })
-  .then(data => {
-    oauth2Client.setCredentials({
-      refresh_token: data.dataValues.refreshToken
-    });
+// const getUserTokens = function(id) {
+//   return User.findOne({
+//     where: { id: id }
+//   })
+//   .then(data => {
+//     oauth2Client.setCredentials({
+//       refresh_token: data.dataValues.refreshToken
+//     });
 
-    oauth2Client.refreshAccessToken((err, tokens) => {
-      // console.log('token', tokens);
-      oauth2Client.setCredentials({
-        access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token
-      });
-    });
-  });
-};
+//     oauth2Client.refreshAccessToken((err, tokens) => {
+//       // console.log('token', tokens);
+//       oauth2Client.setCredentials({
+//         access_token: tokens.access_token,
+//         refresh_token: tokens.refresh_token
+//       });
+//     });
+//   });
+// };
 
 const getGeolocation = (id) => {
   console.log('============== [userController - getGeolocation]: userId =', id);
@@ -76,7 +76,7 @@ const getUser = (id) => {
 module.exports = {
   findOrCreateUser,
   authUser,
-  getUserTokens,
+  // getUserTokens,
   getGeolocation,
   updateUserGeolocation,
   updatePubnub,
