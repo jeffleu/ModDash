@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-class Login extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -36,19 +36,14 @@ class Login extends React.Component {
   }
 
   render() {
-    if (!localStorage.getItem('token')) {
-      return (
-        <div>
-        <img className="signin" src="/assets/google_signin.png" onClick={this.login}/>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-        </div>
-      )
-    }
+    let signInButton = <img className="signin" src="/assets/google_signin.png" onClick={this.login}/>
+
+    return (
+      <div>
+        {localStorage.getItem('token') ? null : signInButton}
+      </div>
+    )
   }
 }
 
-export default Login;
+export default SignIn;

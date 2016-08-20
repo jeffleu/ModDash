@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Time from './Time.jsx';
 import Calendar from './Calendar.jsx'
 import Form from './Form.jsx';
-import Login from './Login.jsx';
+import SignIn from './SignIn.jsx';
 import Setting from './Setting.jsx';
 import commands from '../scripts/commands.js';
 
@@ -75,7 +75,7 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <Login />
+          <SignIn />
         </div>
         <div>
           {}
