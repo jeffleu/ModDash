@@ -1,30 +1,15 @@
 const UserController = require('../db/controllers').UserController;
 // const { UserController } = require('./../db/controllers');
 const requestPromise = require('request-promise');
-
-const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
+const googleMap = require('./map/googleMap');
 
 const getTrafficTime = function(event) {
 
   // console.log('======================= []: event', event.dataValues);
 
-  return UserController.getGeolocation(event.dataValues.userId)
-  .then((data) => data.dataValues.geolocation)
-  .then((geolocation) => {
-    var options = {
-      url,
-      qs: {
-        key: process.env.GOOGLE_MAPS_API_KEY,
-        origins: geolocation,
-        destinations: event.dataValues.location,
-        mode: 'driving',
-        departure_time: 'now',
-        units: 'imperial',
-        traffic_model: 'best_guess'
-      }
-    };
-
-    return requestPromise(options)
+  return UserController.getUserInfo(event.dataValues.userId)
+  .then((data) => {
+    return requestPromise(googleMap.mapTraffic(data, event))
   })
   .then(body => {
     body = JSON.parse(body);

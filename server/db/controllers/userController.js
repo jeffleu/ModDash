@@ -22,7 +22,7 @@ const authUser = function(profile) {
   })
 }
 
-// TO DO: This needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute. 
+// TO DO: This needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute.
 // const getUserTokens = function(id) {
 //   return User.findOne({
 //     where: { id: id }
@@ -42,11 +42,11 @@ const authUser = function(profile) {
 //   });
 // };
 
-const getGeolocation = (id) => {
+const getUserInfo = (id) => {
   console.log('============== [userController - getGeolocation]: userId =', id);
   return User.findOne({
     where: {id: id},
-    attributes: ['id', 'geolocation']
+    attributes: ['id', 'geolocation', 'transitmode']
   });
 };
 
@@ -57,6 +57,18 @@ const updateUserGeolocation = (id, geolocation) => {
       .then((result) => result)
       .catch((err) => err);
 };
+
+const updateUserTransitMode = (id, transit) => {
+  return User.update (
+    {transitmode: transit},
+    {where: {id: id}}
+  )
+  .then((result) => {
+    // need to clean this up, network is still pending on client side
+    res.send(result);
+  })
+  .catch((err) => err);
+}
 
 const updatePubnub = (id, pubnubid) => {
   return User.update(
@@ -77,7 +89,9 @@ module.exports = {
   findOrCreateUser,
   authUser,
   // getUserTokens,
-  getGeolocation,
+  // getGeolocation,
+  getUserInfo,
+  updateUserTransitMode,
   updateUserGeolocation,
   updatePubnub,
   getUser

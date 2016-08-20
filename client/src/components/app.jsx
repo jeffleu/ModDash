@@ -4,6 +4,7 @@ import Time from './Time.jsx';
 import Calendar from './Calendar.jsx'
 import Form from './Form.jsx';
 import Login from './Login.jsx';
+import Setting from './Setting.jsx';
 import Chrono from '../lib/chrono.min.js';
 import artyom from '../lib/artyom.min.js';
 import $ from '../lib/jquery.js';
@@ -81,6 +82,9 @@ class App extends React.Component {
           <Login />
         </div>
         <div>
+          {}
+        </div>
+        <div>
           <Time />
         </div>
         <div>
@@ -88,6 +92,9 @@ class App extends React.Component {
         </div>
         <div>
           <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands}/>
+        </div>
+        <div>
+          <Setting />
         </div>
       </div>
     );
