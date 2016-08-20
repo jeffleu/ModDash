@@ -110,11 +110,10 @@ class Form extends React.Component {
         'authorization': token
       }
     }).then((res) => {
-      console.log('res', res);
-      return res.json();
-    }).then((data) => {
+      if (res.status === 200) {
+        this.props.refreshEvents();
       // Refreshes today's events in chronological order including new event that was just added
-      this.props.refreshEvents();
+      };      
     }).catch((err) => { console.log('Error posting event to Google Calendar:\n', err); });
 
     this.closeModal();

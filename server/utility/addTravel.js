@@ -6,11 +6,11 @@ const requestPromise = require('request-promise');
 const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
 const addTravel = (event) => {
-  console.log('=========================== [addTravel]: event.dataValues\n', event.dataValues);
+  // console.log('=========================== [addTravel]: event.dataValues\n', event.dataValues);
 
   return UserController.getGeolocation(event.dataValues.userId)
   .then((data) => {
-    console.log('========================= [addTravel] Data from getGeolocation (includes userId for now)', data.dataValues);
+    // console.log('========================= [addTravel] Data from getGeolocation (includes userId for now)', data.dataValues);
     return data.dataValues.geolocation;
   })
   .then((geolocation) => {
@@ -21,14 +21,14 @@ const addTravel = (event) => {
         origins: geolocation,
         destinations: event.dataValues.location,
         mode: 'driving',
+        // USING ARRIVAL TIME GETS US THE ESTIMATED TIME TO GET THERE
         arrival_time: event.dataValues.startdatetime,
         // departure_time: 'now',
         units: 'imperial'
-        // traffic_model: 'best_guess'
       }
     };
 
-    console.log('========================= [addTravel]: options\n', options);
+    // console.log('========================= [addTravel]: options\n', options);
 
     // Request to Google Maps API for travel data
     return requestPromise(options);
@@ -37,7 +37,7 @@ const addTravel = (event) => {
     // requestPromise is tricky because not handling response or error/status code, just body
     var body = JSON.parse(body);
 
-    console.log('========================= [addTravel]: body', body);
+    // console.log('========================= [addTravel]: body', body);
 
     var duration = body.rows[0].elements[0].duration;
     var value = 0;

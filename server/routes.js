@@ -4,7 +4,6 @@ const router = require('express').Router();
 //const {
 // addEvent, 
 // addTravel} = require(./utility/index.js)
-const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
 const addTravel = require('./utility/addTravel');
 const getUserGeolocation = require('./utility/getUserGeoLocation');

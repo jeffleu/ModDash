@@ -6,7 +6,7 @@ const url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
 const getTrafficTime = function(event) {
 
-  console.log('======================= []: event', event.dataValues);
+  // console.log('======================= []: event', event.dataValues);
 
   return UserController.getGeolocation(event.dataValues.userId)
   .then((data) => data.dataValues.geolocation)
@@ -16,7 +16,6 @@ const getTrafficTime = function(event) {
       qs: {
         key: process.env.GOOGLE_MAPS_API_KEY,
         origins: geolocation,
-        // can probably store destinations in job?
         destinations: event.dataValues.location,
         mode: 'driving',
         departure_time: 'now',
