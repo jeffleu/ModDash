@@ -1,9 +1,5 @@
-const UserController = require('./../db/controllers/userController');
+const User = require('../db/queries').User;
 
-const updateTransitMode =  (req, res) => {
-  var userId = req.userId;
-  var transit = req.body.transit
-  return UserController.updateUserTransitMode(userId, transit)
-}
+const updateTransitMode = (req, res) => User.updateUserTransitMode(req.userId, req.body.transit);
 
 module.exports = updateTransitMode;

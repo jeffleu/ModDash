@@ -1,9 +1,13 @@
 const path = require('path');
+const app = require('express')();
 const router = require('express').Router();
 //destructure with
 //const {
 // addEvent,
 // addTravel} = require(./utility/index.js)
+const GoogleAuthUrl = require('./setup/googleOAuth').url;
+const extensionAuth = require('./utility/extensionAuth');
+const authCallback = require('./utility/authCallback');
 const addEvent = require('./utility/addEvent');
 const addTravel = require('./utility/addTravel');
 const getUserGeolocation = require('./utility/getUserGeoLocation');
@@ -12,7 +16,6 @@ const getDayEvents = require('./utility/getDayEvents');
 const updateTransit = require('./utility/updateTransitMode');
 const queryTraffic = require('./workers/queryTraffic');
 const jwt = require('jsonwebtoken');
-
 
 //ALL ROUTES HERE
 
@@ -34,7 +37,7 @@ var addEventAndAddTravel = (req, res) => {
     console.log('travel was added, now scheduling queryTraffic worker');
     queryTraffic(travel);
   })
-}
+};
 
 router.use(function(req, res, next) {
   var token = req.headers.authorization;
@@ -54,25 +57,35 @@ router.use(function(req, res, next) {
       message: 'No token provided'
     });
   }
-})
+});
 
 // For testing purposes
-router.get('/test', function(req, res) {
+router.get('/api/test', (req, res) => {
   res.sendStatus(200);
 });
 
+// extensionAuth route
+app.post('/extensionAuth', extensionAuth);
+
+// webAuth routes
+app.get('/auth', (req, res) => {
+  res.redirect(GoogleAuthUrl);
+});
+
+// Google redirect after auth sign in to get code for access token/refresh token
+app.get('/verified', authCallback);
+
 // Calendar Routes
-router.post('/calendar/addEvent', addEventAndAddTravel);
-router.get('/calendar/getDayEvents', getDayEvents);
+router.post('/api/calendar/addEvent', addEventAndAddTravel);
+router.get('/api/calendar/getDayEvents', getDayEvents);
 
 // this endpoint is not doing anything, it was just to trigger a function to fetch all of the user's events in the calendar, but we can do this on the auth callback page or elsewhere
 // router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
 
 // User Routes
 // router.get('/users/getUserInfo', )
-router.post('/users/updateTransit', updateTransit);
-router.get('/users/getGeolocation', getUserGeolocation);
-router.post('/users/updateGeolocation', updateGeolocation);
-
+router.post('/api/users/updateTransit', updateTransit);
+router.get('/api/users/getGeolocation', getUserGeolocation);
+router.post('/api/users/updateGeolocation', updateGeolocation);
 
 module.exports = router;

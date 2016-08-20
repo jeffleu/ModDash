@@ -1,16 +1,10 @@
-const UserController = require('../db/controllers').UserController;
-// const { UserController } = require('./../db/controllers');
+const User = require('../db/queries').User;
 const requestPromise = require('request-promise');
 const googleMap = require('./map/googleMap');
 
-const getTrafficTime = function(event) {
-
-  // console.log('======================= []: event', event.dataValues);
-
-  return UserController.getUserInfo(event.dataValues.userId)
-  .then((data) => {
-    return requestPromise(googleMap.mapTraffic(data, event))
-  })
+const getTrafficTime = event => {
+  return User.getUserInfo(event.dataValues.userId)
+  .then(data => requestPromise(googleMap.mapTraffic(data, event)))
   .then(body => {
     body = JSON.parse(body);
 
@@ -20,9 +14,6 @@ const getTrafficTime = function(event) {
       traffic = duration.value * 1000; // convert seconds to milliseconds
     }
     var notificationTime = new Date(Date.parse(event.startdatetime) - (traffic + 300000));
-
-    console.log('Traffic (in seconds):\n', traffic);
-    console.log('Notification Time:\n', notificationTime);
 
     return {
       traffic,

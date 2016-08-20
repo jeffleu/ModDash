@@ -1,10 +1,7 @@
-const UserController = require('./../db/controllers/userController');
+const User = require('../db/queries').User;
 
 const getUserTransitMode = (req, res) => {
-  // TO DO: User ID hardcoded for now, but should not be. The id should be in the request.
-  var userId = req.userId;
-
-  return UserController.getUserTransitMode(userId)
+  return User.getUserTransitMode(req.userId)
     .then((data) => { console.log('huh', data) })
     .catch((err) => { res.sendStatus(404); });
 };

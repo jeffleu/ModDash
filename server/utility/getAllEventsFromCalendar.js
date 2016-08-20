@@ -1,5 +1,4 @@
-const EventController = require('../db/controllers').EventController;
-// const { UserController, EventController } = require('../db/controllers');
+const Event = require('../db/queries').Event;
 const google = require('googleapis');
 const calendar = google.calendar('v3');
 const googleOAuth = require('../setup/googleOAuth');
@@ -8,7 +7,7 @@ const Promise = require('bluebird');
 calendar.events.list = Promise.promisify(calendar.events.list);
 
 // currently not in use, need to fix this
-const getAllEventsFromCalendar = function (req, res) {
+const getAllEventsFromCalendar = (req, res) => {
   return googleOAuth.getUserTokens(req.userId)
   .then(data => {
     calendar.events.list({
@@ -22,6 +21,7 @@ const getAllEventsFromCalendar = function (req, res) {
       data.items.forEach(event => {
         Event.insertEvent(event, userId);
       });
+      
       res.send(data.items);      
     });
   });

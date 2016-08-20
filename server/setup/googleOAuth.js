@@ -1,14 +1,11 @@
-const UserController = require('../db/controllers').UserController;
+const User = require('../db/queries').User;
 const google = require('googleapis');
 const plus = google.plus('v1');
 const Promise = require('bluebird');
 plus.people.get = Promise.promisify(plus.people.get);
 var OAuth2 = google.auth.OAuth2;
 
-
-var oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID, 
-  process.env.GOOGLE_CLIENT_SECRET, 
-  'http://localhost:9000/verified');
+var oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, 'http://localhost:9000/verified');
 
 oauth2Client.getToken = Promise.promisify(oauth2Client.getToken);
 oauth2Client.refreshAccessToken = Promise.promisify(oauth2Client.refreshAccessToken);
@@ -27,11 +24,7 @@ const googleCalAuthCallback = (code) => {
     oauth2Client.setCredentials(tokens);
     return plus.people.get({ userId: 'me', auth: oauth2Client })
     .then(profile => {
-      var user = {
-        tokens: tokens,
-        profile: profile
-      }
-      return user;
+      return {tokens, profile};
     });
   })
   .catch(err => {
@@ -43,16 +36,16 @@ const extensionIdentityAuth = (token) => {
   oauth2Client.setCredentials({
     access_token: token  
   });
-  return plus.people.get({ userId: 'me', auth: oauth2Client })
+  return plus.people.get({ userId: 'me', auth: oauth2Client });
 };
 
-const getUserTokens = function(id) {
-  return UserController.getUser(id)
+const getUserTokens = (id) => {
+  return User.getUser(id)
   .then(user => {
     oauth2Client.setCredentials({
       refresh_token: user.dataValues.refreshToken
     });
-    return oauth2Client.refreshAccessToken()
+    return oauth2Client.refreshAccessToken();
   })
   .then(tokens => {
     oauth2Client.setCredentials({

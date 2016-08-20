@@ -84,9 +84,23 @@
 
 	var _Setting2 = _interopRequireDefault(_Setting);
 
+<<<<<<< d36df60cba479a0c80404171ca199372a7010754
 	var _commands = __webpack_require__(311);
 
 	var _commands2 = _interopRequireDefault(_commands);
+=======
+	var _chronoMin = __webpack_require__(307);
+
+	var _chronoMin2 = _interopRequireDefault(_chronoMin);
+
+	var _artyomMin = __webpack_require__(308);
+
+	var _artyomMin2 = _interopRequireDefault(_artyomMin);
+
+	var _jquery = __webpack_require__(309);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+>>>>>>> Refactored (previously named) 'controllers' to 'queries'.
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -96,6 +110,12 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< d36df60cba479a0c80404171ca199372a7010754
+=======
+	var commands = __webpack_require__(311);
+	var Modal = __webpack_require__(284);
+
+>>>>>>> Refactored (previously named) 'controllers' to 'queries'.
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 
@@ -38419,6 +38439,8 @@
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
+<<<<<<< d36df60cba479a0c80404171ca199372a7010754
+=======
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -38680,6 +38702,2315 @@
 	exports.RadioGroup = RadioGroup;
 
 /***/ },
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;"use strict";
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	!function (e) {
+	  if ("object" == ( false ? "undefined" : _typeof(exports)) && "undefined" != typeof module) module.exports = e();else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (e), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else {
+	    var o;"undefined" != typeof window ? o = window : "undefined" != typeof global ? o = global : "undefined" != typeof self && (o = self), o.chrono = e();
+	  }
+	}(function () {
+	  var define, module, exports;return function e(t, n, r) {
+	    function s(o, u) {
+	      if (!n[o]) {
+	        if (!t[o]) {
+	          var a = typeof require == "function" && require;if (!u && a) return require(o, !0);if (i) return i(o, !0);var f = new Error("Cannot find module '" + o + "'");throw f.code = "MODULE_NOT_FOUND", f;
+	        }var l = n[o] = { exports: {} };t[o][0].call(l.exports, function (e) {
+	          var n = t[o][1][e];return s(n ? n : e);
+	        }, l, l.exports, e, t, n, r);
+	      }return n[o].exports;
+	    }var i = typeof require == "function" && require;for (var o = 0; o < r.length; o++) {
+	      s(r[o]);
+	    }return s;
+	  }({ 1: [function (require, module, exports) {
+	      !function (t, e) {
+	        "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) && "undefined" != typeof module ? module.exports = e() : "function" == typeof define && define.amd ? define(e) : t.moment = e();
+	      }(this, function () {
+	        "use strict";
+	        function t() {
+	          return Cn.apply(null, arguments);
+	        }function e(t) {
+	          Cn = t;
+	        }function n(t) {
+	          return "[object Array]" === Object.prototype.toString.call(t);
+	        }function i(t) {
+	          return t instanceof Date || "[object Date]" === Object.prototype.toString.call(t);
+	        }function r(t, e) {
+	          var n,
+	              i = [];for (n = 0; n < t.length; ++n) {
+	            i.push(e(t[n], n));
+	          }return i;
+	        }function s(t, e) {
+	          return Object.prototype.hasOwnProperty.call(t, e);
+	        }function a(t, e) {
+	          for (var n in e) {
+	            s(e, n) && (t[n] = e[n]);
+	          }return s(e, "toString") && (t.toString = e.toString), s(e, "valueOf") && (t.valueOf = e.valueOf), t;
+	        }function o(t, e, n, i) {
+	          return Tt(t, e, n, i, !0).utc();
+	        }function u() {
+	          return { empty: !1, unusedTokens: [], unusedInput: [], overflow: -2, charsLeftOver: 0, nullInput: !1, invalidMonth: null, invalidFormat: !1, userInvalidated: !1, iso: !1 };
+	        }function d(t) {
+	          return null == t._pf && (t._pf = u()), t._pf;
+	        }function l(t) {
+	          if (null == t._isValid) {
+	            var e = d(t);t._isValid = !isNaN(t._d.getTime()) && e.overflow < 0 && !e.empty && !e.invalidMonth && !e.nullInput && !e.invalidFormat && !e.userInvalidated, t._strict && (t._isValid = t._isValid && 0 === e.charsLeftOver && 0 === e.unusedTokens.length && void 0 === e.bigHour);
+	          }return t._isValid;
+	        }function c(t) {
+	          var e = o(NaN);return null != t ? a(d(e), t) : d(e).userInvalidated = !0, e;
+	        }function f(t, e) {
+	          var n, i, r;if ("undefined" != typeof e._isAMomentObject && (t._isAMomentObject = e._isAMomentObject), "undefined" != typeof e._i && (t._i = e._i), "undefined" != typeof e._f && (t._f = e._f), "undefined" != typeof e._l && (t._l = e._l), "undefined" != typeof e._strict && (t._strict = e._strict), "undefined" != typeof e._tzm && (t._tzm = e._tzm), "undefined" != typeof e._isUTC && (t._isUTC = e._isUTC), "undefined" != typeof e._offset && (t._offset = e._offset), "undefined" != typeof e._pf && (t._pf = d(e)), "undefined" != typeof e._locale && (t._locale = e._locale), Gn.length > 0) for (n in Gn) {
+	            i = Gn[n], r = e[i], "undefined" != typeof r && (t[i] = r);
+	          }return t;
+	        }function h(e) {
+	          f(this, e), this._d = new Date(+e._d), Fn === !1 && (Fn = !0, t.updateOffset(this), Fn = !1);
+	        }function m(t) {
+	          return t instanceof h || null != t && null != t._isAMomentObject;
+	        }function _(t) {
+	          var e = +t,
+	              n = 0;return 0 !== e && isFinite(e) && (n = e >= 0 ? Math.floor(e) : Math.ceil(e)), n;
+	        }function y(t, e, n) {
+	          var i,
+	              r = Math.min(t.length, e.length),
+	              s = Math.abs(t.length - e.length),
+	              a = 0;for (i = 0; r > i; i++) {
+	            (n && t[i] !== e[i] || !n && _(t[i]) !== _(e[i])) && a++;
+	          }return a + s;
+	        }function p() {}function g(t) {
+	          return t ? t.toLowerCase().replace("_", "-") : t;
+	        }function D(t) {
+	          for (var e, n, i, r, s = 0; s < t.length;) {
+	            for (r = g(t[s]).split("-"), e = r.length, n = g(t[s + 1]), n = n ? n.split("-") : null; e > 0;) {
+	              if (i = v(r.slice(0, e).join("-"))) return i;if (n && n.length >= e && y(r, n, !0) >= e - 1) break;e--;
+	            }s++;
+	          }return null;
+	        }function v(t) {
+	          var e = null;if (!Pn[t] && "undefined" != typeof module && module && module.exports) try {
+	            e = Wn._abbr, require("./locale/" + t), M(e);
+	          } catch (n) {}return Pn[t];
+	        }function M(t, e) {
+	          var n;return t && (n = "undefined" == typeof e ? w(t) : Y(t, e), n && (Wn = n)), Wn._abbr;
+	        }function Y(t, e) {
+	          return null !== e ? (e.abbr = t, Pn[t] || (Pn[t] = new p()), Pn[t].set(e), M(t), Pn[t]) : (delete Pn[t], null);
+	        }function w(t) {
+	          var e;if (t && t._locale && t._locale._abbr && (t = t._locale._abbr), !t) return Wn;if (!n(t)) {
+	            if (e = v(t)) return e;t = [t];
+	          }return D(t);
+	        }function k(t, e) {
+	          var n = t.toLowerCase();Ln[n] = Ln[n + "s"] = Ln[e] = t;
+	        }function T(t) {
+	          return "string" == typeof t ? Ln[t] || Ln[t.toLowerCase()] : void 0;
+	        }function S(t) {
+	          var e,
+	              n,
+	              i = {};for (n in t) {
+	            s(t, n) && (e = T(n), e && (i[e] = t[n]));
+	          }return i;
+	        }function b(e, n) {
+	          return function (i) {
+	            return null != i ? (U(this, e, i), t.updateOffset(this, n), this) : O(this, e);
+	          };
+	        }function O(t, e) {
+	          return t._d["get" + (t._isUTC ? "UTC" : "") + e]();
+	        }function U(t, e, n) {
+	          return t._d["set" + (t._isUTC ? "UTC" : "") + e](n);
+	        }function C(t, e) {
+	          var n;if ("object" == (typeof t === "undefined" ? "undefined" : _typeof(t))) for (n in t) {
+	            this.set(n, t[n]);
+	          } else if (t = T(t), "function" == typeof this[t]) return this[t](e);return this;
+	        }function W(t, e, n) {
+	          for (var i = "" + Math.abs(t), r = t >= 0; i.length < e;) {
+	            i = "0" + i;
+	          }return (r ? n ? "+" : "" : "-") + i;
+	        }function G(t, e, n, i) {
+	          var r = i;"string" == typeof i && (r = function r() {
+	            return this[i]();
+	          }), t && (An[t] = r), e && (An[e[0]] = function () {
+	            return W(r.apply(this, arguments), e[1], e[2]);
+	          }), n && (An[n] = function () {
+	            return this.localeData().ordinal(r.apply(this, arguments), t);
+	          });
+	        }function F(t) {
+	          return t.match(/\[[\s\S]/) ? t.replace(/^\[|\]$/g, "") : t.replace(/\\/g, "");
+	        }function P(t) {
+	          var e,
+	              n,
+	              i = t.match(xn);for (e = 0, n = i.length; n > e; e++) {
+	            An[i[e]] ? i[e] = An[i[e]] : i[e] = F(i[e]);
+	          }return function (r) {
+	            var s = "";for (e = 0; n > e; e++) {
+	              s += i[e] instanceof Function ? i[e].call(r, t) : i[e];
+	            }return s;
+	          };
+	        }function L(t, e) {
+	          return t.isValid() ? (e = x(e, t.localeData()), In[e] || (In[e] = P(e)), In[e](t)) : t.localeData().invalidDate();
+	        }function x(t, e) {
+	          function n(t) {
+	            return e.longDateFormat(t) || t;
+	          }var i = 5;for (Hn.lastIndex = 0; i >= 0 && Hn.test(t);) {
+	            t = t.replace(Hn, n), Hn.lastIndex = 0, i -= 1;
+	          }return t;
+	        }function H(t, e, n) {
+	          ti[t] = "function" == typeof e ? e : function (t) {
+	            return t && n ? n : e;
+	          };
+	        }function I(t, e) {
+	          return s(ti, t) ? ti[t](e._strict, e._locale) : new RegExp(A(t));
+	        }function A(t) {
+	          return t.replace("\\", "").replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (t, e, n, i, r) {
+	            return e || n || i || r;
+	          }).replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+	        }function z(t, e) {
+	          var n,
+	              i = e;for ("string" == typeof t && (t = [t]), "number" == typeof e && (i = function i(t, n) {
+	            n[e] = _(t);
+	          }), n = 0; n < t.length; n++) {
+	            ei[t[n]] = i;
+	          }
+	        }function Z(t, e) {
+	          z(t, function (t, n, i, r) {
+	            i._w = i._w || {}, e(t, i._w, i, r);
+	          });
+	        }function E(t, e, n) {
+	          null != e && s(ei, t) && ei[t](e, n._a, n, t);
+	        }function N(t, e) {
+	          return new Date(Date.UTC(t, e + 1, 0)).getUTCDate();
+	        }function j(t) {
+	          return this._months[t.month()];
+	        }function V(t) {
+	          return this._monthsShort[t.month()];
+	        }function q(t, e, n) {
+	          var i, r, s;for (this._monthsParse || (this._monthsParse = [], this._longMonthsParse = [], this._shortMonthsParse = []), i = 0; 12 > i; i++) {
+	            if (r = o([2e3, i]), n && !this._longMonthsParse[i] && (this._longMonthsParse[i] = new RegExp("^" + this.months(r, "").replace(".", "") + "$", "i"), this._shortMonthsParse[i] = new RegExp("^" + this.monthsShort(r, "").replace(".", "") + "$", "i")), n || this._monthsParse[i] || (s = "^" + this.months(r, "") + "|^" + this.monthsShort(r, ""), this._monthsParse[i] = new RegExp(s.replace(".", ""), "i")), n && "MMMM" === e && this._longMonthsParse[i].test(t)) return i;if (n && "MMM" === e && this._shortMonthsParse[i].test(t)) return i;if (!n && this._monthsParse[i].test(t)) return i;
+	          }
+	        }function J(t, e) {
+	          var n;return "string" == typeof e && (e = t.localeData().monthsParse(e), "number" != typeof e) ? t : (n = Math.min(t.date(), N(t.year(), e)), t._d["set" + (t._isUTC ? "UTC" : "") + "Month"](e, n), t);
+	        }function $(e) {
+	          return null != e ? (J(this, e), t.updateOffset(this, !0), this) : O(this, "Month");
+	        }function R() {
+	          return N(this.year(), this.month());
+	        }function B(t) {
+	          var e,
+	              n = t._a;return n && -2 === d(t).overflow && (e = n[ii] < 0 || n[ii] > 11 ? ii : n[ri] < 1 || n[ri] > N(n[ni], n[ii]) ? ri : n[si] < 0 || n[si] > 24 || 24 === n[si] && (0 !== n[ai] || 0 !== n[oi] || 0 !== n[ui]) ? si : n[ai] < 0 || n[ai] > 59 ? ai : n[oi] < 0 || n[oi] > 59 ? oi : n[ui] < 0 || n[ui] > 999 ? ui : -1, d(t)._overflowDayOfYear && (ni > e || e > ri) && (e = ri), d(t).overflow = e), t;
+	        }function Q(e) {
+	          t.suppressDeprecationWarnings === !1 && "undefined" != typeof console && console.warn && console.warn("Deprecation warning: " + e);
+	        }function X(t, e) {
+	          var n = !0,
+	              i = t + "\n" + new Error().stack;return a(function () {
+	            return n && (Q(i), n = !1), e.apply(this, arguments);
+	          }, e);
+	        }function K(t, e) {
+	          ci[t] || (Q(e), ci[t] = !0);
+	        }function tt(t) {
+	          var e,
+	              n,
+	              i = t._i,
+	              r = fi.exec(i);if (r) {
+	            for (d(t).iso = !0, e = 0, n = hi.length; n > e; e++) {
+	              if (hi[e][1].exec(i)) {
+	                t._f = hi[e][0] + (r[6] || " ");break;
+	              }
+	            }for (e = 0, n = mi.length; n > e; e++) {
+	              if (mi[e][1].exec(i)) {
+	                t._f += mi[e][0];break;
+	              }
+	            }i.match(Qn) && (t._f += "Z"), Dt(t);
+	          } else t._isValid = !1;
+	        }function et(e) {
+	          var n = _i.exec(e._i);return null !== n ? void (e._d = new Date(+n[1])) : (tt(e), void (e._isValid === !1 && (delete e._isValid, t.createFromInputFallback(e))));
+	        }function nt(t, e, n, i, r, s, a) {
+	          var o = new Date(t, e, n, i, r, s, a);return 1970 > t && o.setFullYear(t), o;
+	        }function it(t) {
+	          var e = new Date(Date.UTC.apply(null, arguments));return 1970 > t && e.setUTCFullYear(t), e;
+	        }function rt(t) {
+	          return st(t) ? 366 : 365;
+	        }function st(t) {
+	          return t % 4 === 0 && t % 100 !== 0 || t % 400 === 0;
+	        }function at() {
+	          return st(this.year());
+	        }function ot(t, e, n) {
+	          var i,
+	              r = n - e,
+	              s = n - t.day();return s > r && (s -= 7), r - 7 > s && (s += 7), i = St(t).add(s, "d"), { week: Math.ceil(i.dayOfYear() / 7), year: i.year() };
+	        }function ut(t) {
+	          return ot(t, this._week.dow, this._week.doy).week;
+	        }function dt() {
+	          return this._week.dow;
+	        }function lt() {
+	          return this._week.doy;
+	        }function ct(t) {
+	          var e = this.localeData().week(this);return null == t ? e : this.add(7 * (t - e), "d");
+	        }function ft(t) {
+	          var e = ot(this, 1, 4).week;return null == t ? e : this.add(7 * (t - e), "d");
+	        }function ht(t, e, n, i, r) {
+	          var s,
+	              a,
+	              o = it(t, 0, 1).getUTCDay();return o = 0 === o ? 7 : o, n = null != n ? n : r, s = r - o + (o > i ? 7 : 0) - (r > o ? 7 : 0), a = 7 * (e - 1) + (n - r) + s + 1, { year: a > 0 ? t : t - 1, dayOfYear: a > 0 ? a : rt(t - 1) + a };
+	        }function mt(t) {
+	          var e = Math.round((this.clone().startOf("day") - this.clone().startOf("year")) / 864e5) + 1;return null == t ? e : this.add(t - e, "d");
+	        }function _t(t, e, n) {
+	          return null != t ? t : null != e ? e : n;
+	        }function yt(t) {
+	          var e = new Date();return t._useUTC ? [e.getUTCFullYear(), e.getUTCMonth(), e.getUTCDate()] : [e.getFullYear(), e.getMonth(), e.getDate()];
+	        }function pt(t) {
+	          var e,
+	              n,
+	              i,
+	              r,
+	              s = [];if (!t._d) {
+	            for (i = yt(t), t._w && null == t._a[ri] && null == t._a[ii] && gt(t), t._dayOfYear && (r = _t(t._a[ni], i[ni]), t._dayOfYear > rt(r) && (d(t)._overflowDayOfYear = !0), n = it(r, 0, t._dayOfYear), t._a[ii] = n.getUTCMonth(), t._a[ri] = n.getUTCDate()), e = 0; 3 > e && null == t._a[e]; ++e) {
+	              t._a[e] = s[e] = i[e];
+	            }for (; 7 > e; e++) {
+	              t._a[e] = s[e] = null == t._a[e] ? 2 === e ? 1 : 0 : t._a[e];
+	            }24 === t._a[si] && 0 === t._a[ai] && 0 === t._a[oi] && 0 === t._a[ui] && (t._nextDay = !0, t._a[si] = 0), t._d = (t._useUTC ? it : nt).apply(null, s), null != t._tzm && t._d.setUTCMinutes(t._d.getUTCMinutes() - t._tzm), t._nextDay && (t._a[si] = 24);
+	          }
+	        }function gt(t) {
+	          var e, n, i, r, s, a, o;e = t._w, null != e.GG || null != e.W || null != e.E ? (s = 1, a = 4, n = _t(e.GG, t._a[ni], ot(St(), 1, 4).year), i = _t(e.W, 1), r = _t(e.E, 1)) : (s = t._locale._week.dow, a = t._locale._week.doy, n = _t(e.gg, t._a[ni], ot(St(), s, a).year), i = _t(e.w, 1), null != e.d ? (r = e.d, s > r && ++i) : r = null != e.e ? e.e + s : s), o = ht(n, i, r, a, s), t._a[ni] = o.year, t._dayOfYear = o.dayOfYear;
+	        }function Dt(e) {
+	          if (e._f === t.ISO_8601) return void tt(e);e._a = [], d(e).empty = !0;var n,
+	              i,
+	              r,
+	              s,
+	              a,
+	              o = "" + e._i,
+	              u = o.length,
+	              l = 0;for (r = x(e._f, e._locale).match(xn) || [], n = 0; n < r.length; n++) {
+	            s = r[n], i = (o.match(I(s, e)) || [])[0], i && (a = o.substr(0, o.indexOf(i)), a.length > 0 && d(e).unusedInput.push(a), o = o.slice(o.indexOf(i) + i.length), l += i.length), An[s] ? (i ? d(e).empty = !1 : d(e).unusedTokens.push(s), E(s, i, e)) : e._strict && !i && d(e).unusedTokens.push(s);
+	          }d(e).charsLeftOver = u - l, o.length > 0 && d(e).unusedInput.push(o), d(e).bigHour === !0 && e._a[si] <= 12 && e._a[si] > 0 && (d(e).bigHour = void 0), e._a[si] = vt(e._locale, e._a[si], e._meridiem), pt(e), B(e);
+	        }function vt(t, e, n) {
+	          var i;return null == n ? e : null != t.meridiemHour ? t.meridiemHour(e, n) : null != t.isPM ? (i = t.isPM(n), i && 12 > e && (e += 12), i || 12 !== e || (e = 0), e) : e;
+	        }function Mt(t) {
+	          var e, n, i, r, s;if (0 === t._f.length) return d(t).invalidFormat = !0, void (t._d = new Date(NaN));for (r = 0; r < t._f.length; r++) {
+	            s = 0, e = f({}, t), null != t._useUTC && (e._useUTC = t._useUTC), e._f = t._f[r], Dt(e), l(e) && (s += d(e).charsLeftOver, s += 10 * d(e).unusedTokens.length, d(e).score = s, (null == i || i > s) && (i = s, n = e));
+	          }a(t, n || e);
+	        }function Yt(t) {
+	          if (!t._d) {
+	            var e = S(t._i);t._a = [e.year, e.month, e.day || e.date, e.hour, e.minute, e.second, e.millisecond], pt(t);
+	          }
+	        }function wt(t) {
+	          var e,
+	              r = t._i,
+	              s = t._f;return t._locale = t._locale || w(t._l), null === r || void 0 === s && "" === r ? c({ nullInput: !0 }) : ("string" == typeof r && (t._i = r = t._locale.preparse(r)), m(r) ? new h(B(r)) : (n(s) ? Mt(t) : s ? Dt(t) : i(r) ? t._d = r : kt(t), e = new h(B(t)), e._nextDay && (e.add(1, "d"), e._nextDay = void 0), e));
+	        }function kt(e) {
+	          var s = e._i;void 0 === s ? e._d = new Date() : i(s) ? e._d = new Date(+s) : "string" == typeof s ? et(e) : n(s) ? (e._a = r(s.slice(0), function (t) {
+	            return parseInt(t, 10);
+	          }), pt(e)) : "object" == (typeof s === "undefined" ? "undefined" : _typeof(s)) ? Yt(e) : "number" == typeof s ? e._d = new Date(s) : t.createFromInputFallback(e);
+	        }function Tt(t, e, n, i, r) {
+	          var s = {};return "boolean" == typeof n && (i = n, n = void 0), s._isAMomentObject = !0, s._useUTC = s._isUTC = r, s._l = n, s._i = t, s._f = e, s._strict = i, wt(s);
+	        }function St(t, e, n, i) {
+	          return Tt(t, e, n, i, !1);
+	        }function bt(t, e) {
+	          var i, r;if (1 === e.length && n(e[0]) && (e = e[0]), !e.length) return St();for (i = e[0], r = 1; r < e.length; ++r) {
+	            e[r][t](i) && (i = e[r]);
+	          }return i;
+	        }function Ot() {
+	          var t = [].slice.call(arguments, 0);return bt("isBefore", t);
+	        }function Ut() {
+	          var t = [].slice.call(arguments, 0);return bt("isAfter", t);
+	        }function Ct(t) {
+	          var e = S(t),
+	              n = e.year || 0,
+	              i = e.quarter || 0,
+	              r = e.month || 0,
+	              s = e.week || 0,
+	              a = e.day || 0,
+	              o = e.hour || 0,
+	              u = e.minute || 0,
+	              d = e.second || 0,
+	              l = e.millisecond || 0;this._milliseconds = +l + 1e3 * d + 6e4 * u + 36e5 * o, this._days = +a + 7 * s, this._months = +r + 3 * i + 12 * n, this._data = {}, this._locale = w(), this._bubble();
+	        }function Wt(t) {
+	          return t instanceof Ct;
+	        }function Gt(t, e) {
+	          G(t, 0, 0, function () {
+	            var t = this.utcOffset(),
+	                n = "+";return 0 > t && (t = -t, n = "-"), n + W(~~(t / 60), 2) + e + W(~~t % 60, 2);
+	          });
+	        }function Ft(t) {
+	          var e = (t || "").match(Qn) || [],
+	              n = e[e.length - 1] || [],
+	              i = (n + "").match(vi) || ["-", 0, 0],
+	              r = +(60 * i[1]) + _(i[2]);return "+" === i[0] ? r : -r;
+	        }function Pt(e, n) {
+	          var r, s;return n._isUTC ? (r = n.clone(), s = (m(e) || i(e) ? +e : +St(e)) - +r, r._d.setTime(+r._d + s), t.updateOffset(r, !1), r) : St(e).local();
+	        }function Lt(t) {
+	          return 15 * -Math.round(t._d.getTimezoneOffset() / 15);
+	        }function xt(e, n) {
+	          var i,
+	              r = this._offset || 0;return null != e ? ("string" == typeof e && (e = Ft(e)), Math.abs(e) < 16 && (e = 60 * e), !this._isUTC && n && (i = Lt(this)), this._offset = e, this._isUTC = !0, null != i && this.add(i, "m"), r !== e && (!n || this._changeInProgress ? Xt(this, Jt(e - r, "m"), 1, !1) : this._changeInProgress || (this._changeInProgress = !0, t.updateOffset(this, !0), this._changeInProgress = null)), this) : this._isUTC ? r : Lt(this);
+	        }function Ht(t, e) {
+	          return null != t ? ("string" != typeof t && (t = -t), this.utcOffset(t, e), this) : -this.utcOffset();
+	        }function It(t) {
+	          return this.utcOffset(0, t);
+	        }function At(t) {
+	          return this._isUTC && (this.utcOffset(0, t), this._isUTC = !1, t && this.subtract(Lt(this), "m")), this;
+	        }function zt() {
+	          return this._tzm ? this.utcOffset(this._tzm) : "string" == typeof this._i && this.utcOffset(Ft(this._i)), this;
+	        }function Zt(t) {
+	          return t = t ? St(t).utcOffset() : 0, (this.utcOffset() - t) % 60 === 0;
+	        }function Et() {
+	          return this.utcOffset() > this.clone().month(0).utcOffset() || this.utcOffset() > this.clone().month(5).utcOffset();
+	        }function Nt() {
+	          if (this._a) {
+	            var t = this._isUTC ? o(this._a) : St(this._a);return this.isValid() && y(this._a, t.toArray()) > 0;
+	          }return !1;
+	        }function jt() {
+	          return !this._isUTC;
+	        }function Vt() {
+	          return this._isUTC;
+	        }function qt() {
+	          return this._isUTC && 0 === this._offset;
+	        }function Jt(t, e) {
+	          var n,
+	              i,
+	              r,
+	              a = t,
+	              o = null;return Wt(t) ? a = { ms: t._milliseconds, d: t._days, M: t._months } : "number" == typeof t ? (a = {}, e ? a[e] = t : a.milliseconds = t) : (o = Mi.exec(t)) ? (n = "-" === o[1] ? -1 : 1, a = { y: 0, d: _(o[ri]) * n, h: _(o[si]) * n, m: _(o[ai]) * n, s: _(o[oi]) * n, ms: _(o[ui]) * n }) : (o = Yi.exec(t)) ? (n = "-" === o[1] ? -1 : 1, a = { y: $t(o[2], n), M: $t(o[3], n), d: $t(o[4], n), h: $t(o[5], n), m: $t(o[6], n), s: $t(o[7], n), w: $t(o[8], n) }) : null == a ? a = {} : "object" == (typeof a === "undefined" ? "undefined" : _typeof(a)) && ("from" in a || "to" in a) && (r = Bt(St(a.from), St(a.to)), a = {}, a.ms = r.milliseconds, a.M = r.months), i = new Ct(a), Wt(t) && s(t, "_locale") && (i._locale = t._locale), i;
+	        }function $t(t, e) {
+	          var n = t && parseFloat(t.replace(",", "."));return (isNaN(n) ? 0 : n) * e;
+	        }function Rt(t, e) {
+	          var n = { milliseconds: 0, months: 0 };return n.months = e.month() - t.month() + 12 * (e.year() - t.year()), t.clone().add(n.months, "M").isAfter(e) && --n.months, n.milliseconds = +e - +t.clone().add(n.months, "M"), n;
+	        }function Bt(t, e) {
+	          var n;return e = Pt(e, t), t.isBefore(e) ? n = Rt(t, e) : (n = Rt(e, t), n.milliseconds = -n.milliseconds, n.months = -n.months), n;
+	        }function Qt(t, e) {
+	          return function (n, i) {
+	            var r, s;return null === i || isNaN(+i) || (K(e, "moment()." + e + "(period, number) is deprecated. Please use moment()." + e + "(number, period)."), s = n, n = i, i = s), n = "string" == typeof n ? +n : n, r = Jt(n, i), Xt(this, r, t), this;
+	          };
+	        }function Xt(e, n, i, r) {
+	          var s = n._milliseconds,
+	              a = n._days,
+	              o = n._months;r = null == r ? !0 : r, s && e._d.setTime(+e._d + s * i), a && U(e, "Date", O(e, "Date") + a * i), o && J(e, O(e, "Month") + o * i), r && t.updateOffset(e, a || o);
+	        }function Kt(t) {
+	          var e = t || St(),
+	              n = Pt(e, this).startOf("day"),
+	              i = this.diff(n, "days", !0),
+	              r = -6 > i ? "sameElse" : -1 > i ? "lastWeek" : 0 > i ? "lastDay" : 1 > i ? "sameDay" : 2 > i ? "nextDay" : 7 > i ? "nextWeek" : "sameElse";return this.format(this.localeData().calendar(r, this, St(e)));
+	        }function te() {
+	          return new h(this);
+	        }function ee(t, e) {
+	          var n;return e = T("undefined" != typeof e ? e : "millisecond"), "millisecond" === e ? (t = m(t) ? t : St(t), +this > +t) : (n = m(t) ? +t : +St(t), n < +this.clone().startOf(e));
+	        }function ne(t, e) {
+	          var n;return e = T("undefined" != typeof e ? e : "millisecond"), "millisecond" === e ? (t = m(t) ? t : St(t), +t > +this) : (n = m(t) ? +t : +St(t), +this.clone().endOf(e) < n);
+	        }function ie(t, e, n) {
+	          return this.isAfter(t, n) && this.isBefore(e, n);
+	        }function re(t, e) {
+	          var n;return e = T(e || "millisecond"), "millisecond" === e ? (t = m(t) ? t : St(t), +this === +t) : (n = +St(t), +this.clone().startOf(e) <= n && n <= +this.clone().endOf(e));
+	        }function se(t) {
+	          return 0 > t ? Math.ceil(t) : Math.floor(t);
+	        }function ae(t, e, n) {
+	          var i,
+	              r,
+	              s = Pt(t, this),
+	              a = 6e4 * (s.utcOffset() - this.utcOffset());return e = T(e), "year" === e || "month" === e || "quarter" === e ? (r = oe(this, s), "quarter" === e ? r /= 3 : "year" === e && (r /= 12)) : (i = this - s, r = "second" === e ? i / 1e3 : "minute" === e ? i / 6e4 : "hour" === e ? i / 36e5 : "day" === e ? (i - a) / 864e5 : "week" === e ? (i - a) / 6048e5 : i), n ? r : se(r);
+	        }function oe(t, e) {
+	          var n,
+	              i,
+	              r = 12 * (e.year() - t.year()) + (e.month() - t.month()),
+	              s = t.clone().add(r, "months");return 0 > e - s ? (n = t.clone().add(r - 1, "months"), i = (e - s) / (s - n)) : (n = t.clone().add(r + 1, "months"), i = (e - s) / (n - s)), -(r + i);
+	        }function ue() {
+	          return this.clone().locale("en").format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ");
+	        }function de() {
+	          var t = this.clone().utc();return 0 < t.year() && t.year() <= 9999 ? "function" == typeof Date.prototype.toISOString ? this.toDate().toISOString() : L(t, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]") : L(t, "YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
+	        }function le(e) {
+	          var n = L(this, e || t.defaultFormat);return this.localeData().postformat(n);
+	        }function ce(t, e) {
+	          return this.isValid() ? Jt({ to: this, from: t }).locale(this.locale()).humanize(!e) : this.localeData().invalidDate();
+	        }function fe(t) {
+	          return this.from(St(), t);
+	        }function he(t, e) {
+	          return this.isValid() ? Jt({ from: this, to: t }).locale(this.locale()).humanize(!e) : this.localeData().invalidDate();
+	        }function me(t) {
+	          return this.to(St(), t);
+	        }function _e(t) {
+	          var e;return void 0 === t ? this._locale._abbr : (e = w(t), null != e && (this._locale = e), this);
+	        }function ye() {
+	          return this._locale;
+	        }function pe(t) {
+	          switch (t = T(t)) {case "year":
+	              this.month(0);case "quarter":case "month":
+	              this.date(1);case "week":case "isoWeek":case "day":
+	              this.hours(0);case "hour":
+	              this.minutes(0);case "minute":
+	              this.seconds(0);case "second":
+	              this.milliseconds(0);}return "week" === t && this.weekday(0), "isoWeek" === t && this.isoWeekday(1), "quarter" === t && this.month(3 * Math.floor(this.month() / 3)), this;
+	        }function ge(t) {
+	          return t = T(t), void 0 === t || "millisecond" === t ? this : this.startOf(t).add(1, "isoWeek" === t ? "week" : t).subtract(1, "ms");
+	        }function De() {
+	          return +this._d - 6e4 * (this._offset || 0);
+	        }function ve() {
+	          return Math.floor(+this / 1e3);
+	        }function Me() {
+	          return this._offset ? new Date(+this) : this._d;
+	        }function Ye() {
+	          var t = this;return [t.year(), t.month(), t.date(), t.hour(), t.minute(), t.second(), t.millisecond()];
+	        }function we() {
+	          return l(this);
+	        }function ke() {
+	          return a({}, d(this));
+	        }function Te() {
+	          return d(this).overflow;
+	        }function Se(t, e) {
+	          G(0, [t, t.length], 0, e);
+	        }function be(t, e, n) {
+	          return ot(St([t, 11, 31 + e - n]), e, n).week;
+	        }function Oe(t) {
+	          var e = ot(this, this.localeData()._week.dow, this.localeData()._week.doy).year;return null == t ? e : this.add(t - e, "y");
+	        }function Ue(t) {
+	          var e = ot(this, 1, 4).year;return null == t ? e : this.add(t - e, "y");
+	        }function Ce() {
+	          return be(this.year(), 1, 4);
+	        }function We() {
+	          var t = this.localeData()._week;return be(this.year(), t.dow, t.doy);
+	        }function Ge(t) {
+	          return null == t ? Math.ceil((this.month() + 1) / 3) : this.month(3 * (t - 1) + this.month() % 3);
+	        }function Fe(t, e) {
+	          if ("string" == typeof t) if (isNaN(t)) {
+	            if (t = e.weekdaysParse(t), "number" != typeof t) return null;
+	          } else t = parseInt(t, 10);return t;
+	        }function Pe(t) {
+	          return this._weekdays[t.day()];
+	        }function Le(t) {
+	          return this._weekdaysShort[t.day()];
+	        }function xe(t) {
+	          return this._weekdaysMin[t.day()];
+	        }function He(t) {
+	          var e, n, i;for (this._weekdaysParse || (this._weekdaysParse = []), e = 0; 7 > e; e++) {
+	            if (this._weekdaysParse[e] || (n = St([2e3, 1]).day(e), i = "^" + this.weekdays(n, "") + "|^" + this.weekdaysShort(n, "") + "|^" + this.weekdaysMin(n, ""), this._weekdaysParse[e] = new RegExp(i.replace(".", ""), "i")), this._weekdaysParse[e].test(t)) return e;
+	          }
+	        }function Ie(t) {
+	          var e = this._isUTC ? this._d.getUTCDay() : this._d.getDay();return null != t ? (t = Fe(t, this.localeData()), this.add(t - e, "d")) : e;
+	        }function Ae(t) {
+	          var e = (this.day() + 7 - this.localeData()._week.dow) % 7;return null == t ? e : this.add(t - e, "d");
+	        }function ze(t) {
+	          return null == t ? this.day() || 7 : this.day(this.day() % 7 ? t : t - 7);
+	        }function Ze(t, e) {
+	          G(t, 0, 0, function () {
+	            return this.localeData().meridiem(this.hours(), this.minutes(), e);
+	          });
+	        }function Ee(t, e) {
+	          return e._meridiemParse;
+	        }function Ne(t) {
+	          return "p" === (t + "").toLowerCase().charAt(0);
+	        }function je(t, e, n) {
+	          return t > 11 ? n ? "pm" : "PM" : n ? "am" : "AM";
+	        }function Ve(t) {
+	          G(0, [t, 3], 0, "millisecond");
+	        }function qe() {
+	          return this._isUTC ? "UTC" : "";
+	        }function Je() {
+	          return this._isUTC ? "Coordinated Universal Time" : "";
+	        }function $e(t) {
+	          return St(1e3 * t);
+	        }function Re() {
+	          return St.apply(null, arguments).parseZone();
+	        }function Be(t, e, n) {
+	          var i = this._calendar[t];return "function" == typeof i ? i.call(e, n) : i;
+	        }function Qe(t) {
+	          var e = this._longDateFormat[t];return !e && this._longDateFormat[t.toUpperCase()] && (e = this._longDateFormat[t.toUpperCase()].replace(/MMMM|MM|DD|dddd/g, function (t) {
+	            return t.slice(1);
+	          }), this._longDateFormat[t] = e), e;
+	        }function Xe() {
+	          return this._invalidDate;
+	        }function Ke(t) {
+	          return this._ordinal.replace("%d", t);
+	        }function tn(t) {
+	          return t;
+	        }function en(t, e, n, i) {
+	          var r = this._relativeTime[n];return "function" == typeof r ? r(t, e, n, i) : r.replace(/%d/i, t);
+	        }function nn(t, e) {
+	          var n = this._relativeTime[t > 0 ? "future" : "past"];return "function" == typeof n ? n(e) : n.replace(/%s/i, e);
+	        }function rn(t) {
+	          var e, n;for (n in t) {
+	            e = t[n], "function" == typeof e ? this[n] = e : this["_" + n] = e;
+	          }this._ordinalParseLenient = new RegExp(this._ordinalParse.source + "|" + /\d{1,2}/.source);
+	        }function sn(t, e, n, i) {
+	          var r = w(),
+	              s = o().set(i, e);return r[n](s, t);
+	        }function an(t, e, n, i, r) {
+	          if ("number" == typeof t && (e = t, t = void 0), t = t || "", null != e) return sn(t, e, n, r);var s,
+	              a = [];for (s = 0; i > s; s++) {
+	            a[s] = sn(t, s, n, r);
+	          }return a;
+	        }function on(t, e) {
+	          return an(t, e, "months", 12, "month");
+	        }function un(t, e) {
+	          return an(t, e, "monthsShort", 12, "month");
+	        }function dn(t, e) {
+	          return an(t, e, "weekdays", 7, "day");
+	        }function ln(t, e) {
+	          return an(t, e, "weekdaysShort", 7, "day");
+	        }function cn(t, e) {
+	          return an(t, e, "weekdaysMin", 7, "day");
+	        }function fn() {
+	          var t = this._data;return this._milliseconds = ji(this._milliseconds), this._days = ji(this._days), this._months = ji(this._months), t.milliseconds = ji(t.milliseconds), t.seconds = ji(t.seconds), t.minutes = ji(t.minutes), t.hours = ji(t.hours), t.months = ji(t.months), t.years = ji(t.years), this;
+	        }function hn(t, e, n, i) {
+	          var r = Jt(e, n);return t._milliseconds += i * r._milliseconds, t._days += i * r._days, t._months += i * r._months, t._bubble();
+	        }function mn(t, e) {
+	          return hn(this, t, e, 1);
+	        }function _n(t, e) {
+	          return hn(this, t, e, -1);
+	        }function yn() {
+	          var t,
+	              e,
+	              n,
+	              i = this._milliseconds,
+	              r = this._days,
+	              s = this._months,
+	              a = this._data,
+	              o = 0;return a.milliseconds = i % 1e3, t = se(i / 1e3), a.seconds = t % 60, e = se(t / 60), a.minutes = e % 60, n = se(e / 60), a.hours = n % 24, r += se(n / 24), o = se(pn(r)), r -= se(gn(o)), s += se(r / 30), r %= 30, o += se(s / 12), s %= 12, a.days = r, a.months = s, a.years = o, this;
+	        }function pn(t) {
+	          return 400 * t / 146097;
+	        }function gn(t) {
+	          return 146097 * t / 400;
+	        }function Dn(t) {
+	          var e,
+	              n,
+	              i = this._milliseconds;if (t = T(t), "month" === t || "year" === t) return e = this._days + i / 864e5, n = this._months + 12 * pn(e), "month" === t ? n : n / 12;switch (e = this._days + Math.round(gn(this._months / 12)), t) {case "week":
+	              return e / 7 + i / 6048e5;case "day":
+	              return e + i / 864e5;case "hour":
+	              return 24 * e + i / 36e5;case "minute":
+	              return 1440 * e + i / 6e4;case "second":
+	              return 86400 * e + i / 1e3;case "millisecond":
+	              return Math.floor(864e5 * e) + i;default:
+	              throw new Error("Unknown unit " + t);}
+	        }function vn() {
+	          return this._milliseconds + 864e5 * this._days + this._months % 12 * 2592e6 + 31536e6 * _(this._months / 12);
+	        }function Mn(t) {
+	          return function () {
+	            return this.as(t);
+	          };
+	        }function Yn(t) {
+	          return t = T(t), this[t + "s"]();
+	        }function wn(t) {
+	          return function () {
+	            return this._data[t];
+	          };
+	        }function kn() {
+	          return se(this.days() / 7);
+	        }function Tn(t, e, n, i, r) {
+	          return r.relativeTime(e || 1, !!n, t, i);
+	        }function Sn(t, e, n) {
+	          var i = Jt(t).abs(),
+	              r = ar(i.as("s")),
+	              s = ar(i.as("m")),
+	              a = ar(i.as("h")),
+	              o = ar(i.as("d")),
+	              u = ar(i.as("M")),
+	              d = ar(i.as("y")),
+	              l = r < or.s && ["s", r] || 1 === s && ["m"] || s < or.m && ["mm", s] || 1 === a && ["h"] || a < or.h && ["hh", a] || 1 === o && ["d"] || o < or.d && ["dd", o] || 1 === u && ["M"] || u < or.M && ["MM", u] || 1 === d && ["y"] || ["yy", d];return l[2] = e, l[3] = +t > 0, l[4] = n, Tn.apply(null, l);
+	        }function bn(t, e) {
+	          return void 0 === or[t] ? !1 : void 0 === e ? or[t] : (or[t] = e, !0);
+	        }function On(t) {
+	          var e = this.localeData(),
+	              n = Sn(this, !t, e);return t && (n = e.pastFuture(+this, n)), e.postformat(n);
+	        }function Un() {
+	          var t = ur(this.years()),
+	              e = ur(this.months()),
+	              n = ur(this.days()),
+	              i = ur(this.hours()),
+	              r = ur(this.minutes()),
+	              s = ur(this.seconds() + this.milliseconds() / 1e3),
+	              a = this.asSeconds();return a ? (0 > a ? "-" : "") + "P" + (t ? t + "Y" : "") + (e ? e + "M" : "") + (n ? n + "D" : "") + (i || r || s ? "T" : "") + (i ? i + "H" : "") + (r ? r + "M" : "") + (s ? s + "S" : "") : "P0D";
+	        }var Cn,
+	            Wn,
+	            Gn = t.momentProperties = [],
+	            Fn = !1,
+	            Pn = {},
+	            Ln = {},
+	            xn = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,4}|x|X|zz?|ZZ?|.)/g,
+	            Hn = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,
+	            In = {},
+	            An = {},
+	            zn = /\d/,
+	            Zn = /\d\d/,
+	            En = /\d{3}/,
+	            Nn = /\d{4}/,
+	            jn = /[+-]?\d{6}/,
+	            Vn = /\d\d?/,
+	            qn = /\d{1,3}/,
+	            Jn = /\d{1,4}/,
+	            $n = /[+-]?\d{1,6}/,
+	            Rn = /\d+/,
+	            Bn = /[+-]?\d+/,
+	            Qn = /Z|[+-]\d\d:?\d\d/gi,
+	            Xn = /[+-]?\d+(\.\d{1,3})?/,
+	            Kn = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i,
+	            ti = {},
+	            ei = {},
+	            ni = 0,
+	            ii = 1,
+	            ri = 2,
+	            si = 3,
+	            ai = 4,
+	            oi = 5,
+	            ui = 6;G("M", ["MM", 2], "Mo", function () {
+	          return this.month() + 1;
+	        }), G("MMM", 0, 0, function (t) {
+	          return this.localeData().monthsShort(this, t);
+	        }), G("MMMM", 0, 0, function (t) {
+	          return this.localeData().months(this, t);
+	        }), k("month", "M"), H("M", Vn), H("MM", Vn, Zn), H("MMM", Kn), H("MMMM", Kn), z(["M", "MM"], function (t, e) {
+	          e[ii] = _(t) - 1;
+	        }), z(["MMM", "MMMM"], function (t, e, n, i) {
+	          var r = n._locale.monthsParse(t, i, n._strict);null != r ? e[ii] = r : d(n).invalidMonth = t;
+	        });var di = "January_February_March_April_May_June_July_August_September_October_November_December".split("_"),
+	            li = "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),
+	            ci = {};t.suppressDeprecationWarnings = !1;var fi = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
+	            hi = [["YYYYYY-MM-DD", /[+-]\d{6}-\d{2}-\d{2}/], ["YYYY-MM-DD", /\d{4}-\d{2}-\d{2}/], ["GGGG-[W]WW-E", /\d{4}-W\d{2}-\d/], ["GGGG-[W]WW", /\d{4}-W\d{2}/], ["YYYY-DDD", /\d{4}-\d{3}/]],
+	            mi = [["HH:mm:ss.SSSS", /(T| )\d\d:\d\d:\d\d\.\d+/], ["HH:mm:ss", /(T| )\d\d:\d\d:\d\d/], ["HH:mm", /(T| )\d\d:\d\d/], ["HH", /(T| )\d\d/]],
+	            _i = /^\/?Date\((\-?\d+)/i;t.createFromInputFallback = X("moment construction falls back to js Date. This is discouraged and will be removed in upcoming major release. Please refer to https://github.com/moment/moment/issues/1407 for more info.", function (t) {
+	          t._d = new Date(t._i + (t._useUTC ? " UTC" : ""));
+	        }), G(0, ["YY", 2], 0, function () {
+	          return this.year() % 100;
+	        }), G(0, ["YYYY", 4], 0, "year"), G(0, ["YYYYY", 5], 0, "year"), G(0, ["YYYYYY", 6, !0], 0, "year"), k("year", "y"), H("Y", Bn), H("YY", Vn, Zn), H("YYYY", Jn, Nn), H("YYYYY", $n, jn), H("YYYYYY", $n, jn), z(["YYYY", "YYYYY", "YYYYYY"], ni), z("YY", function (e, n) {
+	          n[ni] = t.parseTwoDigitYear(e);
+	        }), t.parseTwoDigitYear = function (t) {
+	          return _(t) + (_(t) > 68 ? 1900 : 2e3);
+	        };var yi = b("FullYear", !1);G("w", ["ww", 2], "wo", "week"), G("W", ["WW", 2], "Wo", "isoWeek"), k("week", "w"), k("isoWeek", "W"), H("w", Vn), H("ww", Vn, Zn), H("W", Vn), H("WW", Vn, Zn), Z(["w", "ww", "W", "WW"], function (t, e, n, i) {
+	          e[i.substr(0, 1)] = _(t);
+	        });var pi = { dow: 0, doy: 6 };G("DDD", ["DDDD", 3], "DDDo", "dayOfYear"), k("dayOfYear", "DDD"), H("DDD", qn), H("DDDD", En), z(["DDD", "DDDD"], function (t, e, n) {
+	          n._dayOfYear = _(t);
+	        }), t.ISO_8601 = function () {};var gi = X("moment().min is deprecated, use moment.min instead. https://github.com/moment/moment/issues/1548", function () {
+	          var t = St.apply(null, arguments);return this > t ? this : t;
+	        }),
+	            Di = X("moment().max is deprecated, use moment.max instead. https://github.com/moment/moment/issues/1548", function () {
+	          var t = St.apply(null, arguments);return t > this ? this : t;
+	        });Gt("Z", ":"), Gt("ZZ", ""), H("Z", Qn), H("ZZ", Qn), z(["Z", "ZZ"], function (t, e, n) {
+	          n._useUTC = !0, n._tzm = Ft(t);
+	        });var vi = /([\+\-]|\d\d)/gi;t.updateOffset = function () {};var Mi = /(\-)?(?:(\d*)\.)?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?)?/,
+	            Yi = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/;Jt.fn = Ct.prototype;var wi = Qt(1, "add"),
+	            ki = Qt(-1, "subtract");t.defaultFormat = "YYYY-MM-DDTHH:mm:ssZ";var Ti = X("moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.", function (t) {
+	          return void 0 === t ? this.localeData() : this.locale(t);
+	        });G(0, ["gg", 2], 0, function () {
+	          return this.weekYear() % 100;
+	        }), G(0, ["GG", 2], 0, function () {
+	          return this.isoWeekYear() % 100;
+	        }), Se("gggg", "weekYear"), Se("ggggg", "weekYear"), Se("GGGG", "isoWeekYear"), Se("GGGGG", "isoWeekYear"), k("weekYear", "gg"), k("isoWeekYear", "GG"), H("G", Bn), H("g", Bn), H("GG", Vn, Zn), H("gg", Vn, Zn), H("GGGG", Jn, Nn), H("gggg", Jn, Nn), H("GGGGG", $n, jn), H("ggggg", $n, jn), Z(["gggg", "ggggg", "GGGG", "GGGGG"], function (t, e, n, i) {
+	          e[i.substr(0, 2)] = _(t);
+	        }), Z(["gg", "GG"], function (e, n, i, r) {
+	          n[r] = t.parseTwoDigitYear(e);
+	        }), G("Q", 0, 0, "quarter"), k("quarter", "Q"), H("Q", zn), z("Q", function (t, e) {
+	          e[ii] = 3 * (_(t) - 1);
+	        }), G("D", ["DD", 2], "Do", "date"), k("date", "D"), H("D", Vn), H("DD", Vn, Zn), H("Do", function (t, e) {
+	          return t ? e._ordinalParse : e._ordinalParseLenient;
+	        }), z(["D", "DD"], ri), z("Do", function (t, e) {
+	          e[ri] = _(t.match(Vn)[0], 10);
+	        });var Si = b("Date", !0);G("d", 0, "do", "day"), G("dd", 0, 0, function (t) {
+	          return this.localeData().weekdaysMin(this, t);
+	        }), G("ddd", 0, 0, function (t) {
+	          return this.localeData().weekdaysShort(this, t);
+	        }), G("dddd", 0, 0, function (t) {
+	          return this.localeData().weekdays(this, t);
+	        }), G("e", 0, 0, "weekday"), G("E", 0, 0, "isoWeekday"), k("day", "d"), k("weekday", "e"), k("isoWeekday", "E"), H("d", Vn), H("e", Vn), H("E", Vn), H("dd", Kn), H("ddd", Kn), H("dddd", Kn), Z(["dd", "ddd", "dddd"], function (t, e, n) {
+	          var i = n._locale.weekdaysParse(t);null != i ? e.d = i : d(n).invalidWeekday = t;
+	        }), Z(["d", "e", "E"], function (t, e, n, i) {
+	          e[i] = _(t);
+	        });var bi = "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),
+	            Oi = "Sun_Mon_Tue_Wed_Thu_Fri_Sat".split("_"),
+	            Ui = "Su_Mo_Tu_We_Th_Fr_Sa".split("_");G("H", ["HH", 2], 0, "hour"), G("h", ["hh", 2], 0, function () {
+	          return this.hours() % 12 || 12;
+	        }), Ze("a", !0), Ze("A", !1), k("hour", "h"), H("a", Ee), H("A", Ee), H("H", Vn), H("h", Vn), H("HH", Vn, Zn), H("hh", Vn, Zn), z(["H", "HH"], si), z(["a", "A"], function (t, e, n) {
+	          n._isPm = n._locale.isPM(t), n._meridiem = t;
+	        }), z(["h", "hh"], function (t, e, n) {
+	          e[si] = _(t), d(n).bigHour = !0;
+	        });var Ci = /[ap]\.?m?\.?/i,
+	            Wi = b("Hours", !0);G("m", ["mm", 2], 0, "minute"), k("minute", "m"), H("m", Vn), H("mm", Vn, Zn), z(["m", "mm"], ai);var Gi = b("Minutes", !1);G("s", ["ss", 2], 0, "second"), k("second", "s"), H("s", Vn), H("ss", Vn, Zn), z(["s", "ss"], oi);var Fi = b("Seconds", !1);G("S", 0, 0, function () {
+	          return ~~(this.millisecond() / 100);
+	        }), G(0, ["SS", 2], 0, function () {
+	          return ~~(this.millisecond() / 10);
+	        }), Ve("SSS"), Ve("SSSS"), k("millisecond", "ms"), H("S", qn, zn), H("SS", qn, Zn), H("SSS", qn, En), H("SSSS", Rn), z(["S", "SS", "SSS", "SSSS"], function (t, e) {
+	          e[ui] = _(1e3 * ("0." + t));
+	        });var Pi = b("Milliseconds", !1);G("z", 0, 0, "zoneAbbr"), G("zz", 0, 0, "zoneName");var Li = h.prototype;Li.add = wi, Li.calendar = Kt, Li.clone = te, Li.diff = ae, Li.endOf = ge, Li.format = le, Li.from = ce, Li.fromNow = fe, Li.to = he, Li.toNow = me, Li.get = C, Li.invalidAt = Te, Li.isAfter = ee, Li.isBefore = ne, Li.isBetween = ie, Li.isSame = re, Li.isValid = we, Li.lang = Ti, Li.locale = _e, Li.localeData = ye, Li.max = Di, Li.min = gi, Li.parsingFlags = ke, Li.set = C, Li.startOf = pe, Li.subtract = ki, Li.toArray = Ye, Li.toDate = Me, Li.toISOString = de, Li.toJSON = de, Li.toString = ue, Li.unix = ve, Li.valueOf = De, Li.year = yi, Li.isLeapYear = at, Li.weekYear = Oe, Li.isoWeekYear = Ue, Li.quarter = Li.quarters = Ge, Li.month = $, Li.daysInMonth = R, Li.week = Li.weeks = ct, Li.isoWeek = Li.isoWeeks = ft, Li.weeksInYear = We, Li.isoWeeksInYear = Ce, Li.date = Si, Li.day = Li.days = Ie, Li.weekday = Ae, Li.isoWeekday = ze, Li.dayOfYear = mt, Li.hour = Li.hours = Wi, Li.minute = Li.minutes = Gi, Li.second = Li.seconds = Fi, Li.millisecond = Li.milliseconds = Pi, Li.utcOffset = xt, Li.utc = It, Li.local = At, Li.parseZone = zt, Li.hasAlignedHourOffset = Zt, Li.isDST = Et, Li.isDSTShifted = Nt, Li.isLocal = jt, Li.isUtcOffset = Vt, Li.isUtc = qt, Li.isUTC = qt, Li.zoneAbbr = qe, Li.zoneName = Je, Li.dates = X("dates accessor is deprecated. Use date instead.", Si), Li.months = X("months accessor is deprecated. Use month instead", $), Li.years = X("years accessor is deprecated. Use year instead", yi), Li.zone = X("moment().zone is deprecated, use moment().utcOffset instead. https://github.com/moment/moment/issues/1779", Ht);var xi = Li,
+	            Hi = { sameDay: "[Today at] LT", nextDay: "[Tomorrow at] LT", nextWeek: "dddd [at] LT", lastDay: "[Yesterday at] LT", lastWeek: "[Last] dddd [at] LT", sameElse: "L" },
+	            Ii = { LTS: "h:mm:ss A", LT: "h:mm A", L: "MM/DD/YYYY", LL: "MMMM D, YYYY", LLL: "MMMM D, YYYY LT", LLLL: "dddd, MMMM D, YYYY LT" },
+	            Ai = "Invalid date",
+	            zi = "%d",
+	            Zi = /\d{1,2}/,
+	            Ei = { future: "in %s", past: "%s ago", s: "a few seconds", m: "a minute", mm: "%d minutes", h: "an hour", hh: "%d hours", d: "a day", dd: "%d days", M: "a month", MM: "%d months",
+	          y: "a year", yy: "%d years" },
+	            Ni = p.prototype;Ni._calendar = Hi, Ni.calendar = Be, Ni._longDateFormat = Ii, Ni.longDateFormat = Qe, Ni._invalidDate = Ai, Ni.invalidDate = Xe, Ni._ordinal = zi, Ni.ordinal = Ke, Ni._ordinalParse = Zi, Ni.preparse = tn, Ni.postformat = tn, Ni._relativeTime = Ei, Ni.relativeTime = en, Ni.pastFuture = nn, Ni.set = rn, Ni.months = j, Ni._months = di, Ni.monthsShort = V, Ni._monthsShort = li, Ni.monthsParse = q, Ni.week = ut, Ni._week = pi, Ni.firstDayOfYear = lt, Ni.firstDayOfWeek = dt, Ni.weekdays = Pe, Ni._weekdays = bi, Ni.weekdaysMin = xe, Ni._weekdaysMin = Ui, Ni.weekdaysShort = Le, Ni._weekdaysShort = Oi, Ni.weekdaysParse = He, Ni.isPM = Ne, Ni._meridiemParse = Ci, Ni.meridiem = je, M("en", { ordinalParse: /\d{1,2}(th|st|nd|rd)/, ordinal: function ordinal(t) {
+	            var e = t % 10,
+	                n = 1 === _(t % 100 / 10) ? "th" : 1 === e ? "st" : 2 === e ? "nd" : 3 === e ? "rd" : "th";return t + n;
+	          } }), t.lang = X("moment.lang is deprecated. Use moment.locale instead.", M), t.langData = X("moment.langData is deprecated. Use moment.localeData instead.", w);var ji = Math.abs,
+	            Vi = Mn("ms"),
+	            qi = Mn("s"),
+	            Ji = Mn("m"),
+	            $i = Mn("h"),
+	            Ri = Mn("d"),
+	            Bi = Mn("w"),
+	            Qi = Mn("M"),
+	            Xi = Mn("y"),
+	            Ki = wn("milliseconds"),
+	            tr = wn("seconds"),
+	            er = wn("minutes"),
+	            nr = wn("hours"),
+	            ir = wn("days"),
+	            rr = wn("months"),
+	            sr = wn("years"),
+	            ar = Math.round,
+	            or = { s: 45, m: 45, h: 22, d: 26, M: 11 },
+	            ur = Math.abs,
+	            dr = Ct.prototype;dr.abs = fn, dr.add = mn, dr.subtract = _n, dr.as = Dn, dr.asMilliseconds = Vi, dr.asSeconds = qi, dr.asMinutes = Ji, dr.asHours = $i, dr.asDays = Ri, dr.asWeeks = Bi, dr.asMonths = Qi, dr.asYears = Xi, dr.valueOf = vn, dr._bubble = yn, dr.get = Yn, dr.milliseconds = Ki, dr.seconds = tr, dr.minutes = er, dr.hours = nr, dr.days = ir, dr.weeks = kn, dr.months = rr, dr.years = sr, dr.humanize = On, dr.toISOString = Un, dr.toString = Un, dr.toJSON = Un, dr.locale = _e, dr.localeData = ye, dr.toIsoString = X("toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)", Un), dr.lang = Ti, G("X", 0, 0, "unix"), G("x", 0, 0, "valueOf"), H("x", Bn), H("X", Xn), z("X", function (t, e, n) {
+	          n._d = new Date(1e3 * parseFloat(t, 10));
+	        }), z("x", function (t, e, n) {
+	          n._d = new Date(_(t));
+	        }), t.version = "2.10.3", e(St), t.fn = xi, t.min = Ot, t.max = Ut, t.utc = o, t.unix = $e, t.months = on, t.isDate = i, t.locale = M, t.invalid = c, t.duration = Jt, t.isMoment = m, t.weekdays = dn, t.parseZone = Re, t.localeData = w, t.isDuration = Wt, t.monthsShort = un, t.weekdaysMin = cn, t.defineLocale = Y, t.weekdaysShort = ln, t.normalizeUnits = T, t.relativeTimeThreshold = bn;var lr = t;return lr;
+	      });
+	    }, {}], 2: [function (require, module, exports) {
+	      var options = exports.options = require("./options");exports.parser = require("./parsers/parser"), exports.refiner = require("./refiners/refiner"), exports.Parser = exports.parser.Parser, exports.Refiner = exports.refiner.Refiner, exports.Filter = exports.refiner.Filter, exports.ParsedResult = require("./result").ParsedResult, exports.ParsedComponents = require("./result").ParsedComponents;var Chrono = function Chrono(r) {
+	        r = r || exports.options.strictOption(), this.option = r, this.parsers = new Object(r.parsers), this.refiners = new Object(r.refiners);
+	      };Chrono.prototype.parse = function (r, e, t) {
+	        e = e || new Date(), t = t || {};var s = [];return this.parsers.forEach(function (o) {
+	          var n = o.execute(r, e, t);s = s.concat(n);
+	        }), s.sort(function (r, e) {
+	          return r.index - e.index;
+	        }), this.refiners.forEach(function (e) {
+	          s = e.refine(r, s, t);
+	        }), s;
+	      }, Chrono.prototype.parseDate = function (r, e, t) {
+	        var s = this.parse(r, e, t);return s.length > 0 ? s[0].start.date() : null;
+	      }, exports.Chrono = Chrono, exports.strict = new Chrono(options.strictOption()), exports.casual = new Chrono(options.casualOption()), exports.parse = function () {
+	        return exports.casual.parse.apply(exports.casual, arguments);
+	      }, exports.parseDate = function () {
+	        return exports.casual.parseDate.apply(exports.casual, arguments);
+	      };
+	    }, { "./options": 3, "./parsers/parser": 25, "./refiners/refiner": 33, "./result": 34 }], 3: [function (require, module, exports) {
+	      function baseOption(e) {
+	        return { parsers: [new parser.ENISOFormatParser(e), new parser.ENDeadlineFormatParser(e), new parser.ENMonthNameLittleEndianParser(e), new parser.ENMonthNameMiddleEndianParser(e), new parser.ENMonthNameParser(e), new parser.ENSlashDateFormatParser(e), new parser.ENSlashDateFormatStartWithYearParser(e), new parser.ENSlashMonthFormatParser(e), new parser.ENTimeAgoFormatParser(e), new parser.ENTimeExpressionParser(e), new parser.JPStandardParser(e), new parser.ESTimeAgoFormatParser(e), new parser.ESDeadlineFormatParser(e), new parser.ESTimeExpressionParser(e), new parser.ESMonthNameLittleEndianParser(e), new parser.ESSlashDateFormatParser(e)], refiners: [new refiner.OverlapRemovalRefiner(), new refiner.ENMergeDateTimeRefiner(), new refiner.ENMergeDateRangeRefiner(), new refiner.JPMergeDateRangeRefiner(), new refiner.ExtractTimezoneOffsetRefiner(), new refiner.ExtractTimezoneAbbrRefiner(), new refiner.UnlikelyFormatFilter()] };
+	      }var parser = require("./parsers/parser"),
+	          refiner = require("./refiners/refiner");exports.strictOption = function () {
+	        return baseOption(!0);
+	      }, exports.casualOption = function () {
+	        var e = baseOption(!1);return e.parsers.unshift(new parser.ENCasualDateParser()), e.parsers.unshift(new parser.ENWeekdayParser()), e.parsers.unshift(new parser.JPCasualDateParser()), e.parsers.unshift(new parser.ESCasualDateParser()), e.parsers.unshift(new parser.ESWeekdayParser()), e;
+	      };
+	    }, { "./parsers/parser": 25, "./refiners/refiner": 33 }], 4: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = /(\W|^)(now|today|tonight|tomorrow|tmr|yesterday|last\s*night|this\s*(morning|afternoon|evening))(?=\W|$)/i;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (t, r, e, s) {
+	          var t = e[0].substr(e[1].length),
+	              a = e.index + e[1].length,
+	              i = new ParsedResult({ index: a, text: t, ref: r }),
+	              n = moment(r),
+	              o = n.clone(),
+	              m = t.toLowerCase();if ("tonight" == m) i.start.imply("hour", 22), i.start.imply("meridiem", 1);else if ("tomorrow" == m || "tmr" == m) n.hour() > 1 && o.add(1, "day");else if ("yesterday" == m) o.add(-1, "day");else if (m.match(/last\s*night/)) i.start.imply("hour", 0), n.hour() > 6 && o.add(-1, "day");else if (m.match("this")) {
+	            var l = e[3].toLowerCase();"afternoon" == l ? i.start.imply("hour", 15) : "evening" == l ? i.start.imply("hour", 18) : "morning" == l && i.start.imply("hour", 6);
+	          } else m.match("now") && (i.start.imply("hour", n.hour()), i.start.imply("minute", n.minute()), i.start.imply("second", n.second()), i.start.imply("millisecond", n.millisecond()));return i.start.assign("day", o.date()), i.start.assign("month", o.month() + 1), i.start.assign("year", o.year()), i.tags.ENCasualDateParser = !0, i;
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 5: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          util = require("../../utils/EN"),
+	          PATTERN = new RegExp("(\\W|^)(within|in)\\s*(" + util.INTEGER_WORDS_PATTERN + "|[0-9]+|an?(?:\\s*few)?|half(?:\\s*an?)?)\\s*(seconds?|minutes?|hours?|days?|weeks?|months?|years?)\\s*(?=\\W|$)", "i"),
+	          STRICT_PATTERN = new RegExp("(\\W|^)(within|in)\\s*(" + util.INTEGER_WORDS_PATTERN + "|[0-9]+|an?)\\s*(seconds?|minutes?|hours?|days?)\\s*(?=\\W|$)", "i");exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return this.isStrictMode() ? STRICT_PATTERN : PATTERN;
+	        }, this.extract = function (t, e, a, s) {
+	          var r = a.index + a[1].length,
+	              t = a[0];t = a[0].substr(a[1].length, a[0].length - a[1].length);var n = new ParsedResult({ index: r, text: t, ref: e }),
+	              i = a[3];i = void 0 !== util.INTEGER_WORDS[i] ? util.INTEGER_WORDS[i] : "a" === i || "an" === i ? 1 : i.match(/few/) ? 3 : i.match(/half/) ? .5 : parseInt(i);var d = moment(e);return a[4].match(/day|week|month|year/) ? (a[4].match(/day/) ? d.add(i, "d") : a[4].match(/week/) ? d.add(7 * i, "d") : a[4].match(/month/) ? d.add(i, "month") : a[4].match(/year/) && d.add(i, "year"), n.start.assign("year", d.year()), n.start.assign("month", d.month() + 1), n.start.assign("day", d.date()), n) : (a[4].match(/hour/) ? d.add(i, "hour") : a[4].match(/minute/) ? d.add(i, "minute") : a[4].match(/second/) && d.add(i, "second"), n.start.imply("year", d.year()), n.start.imply("month", d.month() + 1), n.start.imply("day", d.date()), n.start.assign("hour", d.hour()), n.start.assign("minute", d.minute()), n.start.assign("second", d.second()), n.tags.ENDeadlineFormatParser = !0, n);
+	        };
+	      };
+	    }, { "../../result": 34, "../../utils/EN": 35, "../parser": 25, "moment": 1 }], 6: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = new RegExp("(\\W|^)([0-9]{4})\\-([0-9]{1,2})\\-([0-9]{1,2})(?:T([0-9]{1,2}):([0-9]{1,2})(?::([0-9]{1,2})(?:\\.(\\d{1,4}))?)?(?:Z|([+-]\\d{2}):?(\\d{2})?)?)?(?=\\W|$)", "i"),
+	          YEAR_NUMBER_GROUP = 2,
+	          MONTH_NUMBER_GROUP = 3,
+	          DATE_NUMBER_GROUP = 4,
+	          HOUR_NUMBER_GROUP = 5,
+	          MINUTE_NUMBER_GROUP = 6,
+	          SECOND_NUMBER_GROUP = 7,
+	          MILLISECOND_NUMBER_GROUP = 8,
+	          TZD_HOUR_OFFSET_GROUP = 9,
+	          TZD_MINUTE_OFFSET_GROUP = 10;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (t, e, s, r) {
+	          var t = s[0].substr(s[1].length),
+	              n = s.index + s[1].length,
+	              R = new ParsedResult({ text: t, index: n, ref: e });if (R.start.assign("year", parseInt(s[YEAR_NUMBER_GROUP])), R.start.assign("month", parseInt(s[MONTH_NUMBER_GROUP])), R.start.assign("day", parseInt(s[DATE_NUMBER_GROUP])), moment(R.start.get("month")) > 12 || moment(R.start.get("month")) < 1 || moment(R.start.get("day")) > 31 || moment(R.start.get("day")) < 1) return null;if (null != s[HOUR_NUMBER_GROUP]) if (R.start.assign("hour", parseInt(s[HOUR_NUMBER_GROUP])), R.start.assign("minute", parseInt(s[MINUTE_NUMBER_GROUP])), null != s[SECOND_NUMBER_GROUP] && R.start.assign("second", parseInt(s[SECOND_NUMBER_GROUP])), null != s[MILLISECOND_NUMBER_GROUP] && R.start.assign("millisecond", parseInt(s[MILLISECOND_NUMBER_GROUP])), null == s[TZD_HOUR_OFFSET_GROUP]) R.start.assign("timezoneOffset", 0);else {
+	            var a = 0,
+	                _ = parseInt(s[TZD_HOUR_OFFSET_GROUP]);null != s[TZD_MINUTE_OFFSET_GROUP] && (a = parseInt(s[TZD_MINUTE_OFFSET_GROUP]));var U = 60 * _;0 > U ? U -= a : U += a, R.start.assign("timezoneOffset", U);
+	          }return R.tags.ENISOFormatParser = !0, R;
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 7: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          util = require("../../utils/EN"),
+	          PATTERN = new RegExp("(\\W|^)(?:(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?([0-9]{1,2})(?:st|nd|rd|th)?(?:\\s*(?:to|\\-|\\–|until|through|till|\\s)\\s*([0-9]{1,2})(?:st|nd|rd|th)?)?\\s*(?:of)?\\s*(Jan(?:uary|\\.)?|Feb(?:ruary|\\.)?|Mar(?:ch|\\.)?|Apr(?:il|\\.)?|May|Jun(?:e|\\.)?|Jul(?:y|\\.)?|Aug(?:ust|\\.)?|Sep(?:tember|\\.)?|Oct(?:ober|\\.)?|Nov(?:ember|\\.)?|Dec(?:ember|\\.)?)(?:,?\\s*([0-9]{2,4}(?![^\\s]\\d))(\\s*BE)?)?(?=\\W|$)", "i"),
+	          WEEKDAY_GROUP = 2,
+	          DATE_GROUP = 3,
+	          DATE_TO_GROUP = 4,
+	          MONTH_NAME_GROUP = 5,
+	          YEAR_GROUP = 6,
+	          YEAR_BE_GROUP = 7;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (e, t, a, r) {
+	          var s = new ParsedResult({ text: a[0].substr(a[1].length, a[0].length - a[1].length), index: a.index + a[1].length, ref: t }),
+	              n = a[MONTH_NAME_GROUP];n = util.MONTH_OFFSET[n.toLowerCase()];var i = a[DATE_GROUP];i = parseInt(i);var d = null;if (a[YEAR_GROUP] && (d = a[YEAR_GROUP], d = parseInt(d), a[YEAR_BE_GROUP] ? d -= 543 : 100 > d && (d += 2e3)), d) s.start.assign("day", i), s.start.assign("month", n), s.start.assign("year", d);else {
+	            var u = moment(t);u.month(n - 1), u.date(i), u.year(moment(t).year());var E = u.clone().add(1, "y"),
+	                o = u.clone().add(-1, "y");Math.abs(E.diff(moment(t))) < Math.abs(u.diff(moment(t))) ? u = E : Math.abs(o.diff(moment(t))) < Math.abs(u.diff(moment(t))) && (u = o), s.start.assign("day", i), s.start.assign("month", n), s.start.imply("year", u.year());
+	          }if (a[WEEKDAY_GROUP]) {
+	            var l = a[WEEKDAY_GROUP];l = util.WEEKDAY_OFFSET[l.toLowerCase()], s.start.assign("weekday", l);
+	          }return a[DATE_TO_GROUP] && (s.end = s.start.clone(), s.end.assign("day", parseInt(a[DATE_TO_GROUP]))), s.tags.ENMonthNameLittleEndianParser = !0, s;
+	        };
+	      };
+	    }, { "../../result": 34, "../../utils/EN": 35, "../parser": 25, "moment": 1 }], 8: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          util = require("../../utils/EN"),
+	          PATTERN = new RegExp("(\\W|^)(?:(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun\\.?|Mon\\.?|Tue\\.?|Wed\\.?|Thu\\.?|Fri\\.?|Sat\\.?)\\s*,?\\s*)?(Jan\\.?|January|Feb\\.?|February|Mar\\.?|March|Apr\\.?|April|May\\.?|Jun\\.?|June|Jul\\.?|July|Aug\\.?|August|Sep\\.?|Sept\\.?|September|Oct\\.?|October|Nov\\.?|November|Dec\\.?|December)\\s*([0-9]{1,2})(?:st|nd|rd|th)?\\s*(?:(?:to|\\-)\\s*([0-9]{1,2})(?:st|nd|rd|th)?\\s*)?(?:\\s*,?\\s*([0-9]{4})(\\s*BE)?\\s*)?(?=\\W|$)(?!\\:\\d)", "i"),
+	          WEEKDAY_GROUP = 2,
+	          MONTH_NAME_GROUP = 3,
+	          DATE_GROUP = 4,
+	          DATE_TO_GROUP = 5,
+	          YEAR_GROUP = 6,
+	          YEAR_BE_GROUP = 7;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (e, t, a, r) {
+	          e.indexOf("5 May 12:00") >= 0 && console.log(a);var s = new ParsedResult({ text: a[0].substr(a[1].length, a[0].length - a[1].length), index: a.index + a[1].length, ref: t }),
+	              n = a[MONTH_NAME_GROUP];n = util.MONTH_OFFSET[n.toLowerCase()];var d = a[DATE_GROUP];d = parseInt(d);var i = null;if (a[YEAR_GROUP] && (i = a[YEAR_GROUP], i = parseInt(i), a[YEAR_BE_GROUP] ? i -= 543 : 100 > i && (i += 2e3)), i) s.start.assign("day", d), s.start.assign("month", n), s.start.assign("year", i);else {
+	            var u = moment(t);u.month(n - 1), u.date(d);var o = u.clone().add(1, "y"),
+	                E = u.clone().add(-1, "y");Math.abs(o.diff(moment(t))) < Math.abs(u.diff(moment(t))) ? u = o : Math.abs(E.diff(moment(t))) < Math.abs(u.diff(moment(t))) && (u = E), s.start.assign("day", d), s.start.assign("month", n), s.start.imply("year", u.year());
+	          }if (a[WEEKDAY_GROUP]) {
+	            var l = a[WEEKDAY_GROUP];l = util.WEEKDAY_OFFSET[l.toLowerCase()], s.start.assign("weekday", l);
+	          }return a[DATE_TO_GROUP] && (s.end = s.start.clone(), s.end.assign("day", parseInt(a[DATE_TO_GROUP]))), s.tags.ENMonthNameMiddleEndianParser = !0, s;
+	        };
+	      };
+	    }, { "../../result": 34, "../../utils/EN": 35, "../parser": 25, "moment": 1 }], 9: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          util = require("../../utils/EN"),
+	          PATTERN = new RegExp("(^|\\D\\s+|[^\\w\\s])(Jan\\.?|January|Feb\\.?|February|Mar\\.?|March|Apr\\.?|April|May\\.?|Jun\\.?|June|Jul\\.?|July|Aug\\.?|August|Sep\\.?|Sept\\.?|September|Oct\\.?|October|Nov\\.?|November|Dec\\.?|December)\\s*(?:,?\\s*([0-9]{4})(\\s*BE)?)?(?=[^\\s\\w]|$)", "i"),
+	          MONTH_NAME_GROUP = 2,
+	          YEAR_GROUP = 3,
+	          YEAR_BE_GROUP = 4;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (e, t, r, a) {
+	          var s = new ParsedResult({ text: r[0].substr(r[1].length, r[0].length - r[1].length), index: r.index + r[1].length, ref: t }),
+	              n = r[MONTH_NAME_GROUP];n = util.MONTH_OFFSET[n.toLowerCase()];var i = 1,
+	              u = null;if (r[YEAR_GROUP] && (u = r[YEAR_GROUP], u = parseInt(u), r[YEAR_BE_GROUP] ? u -= 543 : 100 > u && (u += 2e3)), u) s.start.imply("day", i), s.start.assign("month", n), s.start.assign("year", u);else {
+	            var m = moment(t);m.month(n - 1), m.date(i);var l = m.clone().add(1, "y"),
+	                o = m.clone().add(-1, "y");Math.abs(l.diff(moment(t))) < Math.abs(m.diff(moment(t))) ? m = l : Math.abs(o.diff(moment(t))) < Math.abs(m.diff(moment(t))) && (m = o), s.start.imply("day", i), s.start.assign("month", n), s.start.imply("year", m.year());
+	          }return s.tags.ENMonthNameParser = !0, s;
+	        };
+	      };
+	    }, { "../../result": 34, "../../utils/EN": 35, "../parser": 25, "moment": 1 }], 10: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = new RegExp("(\\W|^)(?:((?:sun|mon|tues?|wed(?:nes)?|thu(?:rs?)?|fri|sat(?:ur)?)(?:day)?)\\s*\\,?\\s*)?([0-9]{1,2})[\\/\\.\\-]([0-9]{1,2})(?:[\\/\\.\\-]([0-9]{4}|[0-9]{2}))?(\\W|$)", "i"),
+	          DAYS_OFFSET = { sunday: 0, sun: 0, monday: 1, mon: 1, tuesday: 2, wednesday: 3, wed: 3, thursday: 4, thur: 4, friday: 5, fri: 5, saturday: 6, sat: 6 },
+	          OPENNING_GROUP = 1,
+	          ENDING_GROUP = 6,
+	          WEEKDAY_GROUP = 2,
+	          MONTH_GROUP = 3,
+	          DAY_GROUP = 4,
+	          YEAR_GROUP = 5;exports.Parser = function (e) {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (e, r, t, s) {
+	          if ("/" == t[OPENNING_GROUP] || "/" == t[ENDING_GROUP]) return void (t.index += t[0].length);var a = t.index + t[OPENNING_GROUP].length,
+	              e = t[0].substr(t[OPENNING_GROUP].length, t[0].length - t[ENDING_GROUP].length),
+	              n = new ParsedResult({ text: e, index: a, ref: r });if (!e.match(/^\d\.\d$/) && !e.match(/^\d\.\d{1,2}\.\d{1,2}$/) && (t[YEAR_GROUP] || !(t[0].indexOf("/") < 0))) {
+	            var P = t[YEAR_GROUP] || moment(r).year() + "",
+	                u = t[MONTH_GROUP],
+	                d = t[DAY_GROUP];if (u = parseInt(u), d = parseInt(d), P = parseInt(P), (1 > u || u > 12) && u > 12) {
+	              if (!(d >= 1 && 12 >= d && u >= 13 && 31 >= u)) return null;var i = u;u = d, d = i;
+	            }return 1 > d || d > 31 ? null : (100 > P && (P += P > 50 ? 1900 : 2e3), n.start.assign("day", d), n.start.assign("month", u), n.start.assign("year", P), t[WEEKDAY_GROUP] && n.start.assign("weekday", DAYS_OFFSET[t[WEEKDAY_GROUP].toLowerCase()]), n.tags.ENSlashDateFormatParser = !0, n);
+	          }
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 11: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = new RegExp("(\\W|^)([0-9]{4})[\\-\\.\\/]([0-9]{1,2})[\\-\\.\\/]([0-9]{1,2})(?=\\W|$)", "i"),
+	          YEAR_NUMBER_GROUP = 2,
+	          MONTH_NUMBER_GROUP = 3,
+	          DATE_NUMBER_GROUP = 4;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (t, e, r, s) {
+	          var t = r[0].substr(r[1].length),
+	              a = r.index + r[1].length,
+	              n = new ParsedResult({ text: t, index: a, ref: e });return n.start.assign("year", parseInt(r[YEAR_NUMBER_GROUP])), n.start.assign("month", parseInt(r[MONTH_NUMBER_GROUP])), n.start.assign("day", parseInt(r[DATE_NUMBER_GROUP])), moment(n.start.get("month")) > 12 || moment(n.start.get("month")) < 1 || moment(n.start.get("day")) > 31 || moment(n.start.get("day")) < 1 ? null : (n.tags.ENDateFormatParser = !0, n);
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 12: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = new RegExp("(^|[^\\d/]\\s+|[^\\w\\s])([0-9]|0[1-9]|1[012])/([0-9]{4})([^\\d/]|$)", "i"),
+	          OPENNING_GROUP = 1,
+	          ENDING_GROUP = 4,
+	          MONTH_GROUP = 2,
+	          YEAR_GROUP = 3;exports.Parser = function (r) {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (r, e, t, s) {
+	          var a = t.index + t[OPENNING_GROUP].length,
+	              r = t[0].substr(t[OPENNING_GROUP].length, t[0].length - (1 + t[ENDING_GROUP].length)).trim(),
+	              n = new ParsedResult({ text: r, index: a, ref: e }),
+	              P = t[YEAR_GROUP],
+	              N = t[MONTH_GROUP],
+	              R = 1;return N = parseInt(N), P = parseInt(P), n.start.imply("day", R), n.start.assign("month", N), n.start.assign("year", P), n.tags.ENSlashMonthFormatParser = !0, n;
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 13: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          util = require("../../utils/EN"),
+	          PATTERN = new RegExp("(\\W|^)(?:within\\s*)?(" + util.INTEGER_WORDS_PATTERN + "|[0-9]+|an?(?:\\s*few)?|half(?:\\s*an?)?)\\s*(seconds?|minutes?|hours?|weeks?|days?|months?|years?)\\s*(?:ago|before|earlier)(?=(?:\\W|$))", "i"),
+	          STRICT_PATTERN = new RegExp("(\\W|^)(?:within\\s*)?([0-9]+|an?)\\s*(seconds?|minutes?|hours?|days?)\\s*ago(?=(?:\\W|$))", "i");exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return this.isStrictMode() ? STRICT_PATTERN : PATTERN;
+	        }, this.extract = function (t, e, a, s) {
+	          if (a.index > 0 && t[a.index - 1].match(/\w/)) return null;var t = a[0];t = a[0].substr(a[1].length, a[0].length - a[1].length), index = a.index + a[1].length;var r = new ParsedResult({ index: index, text: t, ref: e }),
+	              n = a[2];n = void 0 !== util.INTEGER_WORDS[n] ? util.INTEGER_WORDS[n] : "a" === n || "an" === n ? 1 : n.match(/few/) ? 3 : n.match(/half/) ? .5 : parseInt(n);var i = moment(e);return a[3].match(/hour|minute|second/) ? (a[3].match(/hour/) ? i.add(-n, "hour") : a[3].match(/minute/) ? i.add(-n, "minute") : a[3].match(/second/) && i.add(-n, "second"), r.start.imply("day", i.date()), r.start.imply("month", i.month() + 1), r.start.imply("year", i.year()), r.start.assign("hour", i.hour()), r.start.assign("minute", i.minute()), r.start.assign("second", i.second()), r.tags.ENTimeAgoFormatParser = !0, r) : a[3].match(/week/) ? (i.add(-n, "week"), r.start.imply("day", i.date()), r.start.imply("month", i.month() + 1), r.start.imply("year", i.year()), r.start.imply("weekday", i.day()), r) : (a[3].match(/day/) && i.add(-n, "d"), a[3].match(/month/) && i.add(-n, "month"), a[3].match(/year/) && i.add(-n, "year"), r.start.assign("day", i.date()), r.start.assign("month", i.month() + 1), r.start.assign("year", i.year()), r);
+	        };
+	      };
+	    }, { "../../result": 34, "../../utils/EN": 35, "../parser": 25, "moment": 1 }], 14: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          ParsedComponents = require("../../result").ParsedComponents,
+	          FIRST_REG_PATTERN = new RegExp("(^|\\s|T)(?:(?:at|from)\\s*)?(\\d{1,4}|noon|midnight)(?:(?:\\.|\\:|\\：)(\\d{1,2})(?:(?:\\:|\\：)(\\d{2}))?)?(?:\\s*(A\\.M\\.|P\\.M\\.|AM?|PM?))?(?=\\W|$)", "i"),
+	          SECOND_REG_PATTERN = new RegExp("^\\s*(\\-|\\–|\\~|\\〜|to|\\?)\\s*(\\d{1,4})(?:(?:\\.|\\:|\\：)(\\d{1,2})(?:(?:\\.|\\:|\\：)(\\d{1,2}))?)?(?:\\s*(A\\.M\\.|P\\.M\\.|AM?|PM?))?(?=\\W|$)", "i"),
+	          HOUR_GROUP = 2,
+	          MINUTE_GROUP = 3,
+	          SECOND_GROUP = 4,
+	          AM_PM_HOUR_GROUP = 5;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return FIRST_REG_PATTERN;
+	        }, this.extract = function (e, t, r, n) {
+	          if (r.index > 0 && e[r.index - 1].match(/\w/)) return null;var s = moment(t),
+	              i = new ParsedResult();i.ref = t, i.index = r.index + r[1].length, i.text = r[0].substring(r[1].length), i.tags.ENTimeExpressionParser = !0, i.start.imply("day", s.date()), i.start.imply("month", s.month() + 1), i.start.imply("year", s.year());var a = 0,
+	              d = 0,
+	              l = -1;if (null != r[SECOND_GROUP]) {
+	            var u = parseInt(r[SECOND_GROUP]);if (u >= 60) return null;i.start.assign("second", u);
+	          }if ("noon" == r[HOUR_GROUP].toLowerCase() ? (l = 1, a = 12) : "midnight" == r[HOUR_GROUP].toLowerCase() ? (l = 0, a = 0) : a = parseInt(r[HOUR_GROUP]), null != r[MINUTE_GROUP] ? d = parseInt(r[MINUTE_GROUP]) : a > 100 && (d = a % 100, a = parseInt(a / 100)), d >= 60) return null;if (a > 24) return null;if (a >= 12 && (l = 1), null != r[AM_PM_HOUR_GROUP]) {
+	            if (a > 12) return null;var m = r[AM_PM_HOUR_GROUP][0].toLowerCase();"a" == m && (l = 0, 12 == a && (a = 0)), "p" == m && (l = 1, 12 != a && (a += 12));
+	          }if (i.start.assign("hour", a), i.start.assign("minute", d), l >= 0 ? i.start.assign("meridiem", l) : 12 > a ? i.start.imply("meridiem", 0) : i.start.imply("meridiem", 1), r = SECOND_REG_PATTERN.exec(e.substring(i.index + i.text.length)), !r) return i.text.match(/^\d+$/) ? null : i;if (r[0].match(/^\s*(\+|\-)\s*\d{3,4}$/)) return i;null == i.end && (i.end = new ParsedComponents(null, i.start.date()));var a = 0,
+	              d = 0,
+	              l = -1;if (null != r[SECOND_GROUP]) {
+	            var u = parseInt(r[SECOND_GROUP]);if (u >= 60) return null;i.end.assign("second", u);
+	          }if (a = parseInt(r[2]), null != r[MINUTE_GROUP]) {
+	            if (d = parseInt(r[MINUTE_GROUP]), d >= 60) return i;
+	          } else a > 100 && (d = a % 100, a = parseInt(a / 100));if (d >= 60) return null;if (a > 24) return null;if (a >= 12 && (l = 1), null != r[AM_PM_HOUR_GROUP]) {
+	            if (a > 12) return null;"a" == r[AM_PM_HOUR_GROUP][0].toLowerCase() && (l = 0, 12 == a && (a = 0, i.end.isCertain("day") || i.end.imply("day", i.end.get("day") + 1))), "p" == r[AM_PM_HOUR_GROUP][0].toLowerCase() && (l = 1, 12 != a && (a += 12)), i.start.isCertain("meridiem") || (0 == l ? (i.start.imply("meridiem", 0), 12 == i.start.get("hour") && i.start.assign("hour", 0)) : (i.start.imply("meridiem", 1), 12 != i.start.get("hour") && i.start.assign("hour", i.start.get("hour") + 12)));
+	          }if (i.text = i.text + r[0], i.end.assign("hour", a), i.end.assign("minute", d), l >= 0) i.end.assign("meridiem", l);else {
+	            var P = i.start.isCertain("meridiem") && 1 == i.start.get("meridiem");P && i.start.get("hour") > a ? i.end.imply("meridiem", 0) : a > 12 && i.end.imply("meridiem", 1);
+	          }return i.end.date().getTime() < i.start.date().getTime() && i.end.imply("day", i.end.get("day") + 1), i;
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 15: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          DAYS_OFFSET = { sunday: 0, sun: 0, monday: 1, mon: 1, tuesday: 2, tues: 2, tue: 2, wednesday: 3, wed: 3, thursday: 4, thurs: 4, thur: 4, thu: 4, friday: 5, fri: 5, saturday: 6, sat: 6 },
+	          PATTERN = new RegExp("(\\W|^)(?:(?:\\,|\\(|\\（)\\s*)?(?:(this|last|next)\\s*)?(" + Object.keys(DAYS_OFFSET).join("|") + ")(?:\\s*(?:\\,|\\)|\\）))?(?:\\s*(this|last|next)\\s*week)?(?=\\W|$)", "i"),
+	          PREFIX_GROUP = 2,
+	          WEEKDAY_GROUP = 3,
+	          POSTFIX_GROUP = 4;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (t, e, a, r) {
+	          var s = a.index + a[1].length,
+	              t = a[0].substr(a[1].length, a[0].length - a[1].length),
+	              n = new ParsedResult({ index: s, text: t, ref: e }),
+	              d = a[WEEKDAY_GROUP].toLowerCase(),
+	              y = DAYS_OFFSET[d];if (void 0 === y) return null;var i = moment(e),
+	              u = a[PREFIX_GROUP],
+	              l = a[POSTFIX_GROUP];if (u || l) {
+	            var h = u || l;h = h.toLowerCase(), "last" == h ? i.day(y - 7) : "next" == h ? i.day(y + 7) : "this" == h && i.day(y);
+	          } else {
+	            var o = i.day();r.forwardDatesOnly && o > y ? i.day(y + 7) : !r.forwardDatesOnly && Math.abs(y - 7 - o) < Math.abs(y - o) ? i.day(y - 7) : !r.forwardDatesOnly && Math.abs(y + 7 - o) < Math.abs(y - o) ? i.day(y + 7) : i.day(y);
+	          }return n.start.assign("weekday", y), n.start.imply("day", i.date()), n.start.imply("month", i.month() + 1), n.start.imply("year", i.year()), n;
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 16: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = /(\W|^)(ahora|esta\s*(mañana|tarde|noche)|(ayer|mañana)\s*por\s*la\s*(mañana|tarde|noche)|hoy|mañana|ayer|anoche)(?=\W|$)/i;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (a, e, r, t) {
+	          var a = r[0].substr(r[1].length),
+	              s = r.index + r[1].length,
+	              o = new ParsedResult({ index: s, text: a, ref: e }),
+	              i = moment(e),
+	              n = i.clone(),
+	              m = a.toLowerCase().replace(/\s+/g, " ");if ("mañana" == m) i.hour() > 1 && n.add(1, "day");else if ("ayer" == m) n.add(-1, "day");else if ("anoche" == m) o.start.imply("hour", 0), i.hour() > 6 && n.add(-1, "day");else if (m.match("esta")) {
+	            var l = r[3].toLowerCase();"tarde" == l ? o.start.imply("hour", 18) : "mañana" == l ? o.start.imply("hour", 6) : "noche" == l && (o.start.imply("hour", 22), o.start.imply("meridiem", 1));
+	          } else if (m.match(/por\s*la/)) {
+	            var d = r[4].toLowerCase();"ayer" === d ? n.add(-1, "day") : "mañana" === d && n.add(1, "day");var l = r[5].toLowerCase();"tarde" == l ? o.start.imply("hour", 18) : "mañana" == l ? o.start.imply("hour", 9) : "noche" == l && (o.start.imply("hour", 22), o.start.imply("meridiem", 1));
+	          } else m.match("ahora") && (o.start.imply("hour", i.hour()), o.start.imply("minute", i.minute()), o.start.imply("second", i.second()), o.start.imply("millisecond", i.millisecond()));return o.start.assign("day", n.date()), o.start.assign("month", n.month() + 1), o.start.assign("year", n.year()), o.tags.ESCasualDateParser = !0, o;
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 17: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = /(\W|^)(dentro\s*de|en)\s*([0-9]+|medi[oa]|una?)\s*(minutos?|horas?|d[ií]as?)\s*(?=(?:\W|$))/i;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (t, a, r, e) {
+	          var s = r.index + r[1].length,
+	              t = r[0];t = r[0].substr(r[1].length, r[0].length - r[1].length);var n = new ParsedResult({ index: s, text: t, ref: a }),
+	              i = parseInt(r[3]);isNaN(i) && (i = r[3].match(/medi/) ? .5 : 1);var m = moment(a);return r[4].match(/d[ií]a/) ? (m.add(i, "d"), n.start.assign("year", m.year()), n.start.assign("month", m.month() + 1), n.start.assign("day", m.date()), n) : (r[4].match(/hora/) ? m.add(i, "hour") : r[4].match(/minuto/) && m.add(i, "minute"), n.start.imply("year", m.year()), n.start.imply("month", m.month() + 1), n.start.imply("day", m.date()), n.start.assign("hour", m.hour()), n.start.assign("minute", m.minute()), n.tags.ESDeadlineFormatParser = !0, n);
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 18: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          util = require("../../utils/ES"),
+	          DAYS_OFFSET = util.WEEKDAY_OFFSET,
+	          PATTERN = new RegExp("(\\W|^)(?:(Domingo|Lunes|Martes|Miércoles|Miercoles|Jueves|Viernes|Sábado|Sabado|Dom|Lun|Mar|Mie|Jue|Vie|Sab)\\s*,?\\s*)?([0-9]{1,2})(?:º|ª|°)?(?:\\s*(?:desde|de|\\-|\\–|al?|hasta|\\s)\\s*([0-9]{1,2})(?:º|ª|°)?)?\\s*(?:de)?\\s*(Ene(?:ro|\\.)?|Feb(?:rero|\\.)?|Mar(?:zo|\\.)?|Abr(?:il|\\.)?|May(?:o|\\.)?|Jun(?:io|\\.)?|Jul(?:io|\\.)?|Ago(?:sto|\\.)?|Sep(?:tiembre|\\.)?|Oct(?:ubre|\\.)?|Nov(?:iembre|\\.)?|Dic(?:iembre|\\.)?)(?:\\s*(?:del?)?(\\s*[0-9]{2,4}(?![^\\s]\\d))(\\s*AC)?)?(?=\\W|$)", "i"),
+	          WEEKDAY_GROUP = 2,
+	          DATE_GROUP = 3,
+	          DATE_TO_GROUP = 4,
+	          MONTH_NAME_GROUP = 5,
+	          YEAR_GROUP = 6,
+	          YEAR_BE_GROUP = 7;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (e, t, a, s) {
+	          var r = new ParsedResult({ text: a[0].substr(a[1].length, a[0].length - a[1].length), index: a.index + a[1].length, ref: t }),
+	              n = a[MONTH_NAME_GROUP];n = util.MONTH_OFFSET[n.toLowerCase()];var i = a[DATE_GROUP];i = parseInt(i);var o = null;if (a[YEAR_GROUP] && (o = a[YEAR_GROUP], o = parseInt(o), a[YEAR_BE_GROUP] ? o -= 543 : 100 > o && (o += 2e3)), o) r.start.assign("day", i), r.start.assign("month", n), r.start.assign("year", o);else {
+	            var E = moment(t);E.month(n - 1), E.date(i), E.year(moment(t).year());var d = E.clone().add(1, "y"),
+	                l = E.clone().add(-1, "y");Math.abs(d.diff(moment(t))) < Math.abs(E.diff(moment(t))) ? E = d : Math.abs(l.diff(moment(t))) < Math.abs(E.diff(moment(t))) && (E = l), r.start.assign("day", i), r.start.assign("month", n), r.start.imply("year", E.year());
+	          }if (a[WEEKDAY_GROUP]) {
+	            var u = a[WEEKDAY_GROUP];u = util.WEEKDAY_OFFSET[u.toLowerCase()], r.start.assign("weekday", u);
+	          }return a[DATE_TO_GROUP] && (r.end = r.start.clone(), r.end.assign("day", parseInt(a[DATE_TO_GROUP]))), r.tags.ESMonthNameLittleEndianParser = !0, r;
+	        };
+	      };
+	    }, { "../../result": 34, "../../utils/ES": 36, "../parser": 25, "moment": 1 }], 19: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = new RegExp("(\\W|^)(?:((?:domingo|dom|lunes|lun|martes|mar|mi[ée]rcoles|mie|jueves|jue|viernes|vie|s[áa]bado|sab))\\s*\\,?\\s*)?([0-9]{1,2})[\\/\\.\\-]([0-9]{1,2})(?:[\\/\\.\\-]([0-9]{4}|[0-9]{2}))?(\\W|$)", "i"),
+	          DAYS_OFFSET = { domingo: 0, dom: 0, lunes: 1, lun: 1, martes: 2, mar: 2, miercoles: 3, "miércoles": 3, mie: 3, jueves: 4, jue: 4, viernes: 5, vier: 5, "sábado": 6, sabado: 6, sab: 6 },
+	          OPENNING_GROUP = 1,
+	          ENDING_GROUP = 6,
+	          WEEKDAY_GROUP = 2,
+	          MONTH_GROUP = 4,
+	          DAY_GROUP = 3,
+	          YEAR_GROUP = 5;exports.Parser = function (e) {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (e, r, s, t) {
+	          if ("/" == s[OPENNING_GROUP] || "/" == s[ENDING_GROUP]) return void (s.index += s[0].length);var a = s.index + s[OPENNING_GROUP].length,
+	              e = s[0].substr(s[OPENNING_GROUP].length, s[0].length - s[ENDING_GROUP].length),
+	              n = new ParsedResult({ text: e, index: a, ref: r });if (!e.match(/^\d\.\d$/) && !e.match(/^\d\.\d{1,2}\.\d{1,2}$/) && (s[YEAR_GROUP] || !(s[0].indexOf("/") < 0))) {
+	            var i = s[YEAR_GROUP] || moment(r).year() + "",
+	                P = s[MONTH_GROUP],
+	                O = s[DAY_GROUP];if (P = parseInt(P), O = parseInt(O), i = parseInt(i), (1 > P || P > 12) && P > 12) {
+	              if (!(O >= 1 && 12 >= O && P >= 13 && 31 >= P)) return null;var R = P;P = O, O = R;
+	            }return 1 > O || O > 31 ? null : (100 > i && (i > 50 ? i = i + 2500 - 543 : i += 2e3), n.start.assign("day", O), n.start.assign("month", P), n.start.assign("year", i), s[WEEKDAY_GROUP] && n.start.assign("weekday", DAYS_OFFSET[s[WEEKDAY_GROUP].toLowerCase()]), n.tags.ESSlashDateFormatParser = !0, n);
+	          }
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 20: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = /(\W|^)hace\s*([0-9]+|medi[oa]|una?)\s*(minutos?|horas?|semanas?|d[ií]as?|mes(es)?|años?)(?=(?:\W|$))/i;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (a, t, e, r) {
+	          if (e.index > 0 && a[e.index - 1].match(/\w/)) return null;var a = e[0];a = e[0].substr(e[1].length, e[0].length - e[1].length), index = e.index + e[1].length;var s = new ParsedResult({ index: index, text: a, ref: t }),
+	              n = parseInt(e[2]);isNaN(n) && (n = e[2].match(/medi/) ? .5 : 1);var m = moment(t);return e[3].match(/hora/) || e[3].match(/minuto/) ? (e[3].match(/hora/) ? m.add(-n, "hour") : e[3].match(/minuto/) && m.add(-n, "minute"), s.start.imply("day", m.date()), s.start.imply("month", m.month() + 1), s.start.imply("year", m.year()), s.start.assign("hour", m.hour()), s.start.assign("minute", m.minute()), s.tags.ESTimeAgoFormatParser = !0, s) : e[3].match(/semana/) ? (m.add(-n, "week"), s.start.imply("day", m.date()), s.start.imply("month", m.month() + 1), s.start.imply("year", m.year()), s.start.imply("weekday", m.day()), s) : (e[3].match(/d[ií]a/) && m.add(-n, "d"), e[3].match(/mes/) && m.add(-n, "month"), e[3].match(/año/) && m.add(-n, "year"), s.start.assign("day", m.date()), s.start.assign("month", m.month() + 1), s.start.assign("year", m.year()), s);
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 21: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          ParsedComponents = require("../../result").ParsedComponents,
+	          FIRST_REG_PATTERN = new RegExp("(^|\\s|T)(?:(?:a las?|al?|desde|de)\\s*)?(\\d{1,4}|mediod[ií]a|medianoche)(?:(?:\\.|\\:|\\：)(\\d{1,2})(?:(?:\\:|\\：)(\\d{2}))?)?(?:\\s*(A\\.M\\.|P\\.M\\.|AM?|PM?))?(?=\\W|$)", "i"),
+	          SECOND_REG_PATTERN = new RegExp("^\\s*(\\-|\\–|\\~|\\〜|a(?:s*las)?|\\?)\\s*(\\d{1,4})(?:(?:\\.|\\:|\\：)(\\d{1,2})(?:(?:\\.|\\:|\\：)(\\d{1,2}))?)?(?:\\s*(A\\.M\\.|P\\.M\\.|AM?|PM?))?(?=\\W|$)", "i"),
+	          HOUR_GROUP = 2,
+	          MINUTE_GROUP = 3,
+	          SECOND_GROUP = 4,
+	          AM_PM_HOUR_GROUP = 5;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return FIRST_REG_PATTERN;
+	        }, this.extract = function (e, t, r, n) {
+	          if (r.index > 0 && e[r.index - 1].match(/\w/)) return null;var s = moment(t),
+	              a = new ParsedResult();a.ref = t, a.index = r.index + r[1].length, a.text = r[0].substring(r[1].length), a.tags.ESTimeExpressionParser = !0, a.start.imply("day", s.date()), a.start.imply("month", s.month() + 1), a.start.imply("year", s.year());var i = 0,
+	              d = 0,
+	              l = -1;if (null != r[SECOND_GROUP]) {
+	            var u = parseInt(r[SECOND_GROUP]);if (u >= 60) return null;a.start.assign("second", u);
+	          }if (r[HOUR_GROUP].toLowerCase().match(/mediod/) ? (l = 1, i = 12) : "medianoche" == r[HOUR_GROUP].toLowerCase() ? (l = 0, i = 0) : i = parseInt(r[HOUR_GROUP]), null != r[MINUTE_GROUP] ? d = parseInt(r[MINUTE_GROUP]) : i > 100 && (d = i % 100, i = parseInt(i / 100)), d >= 60) return null;if (i > 24) return null;if (i >= 12 && (l = 1), null != r[AM_PM_HOUR_GROUP]) {
+	            if (i > 12) return null;var P = r[AM_PM_HOUR_GROUP][0].toLowerCase();"a" == P && (l = 0, 12 == i && (i = 0)), "p" == P && (l = 1, 12 != i && (i += 12));
+	          }if (a.start.assign("hour", i), a.start.assign("minute", d), l >= 0 && a.start.assign("meridiem", l), r = SECOND_REG_PATTERN.exec(e.substring(a.index + a.text.length)), !r) return a.text.match(/^\d+$/) ? null : a;if (r[0].match(/^\s*(\+|\-)\s*\d{3,4}$/)) return a;null == a.end && (a.end = new ParsedComponents(null, a.start.date()));var i = 0,
+	              d = 0,
+	              l = -1;if (null != r[SECOND_GROUP]) {
+	            var u = parseInt(r[SECOND_GROUP]);if (u >= 60) return null;a.end.assign("second", u);
+	          }if (i = parseInt(r[2]), null != r[MINUTE_GROUP]) {
+	            if (d = parseInt(r[MINUTE_GROUP]), d >= 60) return a;
+	          } else i > 100 && (d = i % 100, i = parseInt(i / 100));if (d >= 60) return null;if (i > 24) return null;if (i >= 12 && (l = 1), null != r[AM_PM_HOUR_GROUP]) {
+	            if (i > 12) return null;"a" == r[AM_PM_HOUR_GROUP][0].toLowerCase() && (l = 0, 12 == i && (i = 0, a.end.isCertain("day") || a.end.imply("day", a.end.get("day") + 1))), "p" == r[AM_PM_HOUR_GROUP][0].toLowerCase() && (l = 1, 12 != i && (i += 12)), a.start.isCertain("meridiem") || (0 == l ? (a.start.imply("meridiem", 0), 12 == a.start.get("hour") && a.start.assign("hour", 0)) : (a.start.imply("meridiem", 1), 12 != a.start.get("hour") && a.start.assign("hour", a.start.get("hour") + 12)));
+	          } else i >= 12 && (l = 1);return a.text = a.text + r[0], a.end.assign("hour", i), a.end.assign("minute", d), l >= 0 && a.end.assign("meridiem", l), a.end.date().getTime() < a.start.date().getTime() && a.end.imply("day", a.end.get("day") + 1), a;
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 22: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          DAYS_OFFSET = { domingo: 0, dom: 0, lunes: 1, lun: 1, martes: 2, mar: 2, miercoles: 3, "miércoles": 3, mie: 3, jueves: 4, jue: 4, viernes: 5, vier: 5, sabado: 6, "sábado": 6, sab: 6 },
+	          PATTERN = new RegExp("(\\W|^)(?:(?:\\,|\\(|\\（)\\s*)?(?:(este|pasado|pr[oó]ximo)\\s*)?(" + Object.keys(DAYS_OFFSET).join("|") + ")(?:\\s*(?:\\,|\\)|\\）))?(?:\\s*(este|pasado|pr[óo]ximo)\\s*week)?(?=\\W|$)", "i"),
+	          PREFIX_GROUP = 2,
+	          WEEKDAY_GROUP = 3,
+	          POSTFIX_GROUP = 4;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (e, a, r, s) {
+	          var t = r.index + r[1].length,
+	              e = r[0].substr(r[1].length, r[0].length - r[1].length),
+	              o = new ParsedResult({ index: t, text: e, ref: a }),
+	              n = r[WEEKDAY_GROUP].toLowerCase(),
+	              i = DAYS_OFFSET[n];if (void 0 === i) return null;var d = moment(a),
+	              l = r[PREFIX_GROUP],
+	              m = r[POSTFIX_GROUP];if (l || m) {
+	            var y = l || m;y = y.toLowerCase(), "pasado" == y ? d.day(i - 7) : "próximo" == y || "proximo" == y ? d.day(i + 7) : "este" == y && d.day(i);
+	          } else {
+	            var u = d.day();s.forwardDatesOnly && u > i ? d.day(i + 7) : !s.forwardDatesOnly && Math.abs(i - 7 - u) < Math.abs(i - u) ? d.day(i - 7) : !s.forwardDatesOnly && Math.abs(i + 7 - u) < Math.abs(i - u) ? d.day(i + 7) : d.day(i);
+	          }return o.start.assign("weekday", i), o.start.imply("day", d.date()), o.start.imply("month", d.month() + 1), o.start.imply("year", d.year()), o;
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 23: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          PATTERN = /今日|当日|昨日|明日|今夜|今夕|今晩|今朝/i;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (r, t, e, a) {
+	          var s = e.index,
+	              r = e[0],
+	              i = new ParsedResult({ index: s, text: r, ref: t }),
+	              n = moment(t),
+	              m = n.clone();return "今夜" == r || "今夕" == r || "今晩" == r ? (i.start.imply("hour", 22), i.start.imply("meridiem", 1)) : "明日" == r ? n.hour() > 4 && m.add(1, "day") : "昨日" == r ? m.add(-1, "day") : r.match("今朝") && (i.start.imply("hour", 6), i.start.imply("meridiem", 0)), i.start.assign("day", m.date()), i.start.assign("month", m.month() + 1), i.start.assign("year", m.year()), i.tags.JPCasualDateParser = !0, i;
+	        };
+	      };
+	    }, { "../../result": 34, "../parser": 25, "moment": 1 }], 24: [function (require, module, exports) {
+	      var moment = require("moment"),
+	          Parser = require("../parser").Parser,
+	          ParsedResult = require("../../result").ParsedResult,
+	          util = require("../../utils/JP"),
+	          PATTERN = /(?:(同|((昭和|平成)?([0-9０-９]{2,4})))年\s*)?([0-9０-９]{1,2})月\s*([0-9０-９]{1,2})日/i,
+	          YEAR_GROUP = 2,
+	          ERA_GROUP = 3,
+	          YEAR_NUMBER_GROUP = 4,
+	          MONTH_GROUP = 5,
+	          DAY_GROUP = 6;exports.Parser = function () {
+	        Parser.apply(this, arguments), this.pattern = function () {
+	          return PATTERN;
+	        }, this.extract = function (t, a, e, r) {
+	          var s = moment(a),
+	              n = new ParsedResult({ text: e[0], index: e.index, ref: a }),
+	              i = e[MONTH_GROUP];i = util.toHankaku(i), i = parseInt(i);var R = e[DAY_GROUP];if (R = util.toHankaku(R), R = parseInt(R), s.set("date", R), s.set("month", i - 1), n.start.assign("day", s.date()), n.start.assign("month", s.month() + 1), e[YEAR_GROUP]) {
+	            if (e[YEAR_GROUP].match("同年")) n.start.assign("year", s.year());else {
+	              var P = e[YEAR_NUMBER_GROUP];P = util.toHankaku(P), P = parseInt(P), "平成" == e[ERA_GROUP] ? P += 1988 : "昭和" == e[ERA_GROUP] && (P += 1925), n.start.assign("year", P);
+	            }
+	          } else {
+	            s.year(moment(a).year());var m = s.clone().add(1, "y"),
+	                o = s.clone().add(-1, "y");Math.abs(m.diff(moment(a))) < Math.abs(s.diff(moment(a))) ? s = m : Math.abs(o.diff(moment(a))) < Math.abs(s.diff(moment(a))) && (s = o), n.start.assign("day", s.date()), n.start.assign("month", s.month() + 1), n.start.imply("year", s.year());
+	          }return n.tags.JPStandardParser = !0, n;
+	        };
+	      };
+	    }, { "../../result": 34, "../../utils/JP": 37, "../parser": 25, "moment": 1 }], 25: [function (require, module, exports) {
+	      function Parser(r) {
+	        this.isStrictMode = function () {
+	          return 1 == r;
+	        }, this.pattern = function () {
+	          return (/./i
+	          );
+	        }, this.extract = function (r, e, a, s) {
+	          return null;
+	        }, this.execute = function (r, e, a) {
+	          for (var s = [], t = this.pattern(), i = r, P = t.exec(i); P;) {
+	            P.index += r.length - i.length;var o = this.extract(r, e, P, a);o ? (i = r.substring(o.index + o.text.length), this.isStrictMode() && !o.hasPossibleDates() || s.push(o)) : i = r.substring(P.index + 1), P = t.exec(i);
+	          }return this.refiners && this.refiners.forEach(function () {
+	            s = refiner.refine(s, r, options);
+	          }), s;
+	        };
+	      }exports.Parser = Parser, exports.ENISOFormatParser = require("./EN/ENISOFormatParser").Parser, exports.ENDeadlineFormatParser = require("./EN/ENDeadlineFormatParser").Parser, exports.ENMonthNameLittleEndianParser = require("./EN/ENMonthNameLittleEndianParser").Parser, exports.ENMonthNameMiddleEndianParser = require("./EN/ENMonthNameMiddleEndianParser").Parser, exports.ENMonthNameParser = require("./EN/ENMonthNameParser").Parser, exports.ENSlashDateFormatParser = require("./EN/ENSlashDateFormatParser").Parser, exports.ENSlashDateFormatStartWithYearParser = require("./EN/ENSlashDateFormatStartWithYearParser").Parser, exports.ENSlashMonthFormatParser = require("./EN/ENSlashMonthFormatParser").Parser, exports.ENTimeAgoFormatParser = require("./EN/ENTimeAgoFormatParser").Parser, exports.ENTimeExpressionParser = require("./EN/ENTimeExpressionParser").Parser, exports.ENWeekdayParser = require("./EN/ENWeekdayParser").Parser, exports.ENCasualDateParser = require("./EN/ENCasualDateParser").Parser, exports.JPStandardParser = require("./JP/JPStandardParser").Parser, exports.JPCasualDateParser = require("./JP/JPCasualDateParser").Parser, exports.ESCasualDateParser = require("./ES/ESCasualDateParser").Parser, exports.ESDeadlineFormatParser = require("./ES/ESDeadlineFormatParser").Parser, exports.ESTimeAgoFormatParser = require("./ES/ESTimeAgoFormatParser").Parser, exports.ESTimeExpressionParser = require("./ES/ESTimeExpressionParser").Parser, exports.ESWeekdayParser = require("./ES/ESWeekdayParser").Parser, exports.ESMonthNameLittleEndianParser = require("./ES/ESMonthNameLittleEndianParser").Parser, exports.ESSlashDateFormatParser = require("./ES/ESSlashDateFormatParser").Parser;
+	    }, { "./EN/ENCasualDateParser": 4, "./EN/ENDeadlineFormatParser": 5, "./EN/ENISOFormatParser": 6, "./EN/ENMonthNameLittleEndianParser": 7, "./EN/ENMonthNameMiddleEndianParser": 8, "./EN/ENMonthNameParser": 9, "./EN/ENSlashDateFormatParser": 10, "./EN/ENSlashDateFormatStartWithYearParser": 11, "./EN/ENSlashMonthFormatParser": 12, "./EN/ENTimeAgoFormatParser": 13, "./EN/ENTimeExpressionParser": 14, "./EN/ENWeekdayParser": 15, "./ES/ESCasualDateParser": 16, "./ES/ESDeadlineFormatParser": 17, "./ES/ESMonthNameLittleEndianParser": 18, "./ES/ESSlashDateFormatParser": 19, "./ES/ESTimeAgoFormatParser": 20, "./ES/ESTimeExpressionParser": 21, "./ES/ESWeekdayParser": 22, "./JP/JPCasualDateParser": 23, "./JP/JPStandardParser": 24 }], 26: [function (require, module, exports) {
+	      var Refiner = require("../refiner").Refiner;exports.Refiner = function () {
+	        Refiner.call(this), this.pattern = function () {
+	          return (/^\s*(to|\-)\s*$/i
+	          );
+	        }, this.refine = function (t, e, n) {
+	          if (e.length < 2) return e;for (var r = [], i = null, s = null, a = 1; a < e.length; a++) {
+	            i = e[a], s = e[a - 1], s.end || i.end || !this.isAbleToMerge(t, s, i) || (s = this.mergeResult(t, s, i), i = null, a += 1), r.push(s);
+	          }return null != i && r.push(i), r;
+	        }, this.isAbleToMerge = function (t, e, n) {
+	          var r = e.index + e.text.length,
+	              i = n.index,
+	              s = t.substring(r, i);return s.match(this.pattern());
+	        }, this.isWeekdayResult = function (t) {
+	          return t.start.isCertain("weekday") && !t.start.isCertain("day");
+	        }, this.mergeResult = function (t, e, n) {
+	          if (!this.isWeekdayResult(e) && !this.isWeekdayResult(n)) {
+	            for (var r in n.start.knownValues) {
+	              e.start.isCertain(r) || e.start.assign(r, n.start.get(r));
+	            }for (var r in e.start.knownValues) {
+	              n.start.isCertain(r) || n.start.assign(r, e.start.get(r));
+	            }
+	          }if (e.start.date().getTime() > n.start.date()) {
+	            var i = n;n = e, e = i;
+	          }e.end = n.start;for (var s in n.tags) {
+	            e.tags[s] = !0;
+	          }var a = Math.min(e.index, n.index),
+	              u = Math.max(e.index + e.text.length, n.index + n.text.length);return e.index = a, e.text = t.substring(a, u), e.tags[this.constructor.name] = !0, e;
+	        };
+	      };
+	    }, { "../refiner": 33 }], 27: [function (require, module, exports) {
+	      function isDateOnly(e) {
+	        return !e.start.isCertain("hour");
+	      }function isTimeOnly(e) {
+	        return !e.start.isCertain("month") && !e.start.isCertain("weekday");
+	      }function isAbleToMerge(e, i, n) {
+	        var t = e.substring(i.index + i.text.length, n.index);return t.match(PATTERN);
+	      }function mergeResult(e, i, n) {
+	        var t = i.start,
+	            r = n.start,
+	            s = t.clone();if (s.assign("hour", r.get("hour")), s.assign("minute", r.get("minute")), s.assign("second", r.get("second")), r.isCertain("meridiem") ? s.assign("meridiem", r.get("meridiem")) : void 0 !== r.get("meridiem") && void 0 === s.get("meridiem") && s.imply("meridiem", r.get("meridiem")), 1 == s.get("meridiem") && s.get("hour") < 12 && s.assign("hour", s.get("hour") + 12), null != i.end || null != n.end) {
+	          var a = null == i.end ? i.start : i.end,
+	              m = null == n.end ? n.start : n.end,
+	              g = a.clone();g.assign("hour", m.get("hour")), g.assign("minute", m.get("minute")), g.assign("second", m.get("second")), m.isCertain("meridiem") ? g.assign("meridiem", m.get("meridiem")) : null != r.get("meridiem") && g.imply("meridiem", m.get("meridiem")), null == i.end && g.date().getTime() < s.date().getTime() && (g.isCertain("day") ? g.assign("day", g.get("day") + 1) : g.imply("day", g.get("day") + 1)), i.end = g;
+	        }i.start = s;var l = Math.min(i.index, n.index),
+	            d = Math.max(i.index + i.text.length, n.index + n.text.length);i.index = l, i.text = e.substring(l, d);for (var u in n.tags) {
+	          i.tags[u] = !0;
+	        }return i.tags.ENMergeDateAndTimeRefiner = !0, i;
+	      }var ParsedComponents = require("../../result").ParsedComponents,
+	          Refiner = require("../refiner").Refiner,
+	          PATTERN = new RegExp("^\\s*(T|at|on|of|,|-)?\\s*$");exports.Refiner = function () {
+	        Refiner.call(this), this.refine = function (e, i, n) {
+	          if (i.length < 2) return i;for (var t = [], r = null, s = null, a = 1; a < i.length; a++) {
+	            r = i[a], s = i[a - 1], isDateOnly(s) && isTimeOnly(r) && isAbleToMerge(e, s, r) ? (s = mergeResult(e, s, r), r = null, a += 1) : isDateOnly(r) && isTimeOnly(s) && isAbleToMerge(e, s, r) && (s = mergeResult(e, r, s), r = null, a += 1), t.push(s);
+	          }return null != r && t.push(r), t;
+	        };
+	      };
+	    }, { "../../result": 34, "../refiner": 33 }], 28: [function (require, module, exports) {
+	      var Refiner = require("./refiner").Refiner,
+	          TIMEZONE_ABBR_MAP = {},
+	          TIMEZONE_NAME_PATTERN = new RegExp("^\\s*\\(?([A-Z]{2,4})\\)?(?=\\W|$)", "i");exports.Refiner = function () {
+	        Refiner.call(this), this.refine = function (T, A, S) {
+	          return A.forEach(function (A) {
+	            if (A.tags.ENTimeExpressionParser) {
+	              var S = TIMEZONE_NAME_PATTERN.exec(T.substring(A.index + A.text.length));if (S) {
+	                var E = S[1].toUpperCase();if (void 0 === TIMEZONE_ABBR_MAP[E]) return;var e = TIMEZONE_ABBR_MAP[E];A.start.isCertain("timezoneOffset") || A.start.assign("timezoneOffset", e), null == A.end || A.end.isCertain("timezoneOffset") || A.end.assign("timezoneOffset", e), A.text += S[0], A.tags.ExtractTimezoneAbbrRefiner = !0;
+	              }
+	            }
+	          }), A;
+	        };
+	      }, TIMEZONE_ABBR_MAP = { ACDT: 630, ACST: 570, ADT: -180, AEDT: 660, AEST: 600, AFT: 270, AKDT: -480, AKST: -540, ALMT: 360, AMST: -180, AMT: -240, ANAST: 720, ANAT: 720, AQTT: 300, ART: -180, AST: -240, AWDT: 540, AWST: 480, AZOST: 0, AZOT: -60, AZST: 300, AZT: 240, BNT: 480, BOT: -240, BRST: -120, BRT: -180, BST: 60, BTT: 360, CAST: 480, CAT: 120, CCT: 390, CDT: -300, CEST: 120, CET: 60, CHADT: 825, CHAST: 765, CKT: -600, CLST: -180, CLT: -240, COT: -300, CST: -360, CVT: -60, CXT: 420, ChST: 600, DAVT: 420, EASST: -300, EAST: -360, EAT: 180, ECT: -300, EDT: -240, EEST: 180, EET: 120, EGST: 0, EGT: -60, EST: -300, ET: -300, FJST: 780, FJT: 720, FKST: -180, FKT: -240, FNT: -120, GALT: -360, GAMT: -540, GET: 240, GFT: -180, GILT: 720, GMT: 0, GST: 240, GYT: -240, HAA: -180, HAC: -300, HADT: -540, HAE: -240, HAP: -420, HAR: -360, HAST: -600, HAT: -90, HAY: -480, HKT: 480, HLV: -210, HNA: -240, HNC: -360, HNE: -300, HNP: -480, HNR: -420, HNT: -150, HNY: -540, HOVT: 420, ICT: 420, IDT: 180, IOT: 360, IRDT: 270, IRKST: 540, IRKT: 540, IRST: 210, IST: 60, JST: 540, KGT: 360, KRAST: 480, KRAT: 480, KST: 540, KUYT: 240, LHDT: 660, LHST: 630, LINT: 840, MAGST: 720, MAGT: 720, MART: -510, MAWT: 300, MDT: -360, MESZ: 120, MEZ: 60, MHT: 720, MMT: 390, MSD: 240, MSK: 240, MST: -420, MUT: 240, MVT: 300, MYT: 480, NCT: 660, NDT: -90, NFT: 690, NOVST: 420, NOVT: 360, NPT: 345, NST: -150, NUT: -660, NZDT: 780, NZST: 720, OMSST: 420, OMST: 420, PDT: -420, PET: -300, PETST: 720, PETT: 720, PGT: 600, PHOT: 780, PHT: 480, PKT: 300, PMDT: -120, PMST: -180, PONT: 660, PST: -480, PT: -480, PWT: 540, PYST: -180, PYT: -240, RET: 240, SAMT: 240, SAST: 120, SBT: 660, SCT: 240, SGT: 480, SRT: -180, SST: -660, TAHT: -600, TFT: 300, TJT: 300, TKT: 780, TLT: 540, TMT: 300, TVT: 720, ULAT: 480, UTC: 0, UYST: -120, UYT: -180, UZT: 300, VET: -210, VLAST: 660, VLAT: 660, VUT: 660, WAST: 120, WAT: 60, WEST: 60, WESZ: 60, WET: 0, WEZ: 0, WFT: 720, WGST: -120, WGT: -180, WIB: 420, WIT: 540, WITA: 480, WST: 780, WT: 0, YAKST: 600, YAKT: 600, YAPT: 600, YEKST: 360, YEKT: 360 };
+	    }, { "./refiner": 33 }], 29: [function (require, module, exports) {
+	      var Refiner = require("./refiner").Refiner,
+	          TIMEZONE_OFFSET_PATTERN = new RegExp("^\\s*(GMT|UTC)?(\\+|\\-)(\\d{1,2}):?(\\d{2})", "i"),
+	          TIMEZONE_OFFSET_SIGN_GROUP = 2,
+	          TIMEZONE_OFFSET_HOUR_OFFSET_GROUP = 3,
+	          TIMEZONE_OFFSET_MINUTE_OFFSET_GROUP = 4;exports.Refiner = function () {
+	        Refiner.call(this), this.refine = function (e, E, O) {
+	          return E.forEach(function (E) {
+	            if (!E.start.isCertain("timezoneOffset")) {
+	              var O = TIMEZONE_OFFSET_PATTERN.exec(e.substring(E.index + E.text.length));if (O) {
+	                var n = parseInt(O[TIMEZONE_OFFSET_HOUR_OFFSET_GROUP]),
+	                    t = parseInt(O[TIMEZONE_OFFSET_MINUTE_OFFSET_GROUP]),
+	                    T = 60 * n + t;"-" === O[TIMEZONE_OFFSET_SIGN_GROUP] && (T = -T), null != E.end && E.end.assign("timezoneOffset", T), E.start.assign("timezoneOffset", T), E.text += O[0], E.tags.ExtractTimezoneOffsetRefiner = !0;
+	              }
+	            }
+	          }), E;
+	        };
+	      };
+	    }, { "./refiner": 33 }], 30: [function (require, module, exports) {
+	      var ENMergeDateRangeRefiner = require("../EN/ENMergeDateRangeRefiner").Refiner;exports.Refiner = function () {
+	        ENMergeDateRangeRefiner.call(this), this.pattern = function () {
+	          return (/^\s*(から|ー)\s*$/i
+	          );
+	        };
+	      };
+	    }, { "../EN/ENMergeDateRangeRefiner": 26 }], 31: [function (require, module, exports) {
+	      var Refiner = require("./refiner").Refiner;exports.Refiner = function () {
+	        Refiner.call(this), this.refine = function (e, n, r) {
+	          if (n.length < 2) return n;for (var t = [], i = n[0], f = 1; f < n.length; f++) {
+	            var h = n[f];h.index < i.index + i.text.length ? h.text.length > i.text.length && (i = h) : (t.push(i), i = h);
+	          }return null != i && t.push(i), t;
+	        };
+	      };
+	    }, { "./refiner": 33 }], 32: [function (require, module, exports) {
+	      var Filter = require("./refiner").Filter;exports.Refiner = function () {
+	        Filter.call(this), this.isValid = function (e, r, i) {
+	          return !r.text.replace(" ", "").match(/^\d*(\.\d*)?$/);
+	        };
+	      };
+	    }, { "./refiner": 33 }], 33: [function (require, module, exports) {
+	      exports.Refiner = function () {
+	        this.refine = function (e, r, i) {
+	          return r;
+	        };
+	      }, exports.Filter = function () {
+	        exports.Refiner.call(this), this.isValid = function (e, r, i) {
+	          return !0;
+	        }, this.refine = function (e, r, i) {
+	          for (var n = [], t = 0; t < r.length; t++) {
+	            var f = r[t];this.isValid(e, f, i) && n.push(f);
+	          }return n;
+	        };
+	      }, exports.OverlapRemovalRefiner = require("./OverlapRemovalRefiner").Refiner, exports.ExtractTimezoneOffsetRefiner = require("./ExtractTimezoneOffsetRefiner").Refiner, exports.ExtractTimezoneAbbrRefiner = require("./ExtractTimezoneAbbrRefiner").Refiner, exports.UnlikelyFormatFilter = require("./UnlikelyFormatFilter").Refiner, exports.ENMergeDateTimeRefiner = require("./EN/ENMergeDateTimeRefiner").Refiner, exports.ENMergeDateRangeRefiner = require("./EN/ENMergeDateRangeRefiner").Refiner, exports.JPMergeDateRangeRefiner = require("./JP/JPMergeDateRangeRefiner").Refiner;
+	    }, { "./EN/ENMergeDateRangeRefiner": 26, "./EN/ENMergeDateTimeRefiner": 27, "./ExtractTimezoneAbbrRefiner": 28, "./ExtractTimezoneOffsetRefiner": 29, "./JP/JPMergeDateRangeRefiner": 30, "./OverlapRemovalRefiner": 31, "./UnlikelyFormatFilter": 32 }], 34: [function (require, module, exports) {
+	      function ParsedResult(t) {
+	        t = t || {}, this.ref = t.ref, this.index = t.index, this.text = t.text, this.tags = t.tags || {}, this.start = new ParsedComponents(t.start, t.ref), t.end && (this.end = new ParsedComponents(t.end, t.ref));
+	      }function ParsedComponents(t, e) {
+	        if (this.knownValues = {}, this.impliedValues = {}, t) for (key in t) {
+	          this.knownValues[key] = t[key];
+	        }e && (e = moment(e), this.imply("day", e.date()), this.imply("month", e.month() + 1), this.imply("year", e.year())), this.imply("hour", 12), this.imply("minute", 0), this.imply("second", 0), this.imply("millisecond", 0);
+	      }var moment = require("moment");ParsedResult.prototype.clone = function () {
+	        var t = new ParsedResult(this);t.tags = JSON.parse(JSON.stringify(this.tags)), t.start = this.start.clone(), this.end && (t.end = this.end.clone());
+	      }, ParsedResult.prototype.hasPossibleDates = function () {
+	        return this.start.isPossibleDate() && (!this.end || this.end.isPossibleDate());
+	      }, ParsedComponents.prototype.clone = function () {
+	        var t = new ParsedComponents();return t.knownValues = JSON.parse(JSON.stringify(this.knownValues)), t.impliedValues = JSON.parse(JSON.stringify(this.impliedValues)), t;
+	      }, ParsedComponents.prototype.get = function (t, e) {
+	        return t in this.knownValues ? this.knownValues[t] : t in this.impliedValues ? this.impliedValues[t] : void 0;
+	      }, ParsedComponents.prototype.assign = function (t, e) {
+	        this.knownValues[t] = e, delete this.impliedValues[t];
+	      }, ParsedComponents.prototype.imply = function (t, e) {
+	        t in this.knownValues || (this.impliedValues[t] = e);
+	      }, ParsedComponents.prototype.isCertain = function (t) {
+	        return t in this.knownValues;
+	      }, ParsedComponents.prototype.isPossibleDate = function () {
+	        var t = this.moment();return t.get("year") != this.get("year") ? !1 : t.get("month") != this.get("month") - 1 ? !1 : t.get("date") != this.get("day") ? !1 : t.get("hour") != this.get("hour") ? !1 : t.get("minute") == this.get("minute");
+	      }, ParsedComponents.prototype.date = function () {
+	        var t = this.moment();return t.toDate();
+	      }, ParsedComponents.prototype.moment = function () {
+	        var t = moment();t.set("year", this.get("year")), t.set("month", this.get("month") - 1), t.set("date", this.get("day")), t.set("hour", this.get("hour")), t.set("minute", this.get("minute")), t.set("second", this.get("second")), t.set("millisecond", this.get("millisecond"));var e = t.utcOffset(),
+	            s = this.isCertain("timezoneOffset") ? this.get("timezoneOffset") : e,
+	            n = s - e;return t.add(-n, "minutes"), t;
+	      }, exports.ParsedComponents = ParsedComponents, exports.ParsedResult = ParsedResult;
+	    }, { "moment": 1 }], 35: [function (require, module, exports) {
+	      exports.WEEKDAY_OFFSET = { sunday: 0, sun: 0, monday: 1, mon: 1, tuesday: 2, tue: 2, wednesday: 3, wed: 3, thursday: 4, thur: 4, thu: 4, friday: 5, fri: 5, saturday: 6, sat: 6 }, exports.MONTH_OFFSET = { january: 1, jan: 1, "jan.": 1, february: 2, feb: 2, "feb.": 2, march: 3, mar: 3, "mar.": 3, april: 4, apr: 4, "apr.": 4, may: 5, june: 6, jun: 6, "jun.": 6, july: 7, jul: 7, "jul.": 7, august: 8, aug: 8, "aug.": 8, september: 9, sep: 9, "sep.": 9, sept: 9, "sept.": 9, october: 10, oct: 10, "oct.": 10, november: 11, nov: 11, "nov.": 11, december: 12, dec: 12, "dec.": 12 }, exports.INTEGER_WORDS_PATTERN = "(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)", exports.INTEGER_WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12 };
+	    }, {}], 36: [function (require, module, exports) {
+	      exports.WEEKDAY_OFFSET = { domingo: 0, dom: 0, lunes: 1, lun: 1, martes: 2, mar: 2, "miércoles": 3, miercoles: 3, mie: 3, jueves: 4, jue: 4, viernes: 5, vie: 5, "sábado": 6, sabado: 6, sab: 6 }, exports.MONTH_OFFSET = { enero: 1, ene: 1, "ene.": 1, febrero: 2, feb: 2, "feb.": 2, marzo: 3, mar: 3, "mar.": 3, abril: 4, abr: 4, "abr.": 4, mayo: 5, may: 5, "may.": 5, junio: 6, jun: 6, "jun.": 6, julio: 7, jul: 7, "jul.": 7, agosto: 8, ago: 8, "ago.": 8, septiembre: 9, sep: 9, sept: 9, "sep.": 9, "sept.": 9, octubre: 10, oct: 10, "oct.": 10, noviembre: 11, nov: 11, "nov.": 11, diciembre: 12, dic: 12, "dic.": 12 };
+	    }, {}], 37: [function (require, module, exports) {
+	      exports.toHankaku = function (u, F) {
+	        function r(F) {
+	          return u(F).replace(/\u2019/g, "'").replace(/\u201D/g, '"').replace(/\u3000/g, " ").replace(/\uFFE5/g, "¥").replace(/[\uFF01\uFF03-\uFF06\uFF08\uFF09\uFF0C-\uFF19\uFF1C-\uFF1F\uFF21-\uFF3B\uFF3D\uFF3F\uFF41-\uFF5B\uFF5D\uFF5E]/g, e);
+	        }function e(u) {
+	          return F(u.charCodeAt(0) - 65248);
+	        }return r;
+	      }(String, String.fromCharCode), exports.toZenkaku = function (u, F) {
+	        function r(F) {
+	          return u(F).replace(/\u0020/g, "　").replace(/\u0022/g, "”").replace(/\u0027/g, "’").replace(/\u00A5/g, "￥").replace(/[!#-&(),-9\u003C-?A-[\u005D_a-{}~]/g, e);
+	        }function e(u) {
+	          return F(u.charCodeAt(0) + 65248);
+	        }return r;
+	      }(String, String.fromCharCode);
+	    }, {}] }, {}, [2])(2);
+>>>>>>> Refactored (previously named) 'controllers' to 'queries'.
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+<<<<<<< d36df60cba479a0c80404171ca199372a7010754
+	var _react = __webpack_require__(2);
+=======
+/***/ },
+/* 308 */
+/***/ function(module, exports) {
+>>>>>>> Refactored (previously named) 'controllers' to 'queries'.
+
+	var _react2 = _interopRequireDefault(_react);
+
+<<<<<<< d36df60cba479a0c80404171ca199372a7010754
+	var _reactRadioGroup = __webpack_require__(306);
+=======
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	/**
+	 * Artyom uses webkitSpeechRecognition && SpeechSynthesisUtterance property of Google Inc.
+	 *
+	 * @version 0.9.7
+	 * @copyright Copyright (c) 2016 Copyright Our Code World All Rights Reserved.
+	 * @author Carlos Delgado - www.ourcodeworld.com
+	 * @param {type} window
+	 * @see http://sdkcarlos.github.io/artyom.html
+	 * @returns Artyom
+	 */
+
+	!function (e) {
+	  "use strict";
+	  function o() {
+	    var o = {},
+	        u = [];o.device = l, o.getVoices = function () {
+	      return e.speechSynthesis.getVoices();
+	    }, o.getAvailableCommands = function () {
+	      for (var e = [], o = 0; o < u.length; o++) {
+	        var n = u[o],
+	            t = {};t.indexes = n.indexes, n.smart && (t.smart = !0), n.description && (t.description = n.description), e.push(t);
+	      }return e;
+	    }, o.initialize = function (e) {
+	      if ("object" != (typeof e === "undefined" ? "undefined" : _typeof(e))) return void console.error("You must give the configuration for start artyom properly.");if (e.hasOwnProperty("lang")) {
+	        switch (e.lang) {case "de":case "de-DE":
+	            c = a.german;break;case "en-GB":
+	            c = a.englishGB;break;case "pt":case "pt-br":case "pt-PT":
+	            c = a.brasilian;break;case "ru":case "ru-RU":
+	            c = a.russia;break;case "nl":case "nl-NL":
+	            c = a.holand;break;case "es":case "es-CO":case "es-ES":
+	            c = a.spanish;break;case "en":case "en-US":
+	            c = a.englishUSA;break;case "fr":case "fr-FR":
+	            c = a.france;break;case "it":case "it-IT":
+	            c = a.italian;break;case "jp":case "ja-JP":
+	            c = a.japanese;break;case "id":case "id-ID":
+	            c = a.indonesia;break;case "pl":case "pl-PL":
+	            c = a.polski;break;case "zh-CN":
+	            c = a.mandarinChinese;break;case "zh-HK":
+	            c = a.cantoneseChinese;break;case "native":
+	            c = a["native"];break;default:
+	            console.warn("The given language for artyom is not supported yet. English has been set to default");}t.lang = e.lang;
+	      }return e.hasOwnProperty("continuous") && (e.continuous ? (t.continuous = !0, i.restartRecognition = !0) : (t.continuous = !1, i.restartRecognition = !1)), e.hasOwnProperty("speed") && (t.speed = e.speed), e.hasOwnProperty("executionKeyword") && (t.executionKeyword = e.executionKeyword), e.hasOwnProperty("obeyKeyword") && (t.obeyKeyword = e.obeyKeyword), e.hasOwnProperty("volume") && (t.volume = e.volume), e.hasOwnProperty("listen") && (t.listen = e.listen), e.hasOwnProperty("debug") ? t.debug = e.debug : console.warn("The initialization doesn't provide how the debug mode should be handled. Is recommendable to set this value either to true or false."), e.mode && (t.mode = e.mode), t.listen === !0 && p(), !0;
+	    }, o.fatality = function () {
+	      try {
+	        return i.restartRecognition = !1, n.stop(), !0;
+	      } catch (e) {
+	        return console.log(e), !1;
+	      }
+	    }, o.addCommands = function (e) {
+	      var o = function o(e) {
+	        e.hasOwnProperty("indexes") ? u.push(e) : (console.error("The following command doesn't provide any index to execute :"), console.dir(e));
+	      };if (e instanceof Array) for (var n = 0; n < e.length; n++) {
+	        o(e[n]);
+	      } else o(e);return !0;
+	    }, o.removeCommands = function (e) {
+	      if ("string" == typeof e) {
+	        for (var o = [], n = 0; n < u.length; n++) {
+	          var t = u[n];t.indexes.indexOf(e) && o.push(n);
+	        }for (var r = 0; r < o.length; r++) {
+	          u.splice(r, 1);
+	        }
+	      }return o;
+	    }, o.emptyCommands = function () {
+	      return u = [];
+	    }, o.shutUp = function () {
+	      if ("speechSynthesis" in e) do {
+	        e.speechSynthesis.cancel();
+	      } while (e.speechSynthesis.pending === !0);t.speaking = !1, o.clearGarbageCollection();
+	    }, o.getProperties = function () {
+	      return t;
+	    };var d = function d(e, o) {
+	      var n = new CustomEvent(e, { detail: o });return document.dispatchEvent(n), n;
+	    };o.when = function (e, o) {
+	      return document.addEventListener(e, function (e) {
+	        o(e.detail);
+	      }, !1);
+	    }, o.getLanguage = function () {
+	      switch (c) {case "Google UK English Male":
+	          return "en-GB";case "Google español":
+	          return "es-CO";case "Google Deutsch":
+	          return "de-DE";case "Google français":
+	          return "fr-FR";case "Google italiano":
+	          return "it-IT";case "Google 日本人":
+	          return "ja-JP";case "Google US English":
+	          return "en-US";case "Google português do Brasil":
+	          return "pt-BR";case "Google русский":
+	          return "ru-RU";case "Google Nederlands":
+	          return "nl-NL";case "Google polski":
+	          return "pl-PL";case "Google Bahasa Indonesia":
+	          return "id-ID";case "Google 普通话（中国大陆）":
+	          return "zh-CN";case "Google 粤語（香港）":
+	          return "zh-HK";case "native":
+	          return "native";}
+	    };var g = function g(n, i, a, l) {
+	      var u = new SpeechSynthesisUtterance();u.text = n, u.volume = t.volume, u.rate = t.speed, c && (u.voice = speechSynthesis.getVoices().filter(function (e) {
+	        return e.name == c;
+	      })[0]), 1 == i && u.addEventListener("start", function () {
+	        t.speaking = !0, o.debug("Event reached : " + s.SPEECH_SYNTHESIS_START), d(s.SPEECH_SYNTHESIS_START), l && "function" == typeof l.onStart && l.onStart.call(u);
+	      }), i >= a && u.addEventListener("end", function () {
+	        t.speaking = !1, o.debug("Event reached : " + s.SPEECH_SYNTHESIS_END), d(s.SPEECH_SYNTHESIS_END), l && "function" == typeof l.onEnd && l.onEnd.call(u);
+	      }), o.debug(i + " text chunk processed succesfully out of " + a), r.push(u), e.speechSynthesis.speak(u);
+	    };o.say = function (e, n) {
+	      if (o.speechSupported()) if ("string" == typeof e) {
+	        if (e.length > 0) {
+	          var r,
+	              i = e.split(","),
+	              a = e.split(".");r = i.length > a.length ? i.filter(function (e) {
+	            return e;
+	          }) : a.filter(function (e) {
+	            return e;
+	          }), r.forEach(function (e, o) {
+	            var t = o + 1;e && g(e, t, r.length, n);
+	          }), t.helpers.lastSay = { text: e, date: new Date() };
+	        } else console.warn("Artyom expects a string to say ... none given.");
+	      } else console.warn("Artyom expects a string to say ... " + (typeof e === "undefined" ? "undefined" : _typeof(e)) + " given.");
+	    }, o.repeatLastSay = function (e) {
+	      var n = t.helpers.lastSay;return e ? n : void (null != n && o.say(n.text));
+	    }, o.speechSupported = function () {
+	      return "speechSynthesis" in e;
+	    }, o.recognizingSupported = function () {
+	      return "webkitSpeechRecognition" in e;
+	    };var p = function p() {
+	      var e, r;n.continuous = !0, n.interimResults = !0, n.lang = t.lang, n.onstart = function () {
+	        o.debug("Event reached : " + s.COMMAND_RECOGNITION_START), d(s.COMMAND_RECOGNITION_START), t.recognizing = !0, r = !0;
+	      }, n.onerror = function (o) {
+	        d(s.ERROR, { code: o.error }), "audio-capture" == o.error && (r = !1), "not-allowed" == o.error && (r = !1, o.timeStamp - e < 100 ? d(s.ERROR, { code: "info-blocked", message: "Artyom needs the permision of the microphone, is blocked." }) : d(s.ERROR, { code: "info-denied", message: "Artyom needs the permision of the microphone, is denied" }));
+	      }, n.onend = function () {
+	        i.restartRecognition === !0 ? (r === !0 ? (n.start(), o.debug("Continuous mode enabled, restarting", "info")) : console.error("Verify the microphone and check for the table of errors in sdkcarlos.github.io/sites/artyom.html to solve your problem. If you want to give your user a message when an error appears add an artyom listener"), d(s.COMMAND_RECOGNITION_END, { code: "continuous_mode_enabled", message: "OnEnd event reached with continuous mode" })) : d(s.COMMAND_RECOGNITION_END, { code: "continuous_mode_disabled", message: "OnEnd event reached without continuous mode" }), t.recognizing = !1;
+	      };var a;if ("normal" == t.mode && (a = function a(e) {
+	        if (!u.length) return void o.debug("No commands to process in normal mode.");var r = e.results.length;d(s.TEXT_RECOGNIZED);for (var i = e.resultIndex; r > i; ++i) {
+	          var a = e.results[i][0].transcript;if (e.results[i].isFinal) {
+	            var c = f(a.trim());if ("function" == typeof t.helpers.redirectRecognizedTextOutput && t.helpers.redirectRecognizedTextOutput(a, !0), c !== !1 && 1 == t.recognizing) {
+	              o.debug("<< Executing Matching Recognition in normal mode >>", "info"), n.stop(), t.recognizing = !1, c.wildcard ? c.objeto.action(c.indice, c.wildcard.item, c.wildcard.full) : c.objeto.action(c.indice);break;
+	            }
+	          } else {
+	            if ("function" == typeof t.helpers.redirectRecognizedTextOutput && t.helpers.redirectRecognizedTextOutput(a, !1), "string" == typeof t.executionKeyword && -1 != a.indexOf(t.executionKeyword)) {
+	              var c = f(a.replace(t.executionKeyword, "").trim());if (c !== !1 && 1 == t.recognizing) {
+	                o.debug("<< Executing command ordered by ExecutionKeyword >>", "info"), n.stop(), t.recognizing = !1, c.wildcard ? c.objeto.action(c.indice, c.wildcard.item, c.wildcard.full) : c.objeto.action(c.indice);break;
+	              }
+	            }o.debug("Normal mode : " + a);
+	          }
+	        }
+	      }), "quick" == t.mode && (a = function a(e) {
+	        if (!u.length) return void o.debug("No commands to process.");var r = e.results.length;d(s.TEXT_RECOGNIZED);for (var i = e.resultIndex; r > i; ++i) {
+	          var a = e.results[i][0].transcript;if (e.results[i].isFinal) {
+	            var c = f(a.trim());if ("function" == typeof t.helpers.redirectRecognizedTextOutput && t.helpers.redirectRecognizedTextOutput(a, !1), c !== !1 && 1 == t.recognizing) {
+	              o.debug("<< Executing Matching Recognition in quick mode >>", "info"), n.stop(), t.recognizing = !1, c.wildcard ? c.objeto.action(c.indice, c.wildcard.item) : c.objeto.action(c.indice);break;
+	            }
+	          } else {
+	            var c = f(a.trim());if ("function" == typeof t.helpers.redirectRecognizedTextOutput && t.helpers.redirectRecognizedTextOutput(a, !0), c !== !1 && 1 == t.recognizing) {
+	              o.debug("<< Executing Matching Recognition in quick mode >>", "info"), n.stop(), t.recognizing = !1, c.wildcard ? c.objeto.action(c.indice, c.wildcard.item) : c.objeto.action(c.indice);break;
+	            }
+	          }o.debug("Quick mode : " + a);
+	        }
+	      }), "remote" == t.mode && (a = function a(e) {
+	        var n = e.results.length;if (d(s.TEXT_RECOGNIZED), "function" != typeof t.helpers.remoteProcessorHandler) return o.debug("The remoteProcessorService is undefined.", "warn");for (var r = e.resultIndex; n > r; ++r) {
+	          var i = e.results[r][0].transcript;t.helpers.remoteProcessorHandler({ text: i, isFinal: e.results[r].isFinal });
+	        }
+	      }), n.onresult = function (e) {
+	        if (t.obeying) a(e);else {
+	          if (!t.obeyKeyword) return;for (var n = "", r = "", i = 0; i < e.results.length; ++i) {
+	            e.results[i]["final"] ? n += e.results[i][0].transcript : r += e.results[i][0].transcript;
+	          }o.debug("Artyom is not obeying", "warn"), (r.indexOf(t.obeyKeyword) > -1 || n.indexOf(t.obeyKeyword) > -1) && (t.obeying = !0);
+	        }
+	      }, t.recognizing) n.stop(), o.debug("Event reached : " + s.COMMAND_RECOGNITION_END), d(s.COMMAND_RECOGNITION_END);else try {
+	        n.start();
+	      } catch (c) {
+	        d(s.ERROR, { code: "recognition_overlap", message: "A webkitSpeechRecognition instance has been started while there's already running. Is recommendable to restart the Browser" });
+	      }
+	    };o.simulateInstruction = function (e) {
+	      if (!e || "string" != typeof e) return console.warn("Cannot execute a non string command"), !1;var n = f(e);return "object" != (typeof n === "undefined" ? "undefined" : _typeof(n)) ? (console.warn("No command founded trying with " + e), !1) : n.objeto ? (n.objeto.smart ? (o.debug("Smart command matches with simulation, executing", "info"), n.objeto.action(n.indice, n.wildcard.item, n.wildcard.full)) : (o.debug("Command matches with simulation, executing", "info"), n.objeto.action(n.indice)), !0) : void 0;
+	    };var f = function f(e) {
+	      if (!e) return console.warn("Internal error: Execution of empty command"), !1;o.debug(">> " + e);for (var n = 0; n < u.length; n++) {
+	        for (var t = u[n], r = t.indexes, i = -1, a = 0; a < r.length; a++) {
+	          var c = r[a];if (t.smart) {
+	            if (-1 != c.indexOf("*")) {
+	              var l = c.split("*");if (l.length > 2) {
+	                console.warn("Artyom found a smart command with " + (l.length - 1) + " wildcards. Artyom only support 1 wildcard for each command. Sorry");continue;
+	              }var g = l[0],
+	                  p = l[1];if ("" == p || " " == p) {
+	                if (-1 != e.indexOf(g) || -1 != e.toLowerCase().indexOf(g.toLowerCase())) {
+	                  var f = e.replace(g, "");f = f.toLowerCase().replace(g.toLowerCase(), ""), i = parseInt(a);
+	                }
+	              } else if (!(-1 == e.indexOf(g) && -1 == e.toLowerCase().indexOf(g.toLowerCase()) || -1 == e.indexOf(p) && -1 == e.toLowerCase().indexOf(p.toLowerCase()))) {
+	                var f = e.replace(g, "").replace(p, "");f = f.toLowerCase().replace(g.toLowerCase(), "").replace(p.toLowerCase(), ""), f = f.toLowerCase().replace(p.toLowerCase(), ""), i = parseInt(a);
+	              }
+	            } else console.warn("Founded command marked as SMART but have no wildcard in the indexes, remove the SMART for prevent extensive memory consuming or add the wildcard *");if (i >= 0) {
+	              i = parseInt(a);break;
+	            }
+	          }
+	        }if (i >= 0) return d(s.COMMAND_MATCHED), { indice: i, objeto: t, wildcard: { item: f, full: e } };
+	      }for (var n = 0; n < u.length; n++) {
+	        for (var t = u[n], r = t.indexes, i = -1, a = 0; a < r.length; a++) {
+	          var c = r[a];if (!t.smart) {
+	            if (e === c) {
+	              o.debug(">> MATCHED FULL EXACT OPTION " + c + " AGAINST " + e + " WITH INDEX " + a + " IN COMMAND ", "info"), i = parseInt(a);break;
+	            }if (e.toLowerCase() === c.toLowerCase()) {
+	              o.debug(">> MATCHED OPTION CHANGING ALL TO LOWERCASE " + c + " AGAINST " + e + " WITH INDEX " + a + " IN COMMAND ", "info"), i = parseInt(a);break;
+	            }
+	          }
+	        }if (i >= 0) return d(s.COMMAND_MATCHED), { indice: i, objeto: t };
+	      }for (var n = 0; n < u.length; n++) {
+	        for (var t = u[n], r = t.indexes, i = -1, a = 0; a < r.length; a++) {
+	          if (!t.smart) {
+	            var c = r[a];if (e.indexOf(c) >= 0) {
+	              o.debug(">> MATCHED INDEX EXACT OPTION " + c + " AGAINST " + e + " WITH INDEX " + a + " IN COMMAND ", "info"), i = parseInt(a);break;
+	            }if (e.toLowerCase().indexOf(c.toLowerCase()) >= 0) {
+	              o.debug(">> MATCHED INDEX OPTION CHANGING ALL TO LOWERCASE " + c + " AGAINST " + e + " WITH INDEX " + a + " IN COMMAND ", "info"), i = parseInt(a);break;
+	            }
+	          }
+	        }if (i >= 0) return d(s.COMMAND_MATCHED), { indice: i, objeto: t };
+	      }return !1;
+	    };return o.debug = function (e, o) {
+	      if (t.debug === !0) switch (o) {case "error":
+	          console.log(" %cArtyom.js  " + e, "background: #C12127; color: #FFFFFF");break;case "warn":
+	          console.warn(e);break;case "info":
+	          console.log(" %cArtyom.js:  " + e, "background: #4285F4; color: #FFFFFF");break;default:
+	          console.log(" %cArtyom.js %c  " + e, "background: #005454; color: #BFF8F8", "color:black;");}
+	    }, o.detectErrors = function () {
+	      if ("file:" == e.location.protocol) {
+	        var n = "Fatal Error Detected : It seems you're running the artyom demo from a local file ! The SpeechRecognitionAPI Needs to be hosted someway (server as http or https). Artyom will NOT work here, Sorry.";return console.error(n), { code: "artyom_error_localfile", message: n };
+	      }if (!o.device.isChrome) {
+	        var n = "Fatal Error Detected: You are not running Google Chrome ! SpeechRecognitionAPI and SpeechSynthesisAPI is only available in google chrome ! ";return console.error(n), { code: "artyom_error_browser_unsupported", message: n };
+	      }return "https:" != e.location.protocol && console.warn("Artyom is not running in HTTPS protocol,running in protocol : " + e.location.protocol + " that means the browser will ask the permission of microphone too often. You need a HTTPS Connection if you want artyom in continuous mode !"), !1;
+	    }, o.redirectRecognizedTextOutput = function (e) {
+	      return "function" != typeof e ? (console.warn("Expected function to handle the recognized text ..."), !1) : (t.helpers.redirectRecognizedTextOutput = e, !0);
+	    }, o.sayRandom = function (e) {
+	      if (e instanceof Array) {
+	        var n = Math.floor(Math.random() * e.length);return o.say(e[n]), { text: e[n], index: n };
+	      }return console.error("Random quotes must be in an array !"), null;
+	    }, o.newDictation = function (e) {
+	      if (!o.recognizingSupported()) return console.error("SpeechRecognition is not supported in this browser"), !1;var n = new webkitSpeechRecognition();return n.continuous = !0, n.interimResults = !0, n.lang = t.lang, n.onresult = function (o) {
+	        for (var n = "", t = "", r = 0; r < o.results.length; ++r) {
+	          o.results[r]["final"] ? n += o.results[r][0].transcript : t += o.results[r][0].transcript;
+	        }e.onResult && e.onResult(t, n);
+	      }, new function () {
+	        var o = n,
+	            t = !0,
+	            r = !1;this.onError = null, this.start = function () {
+	          e.continuous === !0 && (r = !0), o.onstart = function () {
+	            "function" == typeof e.onStart && t === !0 && e.onStart();
+	          }, o.onend = function () {
+	            r === !0 ? (t = !1, o.start()) : (t = !0, "function" == typeof e.onEnd && e.onEnd());
+	          }, o.start();
+	        }, this.stop = function () {
+	          r = !1, o.stop();
+	        }, "function" == typeof e.onError && (o.onerror = e.onError);
+	      }();
+	    }, o.newPrompt = function (e) {
+	      "object" != (typeof e === "undefined" ? "undefined" : _typeof(e)) && console.error("Expected the prompt configuration.");var n = Object.assign([], u);o.emptyCommands();var t = { description: "Setting the artyom commands only for the prompt. The commands will be restored after the prompt finishes", indexes: e.options, action: function action(o, t) {
+	          u = n;var r = e.onMatch(o, t);return "function" != typeof r ? void console.error("onMatch function expects a returning function to be executed") : void r();
+	        } };e.smart && (t.smart = !0), o.addCommands(t), "undefined" != typeof e.beforePrompt && e.beforePrompt(), o.say(e.question, { onStart: function onStart() {
+	          "undefined" != typeof e.onStartPrompt && e.onStartPrompt();
+	        }, onEnd: function onEnd() {
+	          "undefined" != typeof e.onEndPrompt && e.onEndPrompt();
+	        } });
+	    }, o.extensions = function () {
+	      return {};
+	    }, o.getNativeApi = function () {
+	      return n;
+	    }, o.isRecognizing = function () {
+	      return t.recognizing;
+	    }, o.isSpeaking = function () {
+	      return t.speaking;
+	    }, o.clearGarbageCollection = function () {
+	      return r = [];
+	    }, o.getGarbageCollection = function () {
+	      return r;
+	    }, o.setDebug = function (e) {
+	      return e ? t.debug = !0 : t.debug = !1;
+	    }, o.dontObey = function () {
+	      return t.obeying = !1;
+	    }, o.obey = function () {
+	      return t.obeying = !0;
+	    }, o.isObeying = function () {
+	      return t.obeying;
+	    }, o.getVersion = function () {
+	      return "0.9.7";
+	    }, o.remoteProcessorService = function (e) {
+	      return t.helpers.remoteProcessorHandler = e, !0;
+	    }, o;
+	  }if ("speechSynthesis" in e && speechSynthesis.getVoices(), "webkitSpeechRecognition" in e) var n = new webkitSpeechRecognition();var t = { lang: "en-GB", recognizing: !1, continuous: !1, speed: 1, volume: 1, listen: !1, mode: "normal", debug: !1, helpers: { redirectRecognizedTextOutput: null, remoteProcessorHandler: null, lastSay: null }, executionKeyword: null, obeyKeyword: null, speaking: !1, obeying: !0 },
+	      r = [],
+	      i = { restartRecognition: !1 },
+	      a = { german: "Google Deutsch", spanish: "Google español", italian: "Google italiano", japanese: "Google 日本人", englishUSA: "Google US English", englishGB: "Google UK English Male", brasilian: "Google português do Brasil", russia: "Google русский", holand: "Google Nederlands", france: "Google français", polski: "Google polski", indonesia: "Google Bahasa Indonesia", mandarinChinese: "Google 普通话（中国大陆）", cantoneseChinese: "Google 粤語（香港）", "native": "native" },
+	      s = { ERROR: "ERROR", SPEECH_SYNTHESIS_START: "SPEECH_SYNTHESIS_START", SPEECH_SYNTHESIS_END: "SPEECH_SYNTHESIS_END", TEXT_RECOGNIZED: "TEXT_RECOGNIZED", COMMAND_RECOGNITION_START: "COMMAND_RECOGNITION_START", COMMAND_RECOGNITION_END: "COMMAND_RECOGNITION_END", COMMAND_MATCHED: "COMMAND_MATCHED" },
+	      c = "Google UK English Male",
+	      l = { isMobile: !1, isChrome: !0 };(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4))) && (l.isMobile = !0), -1 == navigator.userAgent.indexOf("Chrome") && (l.isChrome = !1), "undefined" == typeof artyom ? e.artyom = Object.preventExtensions(new o()) : console.warn("Artyom is being loaded twice in your document or you're injecting the artyom script via console (injected webkitSpeechRecognition will not work due to security reasons)");
+	}(window);
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+>>>>>>> Refactored (previously named) 'controllers' to 'queries'.
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Setting = function (_React$Component) {
+	  _inherits(Setting, _React$Component);
+
+	  function Setting(props) {
+	    _classCallCheck(this, Setting);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Setting).call(this, props));
+
+	    _this.state = {
+	      showSettings: false,
+	      selectedOption: ''
+	    };
+	    return _this;
+	  }
+
+	  // componentDidMount() {
+	  //   var token = localStorage.getItem('token');
+
+	  // fetch('http://localhost:9000/api/users/getUserInfo')
+	  //   .then((res) => {
+	  //     return res.json();
+	  //   })
+	  //   .then((data) => {
+	  //     this.setState({
+	  //       selectedOption: data.transitmode
+	  //     })
+	  //   })
+	  //   .catch((err) => {
+	  //     console.log('Did not get User info', err);
+	  //   })
+	  // }
+
+	  _createClass(Setting, [{
+	    key: 'clickSetting',
+	    value: function clickSetting() {
+	      if (this.state.showSettings === false) {
+	        this.setState({
+	          showSettings: true
+	        });
+	      } else {
+	        this.setState({
+	          showSettings: false
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'handleChange',
+	    value: function handleChange(value) {
+	      // e.preventDefault();
+	      console.log('value', value);
+	      this.setState({
+	        selectedOption: value
+	      });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit() {
+	      // e.preventDefault();
+	      var token = localStorage.getItem('token');
+	      console.log('client users token', token);
+	      var state = this.state.selectedOption;
+	      console.log('state', state);
+	      var transit = { transit: state };
+
+	      console.log('transit', transit);
+	      fetch('http://localhost:9000/api/users/updateTransit', {
+	        method: 'POST',
+	        body: JSON.stringify(transit),
+	        mode: 'cors-with-forced-preflight',
+	        headers: {
+	          'Content-Type': 'application/json',
+	          'authorization': token
+	        }
+	      }).then(function (res) {
+	        return res.json();
+	      }).then(function (data) {
+	        console.log('responded back with', data);
+	      }).catch(function (err) {
+	        console.log('did not save mode to db', err);
+	      });
+	      this.setState({
+	        showSettings: false
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var radio = _react2.default.createElement(
+	        'div',
+	        { className: 'trans-mode' },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            _reactRadioGroup.RadioGroup,
+	            { name: 'transit', selectedValue: this.state.selectedOption, onChange: this.handleChange.bind(this) },
+	            'Choose Your Transportation ',
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(_reactRadioGroup.Radio, { value: 'driving' }),
+	            'Driving ',
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(_reactRadioGroup.Radio, { value: 'walking' }),
+	            'Walking ',
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(_reactRadioGroup.Radio, { value: 'transit' }),
+	            'Transit ',
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(_reactRadioGroup.Radio, { value: 'bicyling' }),
+	            'Bicycling'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'radio-button' },
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'button', onClick: this.handleSubmit.bind(this) },
+	            'Submit'
+	          )
+	        )
+	      );
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'wheel' },
+	          _react2.default.createElement('img', { src: 'https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_settings_48px-128.png', onClick: this.clickSetting.bind(this) })
+	        ),
+	        this.state.showSettings ? radio : null
+	      );
+	    }
+	  }]);
+
+	  return Setting;
+	}(_react2.default.Component);
+
+	exports.default = Setting;
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Radio = _react2['default'].createClass({
+	  displayName: 'Radio',
+
+	  contextTypes: {
+	    radioGroup: _react2['default'].PropTypes.object
+	  },
+
+	  render: function render() {
+	    var _context$radioGroup = this.context.radioGroup;
+	    var name = _context$radioGroup.name;
+	    var selectedValue = _context$radioGroup.selectedValue;
+	    var onChange = _context$radioGroup.onChange;
+
+	    var optional = {};
+	    if (selectedValue !== undefined) {
+	      optional.checked = this.props.value === selectedValue;
+	    }
+	    if (typeof onChange === 'function') {
+	      optional.onChange = onChange.bind(null, this.props.value);
+	    }
+
+	    return _react2['default'].createElement('input', _extends({}, this.props, {
+	      type: 'radio',
+	      name: name
+	    }, optional));
+	  }
+	});
+
+	exports.Radio = Radio;
+	var RadioGroup = _react2['default'].createClass({
+	  displayName: 'RadioGroup',
+
+	  propTypes: {
+	    name: _react.PropTypes.string,
+	    selectedValue: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number, _react.PropTypes.bool]),
+	    onChange: _react.PropTypes.func,
+	    children: _react.PropTypes.node.isRequired,
+	    Component: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.func, _react.PropTypes.object])
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      Component: "div"
+	    };
+	  },
+
+	  childContextTypes: {
+	    radioGroup: _react2['default'].PropTypes.object
+	  },
+
+	  getChildContext: function getChildContext() {
+	    var _props = this.props;
+	    var name = _props.name;
+	    var selectedValue = _props.selectedValue;
+	    var onChange = _props.onChange;
+
+	    return {
+	      radioGroup: {
+	        name: name, selectedValue: selectedValue, onChange: onChange
+	      }
+	    };
+<<<<<<< d36df60cba479a0c80404171ca199372a7010754
+	  },
+
+	  render: function render() {
+	    var _props2 = this.props;
+	    var Component = _props2.Component;
+	    var name = _props2.name;
+	    var selectedValue = _props2.selectedValue;
+	    var onChange = _props2.onChange;
+	    var children = _props2.children;
+=======
+	  }function Kb(a, b, c, d) {
+	    var e = {},
+	        f = a === Gb;function g(h) {
+	      var i;return e[h] = !0, r.each(a[h] || [], function (a, h) {
+	        var j = h(b, c, d);return "string" != typeof j || f || e[j] ? f ? !(i = j) : void 0 : (b.dataTypes.unshift(j), g(j), !1);
+	      }), i;
+	    }return g(b.dataTypes[0]) || !e["*"] && g("*");
+	  }function Lb(a, b) {
+	    var c,
+	        d,
+	        e = r.ajaxSettings.flatOptions || {};for (c in b) {
+	      void 0 !== b[c] && ((e[c] ? a : d || (d = {}))[c] = b[c]);
+	    }return d && r.extend(!0, a, d), a;
+	  }function Mb(a, b, c) {
+	    var d,
+	        e,
+	        f,
+	        g,
+	        h = a.contents,
+	        i = a.dataTypes;while ("*" === i[0]) {
+	      i.shift(), void 0 === d && (d = a.mimeType || b.getResponseHeader("Content-Type"));
+	    }if (d) for (e in h) {
+	      if (h[e] && h[e].test(d)) {
+	        i.unshift(e);break;
+	      }
+	    }if (i[0] in c) f = i[0];else {
+	      for (e in c) {
+	        if (!i[0] || a.converters[e + " " + i[0]]) {
+	          f = e;break;
+	        }g || (g = e);
+	      }f = f || g;
+	    }if (f) return f !== i[0] && i.unshift(f), c[f];
+	  }function Nb(a, b, c, d) {
+	    var e,
+	        f,
+	        g,
+	        h,
+	        i,
+	        j = {},
+	        k = a.dataTypes.slice();if (k[1]) for (g in a.converters) {
+	      j[g.toLowerCase()] = a.converters[g];
+	    }f = k.shift();while (f) {
+	      if (a.responseFields[f] && (c[a.responseFields[f]] = b), !i && d && a.dataFilter && (b = a.dataFilter(b, a.dataType)), i = f, f = k.shift()) if ("*" === f) f = i;else if ("*" !== i && i !== f) {
+	        if (g = j[i + " " + f] || j["* " + f], !g) for (e in j) {
+	          if (h = e.split(" "), h[1] === f && (g = j[i + " " + h[0]] || j["* " + h[0]])) {
+	            g === !0 ? g = j[e] : j[e] !== !0 && (f = h[0], k.unshift(h[1]));break;
+	          }
+	        }if (g !== !0) if (g && a["throws"]) b = g(b);else try {
+	          b = g(b);
+	        } catch (l) {
+	          return { state: "parsererror", error: g ? l : "No conversion from " + i + " to " + f };
+	        }
+	      }
+	    }return { state: "success", data: b };
+	  }r.extend({ active: 0, lastModified: {}, etag: {}, ajaxSettings: { url: qb.href, type: "GET", isLocal: Cb.test(qb.protocol), global: !0, processData: !0, async: !0, contentType: "application/x-www-form-urlencoded; charset=UTF-8", accepts: { "*": Hb, text: "text/plain", html: "text/html", xml: "application/xml, text/xml", json: "application/json, text/javascript" }, contents: { xml: /\bxml\b/, html: /\bhtml/, json: /\bjson\b/ }, responseFields: { xml: "responseXML", text: "responseText", json: "responseJSON" }, converters: { "* text": String, "text html": !0, "text json": JSON.parse, "text xml": r.parseXML }, flatOptions: { url: !0, context: !0 } }, ajaxSetup: function ajaxSetup(a, b) {
+	      return b ? Lb(Lb(a, r.ajaxSettings), b) : Lb(r.ajaxSettings, a);
+	    }, ajaxPrefilter: Jb(Fb), ajaxTransport: Jb(Gb), ajax: function ajax(b, c) {
+	      "object" == (typeof b === "undefined" ? "undefined" : _typeof(b)) && (c = b, b = void 0), c = c || {};var e,
+	          f,
+	          g,
+	          h,
+	          i,
+	          j,
+	          k,
+	          l,
+	          m,
+	          n,
+	          o = r.ajaxSetup({}, c),
+	          p = o.context || o,
+	          q = o.context && (p.nodeType || p.jquery) ? r(p) : r.event,
+	          s = r.Deferred(),
+	          t = r.Callbacks("once memory"),
+	          u = o.statusCode || {},
+	          v = {},
+	          w = {},
+	          x = "canceled",
+	          y = { readyState: 0, getResponseHeader: function getResponseHeader(a) {
+	          var b;if (k) {
+	            if (!h) {
+	              h = {};while (b = Bb.exec(g)) {
+	                h[b[1].toLowerCase()] = b[2];
+	              }
+	            }b = h[a.toLowerCase()];
+	          }return null == b ? null : b;
+	        }, getAllResponseHeaders: function getAllResponseHeaders() {
+	          return k ? g : null;
+	        }, setRequestHeader: function setRequestHeader(a, b) {
+	          return null == k && (a = w[a.toLowerCase()] = w[a.toLowerCase()] || a, v[a] = b), this;
+	        }, overrideMimeType: function overrideMimeType(a) {
+	          return null == k && (o.mimeType = a), this;
+	        }, statusCode: function statusCode(a) {
+	          var b;if (a) if (k) y.always(a[y.status]);else for (b in a) {
+	            u[b] = [u[b], a[b]];
+	          }return this;
+	        }, abort: function abort(a) {
+	          var b = a || x;return e && e.abort(b), A(0, b), this;
+	        } };if (s.promise(y), o.url = ((b || o.url || qb.href) + "").replace(Eb, qb.protocol + "//"), o.type = c.method || c.type || o.method || o.type, o.dataTypes = (o.dataType || "*").toLowerCase().match(K) || [""], null == o.crossDomain) {
+	        j = d.createElement("a");try {
+	          j.href = o.url, j.href = j.href, o.crossDomain = Ib.protocol + "//" + Ib.host != j.protocol + "//" + j.host;
+	        } catch (z) {
+	          o.crossDomain = !0;
+	        }
+	      }if (o.data && o.processData && "string" != typeof o.data && (o.data = r.param(o.data, o.traditional)), Kb(Fb, o, c, y), k) return y;l = r.event && o.global, l && 0 === r.active++ && r.event.trigger("ajaxStart"), o.type = o.type.toUpperCase(), o.hasContent = !Db.test(o.type), f = o.url.replace(zb, ""), o.hasContent ? o.data && o.processData && 0 === (o.contentType || "").indexOf("application/x-www-form-urlencoded") && (o.data = o.data.replace(yb, "+")) : (n = o.url.slice(f.length), o.data && (f += (sb.test(f) ? "&" : "?") + o.data, delete o.data), o.cache === !1 && (f = f.replace(Ab, ""), n = (sb.test(f) ? "&" : "?") + "_=" + rb++ + n), o.url = f + n), o.ifModified && (r.lastModified[f] && y.setRequestHeader("If-Modified-Since", r.lastModified[f]), r.etag[f] && y.setRequestHeader("If-None-Match", r.etag[f])), (o.data && o.hasContent && o.contentType !== !1 || c.contentType) && y.setRequestHeader("Content-Type", o.contentType), y.setRequestHeader("Accept", o.dataTypes[0] && o.accepts[o.dataTypes[0]] ? o.accepts[o.dataTypes[0]] + ("*" !== o.dataTypes[0] ? ", " + Hb + "; q=0.01" : "") : o.accepts["*"]);for (m in o.headers) {
+	        y.setRequestHeader(m, o.headers[m]);
+	      }if (o.beforeSend && (o.beforeSend.call(p, y, o) === !1 || k)) return y.abort();if (x = "abort", t.add(o.complete), y.done(o.success), y.fail(o.error), e = Kb(Gb, o, c, y)) {
+	        if (y.readyState = 1, l && q.trigger("ajaxSend", [y, o]), k) return y;o.async && o.timeout > 0 && (i = a.setTimeout(function () {
+	          y.abort("timeout");
+	        }, o.timeout));try {
+	          k = !1, e.send(v, A);
+	        } catch (z) {
+	          if (k) throw z;A(-1, z);
+	        }
+	      } else A(-1, "No Transport");function A(b, c, d, h) {
+	        var j,
+	            m,
+	            n,
+	            v,
+	            w,
+	            x = c;k || (k = !0, i && a.clearTimeout(i), e = void 0, g = h || "", y.readyState = b > 0 ? 4 : 0, j = b >= 200 && b < 300 || 304 === b, d && (v = Mb(o, y, d)), v = Nb(o, v, y, j), j ? (o.ifModified && (w = y.getResponseHeader("Last-Modified"), w && (r.lastModified[f] = w), w = y.getResponseHeader("etag"), w && (r.etag[f] = w)), 204 === b || "HEAD" === o.type ? x = "nocontent" : 304 === b ? x = "notmodified" : (x = v.state, m = v.data, n = v.error, j = !n)) : (n = x, !b && x || (x = "error", b < 0 && (b = 0))), y.status = b, y.statusText = (c || x) + "", j ? s.resolveWith(p, [m, x, y]) : s.rejectWith(p, [y, x, n]), y.statusCode(u), u = void 0, l && q.trigger(j ? "ajaxSuccess" : "ajaxError", [y, o, j ? m : n]), t.fireWith(p, [y, x]), l && (q.trigger("ajaxComplete", [y, o]), --r.active || r.event.trigger("ajaxStop")));
+	      }return y;
+	    }, getJSON: function getJSON(a, b, c) {
+	      return r.get(a, b, c, "json");
+	    }, getScript: function getScript(a, b) {
+	      return r.get(a, void 0, b, "script");
+	    } }), r.each(["get", "post"], function (a, b) {
+	    r[b] = function (a, c, d, e) {
+	      return r.isFunction(c) && (e = e || d, d = c, c = void 0), r.ajax(r.extend({ url: a, type: b, dataType: e, data: c, success: d }, r.isPlainObject(a) && a));
+	    };
+	  }), r._evalUrl = function (a) {
+	    return r.ajax({ url: a, type: "GET", dataType: "script", cache: !0, async: !1, global: !1, "throws": !0 });
+	  }, r.fn.extend({ wrapAll: function wrapAll(a) {
+	      var b;return this[0] && (r.isFunction(a) && (a = a.call(this[0])), b = r(a, this[0].ownerDocument).eq(0).clone(!0), this[0].parentNode && b.insertBefore(this[0]), b.map(function () {
+	        var a = this;while (a.firstElementChild) {
+	          a = a.firstElementChild;
+	        }return a;
+	      }).append(this)), this;
+	    }, wrapInner: function wrapInner(a) {
+	      return r.isFunction(a) ? this.each(function (b) {
+	        r(this).wrapInner(a.call(this, b));
+	      }) : this.each(function () {
+	        var b = r(this),
+	            c = b.contents();c.length ? c.wrapAll(a) : b.append(a);
+	      });
+	    }, wrap: function wrap(a) {
+	      var b = r.isFunction(a);return this.each(function (c) {
+	        r(this).wrapAll(b ? a.call(this, c) : a);
+	      });
+	    }, unwrap: function unwrap(a) {
+	      return this.parent(a).not("body").each(function () {
+	        r(this).replaceWith(this.childNodes);
+	      }), this;
+	    } }), r.expr.pseudos.hidden = function (a) {
+	    return !r.expr.pseudos.visible(a);
+	  }, r.expr.pseudos.visible = function (a) {
+	    return !!(a.offsetWidth || a.offsetHeight || a.getClientRects().length);
+	  }, r.ajaxSettings.xhr = function () {
+	    try {
+	      return new a.XMLHttpRequest();
+	    } catch (b) {}
+	  };var Ob = { 0: 200, 1223: 204 },
+	      Pb = r.ajaxSettings.xhr();o.cors = !!Pb && "withCredentials" in Pb, o.ajax = Pb = !!Pb, r.ajaxTransport(function (b) {
+	    var _c, d;if (o.cors || Pb && !b.crossDomain) return { send: function send(e, f) {
+	        var g,
+	            h = b.xhr();if (h.open(b.type, b.url, b.async, b.username, b.password), b.xhrFields) for (g in b.xhrFields) {
+	          h[g] = b.xhrFields[g];
+	        }b.mimeType && h.overrideMimeType && h.overrideMimeType(b.mimeType), b.crossDomain || e["X-Requested-With"] || (e["X-Requested-With"] = "XMLHttpRequest");for (g in e) {
+	          h.setRequestHeader(g, e[g]);
+	        }_c = function c(a) {
+	          return function () {
+	            _c && (_c = d = h.onload = h.onerror = h.onabort = h.onreadystatechange = null, "abort" === a ? h.abort() : "error" === a ? "number" != typeof h.status ? f(0, "error") : f(h.status, h.statusText) : f(Ob[h.status] || h.status, h.statusText, "text" !== (h.responseType || "text") || "string" != typeof h.responseText ? { binary: h.response } : { text: h.responseText }, h.getAllResponseHeaders()));
+	          };
+	        }, h.onload = _c(), d = h.onerror = _c("error"), void 0 !== h.onabort ? h.onabort = d : h.onreadystatechange = function () {
+	          4 === h.readyState && a.setTimeout(function () {
+	            _c && d();
+	          });
+	        }, _c = _c("abort");try {
+	          h.send(b.hasContent && b.data || null);
+	        } catch (i) {
+	          if (_c) throw i;
+	        }
+	      }, abort: function abort() {
+	        _c && _c();
+	      } };
+	  }), r.ajaxPrefilter(function (a) {
+	    a.crossDomain && (a.contents.script = !1);
+	  }), r.ajaxSetup({ accepts: { script: "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript" }, contents: { script: /\b(?:java|ecma)script\b/ }, converters: { "text script": function textScript(a) {
+	        return r.globalEval(a), a;
+	      } } }), r.ajaxPrefilter("script", function (a) {
+	    void 0 === a.cache && (a.cache = !1), a.crossDomain && (a.type = "GET");
+	  }), r.ajaxTransport("script", function (a) {
+	    if (a.crossDomain) {
+	      var b, _c2;return { send: function send(e, f) {
+	          b = r("<script>").prop({ charset: a.scriptCharset, src: a.url }).on("load error", _c2 = function c(a) {
+	            b.remove(), _c2 = null, a && f("error" === a.type ? 404 : 200, a.type);
+	          }), d.head.appendChild(b[0]);
+	        }, abort: function abort() {
+	          _c2 && _c2();
+	        } };
+	    }
+	  });var Qb = [],
+	      Rb = /(=)\?(?=&|$)|\?\?/;r.ajaxSetup({ jsonp: "callback", jsonpCallback: function jsonpCallback() {
+	      var a = Qb.pop() || r.expando + "_" + rb++;return this[a] = !0, a;
+	    } }), r.ajaxPrefilter("json jsonp", function (b, c, d) {
+	    var e,
+	        f,
+	        g,
+	        h = b.jsonp !== !1 && (Rb.test(b.url) ? "url" : "string" == typeof b.data && 0 === (b.contentType || "").indexOf("application/x-www-form-urlencoded") && Rb.test(b.data) && "data");if (h || "jsonp" === b.dataTypes[0]) return e = b.jsonpCallback = r.isFunction(b.jsonpCallback) ? b.jsonpCallback() : b.jsonpCallback, h ? b[h] = b[h].replace(Rb, "$1" + e) : b.jsonp !== !1 && (b.url += (sb.test(b.url) ? "&" : "?") + b.jsonp + "=" + e), b.converters["script json"] = function () {
+	      return g || r.error(e + " was not called"), g[0];
+	    }, b.dataTypes[0] = "json", f = a[e], a[e] = function () {
+	      g = arguments;
+	    }, d.always(function () {
+	      void 0 === f ? r(a).removeProp(e) : a[e] = f, b[e] && (b.jsonpCallback = c.jsonpCallback, Qb.push(e)), g && r.isFunction(f) && f(g[0]), g = f = void 0;
+	    }), "script";
+	  }), o.createHTMLDocument = function () {
+	    var a = d.implementation.createHTMLDocument("").body;return a.innerHTML = "<form></form><form></form>", 2 === a.childNodes.length;
+	  }(), r.parseHTML = function (a, b, c) {
+	    if ("string" != typeof a) return [];"boolean" == typeof b && (c = b, b = !1);var e, f, g;return b || (o.createHTMLDocument ? (b = d.implementation.createHTMLDocument(""), e = b.createElement("base"), e.href = d.location.href, b.head.appendChild(e)) : b = d), f = B.exec(a), g = !c && [], f ? [b.createElement(f[1])] : (f = oa([a], b, g), g && g.length && r(g).remove(), r.merge([], f.childNodes));
+	  }, r.fn.load = function (a, b, c) {
+	    var d,
+	        e,
+	        f,
+	        g = this,
+	        h = a.indexOf(" ");return h > -1 && (d = r.trim(a.slice(h)), a = a.slice(0, h)), r.isFunction(b) ? (c = b, b = void 0) : b && "object" == (typeof b === "undefined" ? "undefined" : _typeof(b)) && (e = "POST"), g.length > 0 && r.ajax({ url: a, type: e || "GET", dataType: "html", data: b }).done(function (a) {
+	      f = arguments, g.html(d ? r("<div>").append(r.parseHTML(a)).find(d) : a);
+	    }).always(c && function (a, b) {
+	      g.each(function () {
+	        c.apply(this, f || [a.responseText, b, a]);
+	      });
+	    }), this;
+	  }, r.each(["ajaxStart", "ajaxStop", "ajaxComplete", "ajaxError", "ajaxSuccess", "ajaxSend"], function (a, b) {
+	    r.fn[b] = function (a) {
+	      return this.on(b, a);
+	    };
+	  }), r.expr.pseudos.animated = function (a) {
+	    return r.grep(r.timers, function (b) {
+	      return a === b.elem;
+	    }).length;
+	  };function Sb(a) {
+	    return r.isWindow(a) ? a : 9 === a.nodeType && a.defaultView;
+	  }r.offset = { setOffset: function setOffset(a, b, c) {
+	      var d,
+	          e,
+	          f,
+	          g,
+	          h,
+	          i,
+	          j,
+	          k = r.css(a, "position"),
+	          l = r(a),
+	          m = {};"static" === k && (a.style.position = "relative"), h = l.offset(), f = r.css(a, "top"), i = r.css(a, "left"), j = ("absolute" === k || "fixed" === k) && (f + i).indexOf("auto") > -1, j ? (d = l.position(), g = d.top, e = d.left) : (g = parseFloat(f) || 0, e = parseFloat(i) || 0), r.isFunction(b) && (b = b.call(a, c, r.extend({}, h))), null != b.top && (m.top = b.top - h.top + g), null != b.left && (m.left = b.left - h.left + e), "using" in b ? b.using.call(a, m) : l.css(m);
+	    } }, r.fn.extend({ offset: function offset(a) {
+	      if (arguments.length) return void 0 === a ? this : this.each(function (b) {
+	        r.offset.setOffset(this, a, b);
+	      });var b,
+	          c,
+	          d,
+	          e,
+	          f = this[0];if (f) return f.getClientRects().length ? (d = f.getBoundingClientRect(), d.width || d.height ? (e = f.ownerDocument, c = Sb(e), b = e.documentElement, { top: d.top + c.pageYOffset - b.clientTop, left: d.left + c.pageXOffset - b.clientLeft }) : d) : { top: 0, left: 0 };
+	    }, position: function position() {
+	      if (this[0]) {
+	        var a,
+	            b,
+	            c = this[0],
+	            d = { top: 0, left: 0 };return "fixed" === r.css(c, "position") ? b = c.getBoundingClientRect() : (a = this.offsetParent(), b = this.offset(), r.nodeName(a[0], "html") || (d = a.offset()), d = { top: d.top + r.css(a[0], "borderTopWidth", !0), left: d.left + r.css(a[0], "borderLeftWidth", !0) }), { top: b.top - d.top - r.css(c, "marginTop", !0), left: b.left - d.left - r.css(c, "marginLeft", !0) };
+	      }
+	    }, offsetParent: function offsetParent() {
+	      return this.map(function () {
+	        var a = this.offsetParent;while (a && "static" === r.css(a, "position")) {
+	          a = a.offsetParent;
+	        }return a || pa;
+	      });
+	    } }), r.each({ scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function (a, b) {
+	    var c = "pageYOffset" === b;r.fn[a] = function (d) {
+	      return S(this, function (a, d, e) {
+	        var f = Sb(a);return void 0 === e ? f ? f[b] : a[d] : void (f ? f.scrollTo(c ? f.pageXOffset : e, c ? e : f.pageYOffset) : a[d] = e);
+	      }, a, d, arguments.length);
+	    };
+	  }), r.each(["top", "left"], function (a, b) {
+	    r.cssHooks[b] = Na(o.pixelPosition, function (a, c) {
+	      if (c) return c = Ma(a, b), Ka.test(c) ? r(a).position()[b] + "px" : c;
+	    });
+	  }), r.each({ Height: "height", Width: "width" }, function (a, b) {
+	    r.each({ padding: "inner" + a, content: b, "": "outer" + a }, function (c, d) {
+	      r.fn[d] = function (e, f) {
+	        var g = arguments.length && (c || "boolean" != typeof e),
+	            h = c || (e === !0 || f === !0 ? "margin" : "border");return S(this, function (b, c, e) {
+	          var f;return r.isWindow(b) ? 0 === d.indexOf("outer") ? b["inner" + a] : b.document.documentElement["client" + a] : 9 === b.nodeType ? (f = b.documentElement, Math.max(b.body["scroll" + a], f["scroll" + a], b.body["offset" + a], f["offset" + a], f["client" + a])) : void 0 === e ? r.css(b, c, h) : r.style(b, c, e, h);
+	        }, b, g ? e : void 0, g);
+	      };
+	    });
+	  }), r.fn.extend({ bind: function bind(a, b, c) {
+	      return this.on(a, null, b, c);
+	    }, unbind: function unbind(a, b) {
+	      return this.off(a, null, b);
+	    }, delegate: function delegate(a, b, c, d) {
+	      return this.on(b, a, c, d);
+	    }, undelegate: function undelegate(a, b, c) {
+	      return 1 === arguments.length ? this.off(a, "**") : this.off(b, a || "**", c);
+	    } }), r.parseJSON = JSON.parse, "function" == "function" && __webpack_require__(310) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+	    return r;
+	  }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Tb = a.jQuery,
+	      Ub = a.$;return r.noConflict = function (b) {
+	    return a.$ === r && (a.$ = Ub), b && a.jQuery === r && (a.jQuery = Tb), r;
+	  }, b || (a.jQuery = a.$ = r), r;
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(178)(module)))
+
+/***/ },
+/* 310 */
+/***/ function(module, exports) {
+>>>>>>> Refactored (previously named) 'controllers' to 'queries'.
+
+	    var rest = _objectWithoutProperties(_props2, ['Component', 'name', 'selectedValue', 'onChange', 'children']);
+
+	    return _react2['default'].createElement(
+	      Component,
+	      rest,
+	      children
+	    );
+	  }
+	});
+	exports.RadioGroup = RadioGroup;
+
+/***/ },
+<<<<<<< d36df60cba479a0c80404171ca199372a7010754
 /* 307 */,
 /* 308 */,
 /* 309 */,
@@ -38689,6 +41020,16 @@
 
 	'use strict';
 
+=======
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Chrono = __webpack_require__(307);
+	var $ = __webpack_require__(309);
+
+>>>>>>> Refactored (previously named) 'controllers' to 'queries'.
 	/********************************************************
 	  HELPER FUNCTIONS
 	********************************************************/

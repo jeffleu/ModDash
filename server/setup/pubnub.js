@@ -1,6 +1,5 @@
+const User = require('../db/queries').User;
 const PubNub = require('pubnub');
-const UserController = require('../db/controllers').UserController;
-// // const { UserController } = require('../db/controllers');
 
 var pubnub = new PubNub({
     subscribeKey: process.env.PUBNUB_SUBSCRIBE_KEY,
@@ -11,11 +10,11 @@ var pubnub = new PubNub({
     logVerbosity: false,
     presenceTimeout: 130,
     heartbeatInterval: 60
-})
+});
 
 const publishEventAdded = (userId, message) => {
   message.messageType = 'eventAdded';
-  UserController.getUser(userId)
+  User.getUser(userId)
   .then(user => {
     var channel = user.dataValues.pubnubid;
     pubnub.publish({

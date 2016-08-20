@@ -1,13 +1,12 @@
-const UserController = require('../db/controllers').UserController;
-// const { UserController } = require('../db/controllers');
+const User = require('../db/queries').User;
 const agenda = require('./agenda');
 const pubnub = require('./../setup/pubnub');
 const newTwilioMessage = require('../utility/notification/twilio');
 
-agenda.define('send leave notification', function(job, done) {
+agenda.define('send leave notification', (job, done) => {
   // Keep an eye on this, there may be a bug where multiple notifications are sent 
-  return UserController.getUser(job.attrs.data.userId)
-  .then((user) => {
+  return User.getUser(job.attrs.data.userId)
+  .then(user => {
     job.attrs.data.origin = user.dataValues.geolocation;
 
     var channel = user.dataValues.pubnubid;
@@ -23,9 +22,7 @@ agenda.define('send leave notification', function(job, done) {
     // Send text message via Twilio
     // TO DO: Phone number should NOT be hard coded.
     newTwilioMessage('14158124699', message.name, message.traffic, message.location);
-
     console.log('Sending notification to user to leave now for event:', message.name);
-
     done();
   });
 });

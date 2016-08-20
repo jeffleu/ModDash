@@ -1,5 +1,4 @@
-const EventController = require('../db/controllers').EventController;
-// const { EventController } = require('../db/controllers');
+const Event = require('../db/queries').Event;
 const googleOAuth = require('../setup/googleOAuth.js');
 const pubnub = require('../setup/pubnub.js')
 const googleCal = require('./calendar/googleCal')
@@ -14,8 +13,8 @@ const addEvent = function(req, res) {
   .then(data => {
     // res.send should be in the parent composition function
     res.sendStatus(200);
-    pubnub.publishEventAdded(req.userId, data);
-    return EventController.insertEvent(req.userId, data);
+    pubnub.publishEventAdded(req.userId, data); 
+    return Event.insertEvent(req.userId, data);     
     // make everything look like this insertEvent function
   })
   .catch(err => {

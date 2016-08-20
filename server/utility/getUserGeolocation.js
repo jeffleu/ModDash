@@ -1,8 +1,7 @@
-const UserController = require('../db/controllers').UserController;
-// const { UserController } = require('../db/controllers');
+const User = require('../db/queries').User;
 
 const getUserGeolocation = (req, res) => {
-  return UserController.getUserInfo(req.userId)
+  return User.getUserInfo(req.userId)
     .then((data) => { res.send(data.dataValues); })
     .catch((err) => { res.sendStatus(404); });
 };

@@ -2,8 +2,7 @@ const Promise = require('bluebird');
 const google = require('googleapis');
 var calendar = google.calendar('v3');
 const googleOAuth = require('../../setup/googleOAuth');
-const EventController = require('../../db/controllers').EventController;
-// const { UserController, EventController } = require('../db/controllers');
+const Event = require('../../db/queries').Event;
 
 calendar.events.insert = Promise.promisify(calendar.events.insert);
 calendar.events.list = Promise.promisify(calendar.events.list);
@@ -14,6 +13,7 @@ const insertEvent = (auth, resource) => {
     auth,
     resource
   };
+
   return calendar.events.insert(params);
 };
 
