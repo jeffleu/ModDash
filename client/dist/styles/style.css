@@ -2,17 +2,18 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
   background:
-    url("https://unsplash.it/g/1440/900?random")
+    url("https://unsplash.it/1440/900?random")
     center center / 100% 100%
     fixed;
   cursor: default;
 }
 
-button {
+.btn {
   font-size: 100%;
-  font-weight: 100;
-  margin: 2px;
-  color: black;
+  font-weight: 200;
+  color: #72c5f7;
+
+  /*color: black;*/
 }
 
 .today {
@@ -46,6 +47,15 @@ button {
   opacity: .80;
 }
 
+.calendar-background {
+/*  position: absolute;
+*//*  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;*/
+  /*background-color: black;*/
+  /*opacity: .20;*/
+}
 .calendar {
   position: absolute;
   /*display: block;*/
@@ -90,7 +100,7 @@ button {
   color: white;
 }
 .event-link:hover {
-  color: aquamarine;
+  color: #72c5f7;
   cursor: pointer;
 }
 
@@ -98,16 +108,6 @@ button {
   position: fixed;
   top: 2%;
   right: 2%;
-  width: 70px;
-  height: 20px;
-  text-align: center;
-  line-height: 20px;
-  color: aquamarine;
-  background-color: black;
-}
-
-.add-event:hover {
-  cursor: pointer;
 }
 
 .event-url {
@@ -115,20 +115,18 @@ button {
 }
 
 .calendar-form {
-  /*margin: auto;*/
   width: 100%;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  /*top: 50%;*/
+  /*transform: translateY(-50%);*/
   font-weight: 100;
   font-size: 160%;
-  text-align: center;
+  text-align: left;
 }
 
 .calendar-form-title {
   font-size: 200%;
-  font-weight: 300;
-  margin-bottom: 5px;
+  font-weight: 100;
 }
 
 input {
@@ -143,14 +141,24 @@ input {
   font-size: 100%;
 }
 
-.ModalClass {
+.ModalForm {
   position: absolute;
   top: 15%;
   left: 5%;
   right: 5%;
   bottom: 15%;
+  color: black;
+  font-weight: 100;
+/*  top: 25%;
+  left: 32.5%;
+  right: 32.5%;
+  bottom: 35%;*/
   /*border: 1px, dotted, black;*/
-  background-color: black;
+  /*background-color: black;*/
+}
+
+.ModalFormBody {
+  height: 300px;
 }
 
 .OverlayClass {

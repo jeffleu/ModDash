@@ -11,13 +11,15 @@ class Calendar extends React.Component {
 
   render() {
     return(
-      <div className='calendar'>
-        <div className='calendar-title'>
-          {this.state.date}
-        </div>
-        <div>{this.props.events.map((event, i) =>
-          <CalendarEntry key={i} event={event} />
-        )}
+      <div className='calendar-background'>
+        <div className='calendar'>
+          <div className='calendar-title'>
+            {this.state.date}
+          </div>
+          <div>{this.props.events.map((event, i) =>
+            <CalendarEntry key={i} event={event} />
+          )}
+          </div>
         </div>
       </div>
     )
