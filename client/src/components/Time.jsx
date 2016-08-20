@@ -5,7 +5,7 @@ class Time extends React.Component {
     super(props)
     this.state = {
       time: '',
-      date: moment().format('dddd, MMMM D')
+      // date: moment().format('dddd, MMMM D')
     }
   }
 
@@ -30,12 +30,12 @@ class Time extends React.Component {
         <div className='time'>
           {this.state.time}
         </div>
-        <div className='date'>
-          {this.state.date}
-        </div>
       </div>
     )
   }
 }
+      //  <div className='date'>
+        //  {this.state.date}
+        // </div>
 
 export default Time;
