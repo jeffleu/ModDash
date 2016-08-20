@@ -18,7 +18,6 @@ var pubnub = PUBNUB({
   }
 });
 
-
 const subscribe = () => {
   var channel = localStorage.getItem('channel');
   console.log('running subscribe', channel);
@@ -53,7 +52,7 @@ const sendEventAddedNotification = (data) => {
     type: 'basic',
     title: 'Your Calendar Event Has Been Added!',
     message: data.location + '\n' + start + ' - ' + end,
-    iconUrl: 'sonic-dash.gif',
+    iconUrl: './../assets/sonic-dash.gif',
     buttons: [{
       title: 'Click To See Event Details'
     }]
@@ -73,7 +72,7 @@ const sendTimeToLeaveNotification = (data) => {
     type: 'basic',
     title: `Time to Leave for ${data.name} at ${data.location}!`,
     message: `Your event is at ${start}, and it will take about ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
-    iconUrl: 'sonic-sega.png',
+    iconUrl: './../assets/sonic-sega.png',
     buttons: [{
       title: 'Click To See Map Details'
     }]

@@ -1,5 +1,4 @@
 import React from 'react';
-const moment = require('moment');
 
 class Time extends React.Component {
   constructor(props) {
