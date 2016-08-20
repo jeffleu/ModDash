@@ -38,24 +38,10 @@ body {
 }
 
 .time:hover {
-  background-color: black;
-  opacity: .80;
+/*  background-color: black;
+  opacity: .80;*/
 }
 
-.date:hover {
-  background-color: black;
-  opacity: .80;
-}
-
-.calendar-background {
-/*  position: absolute;
-*//*  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40%;*/
-  /*background-color: black;*/
-  /*opacity: .20;*/
-}
 .calendar {
   position: absolute;
   /*display: block;*/
@@ -63,38 +49,31 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: 40%;
-  /*margin-top: 20px;*/
-  /*text-align: center;*/
+  text-align: center;
+  font-weight: 100;
+  color: white;
 }
 
 .calendar-title {
   font-size: 350%;
-  font-weight: 100;
-  text-align: center;
 }
 
 .calendar-title:hover {
-  background-color: black;
-  opacity: .75;
-}
-
-.calendar-entry {
-  margin-bottom: 7.5px;
-  font-weight: 100;
-  text-align: center;
+/*  background-color: black;
+  opacity: .75;*/
 }
 
 .calendar-entry:hover {
-  background-color: black;
-  opacity: .75;
+/*  background-color: black;
+  opacity: .75;*/
 }
 
 .event-start {
-  font-size: 200%;
+  font-size: 180%;
 }
 
 .event-summary-location {
-  font-size: 160%;
+  font-size: 150%;
 }
 .event-link {
   color: white;
