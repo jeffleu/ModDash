@@ -1,6 +1,6 @@
 import React from 'react';
 import {RadioGroup, Radio} from 'react-radio-group';
-
+import { Glyphicon } from 'react-bootstrap';
 class Setting extends React.Component {
   constructor(props) {
     super(props)
@@ -8,6 +8,7 @@ class Setting extends React.Component {
       showSettings: false,
       selectedOption: ''
     };
+    this.clickSetting = this.clickSetting.bind(this);
   }
 
   // componentDidMount() {
@@ -101,14 +102,12 @@ class Setting extends React.Component {
 
     return(
       <div>
-        <div className='wheel'>
-          <img src='https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_settings_48px-128.png' onClick={this.clickSetting.bind(this)}/>
-        </div>
+        <div className='settings-cog' onClick={this.clickSetting}> <Glyphicon glyph="cog" /></div>
         {this.state.showSettings ? radio : null}
-
       </div>
     )
   }
 }
-
+          /* <img src='https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_settings_48px-128.png' onClick={this.clickSetting.bind(this)}/>
+*/ 
 export default Setting;

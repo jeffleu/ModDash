@@ -8,10 +8,25 @@ body {
   cursor: default;
 }
 
+.signin {
+  width: 191px;
+  height: 46px;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.signin:hover {
+  cursor: pointer;
+}
+
 .btn {
   font-size: 100%;
   font-weight: 200;
   color: #72c5f7;
+  background-color: rgba(0, 0, 0, 0);
 
   /*color: black;*/
 }
@@ -89,6 +104,10 @@ body {
   right: 2%;
 }
 
+.add-event-glyph {
+  font-size: 150%;
+}
+
 .event-url {
   font-color: white;
 }
@@ -150,16 +169,14 @@ input {
   opacity: .90;
 }
 
-.wheel{
+.settings-cog{
   position: absolute;
-  top: 90%;
+  left: 2%;
+  bottom: 2%;
+  font-size: 150%;
 }
 
-.wheel img{
-  width: 40px
-}
-
-.wheel:hover{
+.settings-cog:hover {
   cursor: pointer;
 }
 
