@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 class Login extends React.Component {
   constructor(props) {
@@ -36,14 +37,14 @@ class Login extends React.Component {
           // <div onClick={this.logout}>
           // Log out
           // </div>
+          // <button className="google-signin" onClick={this.login}>
+          // </button>
 
   render() {
     if (!localStorage.getItem('token')) {
       return (
         <div>
-          <div onClick={this.login}>
-            Sign in
-          </div>
+        <img className="signin" src="/assets/google_signin.png" onClick={this.login}/>
         </div>
       );
     } else {

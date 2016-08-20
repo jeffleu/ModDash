@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarEntry from './CalendarEntry.jsx';
+import { Glyphicon } from 'react-bootstrap';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -25,3 +26,8 @@ class Calendar extends React.Component {
 }
 
 export default Calendar;
+
+        // <div className='add-event-glyph'><Glyphicon glyph="plus" />
+        // </div>
+
+// maybe make the add-event-glyph into load more calendar events, or can add an event from clicking on it, not sure which is more intuitive
