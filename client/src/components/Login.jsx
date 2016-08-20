@@ -34,11 +34,6 @@ class Login extends React.Component {
     // or no log out button and they just have to uninstall the extension
     location.reload();
   }
-          // <div onClick={this.logout}>
-          // Log out
-          // </div>
-          // <button className="google-signin" onClick={this.login}>
-          // </button>
 
   render() {
     if (!localStorage.getItem('token')) {

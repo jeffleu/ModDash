@@ -105,7 +105,26 @@ body {
 }
 
 .add-event-glyph {
+  position: absolute;
+  left: 7%;
+  bottom: 2%;
   font-size: 150%;
+}
+
+
+.add-event-glyph:hover {
+  cursor: pointer;
+}
+
+.voice-glyph {
+  position: absolute;
+  left: 4.5%;
+  bottom: 2%;
+  font-size: 150%;
+}
+
+.voice-glyph:hover {
+  cursor: pointer;
 }
 
 .event-url {
@@ -169,14 +188,14 @@ input {
   opacity: .90;
 }
 
-.settings-cog{
+.settings-glyph{
   position: absolute;
   left: 2%;
   bottom: 2%;
   font-size: 150%;
 }
 
-.settings-cog:hover {
+.settings-glyph:hover {
   cursor: pointer;
 }
 

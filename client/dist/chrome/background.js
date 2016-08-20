@@ -52,7 +52,8 @@ const sendEventAddedNotification = (data) => {
     type: 'basic',
     title: 'Your Calendar Event Has Been Added!',
     message: data.location + '\n' + start + ' - ' + end,
-    iconUrl: './../assets/sonic-dash.gif',
+    iconUrl: './../assets/emoji_calendar1.png',
+    // iconUrl: './../assets/sonic-dash.gif',
     buttons: [{
       title: 'Click To See Event Details'
     }]
@@ -72,7 +73,8 @@ const sendTimeToLeaveNotification = (data) => {
     type: 'basic',
     title: `Time to Leave for ${data.name} at ${data.location}!`,
     message: `Your event is at ${start}, and it will take about ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
-    iconUrl: './../assets/sonic-sega.png',
+    iconUrl: './../assets/emoji_rocket.png',
+    // iconUrl: './../assets/sonic-sega.png',
     buttons: [{
       title: 'Click To See Map Details'
     }]

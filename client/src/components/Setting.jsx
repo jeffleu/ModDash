@@ -102,12 +102,11 @@ class Setting extends React.Component {
 
     return(
       <div>
-        <div className='settings-cog' onClick={this.clickSetting}> <Glyphicon glyph="cog" /></div>
+        <div className='settings-glyph' onClick={this.clickSetting}> <Glyphicon glyph="cog" /></div>
         {this.state.showSettings ? radio : null}
       </div>
     )
   }
 }
-          /* <img src='https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_settings_48px-128.png' onClick={this.clickSetting.bind(this)}/>
-*/ 
+       
 export default Setting;

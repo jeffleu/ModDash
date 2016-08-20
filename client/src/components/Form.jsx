@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 // import Modal from 'react-modal';
-import { Modal, closeButton, Button } from 'react-bootstrap';
+import { Modal, closeButton, Button, Glyphicon } from 'react-bootstrap';
 
 class Form extends React.Component {
   constructor(props) {
@@ -162,6 +162,14 @@ class Form extends React.Component {
     })
   }
 
+
+  /*
+        
+      <Button bsSize="small" className='add-event' onClick={this.openModal}>Add event</Button>
+  */
+
+  // TO DO: Turn on and off voice commands using the voice-glyph (volume-up and volume-off) icons 
+
   render() {
     var state = this.state.repeat;
     var day = function() {
@@ -178,7 +186,12 @@ class Form extends React.Component {
     
     return (
     <div>
-      <Button bsSize="small" className='add-event' onClick={this.openModal}>Add event</Button>
+      <div className='voice-glyph'>
+        <Glyphicon glyph="volume-up" /> 
+      </div>
+      <div className='add-event-glyph' onClick={this.openModal}>
+        <Glyphicon glyph="plus" />
+      </div>
 
       <Modal className="ModalForm" show={this.state.modalIsOpen} onHide={this.closeModal}>
         <Modal.Header closeButton>
