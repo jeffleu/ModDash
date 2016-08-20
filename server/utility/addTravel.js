@@ -6,7 +6,7 @@ const googleMap = require('./map/googleMap');
 
 const addTravel = (event) => {
   // console.log('=========================== [addTravel]: event.dataValues\n', event.dataValues);
-  return UserController.getGeolocation(event.dataValues.userId)
+  return UserController.getUserInfo(event.dataValues.userId)
   .then((data) => {
       // console.log('========================= [addTravel]: options\n', options);
     // Request to Google Maps API for travel data

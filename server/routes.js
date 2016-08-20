@@ -9,6 +9,7 @@ const addTravel = require('./utility/addTravel');
 const getUserGeolocation = require('./utility/getUserGeoLocation');
 const updateGeolocation = require('./utility/updateGeolocation');
 const getDayEvents = require('./utility/getDayEvents');
+const updateTransit = require('./utility/updateTransitMode');
 const queryTraffic = require('./workers/queryTraffic');
 const jwt = require('jsonwebtoken')
 
@@ -68,6 +69,7 @@ router.get('/calendar/getDayEvents', getDayEvents);
 
 // User Routes
 // router.get('/users/getUserInfo', )
+router.post('/users/updateTransit', updateTransit);
 router.get('/users/getGeolocation', getUserGeolocation);
 router.post('/users/updateGeolocation', updateGeolocation);
 

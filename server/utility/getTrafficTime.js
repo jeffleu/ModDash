@@ -7,7 +7,7 @@ const getTrafficTime = function(event) {
 
   // console.log('======================= []: event', event.dataValues);
 
-  return UserController.getGeolocation(event.dataValues.userId)
+  return UserController.getUserInfo(event.dataValues.userId)
   .then((data) => {
     return requestPromise(googleMap.mapTraffic(data, event))
   })
