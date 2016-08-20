@@ -1,8 +1,8 @@
 const path = require('path');
 const router = require('express').Router();
-//destructure with 
+//destructure with
 //const {
-// addEvent, 
+// addEvent,
 // addTravel} = require(./utility/index.js)
 const getAllEventsFromCalendar = require('./utility/getAllEventsFromCalendar');
 const addEvent = require('./utility/addEvent');
@@ -18,16 +18,16 @@ const jwt = require('jsonwebtoken')
 // put this parent function elsewhere later, but for now keep it here to understand what is happening.
 // first add event, then add travel, then set up queryTraffic worker
 var addEventAndAddTravel = (req, res) => {
-// this is a composition function 
-  //addEvent should not handle req or res, 
+// this is a composition function
+  //addEvent should not handle req or res,
 
-  // each function should be modular and pure. 
+  // each function should be modular and pure.
   addEvent(req, res)
   // addEvent(userId, event)
   .spread((event, created) => {
     // res.send('event was added')
     console.log('event was added, now adding travel', event.dataValues);
-    return addTravel(event); 
+    return addTravel(event);
   })
   .then(travel => {
     console.log('travel was added, now scheduling queryTraffic worker');
@@ -68,6 +68,7 @@ router.get('/calendar/getDayEvents', getDayEvents);
 // router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
 
 // User Routes
+// router.get('/users/getUserInfo', )
 router.get('/users/getGeolocation', getUserGeolocation);
 router.post('/users/updateGeolocation', updateGeolocation);
 
