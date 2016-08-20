@@ -8,7 +8,7 @@ body {
 }
 
 button {
-  font-size: 100%;
+  font-size: 1em;
   font-weight: 100;
   margin: 2px;
 }
@@ -26,13 +26,13 @@ button {
 }
 
 .time {
-  font-size: 700%;
+  font-size: 5em;
   font-weight: 500;
 
 }
 
 .date {
-  font-size: 500%;
+  font-size: 3em;
   font-weight: 500;
 }
 

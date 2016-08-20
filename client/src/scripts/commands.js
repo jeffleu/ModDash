@@ -1,6 +1,3 @@
-const Chrono = require('../lib/chrono.min.js');
-const $ = require('../lib/jquery.js');
-
 /********************************************************
   HELPER FUNCTIONS
 ********************************************************/

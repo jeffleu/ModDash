@@ -1,23 +1,30 @@
 const path = require('path');
 
 module.exports = {
-  entry: [path.resolve(__dirname, 'client', 'src', 'components', 'app.jsx'), 'whatwg-fetch'],
+  entry: [path.resolve(__dirname, 'client', 'src', 'components', 'App.jsx'), 'whatwg-fetch'],
   output: {
-    path: './client/public/dist',
+    path: __dirname + '/client/dist',
     filename: 'bundle.js'
   },
   devServer: {
     inline: true,
-    contentBase: './client',
+    contentBase: __dirname + '/client/dist',
     port: 8100
   },
   module: {
     loaders: [
       {
         test: /\.jsx?/,
+        exclude: /node_modules/,
         include: /client/,
-        loader: 'babel',
-      },
+        loaders: ['react-hot', 'babel']
+      }
     ],
   },
+  externals: {
+    "jquery": "jQuery",
+    "Chrono": "Chrono",
+    "artyom": "artyom",
+    "moment": "moment"
+  }
 };

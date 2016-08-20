@@ -32,6 +32,13 @@ const extensionAuth = function(req, res) {
           channel: pubnubid
         });
       }
+      // if no user after they tried to log in with chrome.identity, 
+      // we res.redirect to our sign up auth that gives us calendar privileges,
+      // then that redirects them to our splash page telling them thank you for signing up and telling them of future features like twilio
+      // also some info about us, the creators
+      // then the window closes or we tell them to close the window
+      // now they are in our user table, we ask them to log in again after signing up
+      // seems reasonable, kinda shitty to make them sign up and then have to log in again but no way around it
     });
   })
   .catch(err => {

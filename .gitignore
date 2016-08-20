@@ -1,14 +1,13 @@
 #Node Modules#
 /node_modules
-/client/public/dist/bundle.js
 
 #private keys#
 .env
 
+/client/dist/bundle.js
 /client/.DS_STORE
 /client/src/.DS_STORE
 /server/.DS_STORE
 /server/utility/.DS_STORE
-/public/dist/bundle.js
 
 npm-debug.log

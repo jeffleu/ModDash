@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 const RRule = require('rrule').RRule;
-var Modal = require('react-modal');
+import Modal from 'react-modal';
 
 class Form extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class Form extends React.Component {
       endTime: '',
       modalIsOpen: false,
       freq: ''.
-      
+
     }
 
     this.handleChange = this.handleChange.bind(this);
