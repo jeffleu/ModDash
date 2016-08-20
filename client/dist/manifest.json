@@ -1,14 +1,14 @@
 {
   "manifest_version": 2,
   "name": "ModDash",
-  "description": "Quickly switch to other open tabs with just your keyboard",
+  "description": "Never be late again",
   "version": "1.0.0",
   "background": {
     "persistent": true,
-    "page": "./src/chrome/background.html"
+    "page": "./chrome/background.html"
   },
   "chrome_url_overrides": {
-    "newtab": "./public/dist/index.html"
+    "newtab": "./index.html"
   },
   "permissions": [
     "notifications",
