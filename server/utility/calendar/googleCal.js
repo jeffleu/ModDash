@@ -11,7 +11,7 @@ const insertEvent = (auth, resource) => {
     auth,
     resource
   };
-
+  
   return calendar.events.insert(params);
 };
 
