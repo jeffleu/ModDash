@@ -5,11 +5,7 @@ import Calendar from './Calendar.jsx'
 import Form from './Form.jsx';
 import Login from './Login.jsx';
 import Setting from './Setting.jsx';
-import Chrono from '../lib/chrono.min.js';
-import artyom from '../lib/artyom.min.js';
-import $ from '../lib/jquery.js';
-const commands = require('../scripts/commands.js');
-const Modal = require('react-modal');
+import commands from '../scripts/commands.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -101,6 +97,6 @@ class App extends React.Component {
   }
 }
 
-export default App;
+// export default App;
 
 ReactDOM.render(<App />, document.getElementById('app'));

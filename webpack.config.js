@@ -1,9 +1,9 @@
 const path = require('path');
 
 module.exports = {
-  entry: [path.resolve(__dirname, 'client', 'src', 'components', 'app.jsx'), 'whatwg-fetch'],
+  entry: [path.resolve(__dirname, 'client', 'src', 'components', 'App.jsx'), 'whatwg-fetch'],
   output: {
-    path: './client/public/dist',
+    path: __dirname + '/client/public/dist',
     filename: 'bundle.js'
   },
   devServer: {
@@ -21,4 +21,10 @@ module.exports = {
       }
     ],
   },
+  externals: {
+    "jquery": "jQuery",
+    "Chrono": "Chrono",
+    "artyom": "artyom",
+    "moment": "moment"
+  }
 };

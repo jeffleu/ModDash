@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-var Modal = require('react-modal');
+import Modal from 'react-modal';
 
 class Form extends React.Component {
   constructor(props) {
