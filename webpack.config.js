@@ -8,16 +8,17 @@ module.exports = {
   },
   devServer: {
     inline: true,
-    contentBase: './client',
+    contentBase: './client/public/dist',
     port: 8100
   },
   module: {
     loaders: [
       {
         test: /\.jsx?/,
+        exclude: /node_modules/,
         include: /client/,
-        loader: 'babel',
-      },
+        loaders: ['react-hot', 'babel']
+      }
     ],
   },
 };
