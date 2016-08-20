@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+const RRule = require('rrule').RRule;
 var Modal = require('react-modal');
 
 class Form extends React.Component {
@@ -14,6 +15,8 @@ class Form extends React.Component {
       endDate: '',
       endTime: '',
       modalIsOpen: false,
+      freq: ''.
+      
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,7 +28,7 @@ class Form extends React.Component {
   componentDidMount() {
     // Fill out calendar form with voice
     this.props.commands.onFillOutForm((formData) => {
-      this.openModal(); 
+      this.openModal();
       this.setState(formData);
     });
 
@@ -113,7 +116,7 @@ class Form extends React.Component {
       if (res.status === 200) {
         this.props.refreshEvents();
       // Refreshes today's events in chronological order including new event that was just added
-      };      
+      };
     }).catch((err) => { console.log('Error posting event to Google Calendar:\n', err); });
 
     this.closeModal();
@@ -131,7 +134,7 @@ class Form extends React.Component {
     })
   }
 
-  
+
 
   render() {
     return (
@@ -139,7 +142,7 @@ class Form extends React.Component {
       <div className='add-event' onClick={this.openModal}>
         Add event
       </div>
-        <Modal 
+        <Modal
           className="ModalClass"
           overlayClassName="OverlayClass"
           isOpen={this.state.modalIsOpen}
