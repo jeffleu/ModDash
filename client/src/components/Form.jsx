@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
+import { Modal, closeButton, Button, Glyphicon } from 'react-bootstrap';
 
 class Form extends React.Component {
   constructor(props) {
@@ -162,83 +163,95 @@ class Form extends React.Component {
   }
 
 
+  /*
+        
+      <Button bsSize="small" className='add-event' onClick={this.openModal}>Add event</Button>
+  */
+
+  // TO DO: Turn on and off voice commands using the voice-glyph (volume-up and volume-off) icons 
 
   render() {
-  var state = this.state.repeat;
-   var day = function() {
-     if(state === 'DAILY') {
-       return 'Day'
-     } else if (state === 'WEEKLY') {
-       return 'Week'
-     } else if (state === 'MONTHLY') {
-       return 'Month'
-     } else if (state === 'YEARLY') {
-       return 'Year'
-     }
-   }
-
+    var state = this.state.repeat;
+    var day = function() {
+      if(state === 'DAILY') {
+        return 'Day'
+      } else if (state === 'WEEKLY') {
+        return 'Week'
+      } else if (state === 'MONTHLY') {
+        return 'Month'
+      } else if (state === 'YEARLY') {
+        return 'Year'
+      }
+    }
+    
     return (
-      <div>
-      <div className='add-event' onClick={this.openModal}>
-        Add event
+    <div>
+      <div className='voice-glyph'>
+        <Glyphicon glyph="volume-up" /> 
       </div>
-        <Modal
-          className="ModalClass"
-          overlayClassName="OverlayClass"
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-        >
-          <div>
-            <form className="calendar-form" onSubmit={this.handleSubmit}>
-              <div className="calendar-form-title"> How's this look? </div>
-              <div>
-                Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event" onChange={this.handleChange} />
-              </div>
-              <div>
-                Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location" onChange={this.handleChange} />
-              </div>
-              <div>
-                Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="Date" onChange={this.handleChange} />
-              </div>
-              <div>
-                Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="Time" onChange={this.handleChange} />
-              </div>
-              <div> Repeats:
-                <select className='Repeat' onChange={this.handleChange}>
-                  <option value='DAILY'>Daily</option>
-                  <option value='WEEKLY'>Weekly</option>
-                  <option value='MONTHLY'>Monthly</option>
-                  <option value='YEARLY'>Yearly</option>
-                </select>
-                Repeat Every:
-                <select className='Repeat-Every' onChange={this.handleChange}>
-                  <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                  <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
-                  <option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option>
-                  <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
-                  <option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option>
-                  <option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option>
-                  <option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option>
-                  <option value="28">28</option><option value="29">29</option><option value="30">30</option>
-                </select>
-                {day()}
-                  <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='MO'/>Monday</label>
-                  <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TU'/>Tuesday</label>
-                  <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='WE'/>Wednesday</label>
-                  <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TH'/>Thursday</label>
-                  <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='FR'/>Friday</label>
-                  <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SA'/>Saturday</label>
-                  <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SU'/>Sunday</label>
-              </div>
+      <div className='add-event-glyph' onClick={this.openModal}>
+        <Glyphicon glyph="plus" />
+      </div>
 
-              <div>
-                <button type="button" onClick={this.closeModal}> Nah </button>
-                <button type="submit" value="Looks good!" onClick={this.handleSubmit}>Looks Good </button>
-              </div>
-            </form>
-          </div>
-        </Modal>
-      </div>
+      <Modal className="ModalForm" show={this.state.modalIsOpen} onHide={this.closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title> 
+            <div className="calendar-form-title">Add an event</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="ModalFormBody">
+          <form className="calendar-form" onSubmit={this.handleSubmit}>
+            <div>
+              Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event" onChange={this.handleChange} />
+            </div>
+            <div>
+              Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location" onChange={this.handleChange} />
+            </div>
+            <div>
+              Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="Date" onChange={this.handleChange} />
+            </div>
+            <div>
+              Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="Time" onChange={this.handleChange} />
+            </div>
+
+            <div> Repeats:
+              <select className='Repeat' onChange={this.handleChange}>
+                <option value='DAILY'>Daily</option>
+                <option value='WEEKLY'>Weekly</option>
+                <option value='MONTHLY'>Monthly</option>
+                <option value='YEARLY'>Yearly</option>
+              </select>
+              Repeat Every:
+              <select className='Repeat-Every' onChange={this.handleChange}>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+                <option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option>
+                <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+                <option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option>
+                <option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option>
+                <option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option>
+                <option value="28">28</option><option value="29">29</option><option value="30">30</option>
+              </select>
+              {day()}
+                <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='MO'/>Monday</label>
+                <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TU'/>Tuesday</label>
+                <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='WE'/>Wednesday</label>
+                <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TH'/>Thursday</label>
+                <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='FR'/>Friday</label>
+                <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SA'/>Saturday</label>
+                <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SU'/>Sunday</label>
+            </div>
+
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+            <div>
+              <Button bsSize="small" onClick={this.closeModal}> Nah </Button>
+              <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good </Button>
+            </div>
+        </Modal.Footer>
+      </Modal>
+    </div>
     );
   }
 }

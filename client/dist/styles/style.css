@@ -4,13 +4,31 @@ body {
   background:
     url("https://unsplash.it/1440/900?random")
     center center / 100% 100%
-    fixed
+    fixed;
+  cursor: default;
 }
 
-button {
+.signin {
+  width: 191px;
+  height: 46px;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.signin:hover {
+  cursor: pointer;
+}
+
+.btn {
   font-size: 100%;
-  font-weight: 100;
-  margin: 2px;
+  font-weight: 200;
+  color: #72c5f7;
+  background-color: rgba(0, 0, 0, 0);
+
+  /*color: black;*/
 }
 
 .today {
@@ -18,8 +36,7 @@ button {
   /*display: block;*/
   top: 15%;
   left: 50%;
-  width: 70%;
-  margin-top: 70px;
+  width: 45%;
   text-align: center;
   /*font-size: 700%;*/
   transform: translateX(-50%) translateY(-50%);
@@ -27,8 +44,7 @@ button {
 
 .time {
   font-size: 700%;
-  font-weight: 500;
-
+  font-weight: 200;
 }
 
 .date {
@@ -37,76 +53,77 @@ button {
 }
 
 .time:hover {
-  background-color: black;
-  opacity: .80;
-}
-
-.date:hover {
-  background-color: black;
-  opacity: .80;
+/*  background-color: black;
+  opacity: .80;*/
 }
 
 .calendar {
   position: absolute;
   /*display: block;*/
-  top: 35%;
+  top: 25%;
   left: 50%;
   transform: translateX(-50%);
-  width: 30%;
-  margin-top: 20px;
-  /*text-align: center;*/
+  width: 40%;
+  text-align: center;
+  font-weight: 100;
+  color: white;
 }
 
 .calendar-title {
   font-size: 350%;
-  font-weight: 400;
-  text-align: center;
 }
 
 .calendar-title:hover {
-  background-color: black;
-  opacity: .75;
-}
-
-.calendar-entry {
-  margin-top: 7.5px;
-  margin-bottom: 7.5px;
-  font-weight: 100;
-  text-align: center;
+/*  background-color: black;
+  opacity: .75;*/
 }
 
 .calendar-entry:hover {
-  background-color: black;
-  opacity: .75;
+/*  background-color: black;
+  opacity: .75;*/
 }
 
 .event-start {
-  font-size: 200%;
+  font-size: 180%;
 }
 
 .event-summary-location {
-  font-size: 160%;
+  font-size: 150%;
 }
 .event-link {
   color: white;
 }
 .event-link:hover {
-  color: aquamarine;
+  color: #72c5f7;
+  cursor: pointer;
 }
 
 .add-event {
   position: fixed;
   top: 2%;
   right: 2%;
-  width: 70px;
-  height: 20px;
-  text-align: center;
-  line-height: 20px;
-  color: aquamarine;
-  background-color: black;
 }
 
-.add-event:hover {
+.add-event-glyph {
+  position: absolute;
+  left: 7%;
+  bottom: 2%;
+  font-size: 150%;
+}
+
+
+.add-event-glyph:hover {
+  cursor: pointer;
+}
+
+.voice-glyph {
+  position: absolute;
+  left: 4.5%;
+  bottom: 2%;
+  font-size: 150%;
+}
+
+.voice-glyph:hover {
   cursor: pointer;
 }
 
@@ -115,20 +132,18 @@ button {
 }
 
 .calendar-form {
-  /*margin: auto;*/
   width: 100%;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  /*top: 50%;*/
+  /*transform: translateY(-50%);*/
   font-weight: 100;
   font-size: 160%;
-  text-align: center;
+  text-align: left;
 }
 
 .calendar-form-title {
   font-size: 200%;
-  font-weight: 300;
-  margin-bottom: 5px;
+  font-weight: 100;
 }
 
 input {
@@ -143,14 +158,24 @@ input {
   font-size: 100%;
 }
 
-.ModalClass {
+.ModalForm {
   position: absolute;
   top: 15%;
   left: 5%;
   right: 5%;
   bottom: 15%;
+  color: black;
+  font-weight: 100;
+/*  top: 25%;
+  left: 32.5%;
+  right: 32.5%;
+  bottom: 35%;*/
   /*border: 1px, dotted, black;*/
-  background-color: black;
+  /*background-color: black;*/
+}
+
+.ModalFormBody {
+  height: 300px;
 }
 
 .OverlayClass {
@@ -163,13 +188,15 @@ input {
   opacity: .90;
 }
 
-.wheel{
+.settings-glyph{
   position: absolute;
-  top: 90%;
+  left: 2%;
+  bottom: 2%;
+  font-size: 150%;
 }
 
-.wheel img{
-  width: 40px
+.settings-glyph:hover {
+  cursor: pointer;
 }
 
 .trans-mode{

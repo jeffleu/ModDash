@@ -1,6 +1,7 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
-class Login extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -33,26 +34,16 @@ class Login extends React.Component {
     // or no log out button and they just have to uninstall the extension
     location.reload();
   }
-          // <div onClick={this.logout}>
-          // Log out
-          // </div>
 
   render() {
-    if (!localStorage.getItem('token')) {
-      return (
-        <div>
-          <div onClick={this.login}>
-            Sign in
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-        </div>
-      )
-    }
+    let signInButton = <img className="signin" src="/assets/google_signin.png" onClick={this.login}/>
+
+    return (
+      <div>
+        {localStorage.getItem('token') ? null : signInButton}
+      </div>
+    )
   }
 }
 
-export default Login;
+export default SignIn;

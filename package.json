@@ -9,7 +9,10 @@
     "dev:hot": "nodemon server/server.js & webpack --watch & open -a \"Google Chrome\" http://localhost:3000",
     "dev": "node_modules/.bin/webpack-dev-server --progress --inline --hot",
     "initDB": "sh server/db/dbinit.sh",
-    "build": "webpack --watch"
+    "build": "webpack --watch",
+    "lint": "npm run lint:node && npm run lint:browser",
+    "lint:node": "eslint --config=.eslintrc server/*.js server/*/*.js",
+    "lint:browser": "eslint --config=.eslintrc client/src/*.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +33,7 @@
     "chai": "^3.5.0",
     "eslint": "^2.9.0",
     "eslint-config-airbnb": "^9.0.1",
+    "eslint-config-hackreactor": "github:hackreactor-labs/eslint-config-hackreactor",
     "eslint-plugin-import": "^1.10.3",
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.2.2",
