@@ -1,8 +1,8 @@
-const User = require('../db/queries').User;
+const User = require('../../db/queries').User;
 const requestPromise = require('request-promise');
-const googleMap = require('./map/googleMap');
+const googleMap = require('./googleMap');
 
-const getTrafficTime = event => {
+const getTrafficTime = (event) => {
   return User.getUserInfo(event.dataValues.userId)
   .then(data => requestPromise(googleMap.mapTraffic(data, event)))
   .then(body => {

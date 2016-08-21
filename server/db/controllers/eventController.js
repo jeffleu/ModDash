@@ -9,9 +9,7 @@ const db = require('../db.js');
 const insertEvent = (userId, data) => {
   console.log('data', data);
   return Event.findOrCreate({
-    where: {
-      googleCalendarEventId: data.id
-    },
+    where: { googleCalendarEventId: data.id },
     defaults: {
       userId: userId,
       name: data.summary,

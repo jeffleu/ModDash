@@ -1,5 +1,5 @@
 const User = require('../db/queries').User;
-const googleOAuth = require('./../setup/googleOAuth');
+const googleOAuth = require('../setup/googleOAuth');
 const jwt = require('jsonwebtoken');
 const uuid = require('node-uuid');
 
@@ -13,7 +13,7 @@ const extensionAuth = (req, res) => {
     .then(user => {
       if (user) {
         // put into pubnub module
-        var pubnubid = user.dataValues.pubnubid
+        var pubnubid = user.dataValues.pubnubid;
         
         if (!pubnubid) {
           pubnubid = uuid.v4();
@@ -51,4 +51,26 @@ const extensionAuth = (req, res) => {
   })
 };
 
-module.exports = extensionAuth;
+const authCallback = (req, res) => {
+  googleOAuth.googleCalAuthCallback(req.query.code)
+  .then((user) => {
+    User.findOrCreateUser(user.profile, user.tokens)
+    .spread((user, created) => {
+      if (created) { // this is for new users
+      // NOTE: REDIRECT THEM TO SPLASH PAGE HERE. 
+        res.redirect('/')
+      } else {
+      // Could redirect them to same splash page
+        res.redirect('/')
+      }
+    })
+  })
+  .catch(err => {
+    console.warn('Did not find user\'s profile in db for web oAuth', err);
+  });
+};
+
+module.exports = {
+  extensionAuth,
+  authCallback
+};

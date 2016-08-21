@@ -1,6 +1,6 @@
 const Event = require('../db/queries').Event;
 const agenda = require('./agenda');
-const getTrafficTime = require('../utility/getTrafficTime');
+const getTrafficTime = require('../utility/map/getTrafficTime');
 const sendLeaveNotification = require ('./sendLeaveNotification');
 
 const recurringCheck = (event) => {

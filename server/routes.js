@@ -1,45 +1,13 @@
 const path = require('path');
-const app = require('express')();
 const router = require('express').Router();
-//destructure with
-//const {
-// addEvent,
-// addTravel} = require(./utility/index.js)
 const GoogleAuthUrl = require('./setup/googleOAuth').url;
-const extensionAuth = require('./utility/extensionAuth');
-const authCallback = require('./utility/authCallback');
-const addEvent = require('./utility/addEvent');
-const addTravel = require('./utility/addTravel');
-const getUserGeolocation = require('./utility/getUserGeoLocation');
-const updateGeolocation = require('./utility/updateGeolocation');
-const getDayEvents = require('./utility/getDayEvents');
-const updateTransit = require('./utility/updateTransitMode');
+const AuthController = require('./controllers').Auth;
+const EventController = require('./controllers').Event;
+const UserController = require('./controllers').User;
 const queryTraffic = require('./workers/queryTraffic');
 const jwt = require('jsonwebtoken');
 
-//ALL ROUTES HERE
-
-// put this parent function elsewhere later, but for now keep it here to understand what is happening.
-// first add event, then add travel, then set up queryTraffic worker
-var addEventAndAddTravel = (req, res) => {
-// this is a composition function
-  //addEvent should not handle req or res,
-
-  // each function should be modular and pure.
-  addEvent(req, res)
-  // addEvent(userId, event)
-  .spread((event, created) => {
-    // res.send('event was added')
-    console.log('event was added, now adding travel', event.dataValues);
-    return addTravel(event);
-  })
-  .then(travel => {
-    console.log('travel was added, now scheduling queryTraffic worker');
-    queryTraffic(travel);
-  })
-};
-
-router.use(function(req, res, next) {
+router.use('/api', function(req, res, next) {
   var token = req.headers.authorization;
   if (token) {
       jwt.verify(token, process.env.JWT_SECRET, {issuer: 'NeverMissOut'}, function(err, decoded) {
@@ -60,32 +28,24 @@ router.use(function(req, res, next) {
 });
 
 // For testing purposes
-router.get('/api/test', (req, res) => {
-  res.sendStatus(200);
-});
+router.get('/api/test', (req, res) => { res.sendStatus(200); });
 
-// extensionAuth route
-app.post('/extensionAuth', extensionAuth);
-
-// webAuth routes
-app.get('/auth', (req, res) => {
-  res.redirect(GoogleAuthUrl);
-});
-
-// Google redirect after auth sign in to get code for access token/refresh token
-app.get('/verified', authCallback);
+// Auth Routes
+router.get('/auth', (req, res) => { res.redirect(GoogleAuthUrl); });
+router.get('/verified', AuthController.authCallback); // Google redirect after auth sign in to get code for access token/refresh token
+router.post('/extensionAuth', AuthController.extensionAuth);
 
 // Calendar Routes
-router.post('/api/calendar/addEvent', addEventAndAddTravel);
-router.get('/api/calendar/getDayEvents', getDayEvents);
+router.post('/api/calendar/addEvent', EventController.addEventAndAddTravel);
+router.get('/api/calendar/getDayEvents', EventController.getDayEvents);
 
 // this endpoint is not doing anything, it was just to trigger a function to fetch all of the user's events in the calendar, but we can do this on the auth callback page or elsewhere
 // router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
 
 // User Routes
 // router.get('/users/getUserInfo', )
-router.post('/api/users/updateTransit', updateTransit);
-router.get('/api/users/getGeolocation', getUserGeolocation);
-router.post('/api/users/updateGeolocation', updateGeolocation);
+router.post('/api/users/updateTransit', UserController.updateTransitMode);
+router.get('/api/users/getGeolocation', UserController.getGeolocation);
+router.post('/api/users/updateGeolocation', UserController.updateGeolocation);
 
 module.exports = router;
