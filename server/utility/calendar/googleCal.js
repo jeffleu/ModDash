@@ -10,7 +10,7 @@ calendar.events.list = Promise.promisify(calendar.events.list);
 
 const insertEvent = (auth, resource) => {
   let params = {
-    calendarId: 'primary', 
+    calendarId: 'primary',
     auth,
     resource
   };
@@ -31,7 +31,7 @@ const getAllEventsFromCalendar = (req, res) => {
       data.items.forEach(event => {
         Event.insertEvent(event, userId);
       });
-      res.send(data.items);      
+      res.send(data.items);
     });
   });
 };
