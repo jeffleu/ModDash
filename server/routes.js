@@ -11,7 +11,8 @@ const updateGeolocation = require('./utility/updateGeolocation');
 const getDayEvents = require('./utility/getDayEvents');
 const updateTransit = require('./utility/updateTransitMode');
 const queryTraffic = require('./workers/queryTraffic');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+
 
 //ALL ROUTES HERE
 

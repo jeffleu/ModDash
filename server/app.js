@@ -8,7 +8,6 @@ const session = require('express-session')
 const extensionAuth = require('./utility/extensionAuth');
 const GoogleAuthUrl = require('./setup/googleOAuth').url;
 const authCallback = require('./utility/authCallback');
-
 const router = require('./routes');
 
 app.use(bodyParser.json());

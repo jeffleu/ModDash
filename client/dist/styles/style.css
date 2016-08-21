@@ -145,10 +145,10 @@ input {
 
 .ModalClass {
   position: absolute;
-  top: 25%;
-  left: 32.5%;
-  right: 32.5%;
-  bottom: 35%;
+  top: 15%;
+  left: 5%;
+  right: 5%;
+  bottom: 15%;
   /*border: 1px, dotted, black;*/
   background-color: black;
 }

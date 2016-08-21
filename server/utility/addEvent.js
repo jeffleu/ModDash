@@ -6,6 +6,7 @@ const googleCal = require('./calendar/googleCal')
 
 // function(userId, eventDetails);
 const addEvent = function(req, res) {
+  console.log('request to gcal', req.body);
   return googleOAuth.getUserTokens(req.userId)
   .then((oauth2Client) => {
     return googleCal.insertEvent(oauth2Client, req.body)
@@ -13,8 +14,8 @@ const addEvent = function(req, res) {
   .then(data => {
     // res.send should be in the parent composition function
     res.sendStatus(200);
-    pubnub.publishEventAdded(req.userId, data); 
-    return EventController.insertEvent(req.userId, data);     
+    pubnub.publishEventAdded(req.userId, data);
+    return EventController.insertEvent(req.userId, data);
     // make everything look like this insertEvent function
   })
   .catch(err => {
