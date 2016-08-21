@@ -13,9 +13,9 @@ const mapTraffic = (data, event) => {
       units: 'imperial',
       traffic_model: 'best_guess'
     }
-  };
+  };  
   return options;
-}
+};
 
 const mapTravel = (data, event) => {
   console.log('inside map travel', data.dataValues);
@@ -33,7 +33,8 @@ const mapTravel = (data, event) => {
     }
   };
   return options;
-}
+};
+
 module.exports = {
   mapTraffic,
   mapTravel

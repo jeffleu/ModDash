@@ -1,10 +1,9 @@
-const EventController = require('../db/controllers').EventController;
-// const { EventController } = require('../db/controllers');
+const Event = require('../db/queries').Event;
 const agenda = require('./agenda');
-const getTrafficTime = require('../utility/getTrafficTime');
+const getTrafficTime = require('../utility/map/getTrafficTime');
 const sendLeaveNotification = require ('./sendLeaveNotification');
 
-const recurringCheck = function(event) {
+const recurringCheck = (event) => {
   console.log('inside recurringCheck');  
   const timeToCheckAgain = 180000; // 3 min
   getTrafficTime(event)
@@ -25,13 +24,13 @@ const recurringCheck = function(event) {
 };
 
 // define the job
-agenda.define('query traffic', function(job, done) {
+agenda.define('query traffic', (job, done) => {
   // this should probably be a setInterval to keep querying for Traffic time and then setting new notification job if it meets certain requirements. Interval ends when we pass the leave time.
   // for now we are just going to query traffic once at the scheduled time, which is double the initial estimate
   var travel = job.attrs.data;
   var eventId = travel.eventId;
 
-  return EventController.retrieveEvent(eventId)
+  return Event.retrieveEvent(eventId)
   .then(event => {
     recurringCheck(event);
     // console.log('event', event);
@@ -54,10 +53,10 @@ agenda.define('query traffic', function(job, done) {
 });
 
 // function for scheduling the job
-const queryTraffic = function (travel) {
+const queryTraffic = travel => {
   travel = travel.dataValues;
   console.log('scheduling a queryTraffic worker for destination', travel.destination,'to begin querying at', travel.queryTime)
   agenda.schedule(travel.queryTime, 'query traffic', travel);
-}
+};
 
 module.exports = queryTraffic;

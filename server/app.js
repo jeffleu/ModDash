@@ -5,14 +5,12 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./db/db.js');
 const session = require('express-session')
-const extensionAuth = require('./utility/extensionAuth');
 const GoogleAuthUrl = require('./setup/googleOAuth').url;
-const authCallback = require('./utility/authCallback');
 const router = require('./routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../client/public/dist/')));
+app.use(express.static(path.join(__dirname, '../client/dist/')));
 
 app.all('/*', function(req, res, next) {
   // access control allow origin has to be chrome:extension/chromeID
@@ -23,20 +21,9 @@ app.all('/*', function(req, res, next) {
    return next();
   }
   return res.sendStatus(204);
-})
-
-//MIDDLEWARE HERE
-app.use('/api', router);
-
-// extensionAuth route
-app.post('/extensionAuth', extensionAuth);
-
-// webAuth routes
-app.get('/auth', function(req, res) {
-  res.redirect(GoogleAuthUrl);
 });
-// google redirect after auth sign in to get code for access token/refresh token
-app.get('/verified', authCallback);
+
+app.use('/', router);
 
 // app.get('/', (req, res) => {
 //   // google username
@@ -46,7 +33,6 @@ app.get('/verified', authCallback);
 //   //   res.sendFile(path.join(__dirname + '/../client/public/dist/index.html'));
 //   //   res.send({auth: true, id: req.session.googleid})
 //   // }
-
 // });
 
 module.exports = app;
