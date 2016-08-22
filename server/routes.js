@@ -43,7 +43,7 @@ router.get('/api/calendar/getDayEvents', EventController.getDayEvents);
 // router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
 
 // User Routes
-// router.get('/users/getUserInfo', )
+router.get('/api/users/getTransit', UserController.getTransitMode);
 router.post('/api/users/updateTransit', UserController.updateTransitMode);
 router.get('/api/users/getGeolocation', UserController.getGeolocation);
 router.post('/api/users/updateGeolocation', UserController.updateGeolocation);
