@@ -43,10 +43,6 @@ class Setting extends React.Component {
   handleSubmit() {
     // e.preventDefault();
     var token = localStorage.getItem('token');
-<<<<<<< e68a40f046e03637377399e58d419554de39fd6f
-=======
-    console.log('client users token', token);
->>>>>>> Implemented Settings modal, but still in progress.
     var state = this.state.selectedOption;
     this.props.transitChange(state);
     var transit = {transit: state};
@@ -135,10 +131,5 @@ class Setting extends React.Component {
   //   );
   // }
 }
-<<<<<<< e68a40f046e03637377399e58d419554de39fd6f
 
 export default Setting;
-=======
-       
-export default Setting;
->>>>>>> Implemented Settings modal, but still in progress.
