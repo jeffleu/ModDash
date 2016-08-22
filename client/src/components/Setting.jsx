@@ -88,8 +88,6 @@ class Setting extends React.Component {
 
     return(
       <div>
-        <div className='displayTransit'>
-        </div>
         <div className='settings-glyph' onClick={this.clickSetting}> <Glyphicon glyph="cog" /></div>
         {this.state.showSettings ? radio : null}
       </div>
