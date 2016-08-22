@@ -51,6 +51,8 @@ class App extends React.Component {
     this.setState({
       displayTransitMode: value
     });
+
+    console.log('[App] App state transit mode set to', value);
   }
 
   displayTransitMode() {

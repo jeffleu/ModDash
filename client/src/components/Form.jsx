@@ -204,7 +204,7 @@ class Form extends React.Component {
       }
     };
 
-    var displayRecur =  <div> Repeats:
+    var displayRecur = <div> Repeats:
                   <select className='Repeat' onChange={this.handleChange}>
                     <option value='DAILY'>Daily</option>
                     <option value='WEEKLY'>Weekly</option>

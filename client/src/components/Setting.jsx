@@ -7,14 +7,20 @@ class Setting extends React.Component {
 
     this.state = {
       showSettings: false,
-      transitMode: '',
       phoneNumber: null
     };
+
+    // console.log('[Setting]: this.props.transitMode:', this.props.transitMode);
   }
 
-  // componentDidMount() {
-  //
-  // }
+  shouldComponentUpdate() {
+    // console.log('[Settings]: this.props.transitMode', this.props.transitMode);
+    if (this.props.transitMode) {
+      return true;
+    }
+
+    return false;
+  }
 
   showSettings() {
     this.setState({
@@ -28,23 +34,15 @@ class Setting extends React.Component {
     });
   }
 
-  handleChangeTransitMode(value) {
-    // e.preventDefault();
-    console.log('value', value);
-    this.setState({
-      selectedOption: value
-    });
-  }
-
   // TO DO: Need to refactor to handle transit mode and phone number update in DB
   handleSubmit() {
     // e.preventDefault();
     var token = localStorage.getItem('token');
-    var state = this.state.transmitMode;
+    var state = this.props.transitMode;
     this.props.transitChange(state);
     var transit = {transit: state};
 
-    console.log('transit', transit);
+    console.log('Updating transit mode in DB to:', transit);
     fetch('http://localhost:9000/api/users/updateTransit', {
       method: 'POST',
       body: JSON.stringify(transit),
@@ -82,20 +80,22 @@ class Setting extends React.Component {
           </Modal.Header>
           <Modal.Body className="settings-body">
             <form className="settings-form" onSubmit={this.handleSubmit}>
-              <RadioGroup name="transit" selectedValue={this.state.selectedOption} onChange={this.handleChangeTransitMode.bind(this)}>
+              <RadioGroup name="transit" selectedValue={this.props.transitMode} onChange={this.props.transitChange}>
                 Choose Your Transportation <br/>
                 <Radio value="driving" checked /> Driving <br/>
                 <Radio value="walking" /> Walking <br/>
                 <Radio value="transit" /> Transit <br/>
-                <Radio value="bicyling" /> Bicycling
+                <Radio value="bicycling" /> Bicycling
               </RadioGroup>
+
+
             </form>
           </Modal.Body>
           <Modal.Footer>
-              <div>
-                <Button bsSize="small" onClick={this.hideSettings.bind(this)}> Nah </Button>
-                <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good </Button>
-              </div>
+            <div>
+              <Button bsSize="small" onClick={this.hideSettings.bind(this)}> Nah </Button>
+              <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good </Button>
+            </div>
           </Modal.Footer>
         </Modal>
       </div>
