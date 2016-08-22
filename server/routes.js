@@ -1,6 +1,5 @@
 const path = require('path');
 const router = require('express').Router();
-const GoogleAuthUrl = require('./setup/googleOAuth').url;
 const AuthController = require('./controllers').Auth;
 const EventController = require('./controllers').Event;
 const UserController = require('./controllers').User;
@@ -10,11 +9,11 @@ const jwt = require('jsonwebtoken');
 router.use('/api', function(req, res, next) {
   var token = req.headers.authorization;
   if (token) {
-      jwt.verify(token, process.env.JWT_SECRET, {issuer: 'NeverMissOut'}, function(err, decoded) {
+    // tried to refactor to be jwt.verifyJWT function (see utility/auth/jwt.js)
+    jwt.verify(token, process.env.JWT_SECRET, {issuer: 'NeverMissOut'}, function(err, decoded) {
       if (err) {
         return res.json({ success: false, message: 'Failed to authenticate token, please log-in again'})
       } else {
-        console.log('decoded token object', decoded);
         req.userId = decoded.userId;
         next();
       }
@@ -31,9 +30,8 @@ router.use('/api', function(req, res, next) {
 router.get('/api/test', (req, res) => { res.sendStatus(200); });
 
 // Auth Routes
-router.get('/auth', (req, res) => { res.redirect(GoogleAuthUrl); });
+router.post('/auth', AuthController.authHandler);
 router.get('/verified', AuthController.authCallback); // Google redirect after auth sign in to get code for access token/refresh token
-router.post('/extensionAuth', AuthController.extensionAuth);
 
 // Calendar Routes
 router.post('/api/calendar/addEvent', EventController.addEventAndAddTravel);

@@ -5,7 +5,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./db/db.js');
 const session = require('express-session')
-const GoogleAuthUrl = require('./setup/googleOAuth').url;
 const router = require('./routes');
 
 app.use(bodyParser.json());
@@ -24,15 +23,5 @@ app.all('/*', function(req, res, next) {
 });
 
 app.use('/', router);
-
-// app.get('/', (req, res) => {
-//   // google username
-//   // console.log('req in every get', req.session);
-//   // if (typeof req.session.googleid !== 'undefined') {
-//   //   console.log('verified login: ', req.session.googleid);
-//   //   res.sendFile(path.join(__dirname + '/../client/public/dist/index.html'));
-//   //   res.send({auth: true, id: req.session.googleid})
-//   // }
-// });
 
 module.exports = app;

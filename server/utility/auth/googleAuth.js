@@ -1,20 +1,14 @@
-const User = require('../db/queries').User;
+const Promise = require('bluebird');
 const google = require('googleapis');
 const plus = google.plus('v1');
-const Promise = require('bluebird');
+const googleOAuth2 = require('../../setup/googleOAuth2');
+var oauth2Client = googleOAuth2.oauth2Client; 
+const url = googleOAuth2.url;
+
 plus.people.get = Promise.promisify(plus.people.get);
-var OAuth2 = google.auth.OAuth2;
-
-var oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, 'http://localhost:9000/verified');
-
 oauth2Client.getToken = Promise.promisify(oauth2Client.getToken);
 oauth2Client.refreshAccessToken = Promise.promisify(oauth2Client.refreshAccessToken);
 
-// generate consent page url with our required access scopes
-var url = oauth2Client.generateAuthUrl({
-  access_type: 'offline',
-  scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read', 'https://www.googleapis.com/auth/calendar'] 
-});
 
 const googleCalAuthCallback = (code) => {
   // not sure how to fix this promise chain because I need to return tokens and profile for the next function. 
@@ -60,9 +54,8 @@ const getUserTokens = (id) => {
 };
 
 module.exports = {
-  oauth2Client,
-  url,
   googleCalAuthCallback,
   extensionIdentityAuth,
-  getUserTokens
-};
+  getUserTokens,
+  url
+}
