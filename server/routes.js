@@ -9,11 +9,11 @@ const jwt = require('jsonwebtoken');
 router.use('/api', function(req, res, next) {
   var token = req.headers.authorization;
   if (token) {
-      jwt.verify(token, process.env.JWT_SECRET, {issuer: 'NeverMissOut'}, function(err, decoded) {
+    // tried to refactor to be jwt.verifyJWT function (see utility/auth/jwt.js)
+    jwt.verify(token, process.env.JWT_SECRET, {issuer: 'NeverMissOut'}, function(err, decoded) {
       if (err) {
         return res.json({ success: false, message: 'Failed to authenticate token, please log-in again'})
       } else {
-        console.log('decoded token object', decoded);
         req.userId = decoded.userId;
         next();
       }

@@ -1,6 +1,6 @@
 const User = require('../db/queries').User;
 const googleAuth = require('../utility/auth/googleAuth');
-const jwt = require('jsonwebtoken');
+const jwt = require('../utility/auth/jwt');
 
 const authHandler = (req, res) => {
   // do oAuth with the token that comes back from google
@@ -19,9 +19,7 @@ const authHandler = (req, res) => {
       };
       // if user is found, log them in and give them the token and unique pubnub channel
       if (user) {
-        var tokenOptions = { issuer: 'NeverMissOut' };
-
-        var token = jwt.sign({userId: user.dataValues.id}, process.env.JWT_SECRET, tokenOptions);
+        var token = jwt.signJWT(user.dataValues.id);
         
         res.json({
           success: true,
