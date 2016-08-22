@@ -8,8 +8,8 @@ class SignIn extends React.Component {
 
   login() {
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-      console.log(token);
-      fetch('http://localhost:9000/extensionAuth', {
+      console.log('chrome identity token:', token);
+      fetch('http://localhost:9000/auth', {
         method: 'POST',
         body: JSON.stringify({token: token}),
         mode: 'cors-with-forced-preflight',
@@ -19,10 +19,14 @@ class SignIn extends React.Component {
         return res.json();
       })
       .then(data => {
-        console.log('data back from extensionAuth', data);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('channel', data.channel);
-        location.reload();
+        if (data.url) {
+          // not found in database, so go to googleCal web auth url that is returned from server
+          location.assign(data.url);
+        } else {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('channel', data.channel);
+          location.reload();
+        }
       });
     });
   }

@@ -1,6 +1,6 @@
 const path = require('path');
 const router = require('express').Router();
-const GoogleAuthUrl = require('./setup/googleOAuth').url;
+// const GoogleAuthUrl = require('./setup/googleOAuth2').url;
 const AuthController = require('./controllers').Auth;
 const EventController = require('./controllers').Event;
 const UserController = require('./controllers').User;
@@ -31,9 +31,12 @@ router.use('/api', function(req, res, next) {
 router.get('/api/test', (req, res) => { res.sendStatus(200); });
 
 // Auth Routes
-router.get('/auth', (req, res) => { res.redirect(GoogleAuthUrl); });
+
+router.post('/auth', AuthController.authHandler);
+
+// router.get('/auth', (req, res) => { res.redirect(GoogleAuthUrl); });
 router.get('/verified', AuthController.authCallback); // Google redirect after auth sign in to get code for access token/refresh token
-router.post('/extensionAuth', AuthController.extensionAuth);
+// router.post('/extensionAuth', AuthController.extensionAuth);
 
 // Calendar Routes
 router.post('/api/calendar/addEvent', EventController.addEventAndAddTravel);

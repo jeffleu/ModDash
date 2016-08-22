@@ -1,18 +1,26 @@
 const User = require('../db/queries').User;
-const googleOAuth = require('../setup/googleOAuth');
+const googleAuth = require('../utility/auth/googleAuth');
 const jwt = require('jsonwebtoken');
 const uuid = require('node-uuid');
 
-const extensionAuth = (req, res) => {
+const authHandler = (req, res) => {
   // do oAuth with the token that comes back from google
-  googleOAuth.extensionIdentityAuth(req.body.token)
+  googleAuth.extensionIdentityAuth(req.body.token)
   .then(profile => {
-    console.log(`user ${profile.displayName} is doing extension auth`);
+    console.log(`user ${profile.displayName} is doing auth`);
     // auth the user by checking their googleId against our user table's googleID
     User.authUser(profile)
     .then(user => {
+      // if user is not found, send back the googleCal web auth url
+      if (!user) {
+        res.json({
+          message: 'please sign up with googleCal', 
+          url: googleAuth.url
+        }); 
+      };
+      // if user is found, log them in and give them a token and channel
       if (user) {
-        // put into pubnub module
+        // put this into pubnub module
         var pubnubid = user.dataValues.pubnubid;
         
         if (!pubnubid) {
@@ -20,10 +28,8 @@ const extensionAuth = (req, res) => {
           User.updatePubnub(user.dataValues.id, pubnubid);
         }
         
-        // put into jwt token module
         var tokenOptions = { issuer: 'NeverMissOut' };
 
-        // jwt.sign(payload, secretOrPrivateKey, options, [callback])
         var token = jwt.sign({userId: user.dataValues.id}, process.env.JWT_SECRET, tokenOptions);
         
         res.json({
@@ -32,15 +38,8 @@ const extensionAuth = (req, res) => {
           token,
           channel: pubnubid
         });
-      }
-      // if no user after they tried to log in with chrome.identity, 
-      // we res.redirect to our sign up auth that gives us calendar privileges,
-      // then that redirects them to our splash page telling them thank you for signing up and telling them of future features like twilio
-      // also some info about us, the creators
-      // then the window closes or we tell them to close the window
-      // now they are in our user table, we ask them to log in again after signing up
-      // seems reasonable, kinda shitty to make them sign up and then have to log in again but no way around it
-    });
+      };
+    })
   })
   .catch(err => {
     console.log('did not get users profile', err);
@@ -48,20 +47,22 @@ const extensionAuth = (req, res) => {
       success: false,
       message: 'please log in again'
     })
-  })
+  });
 };
 
 const authCallback = (req, res) => {
-  googleOAuth.googleCalAuthCallback(req.query.code)
+  googleAuth.googleCalAuthCallback(req.query.code)
   .then((user) => {
     User.findOrCreateUser(user.profile, user.tokens)
     .spread((user, created) => {
       if (created) { // this is for new users
       // NOTE: REDIRECT THEM TO SPLASH PAGE HERE. 
-        res.redirect('/')
+        // res.redirect('/')
+      res.send('splash page');
       } else {
       // Could redirect them to same splash page
-        res.redirect('/')
+        // res.redirect('/')
+      res.send('splash page');
       }
     })
   })
@@ -70,7 +71,12 @@ const authCallback = (req, res) => {
   });
 };
 
+// const authHandler = (req, res) => {
+
+// }
+
 module.exports = {
-  extensionAuth,
-  authCallback
+  // extensionAuth,
+  authCallback,
+  authHandler
 };

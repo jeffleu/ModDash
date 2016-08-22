@@ -3,7 +3,7 @@ const addEvent = require('../utility/calendar/addEvent');
 const addTravel = require('../utility/map/addTravel');
 const queryTraffic = require('../workers/queryTraffic');
 const google = require('googleapis');
-const googleOAuth = require('../setup/googleOAuth');
+const googleAuth = require('../utility/auth/googleAuth');
 const Promise = require('bluebird');
 const calendar = google.calendar('v3');
 calendar.events.list = Promise.promisify(calendar.events.list);
@@ -35,8 +35,8 @@ const getDayEvents = (req, res) => {
 
 // Currently not in use. Need to fix this.
 const getAllEventsFromCalendar = (req, res) => {
-  return googleOAuth.getUserTokens(req.userId)
-  .then(data => {
+  return googleAuth.getUserTokens(req.userId)
+  .then(oauth2Client => {
     calendar.events.list({
       auth: oauth2Client,
       calendarId: 'primary',
