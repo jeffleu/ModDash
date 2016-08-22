@@ -27,7 +27,7 @@ const subscribe = () => {
       message: function(data) {
         sendNotification(data);
       }
-    });    
+    });
   } else {
     setTimeout(subscribe, 10000);
     // check every 10 seconds to see if user is logged in and has a channel to subscribe to for notifications
@@ -68,6 +68,18 @@ const sendEventAddedNotification = (data) => {
 }
 
 const sendTimeToLeaveNotification = (data) => {
+  let transit = (data) => {
+    if (data.transit === 'driving') {
+      return 'data=!4m2!4m1!3e0';
+    } else if (data.transit === 'bicycling') {
+      return 'data=!4m2!4m1!3e1';
+    } else if (data.transit === 'walking') {
+      return 'data=!4m2!4m1!3e2';
+    } else if (data.transit === 'transit') {
+      return 'data=!4m2!4m1!3e3';
+    }
+  };
+
   let start = moment(data.startdatetime).format('LT');
   let leave = {
     type: 'basic',
@@ -80,7 +92,7 @@ const sendTimeToLeaveNotification = (data) => {
     }]
   };
   chrome.notifications.onButtonClicked.addListener(function() {
-    window.open(`https://www.google.com/maps/dir/${data.origin}/${data.location}`);
+    window.open(`https://www.google.com/maps/dir/${data.origin}/${data.location}/${transit(data)}`);
   });
 
   chrome.notifications.create(leave, function() {
