@@ -1,6 +1,6 @@
 const User = require('../db/queries').User;
 const agenda = require('./agenda');
-const pubnub = require('./../setup/pubnub');
+const pubnub = require('../utility/notification/pubnub');
 const newTwilioMessage = require('../utility/notification/twilio');
 
 agenda.define('send leave notification', (job, done) => {
