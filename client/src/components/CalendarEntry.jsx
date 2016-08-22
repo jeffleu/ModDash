@@ -67,7 +67,6 @@ class CalendarEntry extends React.Component {
         </div>
     );
   }
-
 }
 
 export default CalendarEntry;
