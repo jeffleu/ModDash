@@ -53,17 +53,18 @@ const sendEventAddedNotification = (data) => {
     title: 'Your Calendar Event Has Been Added!',
     message: data.location + '\n' + start + ' - ' + end,
     iconUrl: './../assets/emoji_calendar1.png',
-    // iconUrl: './../assets/sonic-dash.gif',
     buttons: [{
       title: 'Click To See Event Details'
     }]
   };
-  chrome.notifications.onButtonClicked.addListener(function() {
-    window.open(data.htmlLink);
-  });
 
-  chrome.notifications.create(notify, function() {
+  chrome.notifications.create(notify, function(id) {
     console.log('created event added notification!');
+    chrome.notifications.onButtonClicked.addListener(function(clickId) {
+      if (id === clickId) {
+        window.open(data.htmlLink);
+      }
+    });
   });
 }
 
@@ -86,16 +87,17 @@ const sendTimeToLeaveNotification = (data) => {
     title: `Time to Leave for ${data.name} at ${data.location}!`,
     message: `Your event is at ${start}, and it will take about ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
     iconUrl: './../assets/emoji_rocket.png',
-    // iconUrl: './../assets/sonic-sega.png',
     buttons: [{
       title: 'Click To See Map Details'
     }]
   };
-  chrome.notifications.onButtonClicked.addListener(function() {
-    window.open(`https://www.google.com/maps/dir/${data.origin}/${data.location}/${transit(data)}`);
-  });
 
-  chrome.notifications.create(leave, function() {
+  chrome.notifications.create(leave, function(id) {
     console.log('created time to leave notification!');
+    chrome.notifications.onButtonClicked.addListener(function(clickId) {
+      if (clickId === id) {
+        window.open(`https://www.google.com/maps/dir/${data.origin}/${data.location}/${transit(data)}`);
+      }
+    });
   });
 }
