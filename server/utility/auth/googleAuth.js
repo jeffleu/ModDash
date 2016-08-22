@@ -2,9 +2,9 @@ const Promise = require('bluebird');
 const google = require('googleapis');
 const plus = google.plus('v1');
 const googleOAuth2 = require('../../setup/googleOAuth2');
+const User = require('../../db/queries/userQueries');
 var oauth2Client = googleOAuth2.oauth2Client; 
 const url = googleOAuth2.url;
-
 plus.people.get = Promise.promisify(plus.people.get);
 oauth2Client.getToken = Promise.promisify(oauth2Client.getToken);
 oauth2Client.refreshAccessToken = Promise.promisify(oauth2Client.refreshAccessToken);
