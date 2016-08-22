@@ -13,10 +13,13 @@ const updateGeolocation = (req, res) => {
 };
 
 const getTransitMode = (req, res) => {
-  return User.getUserTransitMode(req.userId)
-    .then((data) => { console.log('huh', data) })
+  console.log('am i getting here', req.userId);
+  return User.getUserInfo(req.userId)
+    .then((data) => { res.send(data.dataValues)} )
     .catch((err) => { res.sendStatus(404); });
 };
+
+
 
 const updateTransitMode = (req, res) => User.updateUserTransitMode(req.userId, req.body.transit);
 

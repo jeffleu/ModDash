@@ -11,7 +11,8 @@ const findOrCreateUser = (profile, tokens) => {
       firstName: profile.name.givenName,
       email: profile.emails[0].value,
       refreshToken: tokens.refresh_token,
-      accessToken: tokens.access_token
+      accessToken: tokens.access_token,
+      transitmode: 'driving'
     }
   });
 };

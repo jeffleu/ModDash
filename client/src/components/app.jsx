@@ -11,8 +11,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: []
-    }
+      events: [],
+      displayTransitMode: ''
+    };
   }
 
   fetchAndUpdateEvents() {
@@ -42,7 +43,41 @@ class App extends React.Component {
     })
     .catch((err) => {
       console.log('Error retrieving events', err);
+    });
+  }
+  //
+  handleTransChange(value) {
+    this.setState({
+      displayTransitMode: value
     })
+  }
+
+  displayTransitMode() {
+    var token = localStorage.getItem('token');
+
+    fetch('http://localhost:9000/api/users/getTransit', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': token
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        // this.setState({
+        //   selectedOption: data.transitmode
+        // })
+        // pass data back to app jsx
+        console.log('setting data', data);
+        this.setState({
+          displayTransitMode: data.transitmode
+        });
+      })
+      .catch((err) => {
+        console.log('Did not get User info', err);
+      });
   }
 
   sortAndUpdateEvents(eventList) {
@@ -69,6 +104,8 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchAndUpdateEvents();
+    this.displayTransitMode();
+
   }
 
   render() {
@@ -78,7 +115,8 @@ class App extends React.Component {
           <SignIn />
         </div>
         <div>
-          {}
+        Transportation Mode:
+        {this.state.displayTransitMode}
         </div>
         <div>
           <Time />
@@ -90,7 +128,7 @@ class App extends React.Component {
           <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands}/>
         </div>
         <div>
-          <Setting />
+          <Setting transitChange={this.handleTransChange.bind(this)}/>
         </div>
       </div>
     );

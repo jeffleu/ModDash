@@ -3,7 +3,7 @@ import {RadioGroup, Radio} from 'react-radio-group';
 import { Glyphicon } from 'react-bootstrap';
 class Setting extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       showSettings: false,
       selectedOption: ''
@@ -12,20 +12,7 @@ class Setting extends React.Component {
   }
 
   // componentDidMount() {
-  //   var token = localStorage.getItem('token');
-
-    // fetch('http://localhost:9000/api/users/getUserInfo')
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     this.setState({
-    //       selectedOption: data.transitmode
-    //     })
-    //   })
-    //   .catch((err) => {
-    //     console.log('Did not get User info', err);
-    //   })
+  //
   // }
 
   clickSetting() {
@@ -52,9 +39,8 @@ class Setting extends React.Component {
   handleSubmit() {
     // e.preventDefault();
     var token = localStorage.getItem('token');
-    console.log('client users token', token)
     var state = this.state.selectedOption;
-    console.log('state', state);
+    this.props.transitChange(state);
     var transit = {transit: state};
 
     console.log('transit', transit);
@@ -102,11 +88,13 @@ class Setting extends React.Component {
 
     return(
       <div>
+        <div className='displayTransit'>
+        </div>
         <div className='settings-glyph' onClick={this.clickSetting}> <Glyphicon glyph="cog" /></div>
         {this.state.showSettings ? radio : null}
       </div>
     )
   }
 }
-       
+
 export default Setting;
