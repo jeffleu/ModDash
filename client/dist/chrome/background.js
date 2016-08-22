@@ -69,17 +69,18 @@ const sendEventAddedNotification = (data) => {
 }
 
 const sendTimeToLeaveNotification = (data) => {
-  let transit = (data) => {
-    if (data.transit === 'driving') {
-      return 'data=!4m2!4m1!3e0';
-    } else if (data.transit === 'bicycling') {
-      return 'data=!4m2!4m1!3e1';
-    } else if (data.transit === 'walking') {
-      return 'data=!4m2!4m1!3e2';
-    } else if (data.transit === 'transit') {
-      return 'data=!4m2!4m1!3e3';
-    }
+
+  const googleTransitMode = {
+    driving: 'data=!4m2!4m1!3e0',
+    bicycling: 'data=!4m2!4m1!3e1',
+    walking: 'data=!4m2!4m1!3e2',
+    transit: 'data=!4m2!4m1!3e3'
+  }
+
+  const iconUrl = {
   };
+
+
 
   let start = moment(data.startdatetime).format('LT');
   let leave = {
@@ -96,7 +97,7 @@ const sendTimeToLeaveNotification = (data) => {
     console.log('created time to leave notification!');
     chrome.notifications.onButtonClicked.addListener(function(clickId) {
       if (clickId === id) {
-        window.open(`https://www.google.com/maps/dir/${data.origin}/${data.location}/${transit(data)}`);
+        window.open(`https://www.google.com/maps/dir/${data.origin}/${data.location}/${googleTransitMode[data.transit]}`);
       }
     });
   });
