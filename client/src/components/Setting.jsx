@@ -43,7 +43,7 @@ class Setting extends React.Component {
   handleSubmit() {
     // e.preventDefault();
     var token = localStorage.getItem('token');
-    var state = this.state.selectedOption;
+    var state = this.state.transmitMode;
     this.props.transitChange(state);
     var transit = {transit: state};
 

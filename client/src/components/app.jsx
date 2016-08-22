@@ -10,6 +10,7 @@ import commands from '../scripts/commands.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       events: [],
       displayTransitMode: ''
@@ -125,7 +126,7 @@ class App extends React.Component {
           <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands}/>
         </div>
         <div>
-          <Setting transitChange={this.handleTransChange.bind(this)}/>
+          <Setting transitChange={this.handleTransChange.bind(this)} transitMode={this.state.displayTransitMode} />
         </div>
       </div>
     );
