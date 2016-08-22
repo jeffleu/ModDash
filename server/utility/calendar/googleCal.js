@@ -1,18 +1,24 @@
-const Promise = require('bluebird');
+const googleAuth = require('../auth/googleAuth');
 const google = require('googleapis');
 var calendar = google.calendar('v3');
+const Promise = require('bluebird');
 
 calendar.events.insert = Promise.promisify(calendar.events.insert);
 calendar.events.list = Promise.promisify(calendar.events.list);
 
-const insertEvent = (auth, resource) => {
-  var params = {
-    calendarId: 'primary', 
-    auth,
-    resource
-  };
-
-  return calendar.events.insert(params);
+const addEventToGoogleCal = (userId, event) => {
+  return googleAuth.getUserTokens(userId)
+  .then(oauth2Client => {
+    var params = {
+      calendarId: 'primary', 
+      auth: oauth2Client,
+      resource: eventDetails
+    };
+    return calendar.events.insert(params);
+  })
+  .catch(err => {
+    console.warn('error in adding event to Google Calendar:', err);
+  });
 };
 
 const getAllEventsFromCalendar = (req, res) => {
@@ -35,6 +41,6 @@ const getAllEventsFromCalendar = (req, res) => {
 };
 
 module.exports = {
-  insertEvent,
-  getAllEventsFromCalendar
+  addEventToGoogleCal,
+  getAllEventsFromGoogleCal
 };
