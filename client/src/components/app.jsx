@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Time from './Time.jsx';
-import Calendar from './Calendar.jsx'
+import Calendar from './Calendar.jsx';
 import Form from './Form.jsx';
 import SignIn from './SignIn.jsx';
 import Setting from './Setting.jsx';
@@ -39,17 +39,17 @@ class App extends React.Component {
           };
         });
 
-      this.sortAndUpdateEvents(eventList);
-    })
+        this.sortAndUpdateEvents(eventList);
+      })
     .catch((err) => {
       console.log('Error retrieving events', err);
     });
   }
-  //
+  
   handleTransChange(value) {
     this.setState({
       displayTransitMode: value
-    })
+    });
   }
 
   displayTransitMode() {
@@ -62,9 +62,7 @@ class App extends React.Component {
         'authorization': token
       }
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         // this.setState({
         //   selectedOption: data.transitmode
@@ -105,7 +103,6 @@ class App extends React.Component {
   componentDidMount() {
     this.fetchAndUpdateEvents();
     this.displayTransitMode();
-
   }
 
   render() {

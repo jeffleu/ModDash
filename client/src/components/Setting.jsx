@@ -1,44 +1,52 @@
 import React from 'react';
-import {RadioGroup, Radio} from 'react-radio-group';
-import { Glyphicon } from 'react-bootstrap';
+import { RadioGroup, Radio } from 'react-radio-group';
+import { Button, closeButton, Glyphicon, Modal } from 'react-bootstrap';
 class Setting extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showSettings: false,
-      selectedOption: ''
+      transitMode: '',
+      phoneNumber: null
     };
-    this.clickSetting = this.clickSetting.bind(this);
+
+    // this.showSettings.bind(this);
+    // this.hideSettings.bind(this);
   }
 
   // componentDidMount() {
   //
   // }
 
-  clickSetting() {
-    if(this.state.showSettings === false) {
-      this.setState({
-        showSettings: true
-      })
-    } else {
-      this.setState({
-        showSettings: false
-      })
-    }
+  showSettings() {
+    this.setState({
+      showSettings: true
+    });
   }
 
-  handleChange(value) {
+  hideSettings() {
+    this.setState({
+      showSettings: false
+    });
+  }
+
+  handleChangeTransitMode(value) {
     // e.preventDefault();
-    console.log('value', value)
+    console.log('value', value);
     this.setState({
       selectedOption: value
-    })
+    });
   }
 
-
+  // TO DO: Need to refactor to handle transit mode and phone number update in DB
   handleSubmit() {
     // e.preventDefault();
     var token = localStorage.getItem('token');
+<<<<<<< e68a40f046e03637377399e58d419554de39fd6f
+=======
+    console.log('client users token', token);
+>>>>>>> Implemented Settings modal, but still in progress.
     var state = this.state.selectedOption;
     this.props.transitChange(state);
     var transit = {transit: state};
@@ -53,46 +61,84 @@ class Setting extends React.Component {
         'authorization': token
       }
     })
-    .then((res) => {
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((data) => {
       console.log('responded back with', data);
     })
     .catch((err) => {
       console.log('did not save mode to db', err);
-    })
+    });
+
     this.setState({
       showSettings: false
-    })
+    });
   }
-
 
   render() {
-    let radio =
-    <div className='trans-mode'>
-          <div>
-            <RadioGroup  name="transit"  selectedValue={this.state.selectedOption} onChange={this.handleChange.bind(this)}>
-              Choose Your Transportation <br/>
-
-              <Radio value="driving" />Driving <br/>
-              <Radio value="walking" />Walking <br/>
-              <Radio value="transit" />Transit <br/>
-              <Radio value="bicyling" />Bicycling
-            </RadioGroup>
-          </div>
-          <div className='radio-button'>
-            <button type='button'  onClick={this.handleSubmit.bind(this)}>Submit</button>
-          </div>
-        </div>;
-
-    return(
+    return (
       <div>
-        <div className='settings-glyph' onClick={this.clickSetting}> <Glyphicon glyph="cog" /></div>
-        {this.state.showSettings ? radio : null}
+        <div className='settings-glyph' onClick={this.showSettings.bind(this)}>
+          <Glyphicon glyph="cog" />
+        </div>
+
+        <Modal className="ModalForm" show={this.state.showSettings} onHide={this.hideSettings.bind(this)}>
+          <Modal.Header closeButton>
+            <Modal.Title> 
+              <div className="settings-title">Settings</div>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="settings-body">
+            <form className="settings-form" onSubmit={this.handleSubmit}>
+              <RadioGroup name="transit" selectedValue={this.state.selectedOption} onChange={this.handleChangeTransitMode.bind(this)}>
+                Choose Your Transportation <br/>
+                <Radio value="driving" /> Driving <br/>
+                <Radio value="walking" /> Walking <br/>
+                <Radio value="transit" /> Transit <br/>
+                <Radio value="bicyling" /> Bicycling
+              </RadioGroup>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+              <div>
+                <Button bsSize="small" onClick={this.hideSettings.bind(this)}> Nah </Button>
+                <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good </Button>
+              </div>
+          </Modal.Footer>
+        </Modal>
       </div>
-    )
+    );
   }
+
+  // render() {
+  //   let radio =
+  //   <div className='trans-mode'>
+  //     <div>
+  //       <RadioGroup name="transit" selectedValue={this.state.selectedOption} onChange={this.handleChangeTransitMode.bind(this)}>
+  //         Choose Your Transportation <br/>
+
+  //         <Radio value="driving" /> Driving <br/>
+  //         <Radio value="walking" /> Walking <br/>
+  //         <Radio value="transit" /> Transit <br/>
+  //         <Radio value="bicyling" /> Bicycling
+  //       </RadioGroup>
+  //     </div>
+  //     <div className='radio-button'>
+  //       <button type='button' onClick={this.handleSubmit.bind(this)}>Submit</button>
+  //     </div>
+  //   </div>;
+
+  //   return (
+  //     <div>
+  //       <div className='settings-glyph' onClick={this.clickSetting}> <Glyphicon glyph="cog" /></div>
+  //       {this.state.showSettings ? radio : null}
+  //     </div>
+  //   );
+  // }
 }
+<<<<<<< e68a40f046e03637377399e58d419554de39fd6f
 
 export default Setting;
+=======
+       
+export default Setting;
+>>>>>>> Implemented Settings modal, but still in progress.

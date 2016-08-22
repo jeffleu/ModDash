@@ -14,11 +14,9 @@ const updateGeolocation = (req, res) => {
 
 const getTransitMode = (req, res) => {
   return User.getUserInfo(req.userId)
-    .then((data) => { res.send(data.dataValues)} )
+    .then((data) => { res.send(data.dataValues)}; )
     .catch((err) => { res.sendStatus(404); });
 };
-
-
 
 const updateTransitMode = (req, res) => User.updateUserTransitMode(req.userId, req.body.transit);
 
