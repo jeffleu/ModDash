@@ -52,7 +52,7 @@ const sendEventAddedNotification = (data) => {
     type: 'basic',
     title: 'Your Calendar Event Has Been Added!',
     message: data.location + '\n' + start + ' - ' + end,
-    iconUrl: './../assets/emoji_calendar1.png',
+    iconUrl: '../assets/emoji_calendar1.png',
     buttons: [{
       title: 'Click To See Event Details'
     }]
@@ -78,6 +78,10 @@ const sendTimeToLeaveNotification = (data) => {
   }
 
   const iconUrl = {
+    driving: '../assets/emoji_driving.png',
+    bicycling: '../assets/emoji_bicycle2.png',
+    walking: '../assets/emoji_walking.png',
+    transit: '../assets/emoji_transit.png'
   };
 
 
@@ -87,7 +91,7 @@ const sendTimeToLeaveNotification = (data) => {
     type: 'basic',
     title: `Time to Leave for ${data.name} at ${data.location}!`,
     message: `Your event is at ${start}, and it will take about ${Math.ceil(((parseInt(data.traffic) / 60) / 1000))} minutes to get there`,
-    iconUrl: './../assets/emoji_rocket.png',
+    iconUrl: iconUrl[data.transit],
     buttons: [{
       title: 'Click To See Map Details'
     }]
