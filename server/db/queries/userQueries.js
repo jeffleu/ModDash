@@ -1,7 +1,6 @@
 const User = require('../models').User;
+const uuid = require('node-uuid');
 // const { User } = require('../models');
-// const googleOAuth = require('./../../setup/googleOAuth');
-// var oauth2Client = googleOAuth.oauth2Client;
 
 const findOrCreateUser = (profile, tokens) => {
   return User.findOrCreate({
@@ -12,7 +11,8 @@ const findOrCreateUser = (profile, tokens) => {
       email: profile.emails[0].value,
       refreshToken: tokens.refresh_token,
       accessToken: tokens.access_token,
-      transitmode: 'driving'
+      transitmode: 'driving',
+      pubnubid: uuid.v4()
     }
   });
 };
@@ -22,26 +22,6 @@ const authUser = function(profile) {
     where: {googleid: profile.id}
   })
 }
-
-// TO DO: This needs to be fixed so that it's just doing User.findOne and returning the refreshToken as an attribute.
-// const getUserTokens = function(id) {
-//   return User.findOne({
-//     where: { id: id }
-//   })
-//   .then(data => {
-//     oauth2Client.setCredentials({
-//       refresh_token: data.dataValues.refreshToken
-//     });
-
-//     oauth2Client.refreshAccessToken((err, tokens) => {
-//       // console.log('token', tokens);
-//       oauth2Client.setCredentials({
-//         access_token: tokens.access_token,
-//         refresh_token: tokens.refresh_token
-//       });
-//     });
-//   });
-// };
 
 const getUserInfo = (id) => {
   console.log('============== [userController - getGeolocation]: userId =', id);
@@ -71,14 +51,6 @@ const updateUserTransitMode = (id, transit) => {
   .catch((err) => err);
 }
 
-const updatePubnub = (id, pubnubid) => {
-  return User.update(
-    { pubnubid: pubnubid },
-    { where: {id: id} })
-    .catch(err => {
-      console.log('failure to update pubnubid in user', err);
-    })
-};
 
 const getUser = (id) => {
   return User.findOne(
@@ -89,11 +61,8 @@ const getUser = (id) => {
 module.exports = {
   findOrCreateUser,
   authUser,
-  // getUserTokens,
-  // getGeolocation,
   getUserInfo,
   updateUserTransitMode,
   updateUserGeolocation,
-  updatePubnub,
   getUser
 };

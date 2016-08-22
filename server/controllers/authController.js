@@ -1,7 +1,6 @@
 const User = require('../db/queries').User;
 const googleAuth = require('../utility/auth/googleAuth');
 const jwt = require('jsonwebtoken');
-const uuid = require('node-uuid');
 
 const authHandler = (req, res) => {
   // do oAuth with the token that comes back from google
@@ -14,29 +13,21 @@ const authHandler = (req, res) => {
       // if user is not found, send back the googleCal web auth url
       if (!user) {
         res.json({
-          message: 'please sign up with googleCal', 
+          message: 'Please sign in with Google Cal', 
           url: googleAuth.url
         }); 
       };
-      // if user is found, log them in and give them a token and channel
+      // if user is found, log them in and give them the token and unique pubnub channel
       if (user) {
-        // put this into pubnub module
-        var pubnubid = user.dataValues.pubnubid;
-        
-        if (!pubnubid) {
-          pubnubid = uuid.v4();
-          User.updatePubnub(user.dataValues.id, pubnubid);
-        }
-        
         var tokenOptions = { issuer: 'NeverMissOut' };
 
         var token = jwt.sign({userId: user.dataValues.id}, process.env.JWT_SECRET, tokenOptions);
         
         res.json({
           success: true,
-          message: 'here is your token',
+          message: 'Here is your token and channel',
           token,
-          channel: pubnubid
+          channel: user.dataValues.pubnubid
         });
       };
     })
@@ -45,7 +36,7 @@ const authHandler = (req, res) => {
     console.log('did not get users profile', err);
     res.json({
       success: false,
-      message: 'please log in again'
+      message: 'Please try logging in again'
     })
   });
 };
@@ -53,16 +44,17 @@ const authHandler = (req, res) => {
 const authCallback = (req, res) => {
   googleAuth.googleCalAuthCallback(req.query.code)
   .then((user) => {
+    // create new user
     User.findOrCreateUser(user.profile, user.tokens)
     .spread((user, created) => {
       if (created) { // this is for new users
       // NOTE: REDIRECT THEM TO SPLASH PAGE HERE. 
         // res.redirect('/')
-      res.send('splash page');
+        res.send('splash page');
       } else {
       // Could redirect them to same splash page
         // res.redirect('/')
-      res.send('splash page');
+        res.send('splash page');
       }
     })
   })
@@ -71,12 +63,8 @@ const authCallback = (req, res) => {
   });
 };
 
-// const authHandler = (req, res) => {
-
-// }
 
 module.exports = {
-  // extensionAuth,
-  authCallback,
-  authHandler
+  authHandler,
+  authCallback
 };
