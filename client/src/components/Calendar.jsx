@@ -6,22 +6,25 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: moment().format('dddd, MMMM D')
-    }
+      date: moment().format('dddd, MMMM D'),
+    };
   }
 
+
   render() {
-    return(
+    let hover = this.state.hover;
+    return (
       <div className='calendar'>
         <div className='calendar-title'>
           {this.state.date}
         </div>
-        <div>{this.props.events.map((event, i) =>
-          <CalendarEntry key={i} event={event} />
+        <div>
+        {this.props.events.map((event, i) =>
+            <CalendarEntry key={i} event={event} />
         )}
         </div>
       </div>
-    )
+    );
   }
 }
 
