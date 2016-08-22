@@ -10,9 +10,6 @@ class Setting extends React.Component {
       transitMode: '',
       phoneNumber: null
     };
-
-    // this.showSettings.bind(this);
-    // this.hideSettings.bind(this);
   }
 
   // componentDidMount() {
@@ -87,7 +84,7 @@ class Setting extends React.Component {
             <form className="settings-form" onSubmit={this.handleSubmit}>
               <RadioGroup name="transit" selectedValue={this.state.selectedOption} onChange={this.handleChangeTransitMode.bind(this)}>
                 Choose Your Transportation <br/>
-                <Radio value="driving" /> Driving <br/>
+                <Radio value="driving" checked /> Driving <br/>
                 <Radio value="walking" /> Walking <br/>
                 <Radio value="transit" /> Transit <br/>
                 <Radio value="bicyling" /> Bicycling
