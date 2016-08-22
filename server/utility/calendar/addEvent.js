@@ -1,6 +1,6 @@
 const Event = require('../../db/queries').Event;
 const googleAuth = require('../auth/googleAuth');
-const pubnub = require('../../setup/pubnub');
+const pubnub = require('../../utility/notification/pubnub');
 const googleCal = require('./googleCal');
 
 const addEvent = (userId, eventDetails) => {
