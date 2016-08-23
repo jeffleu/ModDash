@@ -52,7 +52,6 @@ class CalendarEntry extends React.Component {
     });
   }
 
-
   render() {
     let displayButton = <span onClick={this.deleteEvent.bind(this)}className='glyphicon glyphicon-remove-circle' id='delete'></span>;
     return (
