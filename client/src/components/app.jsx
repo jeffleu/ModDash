@@ -5,7 +5,7 @@ import Calendar from './Calendar.jsx';
 import Form from './Form.jsx';
 import SignIn from './SignIn.jsx';
 import Setting from './Setting.jsx';
-import commands from '../scripts/commands.js';
+// import commands from '../scripts/commands.js';
 import Navigation from './Navigation.jsx';
 
 class App extends React.Component {
@@ -20,16 +20,37 @@ class App extends React.Component {
     };
 
     this.toggleEventForm = this.toggleEventForm.bind(this);
+    this.toggleSettings = this.toggleSettings.bind(this);
+    this.fetchAndUpdateEvents = this.fetchAndUpdateEvents.bind(this);
+    this.handleTransChange = this.handleTransChange.bind(this);
   }
 
   toggleEventForm() {
-    if (this.state.eventFormIsOpen) {
-      this.setState({
-        eventFormIsOpen: false
+    // if (!this.state.eventFormIsOpen) {
+    //   this.setState({ eventFormIsOpen: true }, function() {
+    //     this.forceUpdate();
+    //   });
+    // } else {
+    //   this.setState({ eventFormIsOpen: false }, function() {
+    //     this.forceUpdate();
+    //   });
+    // }
+
+    if (!this.state.eventFormIsOpen) {
+      this.setState({ eventFormIsOpen: true });
+    } else {
+      this.setState({ eventFormIsOpen: false });
+    }
+  }
+
+  toggleSettings() {
+    if (!this.state.settingsIsOpen) {  
+      this.setState({ settingsIsOpen: true }, function() {
+        this.forceUpdate();
       });
     } else {
-      this.setState({
-        eventFormIsOpen: true
+      this.setState({ settingsIsOpen: false }, function() {
+        this.forceUpdate();
       });
     }
   }
@@ -65,11 +86,7 @@ class App extends React.Component {
   }
   
   handleTransChange(value) {
-    this.setState({
-      displayTransitMode: value
-    });
-
-    console.log('[App] App state transit mode set to', value);
+    this.setState({ displayTransitMode: value });
   }
 
   displayTransitMode() {
@@ -107,8 +124,7 @@ class App extends React.Component {
     // Sort event times in chronological order
     times.sort((a, b) => new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`));
 
-    // TO DO: Bug fix - if there are multiple events are at the same time, the last
-    // event with the same time will overwrite the first one
+    // TO DO: Bug fix - if there are multiple events are at the same time, the last event with the same time will overwrite the first one
 
     // Sort events based on start time
     let sortedEvents = eventList.reduce((sortedArray, event) => {
@@ -129,12 +145,12 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <Navigation toggleEventForm={this.toggleEventForm} />
+          <Navigation toggleEventForm={this.toggleEventForm} toggleSettings={this.toggleSettings} />
         </div>
         <div>
           <SignIn />
         </div>
-        <div>
+        <div className="transit-mode">
           Transportation Mode:&nbsp;
           {this.state.displayTransitMode}
         </div>
@@ -145,10 +161,10 @@ class App extends React.Component {
           <Calendar events={this.state.events} />
         </div>
         <div>
-          <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands} eventFormIsOpen={this.state.eventFormIsOpen} />
+          <Form refreshEvents={this.fetchAndUpdateEvents} eventFormIsOpen={this.state.eventFormIsOpen} toggleEventForm={this.toggleEventForm} />
         </div>
         <div>
-          <Setting transitChange={this.handleTransChange.bind(this)} transitMode={this.state.displayTransitMode} />
+          <Setting transitChange={this.handleTransChange} transitMode={this.state.displayTransitMode} settingsIsOpen={this.state.settingsIsOpen} toggleSettings={this.toggleSettings} />
         </div>
       </div>
     );

@@ -7,6 +7,7 @@ body {
     fixed;
   cursor: default;
 }
+
 .navigation {
   border: 0;
   background-color: rgba(0, 0, 0, 0);
@@ -90,6 +91,7 @@ body {
 
 .calendar-title {
   font-size: 350%;
+  padding-bottom: 35px;
 }
 
 .calendar-title:hover {
@@ -129,7 +131,6 @@ body {
   bottom: 2%;
   font-size: 150%;
 }
-
 
 .add-event-glyph:hover {
   cursor: pointer;

@@ -10,8 +10,6 @@ class Setting extends React.Component {
       phoneNumber: ''
     };
 
-    this.showSettings = this.showSettings.bind(this);
-    this.hideSettings = this.hideSettings.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onPhoneNumberChange = this.onPhoneNumberChange.bind(this);
   }
@@ -23,17 +21,9 @@ class Setting extends React.Component {
 
     return false;
   }
-
-  showSettings() {
-    this.setState({
-      showSettings: true
-    });
-  }
-
-  hideSettings() {
-    this.setState({
-      showSettings: false
-    });
+  
+  onPhoneNumberChange(e) {
+    this.setState({ phoneNumber: e.target.value });
   }
 
   handleSubmit() {
@@ -61,24 +51,13 @@ class Setting extends React.Component {
       console.log('did not save mode to db', err);
     });
 
-    // Hide settings after submit
-    this.setState({ showSettings: false });
-  }
-
-  onPhoneNumberChange(e) {
-    this.setState({
-      phoneNumber: e.target.value
-    });
+    this.props.toggleSettings();
   }
 
   render() {
     return (
       <div>
-        <div className='settings-glyph' onClick={this.showSettings}>
-          <Glyphicon glyph="cog" />
-        </div>
-
-        <Modal className="ModalForm" show={this.state.showSettings} onHide={this.hideSettings}>
+        <Modal className="ModalForm" show={this.props.settingsIsOpen} onHide={this.props.toggleSettings}>
           <Modal.Header closeButton>
             <Modal.Title> 
               <div className="settings-title">Settings</div>
@@ -102,7 +81,7 @@ class Setting extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <div>
-              <Button bsSize="small" onClick={this.hideSettings}>Cancel</Button>
+              <Button bsSize="small" onClick={this.props.toggleSettings}>Cancel</Button>
               <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Save Changes</Button>
             </div>
           </Modal.Footer>

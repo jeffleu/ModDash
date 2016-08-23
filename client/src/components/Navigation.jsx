@@ -37,11 +37,11 @@ class Navigation extends React.Component {
           <NavItem eventKey={1} href="#" onClick={this.props.toggleEventForm}>
             <Glyphicon glyph="plus" />
           </NavItem>
-          <NavItem onClick={this.toggleArtyomListener}>
+          <NavItem eventKey={2} onClick={this.toggleArtyomListener}>
             {volumeIcon}
           </NavItem>
-          <NavItem eventKey={2} href="#">
-            <Glyphicon glyph="cog" />
+          <NavItem eventKey={3} href="#">
+            <Glyphicon glyph="cog" onClick={this.props.toggleSettings} />
           </NavItem>
         </Nav>
       </Navbar>
