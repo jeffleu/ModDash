@@ -1,0 +1,238 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+  background:
+    url("https://unsplash.it/1440/900?random")
+    center center / 100% 100%
+    fixed;
+  cursor: default;
+}
+.navigation {
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar-default .navbar-brand {
+  color: gold;
+  font-size: 200%;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.glyphicon {
+  font-size: 125%;
+  color: white;
+}
+
+.signin {
+  width: 191px;
+  height: 46px;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.signin:hover {
+  cursor: pointer;
+}
+
+.btn {
+  font-size: 100%;
+  font-weight: 200;
+  color: #72c5f7;
+  background-color: rgba(0, 0, 0, 0);
+
+  /*color: black;*/
+}
+
+.today {
+  position: absolute;
+  /*display: block;*/
+  top: 18%;
+  left: 50%;
+  width: 45%;
+  text-align: center;
+  /*font-size: 700%;*/
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.time {
+  font-size: 700%;
+  font-weight: 200;
+}
+
+.date {
+  font-size: 500%;
+  font-weight: 500;
+}
+
+.time:hover {
+/*  background-color: black;
+  opacity: .80;*/
+}
+
+.calendar {
+  position: absolute;
+  /*display: block;*/
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  text-align: center;
+  font-weight: 100;
+  color: white;
+}
+
+.calendar-title {
+  font-size: 350%;
+}
+
+.calendar-title:hover {
+/*  background-color: black;
+  opacity: .75;*/
+}
+
+.calendar-entry:hover {
+/*  background-color: black;
+  opacity: .75;*/
+}
+
+.event-start {
+  font-size: 180%;
+}
+
+.event-summary-location {
+  font-size: 150%;
+}
+.event-link {
+  color: white;
+}
+.event-link:hover {
+  color: #72c5f7;
+  cursor: pointer;
+}
+
+.add-event {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+}
+
+.add-event-glyph {
+  position: absolute;
+  left: 7%;
+  bottom: 2%;
+  font-size: 150%;
+}
+
+
+.add-event-glyph:hover {
+  cursor: pointer;
+}
+
+.voice-glyph {
+  position: absolute;
+  left: 4.5%;
+  bottom: 2%;
+  font-size: 150%;
+}
+
+.voice-glyph:hover {
+  cursor: pointer;
+}
+
+.event-url {
+  font-color: white;
+}
+
+.calendar-form {
+  width: 100%;
+  position: absolute;
+  /*top: 50%;*/
+  /*transform: translateY(-50%);*/
+  font-weight: 100;
+  font-size: 125%;
+  text-align: left;
+}
+
+.calendar-form-title {
+  font-size: 200%;
+  font-weight: 100;
+}
+
+input {
+  font-weight: 100;
+  font-size: 100%;
+  margin-bottom: 3px;
+  color: black;
+}
+
+.nah {
+  font-weight: 100;
+  font-size: 100%;
+}
+
+.ModalForm {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  right: 5%;
+  bottom: 15%;
+  color: black;
+  font-weight: 100;
+/*  top: 25%;
+  left: 32.5%;
+  right: 32.5%;
+  bottom: 35%;*/
+  /*border: 1px, dotted, black;*/
+  /*background-color: black;*/
+}
+
+.ModalFormBody {
+  height: 300px;
+}
+
+.OverlayClass {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /*background-color: white;*/
+  opacity: .90;
+}
+
+.phone-number-input {
+  padding-top: 25px;
+}
+
+.settings-form {
+  font-size: 125%;
+}
+
+.settings-glyph {
+  position: absolute;
+  left: 2%;
+  bottom: 2%;
+  font-size: 150%;
+}
+
+.settings-glyph:hover {
+  cursor: pointer;
+}
+
+.settings-title {
+  font-size: 200%;
+  font-weight: 100;
+}
+
+.trans-mode{
+  position: absolute;
+  top: 75%;
+  left: 5%;
+}
