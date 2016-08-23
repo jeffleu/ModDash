@@ -18,11 +18,15 @@ const getTransitMode = (req, res) => {
     .catch((err) => { res.sendStatus(404); });
 };
 
-const updateTransitMode = (req, res) => User.updateUserTransitMode(req.userId, req.body.transit);
+const updateSettings = (req, res) => {
+  return User.updateUserSettings(req.userId, req.body.transit, req.body.phoneNumber)
+    .then((result) => { res.sendStatus(200); })
+    .catch((err) => { res.sendStatus(404); });
+};
 
 module.exports = {
   getGeolocation,
   updateGeolocation,
   getTransitMode,
-  updateTransitMode
+  updateSettings
 };

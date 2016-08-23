@@ -101,8 +101,8 @@ class Form extends React.Component {
     // TO DO: Use geolocation to update timeZone automatically
 
     // Create event object with Form's state
-    var recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`
-    console.log('recur', recur)
+    var recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;
+    console.log('recur', recur);
     var event;
     if (this.state.recIsOpen === false) {
       event = {

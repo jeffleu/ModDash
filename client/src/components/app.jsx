@@ -115,8 +115,8 @@ class App extends React.Component {
           <SignIn />
         </div>
         <div>
-        Transportation Mode:
-        {this.state.displayTransitMode}
+          Transportation Mode:&nbsp;
+          {this.state.displayTransitMode}
         </div>
         <div>
           <Time />

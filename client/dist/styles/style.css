@@ -137,7 +137,7 @@ body {
   /*top: 50%;*/
   /*transform: translateY(-50%);*/
   font-weight: 100;
-  font-size: 160%;
+  font-size: 125%;
   text-align: left;
 }
 
@@ -188,7 +188,15 @@ input {
   opacity: .90;
 }
 
-.settings-glyph{
+.phone-number-input {
+  padding-top: 25px;
+}
+
+.settings-form {
+  font-size: 125%;
+}
+
+.settings-glyph {
   position: absolute;
   left: 2%;
   bottom: 2%;
@@ -197,6 +205,11 @@ input {
 
 .settings-glyph:hover {
   cursor: pointer;
+}
+
+.settings-title {
+  font-size: 200%;
+  font-weight: 100;
 }
 
 .trans-mode{

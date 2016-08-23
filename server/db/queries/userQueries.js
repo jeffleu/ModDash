@@ -38,9 +38,12 @@ const updateUserGeolocation = (id, geolocation) => {
       .catch((err) => err);
 };
 
-const updateUserTransitMode = (id, transit) => {
-  return User.update (
-    { transitmode: transit },
+const updateUserSettings = (id, transit, phoneNumber) => {
+  return User.update(
+    {
+      transitmode: transit,
+      phone: phoneNumber
+    }, 
     { where: { id: id } }
   )
   .then((result) => result)
@@ -57,7 +60,7 @@ module.exports = {
   findOrCreateUser,
   authUser,
   getUserInfo,
-  updateUserTransitMode,
+  updateUserSettings,
   updateUserGeolocation,
   getUser
 };
