@@ -6,6 +6,7 @@ import Form from './Form.jsx';
 import SignIn from './SignIn.jsx';
 import Setting from './Setting.jsx';
 import commands from '../scripts/commands.js';
+import Navigation from './Navigation.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -111,6 +112,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <div>
+          <Navigation />
+        </div>
         <div>
           <SignIn />
         </div>
