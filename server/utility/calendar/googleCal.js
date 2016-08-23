@@ -21,7 +21,7 @@ const addEventToGoogleCal = (userId, event) => {
   });
 };
 
-const getAllEventsFromCalendar = (req, res) => {
+const getEventsFromGoogleCal = (req, res) => {
   return googleOAuth.getUserTokens(req.userId)
   .then(data => {
     calendar.events.list({
@@ -31,7 +31,7 @@ const getAllEventsFromCalendar = (req, res) => {
       timeMin: (new Date(Date.now() - 12096e5)).toISOString(),
       timeMax: (new Date(Date.now() + 12096e5)).toISOString()
       // 12096e5 is 2 weeks in milliseconds, so this will pull events from 2 weeks in the past and 2 weeks in the future
-    };
+    });
     return calendar.events.list(params);
   })
   .catch(err => {
@@ -41,5 +41,5 @@ const getAllEventsFromCalendar = (req, res) => {
 
 module.exports = {
   addEventToGoogleCal,
-  getAllEventsFromGoogleCal
+  getEventsFromGoogleCal
 };
