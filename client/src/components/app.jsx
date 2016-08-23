@@ -26,38 +26,16 @@ class App extends React.Component {
   }
 
   toggleEventForm() {
-    // if (!this.state.eventFormIsOpen) {
-    //   this.setState({ eventFormIsOpen: true }, function() {
-    //     this.forceUpdate();
-    //   });
-    // } else {
-    //   this.setState({ eventFormIsOpen: false }, function() {
-    //     this.forceUpdate();
-    //   });
-    // }
-
-    if (!this.state.eventFormIsOpen) {
-      this.setState({ eventFormIsOpen: true });
-    } else {
-      this.setState({ eventFormIsOpen: false });
-    }
+    (!this.state.eventFormIsOpen) ? this.setState({ eventFormIsOpen: true }) : this.setState({ eventFormIsOpen: false });
   }
 
   toggleSettings() {
-    if (!this.state.settingsIsOpen) {  
-      this.setState({ settingsIsOpen: true }, function() {
-        this.forceUpdate();
-      });
-    } else {
-      this.setState({ settingsIsOpen: false }, function() {
-        this.forceUpdate();
-      });
-    }
+    (!this.state.settingsIsOpen) ? this.setState({ settingsIsOpen: true }) : this.setState({ settingsIsOpen: false });
   }
 
   fetchAndUpdateEvents() {
     var token = localStorage.getItem('token');
-    console.log('got token for fetch and update events', token);
+
     // Post event to Google Calendar API
     fetch('http://localhost:9000/api/calendar/getDayEvents', {
       method: 'GET',
