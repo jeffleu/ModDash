@@ -1,18 +1,24 @@
-const Promise = require('bluebird');
+const googleAuth = require('../auth/googleAuth');
 const google = require('googleapis');
 var calendar = google.calendar('v3');
+const Promise = require('bluebird');
 
 calendar.events.insert = Promise.promisify(calendar.events.insert);
 calendar.events.list = Promise.promisify(calendar.events.list);
 
-const insertEvent = (auth, resource) => {
-  var params = {
-    calendarId: 'primary', 
-    auth,
-    resource
-  };
-
-  return calendar.events.insert(params);
+const addEventToGoogleCal = (userId, event) => {
+  return googleAuth.getUserTokens(userId)
+  .then(oauth2Client => {
+    var params = {
+      calendarId: 'primary', 
+      auth: oauth2Client,
+      resource: eventDetails
+    };
+    return calendar.events.insert(params);
+  })
+  .catch(err => {
+    console.warn('error in adding event to Google Calendar:', err);
+  });
 };
 
 const getAllEventsFromCalendar = (req, res) => {
@@ -22,19 +28,18 @@ const getAllEventsFromCalendar = (req, res) => {
       auth: oauth2Client,
       calendarId: 'primary',
       singleEvents: true,
-      minTime: Date.now()
-      // not sure about the params to get all events or get new events that we don't have yet.
-    })
-    .then(data => {
-      data.items.forEach(event => {
-        Event.insertEvent(event, userId);
-      });
-      res.send(data.items);      
-    });
+      timeMin: (new Date(Date.now() - 12096e5)).toISOString(),
+      timeMax: (new Date(Date.now() + 12096e5)).toISOString()
+      // 12096e5 is 2 weeks in milliseconds, so this will pull events from 2 weeks in the past and 2 weeks in the future
+    };
+    return calendar.events.list(params);
+  })
+  .catch(err => {
+    console.warn('error in getting events from Google Calendar', err);
   });
 };
 
 module.exports = {
-  insertEvent,
-  getAllEventsFromCalendar
+  addEventToGoogleCal,
+  getAllEventsFromGoogleCal
 };
