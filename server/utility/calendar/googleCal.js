@@ -10,7 +10,7 @@ const addEventToGoogleCal = (userId, event) => {
   return googleAuth.getUserTokens(userId)
   .then(oauth2Client => {
     var params = {
-      calendarId: 'primary', 
+      calendarId: 'primary',
       auth: oauth2Client,
       resource: eventDetails
     };
@@ -31,7 +31,7 @@ const getAllEventsFromCalendar = (req, res) => {
       timeMin: (new Date(Date.now() - 12096e5)).toISOString(),
       timeMax: (new Date(Date.now() + 12096e5)).toISOString()
       // 12096e5 is 2 weeks in milliseconds, so this will pull events from 2 weeks in the past and 2 weeks in the future
-    };
+    });
     return calendar.events.list(params);
   })
   .catch(err => {
