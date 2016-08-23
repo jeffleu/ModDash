@@ -47,8 +47,8 @@ const getUserChannel = (id) => {
   return User.findOne({
     where: { id: id },
     attributes: ['pubnubid']
-  })
-}
+  });
+};
 
 const updateUserGeolocation = (id, geolocation) => {
   return User.update(
