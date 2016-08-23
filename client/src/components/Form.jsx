@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 // import Modal from 'react-modal';
 import { Modal, closeButton, Button, Glyphicon } from 'react-bootstrap';
+import { arytomStart, artyomStop } from '../scripts/commands';
 
 class Form extends React.Component {
   constructor(props) {
@@ -51,6 +52,24 @@ class Form extends React.Component {
         recIsOpen: false
       });
     }
+  }
+
+  toggleArtyomListener() {
+    console.log('Artyom listening (before)?', this.state.artyomListening);
+
+    if (this.state.artyomListening) {
+      artyomStop();
+      this.setState({
+        artyomListening: false
+      });
+    } else {
+      artyomStart();
+      this.setState({
+        artyomListening: true
+      });
+    }
+
+    console.log('Artyom listening (after)?', this.state.artyomListening);
   }
 
   // Update Form's state on input form change
@@ -180,14 +199,6 @@ class Form extends React.Component {
     });
   }
 
-  /*
-<<<<<<< f9870f8717ee243218f7c236d7ca1757f9d5919b
-
-=======
->>>>>>> Implemented Settings modal, but still in progress.
-      <Button bsSize="small" className='add-event' onClick={this.openModal}>Add event</Button>
-  */
-
   // TO DO: Turn on and off voice commands using the voice-glyph (volume-up and volume-off) icons
 
   render() {
@@ -234,7 +245,7 @@ class Form extends React.Component {
 
     return (
       <div>
-        <div className='voice-glyph'>
+        <div className='voice-glyph' onClick={this.toggleArtyomListener.bind(this)}>
           <Glyphicon glyph="volume-up" />
         </div>
         <div className='add-event-glyph' onClick={this.openModal}>
