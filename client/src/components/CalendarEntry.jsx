@@ -30,6 +30,10 @@ class CalendarEntry extends React.Component {
     });
   }
 
+  deleteEvent(event) {
+    console.log('eventid', event);
+    this.props.deleteEvent(event);
+  }
 
   mouseOut() {
     this.setState({
@@ -38,18 +42,19 @@ class CalendarEntry extends React.Component {
   }
 
   render() {
-
+    console.log('props', this.props);
+    var gcalId = this.props.event.eventId;
     return (
       <div className='calendar-entry'>
         <div className='close'>
 
         </div>
         <div className='event-start'>
-          {props.event.startTime}
+          {this.props.event.startTime}
         </div>
         <div className='event-summary-location'>
-          {this.state.hover ? (<div> does this show up</div>) : null}    
-          <a className='event-link' onMouseOver={this.mouseOver.bind(this)} onMouseOut={this.mouseOut.bind(this)} href={props.event.eventUrl} target='new'>{props.event.eventName} at {props.event.location}</a>
+          {this.state.hover ? (<div><a onClick={this.deleteEvent(gcalId)}>Delete Event</a></div>) : null}
+          <a className='event-link' onMouseOver={this.mouseOver.bind(this)} onMouseOut={this.mouseOut.bind(this)} href={this.props.event.eventUrl} target='new'>{this.props.event.eventName} at {this.props.event.location}</a>
         </div>
       </div>
     );

@@ -35,12 +35,13 @@ class App extends React.Component {
             eventName: event.name,
             location: event.location,
             startTime: event.startdatetime,
-            eventUrl: event.eventUrl
+            eventUrl: event.eventUrl,
+            eventId: event.googleCalendarEventId
           };
         });
 
-      this.sortAndUpdateEvents(eventList);
-    })
+        this.sortAndUpdateEvents(eventList);
+      })
     .catch((err) => {
       console.log('Error retrieving events', err);
     });
@@ -49,7 +50,7 @@ class App extends React.Component {
   handleTransChange(value) {
     this.setState({
       displayTransitMode: value
-    })
+    });
   }
 
   displayTransitMode() {
@@ -102,6 +103,30 @@ class App extends React.Component {
     this.setState({ events: sortedEvents });
   }
 
+  deleteAndUpdateEvent(event) {
+    var token = localStorage.getItem('token');
+    console.log('app event id', event);
+    // fetch('some url endpoint', {
+    //   method: 'DELETE',
+    //   body: JSON.stringify(event),
+    //   mode: 'cors-with-forced-preflight',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'authorization': token
+    //   }
+    // })
+    // .then((res) => {
+    //   return res.json();
+    // })
+    // .then((data) => {
+    //   console.log('data'. data);
+    //   // use data to update state after success deletion
+    // })
+    // .then((err) => {
+    //   console.log('did not delete event from db and gcal');
+    // });
+  }
+
   componentDidMount() {
     this.fetchAndUpdateEvents();
     this.displayTransitMode();
@@ -122,7 +147,7 @@ class App extends React.Component {
           <Time />
         </div>
         <div>
-          <Calendar events={this.state.events} />
+          <Calendar deleteEvent={this.deleteAndUpdateEvent.bind(this)} events={this.state.events} />
         </div>
         <div>
           <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands}/>
