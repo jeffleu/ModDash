@@ -17,6 +17,7 @@ const insertEvent = (auth, resource) => {
 };
 
 const deleteEvent = (auth, event) => {
+
   var params = {
     calenderId: 'primary',
     auth,
