@@ -7,6 +7,25 @@ body {
     fixed;
   cursor: default;
 }
+.navigation {
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar-default .navbar-brand {
+  color: gold;
+  font-size: 200%;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.glyphicon {
+  font-size: 125%;
+  color: white;
+}
 
 .signin {
   width: 191px;
@@ -34,7 +53,7 @@ body {
 .today {
   position: absolute;
   /*display: block;*/
-  top: 15%;
+  top: 18%;
   left: 50%;
   width: 45%;
   text-align: center;
@@ -60,7 +79,7 @@ body {
 .calendar {
   position: absolute;
   /*display: block;*/
-  top: 25%;
+  top: 28%;
   left: 50%;
   transform: translateX(-50%);
   width: 40%;
