@@ -23,6 +23,12 @@ const authUser = (profile) => {
   });
 };
 
+const getUser = (id) => {
+  return User.findOne({
+    where: { id: id }
+  });
+};
+
 const getUserInfo = (id) => {
   return User.findOne({
     where: { id: id },
@@ -67,6 +73,7 @@ const updateUserSettings = (id, transit, phoneNumber) => {
 module.exports = {
   findOrCreateUser,
   authUser,
+  getUser,
   getUserInfo,
   getRefreshToken,
   getUserChannel,
