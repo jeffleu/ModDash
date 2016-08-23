@@ -9,7 +9,7 @@ class SignIn extends React.Component {
   login() {
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
       console.log('chrome identity token:', token);
-      fetch('http://localhost:9000/auth', {
+      fetch('ec2-52-33-110-254.us-west-2.compute.amazonaws.com:443:/auth', {
         method: 'POST',
         body: JSON.stringify({token: token}),
         mode: 'cors-with-forced-preflight',
@@ -30,7 +30,7 @@ class SignIn extends React.Component {
       });
     });
   }
-  
+
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('channel');
