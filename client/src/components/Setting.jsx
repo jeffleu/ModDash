@@ -10,7 +10,6 @@ class Setting extends React.Component {
       phoneNumber: ''
     };
 
-    // Set 'this' bindings
     this.showSettings = this.showSettings.bind(this);
     this.hideSettings = this.hideSettings.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,7 +36,6 @@ class Setting extends React.Component {
     });
   }
 
-  // TO DO: Need to refactor to handle transit mode and phone number update in DB
   handleSubmit() {
     // e.preventDefault();
     var token = localStorage.getItem('token');
