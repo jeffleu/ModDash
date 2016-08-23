@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Time from './Time.jsx';
-import Calendar from './Calendar.jsx'
+import Calendar from './Calendar.jsx';
 import Form from './Form.jsx';
 import SignIn from './SignIn.jsx';
 import Setting from './Setting.jsx';
@@ -10,6 +10,7 @@ import commands from '../scripts/commands.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       events: [],
       displayTransitMode: ''
@@ -39,17 +40,19 @@ class App extends React.Component {
           };
         });
 
-      this.sortAndUpdateEvents(eventList);
-    })
+        this.sortAndUpdateEvents(eventList);
+      })
     .catch((err) => {
       console.log('Error retrieving events', err);
     });
   }
-  //
+  
   handleTransChange(value) {
     this.setState({
       displayTransitMode: value
-    })
+    });
+
+    console.log('[App] App state transit mode set to', value);
   }
 
   displayTransitMode() {
@@ -62,9 +65,7 @@ class App extends React.Component {
         'authorization': token
       }
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         // this.setState({
         //   selectedOption: data.transitmode
@@ -105,7 +106,6 @@ class App extends React.Component {
   componentDidMount() {
     this.fetchAndUpdateEvents();
     this.displayTransitMode();
-
   }
 
   render() {
@@ -115,8 +115,8 @@ class App extends React.Component {
           <SignIn />
         </div>
         <div>
-        Transportation Mode:
-        {this.state.displayTransitMode}
+          Transportation Mode:&nbsp;
+          {this.state.displayTransitMode}
         </div>
         <div>
           <Time />
@@ -128,7 +128,7 @@ class App extends React.Component {
           <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands}/>
         </div>
         <div>
-          <Setting transitChange={this.handleTransChange.bind(this)}/>
+          <Setting transitChange={this.handleTransChange.bind(this)} transitMode={this.state.displayTransitMode} />
         </div>
       </div>
     );

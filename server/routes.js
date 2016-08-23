@@ -12,12 +12,12 @@ router.use('/api', function(req, res, next) {
     // tried to refactor to be jwt.verifyJWT function (see utility/auth/jwt.js)
     jwt.verify(token, process.env.JWT_SECRET, {issuer: 'NeverMissOut'}, function(err, decoded) {
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token, please log-in again'})
+        return res.json({ success: false, message: 'Failed to authenticate token, please log-in again'});
       } else {
         req.userId = decoded.userId;
         next();
       }
-    })
+    });
   } else {
     return res.status(403).send({
       success: false,
@@ -42,7 +42,7 @@ router.get('/api/calendar/getDayEvents', EventController.getDayEvents);
 
 // User Routes
 router.get('/api/users/getTransit', UserController.getTransitMode);
-router.post('/api/users/updateTransit', UserController.updateTransitMode);
+router.post('/api/users/updateSettings', UserController.updateSettings);
 router.get('/api/users/getGeolocation', UserController.getGeolocation);
 router.post('/api/users/updateGeolocation', UserController.updateGeolocation);
 

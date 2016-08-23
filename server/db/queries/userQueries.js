@@ -17,52 +17,43 @@ const findOrCreateUser = (profile, tokens) => {
   });
 };
 
-const authUser = function(profile) {
+const authUser = (profile) => {
   return User.findOne({
-    where: {googleid: profile.id}
-  })
-}
+    where: { googleid: profile.id }
+  });
+};
 
 const getUserInfo = (id) => {
-  console.log('============== [userController - getGeolocation]: userId =', id);
   return User.findOne({
-    where: {id: id},
-    attributes: ['id', 'geolocation', 'transitmode']
+    where: { id: id },
+    attributes: ['id', 'geolocation', 'transitmode', 'phone']
   });
 };
 
 const updateUserGeolocation = (id, geolocation) => {
   return User.update(
     { geolocation: geolocation },
-    { where: {id : id} })
+    { where: { id: id } })
       .then((result) => result)
       .catch((err) => err);
 };
 
-const updateUserTransitMode = (id, transit) => {
-  return User.update (
-    {transitmode: transit},
-    {where: {id: id}}
-  )
-  .then((result) => {
-    // need to clean this up, network is still pending on client side
-    res.send(result);
-  })
-  .catch((err) => err);
-}
-
-
-const getUser = (id) => {
-  return User.findOne(
+const updateUserSettings = (id, transit, phoneNumber) => {
+  return User.update(
+    {
+      transitmode: transit,
+      phone: phoneNumber
+    }, 
     { where: { id: id } }
-  );
+  )
+  .then((result) => result)
+  .catch((err) => err);
 };
 
 module.exports = {
   findOrCreateUser,
   authUser,
   getUserInfo,
-  updateUserTransitMode,
-  updateUserGeolocation,
-  getUser
+  updateUserSettings,
+  updateUserGeolocation
 };

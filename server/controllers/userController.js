@@ -14,17 +14,19 @@ const updateGeolocation = (req, res) => {
 
 const getTransitMode = (req, res) => {
   return User.getUserInfo(req.userId)
-    .then((data) => { res.send(data.dataValues)} )
+    .then((data) => { res.send(data.dataValues); })
     .catch((err) => { res.sendStatus(404); });
 };
 
-
-
-const updateTransitMode = (req, res) => User.updateUserTransitMode(req.userId, req.body.transit);
+const updateSettings = (req, res) => {
+  return User.updateUserSettings(req.userId, req.body.transit, req.body.phoneNumber)
+    .then((result) => { res.sendStatus(200); })
+    .catch((err) => { res.sendStatus(404); });
+};
 
 module.exports = {
   getGeolocation,
   updateGeolocation,
   getTransitMode,
-  updateTransitMode
+  updateSettings
 };

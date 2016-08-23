@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 // import Modal from 'react-modal';
 import { Modal, closeButton, Button, Glyphicon } from 'react-bootstrap';
+import { arytomStart, artyomStop } from '../scripts/commands';
 
 class Form extends React.Component {
   constructor(props) {
@@ -34,10 +35,6 @@ class Form extends React.Component {
       this.setState(formData);
     });
 
-    // this.props.commands.onVoiceSubmit(() => {
-    //   this.handleSubmit(e);
-    // });
-
     // Set up commands
     this.props.commands.addCommands(this.props.commands.commands);
 
@@ -55,6 +52,24 @@ class Form extends React.Component {
         recIsOpen: false
       });
     }
+  }
+
+  toggleArtyomListener() {
+    console.log('Artyom listening (before)?', this.state.artyomListening);
+
+    if (this.state.artyomListening) {
+      artyomStop();
+      this.setState({
+        artyomListening: false
+      });
+    } else {
+      artyomStart();
+      this.setState({
+        artyomListening: true
+      });
+    }
+
+    console.log('Artyom listening (after)?', this.state.artyomListening);
   }
 
   // Update Form's state on input form change
@@ -94,22 +109,19 @@ class Form extends React.Component {
       if (this.state.days.indexOf(value) === -1) {
         this.setState({
           days: this.state.days.concat([value])
-        })
+        });
       }
     }
-
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-
-
     // TO DO: Use geolocation to update timeZone automatically
 
     // Create event object with Form's state
-    var recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`
-    console.log('recur', recur)
+    var recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;
+    console.log('recur', recur);
     var event;
     if (this.state.recIsOpen === false) {
       event = {
@@ -140,7 +152,6 @@ class Form extends React.Component {
       };
     }
 
-
     // Clear state which the form's values are pointing to
     this.setState({
       summary: '',
@@ -153,8 +164,6 @@ class Form extends React.Component {
       repeatEvery: '',
       days: []
     });
-
-
 
     var token = localStorage.getItem('token');
     console.log('got token for adding event', token);
@@ -172,7 +181,7 @@ class Form extends React.Component {
       if (res.status === 200) {
         this.props.refreshEvents();
       // Refreshes today's events in chronological order including new event that was just added
-      };
+      }
     }).catch((err) => { console.log('Error posting event to Google Calendar:\n', err); });
 
     this.closeModal();
@@ -181,20 +190,14 @@ class Form extends React.Component {
   openModal() {
     this.setState({
       modalIsOpen: true
-    })
+    });
   }
 
   closeModal() {
     this.setState({
-      modalIsOpen:false
-    })
+      modalIsOpen: false
+    });
   }
-
-
-  /*
-
-      <Button bsSize="small" className='add-event' onClick={this.openModal}>Add event</Button>
-  */
 
   // TO DO: Turn on and off voice commands using the voice-glyph (volume-up and volume-off) icons
 
@@ -212,7 +215,7 @@ class Form extends React.Component {
       }
     };
 
-    var displayRecur =  <div> Repeats:
+    var displayRecur = <div> Repeats:
                   <select className='Repeat' onChange={this.handleChange}>
                     <option value='DAILY'>Daily</option>
                     <option value='WEEKLY'>Weekly</option>
@@ -241,47 +244,47 @@ class Form extends React.Component {
                 </div>;
 
     return (
-    <div>
-      <div className='voice-glyph'>
-        <Glyphicon glyph="volume-up" />
-      </div>
-      <div className='add-event-glyph' onClick={this.openModal}>
-        <Glyphicon glyph="plus" />
-      </div>
+      <div>
+        <div className='voice-glyph' onClick={this.toggleArtyomListener.bind(this)}>
+          <Glyphicon glyph="volume-up" />
+        </div>
+        <div className='add-event-glyph' onClick={this.openModal}>
+          <Glyphicon glyph="plus" />
+        </div>
 
-      <Modal className="ModalForm" show={this.state.modalIsOpen} onHide={this.closeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <div className="calendar-form-title">Add an event</div>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="ModalFormBody">
-          <form className="calendar-form" onSubmit={this.handleSubmit}>
-            <div>
-              Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event" onChange={this.handleChange} />
-            </div>
-            <div>
-              Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location" onChange={this.handleChange} />
-            </div>
-            <div>
-              Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="Date" onChange={this.handleChange} />
-            </div>
-            <div>
-              Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="Time" onChange={this.handleChange} />
-            </div>
-            {this.state.recIsOpen ? displayRecur : null}
+        <Modal className="ModalForm" show={this.state.modalIsOpen} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <div className="calendar-form-title">Add an event</div>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="ModalFormBody">
+            <form className="calendar-form" onSubmit={this.handleSubmit}>
+              <div>
+                Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event" onChange={this.handleChange} />
+              </div>
+              <div>
+                Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location" onChange={this.handleChange} />
+              </div>
+              <div>
+                Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="Date" onChange={this.handleChange} />
+              </div>
+              <div>
+                Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="Time" onChange={this.handleChange} />
+              </div>
+              {this.state.recIsOpen ? displayRecur : null}
 
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
             <div>
               <a onClick={this.clickRecur.bind(this)}>Repeat</a>
               <Button bsSize="small" onClick={this.closeModal}> Nah </Button>
               <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good </Button>
             </div>
-        </Modal.Footer>
-      </Modal>
-    </div>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
   }
 }
