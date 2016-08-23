@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 // import Modal from 'react-modal';
 import { Modal, closeButton, Button, Glyphicon } from 'react-bootstrap';
-import { arytomStart, artyomStop } from '../scripts/commands';
+import { artyomStart, artyomStop } from '../scripts/commands';
 
 class Form extends React.Component {
   constructor(props) {
@@ -19,7 +19,8 @@ class Form extends React.Component {
       repeat: '',
       repeatEvery: '',
       days: [],
-      recIsOpen: false
+      recIsOpen: false,
+      artyomListening: true
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -55,8 +56,6 @@ class Form extends React.Component {
   }
 
   toggleArtyomListener() {
-    console.log('Artyom listening (before)?', this.state.artyomListening);
-
     if (this.state.artyomListening) {
       artyomStop();
       this.setState({
@@ -68,8 +67,6 @@ class Form extends React.Component {
         artyomListening: true
       });
     }
-
-    console.log('Artyom listening (after)?', this.state.artyomListening);
   }
 
   // Update Form's state on input form change
@@ -202,6 +199,8 @@ class Form extends React.Component {
   // TO DO: Turn on and off voice commands using the voice-glyph (volume-up and volume-off) icons
 
   render() {
+    var volumeIcon = (this.state.artyomListening) ? <Glyphicon glyph="volume-up" /> : <Glyphicon glyph="volume-off" />;
+
     var state = this.state.repeat;
     var day = function() {
       if (state === 'DAILY') {
@@ -246,7 +245,7 @@ class Form extends React.Component {
     return (
       <div>
         <div className='voice-glyph' onClick={this.toggleArtyomListener.bind(this)}>
-          <Glyphicon glyph="volume-up" />
+          {volumeIcon}
         </div>
         <div className='add-event-glyph' onClick={this.openModal}>
           <Glyphicon glyph="plus" />
