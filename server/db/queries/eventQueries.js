@@ -47,8 +47,15 @@ const getDayEvents = (userId) => {
   });
 }
 
+const getAllUserEvents = (userId) => {
+  return Event.findAll({
+    where: {userId}
+  });
+}
+
 module.exports = {
   insertEvent,
   retrieveEvent,
-  getDayEvents
+  getDayEvents,
+  getAllUserEvents
 };

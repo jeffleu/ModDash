@@ -8,18 +8,37 @@ const getAllEvents = (userId) => {
   googleCal.getEventsFromGoogleCal(userId) 
   .then(events => {
     events.items.forEach(event => {
-      addToDB(userId, event);
+      addToEventDB(userId, event);
     });    
   });
 };
 
-const addToDB = (userId, event) => {
+const addToEventDB = (userId, event) => {
   Event.insertEvent(userId, event)
   .spread((event, created) => {
     if (created) {
       console.log('Event successfully added.\n', event.dataValues);
     }
   })
+  .catch(err => {
+    console.warn('error in adding events to DB', err);
+  });
+};
+
+// const addToTravelAndTraffic = (userId) => {
+//   Event.getAllUserEvents(userId)
+//   .then(events => {
+//     events.forEach(event => {
+//       return addTravel(event)
+//       .then(travel => {
+//         return queryTraffic(travel);
+//       });
+//     });
+//   })
+//   .catch(err => {
+//     console.warn('error in adding inital user events to travel & traffic', err);
+//   });
+// };
     // TO DO: FIX THIS
         // addTravel breaks because user does not have geolocation yet
         // options are to schedule addTravel later when we get the geolocation, or somehow get the user to send geolocation at the same time
@@ -37,9 +56,5 @@ const addToDB = (userId, event) => {
   //     return queryTraffic(travel);      
   //   }
   // })
-  .catch(err => {
-    console.warn('error in adding events to DB', err);
-  });
-};
 
 module.exports = getAllEvents;
