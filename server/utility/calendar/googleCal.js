@@ -21,7 +21,7 @@ const addEventToGoogleCal = (userId, event) => {
   });
 };
 
-const getAllEventsFromCalendar = (req, res) => {
+const getEventsFromGoogleCal = (req, res) => {
   return googleOAuth.getUserTokens(req.userId)
   .then(data => {
     calendar.events.list({
@@ -41,5 +41,5 @@ const getAllEventsFromCalendar = (req, res) => {
 
 module.exports = {
   addEventToGoogleCal,
-  getAllEventsFromGoogleCal
+  getEventsFromGoogleCal
 };
