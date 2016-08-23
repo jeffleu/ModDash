@@ -14,6 +14,7 @@ class CalendarEntry extends React.Component {
       show: false,
       gcalId: ''
     };
+    this.handleDeleteEvent.bind(this);
   }
 
   showDelete() {
