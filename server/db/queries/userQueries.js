@@ -26,7 +26,7 @@ const authUser = (profile) => {
 const getUserInfo = (id) => {
   return User.findOne({
     where: { id: id },
-    attributes: ['id', 'geolocation', 'transitmode']
+    attributes: ['id', 'geolocation', 'transitmode', 'phone']
   });
 };
 
@@ -50,17 +50,10 @@ const updateUserSettings = (id, transit, phoneNumber) => {
   .catch((err) => err);
 };
 
-const getUser = (id) => {
-  return User.findOne(
-    { where: { id: id } }
-  );
-};
-
 module.exports = {
   findOrCreateUser,
   authUser,
   getUserInfo,
   updateUserSettings,
-  updateUserGeolocation,
-  getUser
+  updateUserGeolocation
 };
