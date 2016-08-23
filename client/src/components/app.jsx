@@ -21,7 +21,7 @@ class App extends React.Component {
     var token = localStorage.getItem('token');
     console.log('got token for fetch and update events', token);
     // Post event to Google Calendar API
-    fetch('ec2-52-33-110-254.us-west-2.compute.amazonaws.com:443/api/calendar/getDayEvents', {
+    fetch('ec2-52-33-110-254.us-west-2.compute.amazonaws.com:80/api/calendar/getDayEvents', {
       method: 'GET',
       mode: 'cors-with-forced-preflight',
       headers: {
@@ -58,7 +58,7 @@ class App extends React.Component {
   displayTransitMode() {
     var token = localStorage.getItem('token');
 
-    fetch('ec2-52-33-110-254.us-west-2.compute.amazonaws.com:443/api/users/getTransit', {
+    fetch('ec2-52-33-110-254.us-west-2.compute.amazonaws.com:80/api/users/getTransit', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
