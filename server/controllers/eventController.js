@@ -1,6 +1,7 @@
 const Event = require('../db/queries').Event;
 const addEvent = require('../utility/calendar/addEvent');
 const addTravel = require('../utility/map/addTravel');
+const deleteEvent = require('../utility/calendar/deleteEvent');
 const queryTraffic = require('../workers/queryTraffic');
 const google = require('googleapis');
 const googleAuth = require('../utility/auth/googleAuth');
@@ -25,7 +26,7 @@ const getDayEvents = (req, res) => {
   // console.log('in get day events', req.session);
   // req.session.regenerate(() => {
     // req.session.something = 'something';
-    // console.log('after regenerating', req.session);  
+    // console.log('after regenerating', req.session);
   Event.retrieveDayEvent(req.userId)
   .then(datas => {
     res.send(datas);
@@ -48,14 +49,25 @@ const getAllEventsFromCalendar = (req, res) => {
       data.items.forEach(event => {
         Event.insertEvent(event, userId);
       });
-      
-      res.send(data.items);      
+
+      res.send(data.items);
     });
   });
 };
 
+const deleteEventFromCalendar = (req, res) => {
+  deleteEvent(req.userId, req.body)
+  .then((data) => {
+    console.log('respond back', data);
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log('errorrrrrrr', err);
+  });
+};
 module.exports = {
   addEventAndAddTravel,
   getDayEvents,
-  getAllEventsFromCalendar
+  getAllEventsFromCalendar,
+  deleteEventFromCalendar
 };

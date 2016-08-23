@@ -106,25 +106,26 @@ class App extends React.Component {
   deleteAndUpdateEvent(event) {
     var token = localStorage.getItem('token');
     console.log('app event id', event);
-    // fetch('some url endpoint', {
-    //   method: 'DELETE',
-    //   body: JSON.stringify(event),
-    //   mode: 'cors-with-forced-preflight',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'authorization': token
-    //   }
-    // })
-    // .then((res) => {
-    //   return res.json();
-    // })
-    // .then((data) => {
-    //   console.log('data'. data);
-    //   // use data to update state after success deletion
-    // })
-    // .then((err) => {
-    //   console.log('did not delete event from db and gcal');
-    // });
+    var googleCalId = {event: event}
+    fetch('http://localhost:9000/api/calendar/deleteEvent', {
+      method: 'DELETE',
+      body: JSON.stringify(googleCalId),
+      mode: 'cors-with-forced-preflight',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': token
+      }
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log('data'. data);
+      // use data to update state after success deletion
+    })
+    .then((err) => {
+      console.log('did not delete event from db and gcal');
+    });
   }
 
   componentDidMount() {
