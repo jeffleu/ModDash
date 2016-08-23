@@ -25,29 +25,14 @@ const recurringCheck = (event) => {
 
 // define the job
 agenda.define('query traffic', (job, done) => {
-  // this should probably be a setInterval to keep querying for Traffic time and then setting new notification job if it meets certain requirements. Interval ends when we pass the leave time.
-  // for now we are just going to query traffic once at the scheduled time, which is double the initial estimate
   var travel = job.attrs.data;
   var eventId = travel.eventId;
 
   return Event.retrieveEvent(eventId)
   .then(event => {
     recurringCheck(event);
-    // console.log('event', event);
-    // return getTrafficTime(event)
-    // .then(times => {
-    //   event.dataValues.traffic = times.traffic
-    //   sendLeaveNotification(times.notificationTime, event.dataValues);
-    //   // schedule notification for leaving
-    // });
-  })
-    // return getTrafficTime(event)
-    // .then(times => {
-      // event.dataValues.traffic = times.traffic
-      // sendLeaveNotification(times.notificationTime, event.dataValues);
-      // schedule notification for leaving
-    // });
-  // });  
+  });
+    
   // then agenda.cancel({id: jobiD}) or some other kind of identifier of the job we were doing
   done();
 });
