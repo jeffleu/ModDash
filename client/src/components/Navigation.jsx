@@ -14,6 +14,7 @@ class Navigation extends React.Component {
     this.setState({
       listening: !(this.state.listening)
     });
+    // artyomStop or artyomStart needs to happen, see Form.jsx
   }
 
   render() {
@@ -27,7 +28,7 @@ class Navigation extends React.Component {
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight={true} className="nav-icons">
-          <NavItem eventKey={1} href="#">
+          <NavItem eventKey={1} href="#" onClick={this.props.toggleEventForm}>
             <Glyphicon glyph="plus" />
           </NavItem>
           <NavItem onClick={this.toggleArtyomListener}>

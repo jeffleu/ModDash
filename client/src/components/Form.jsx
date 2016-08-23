@@ -15,7 +15,7 @@ class Form extends React.Component {
       startTime: '',
       endDate: '',
       endTime: '',
-      modalIsOpen: false,
+      eventFormIsOpen: false,
       repeat: '',
       repeatEvery: '',
       days: [],
@@ -25,14 +25,14 @@ class Form extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.openForm = this.openForm.bind(this);
+    this.closeForm = this.closeForm.bind(this);
   }
 
   componentDidMount() {
     // Fill out calendar form with voice
     this.props.commands.onFillOutForm((formData) => {
-      this.openModal();
+      this.openForm();
       this.setState(formData);
     });
 
@@ -41,6 +41,12 @@ class Form extends React.Component {
 
     // Start artyom listener
     this.props.commands.artyomStart();
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.eventFormIsOpen === true) {
+      this.openForm();
+    }
   }
 
   clickRecur() {
@@ -181,25 +187,23 @@ class Form extends React.Component {
       }
     }).catch((err) => { console.log('Error posting event to Google Calendar:\n', err); });
 
-    this.closeModal();
+    this.closeForm();
   }
 
-  openModal() {
+  openForm() {
     this.setState({
-      modalIsOpen: true
+      eventFormIsOpen: true
     });
   }
 
-  closeModal() {
+  closeForm() {
     this.setState({
-      modalIsOpen: false
+      eventFormIsOpen: false
     });
   }
 
-  // TO DO: Turn on and off voice commands using the voice-glyph (volume-up and volume-off) icons
 
   render() {
-    var volumeIcon = (this.state.artyomListening) ? <Glyphicon glyph="volume-up" /> : <Glyphicon glyph="volume-off" />;
 
     var state = this.state.repeat;
     var day = function() {
@@ -244,14 +248,12 @@ class Form extends React.Component {
 
     return (
       <div>
-        <div className='voice-glyph' onClick={this.toggleArtyomListener.bind(this)}>
-          {volumeIcon}
-        </div>
-        <div className='add-event-glyph' onClick={this.openModal}>
+ 
+        <div className='add-event-glyph' onClick={this.openForm}>
           <Glyphicon glyph="plus" />
         </div>
 
-        <Modal className="ModalForm" show={this.state.modalIsOpen} onHide={this.closeModal}>
+        <Modal className="ModalForm" show={this.state.eventFormIsOpen} onHide={this.closeForm}>
           <Modal.Header closeButton>
             <Modal.Title>
               <div className="calendar-form-title">Add an event</div>
@@ -278,7 +280,7 @@ class Form extends React.Component {
           <Modal.Footer>
             <div>
               <a onClick={this.clickRecur.bind(this)}>Repeat</a>
-              <Button bsSize="small" onClick={this.closeModal}> Nah </Button>
+              <Button bsSize="small" onClick={this.closeForm}> Nah </Button>
               <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good </Button>
             </div>
           </Modal.Footer>
@@ -287,5 +289,12 @@ class Form extends React.Component {
     );
   }
 }
+
+
+  // TO DO: Turn on and off voice commands using the voice-glyph (volume-up and volume-off) icons
+    // var volumeIcon = (this.state.artyomListening) ? <Glyphicon glyph="volume-up" /> : <Glyphicon glyph="volume-off" />;
+        //    <div className='voice-glyph' onClick={this.toggleArtyomListener.bind(this)}>
+        //   {volumeIcon}
+        // </div>
 
 export default Form;

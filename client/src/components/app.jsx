@@ -14,8 +14,36 @@ class App extends React.Component {
 
     this.state = {
       events: [],
-      displayTransitMode: ''
+      displayTransitMode: '',
+      eventFormIsOpen: false
     };
+    this.toggleEventForm = this.toggleEventForm.bind(this);
+    // this.eventFormClosed = this.eventFormClosed.bind(this);
+  }
+
+  toggleEventForm() {
+    console.log('before setting', this.state.eventFormIsOpen);
+    this.setState({
+      eventFormIsOpen: true
+    }, function() {
+      console.log('toggle event form:', this.state.eventFormIsOpen);
+      this.forceUpdate();
+    });
+    // if (this.state.eventFormIsOpen) {
+    //   this.setState({
+    //     eventFormIsOpen: false
+    //   });
+    // } else {
+    //   this.setState({
+    //     eventFormIsOpen: true
+    //   })
+    // }
+  }
+
+  eventFormClosed() {
+    this.setState({
+      eventFormIsOpen: false
+    });
   }
 
   fetchAndUpdateEvents() {
@@ -113,7 +141,7 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <Navigation />
+          <Navigation toggleEventForm={this.toggleEventForm} />
         </div>
         <div>
           <SignIn />
@@ -129,7 +157,7 @@ class App extends React.Component {
           <Calendar events={this.state.events} />
         </div>
         <div>
-          <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands}/>
+          <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands} eventFormIsOpen={this.state.eventFormIsOpen} eventFormClosed={this.eventFormClosed} />
         </div>
         <div>
           <Setting transitChange={this.handleTransChange.bind(this)} transitMode={this.state.displayTransitMode} />
