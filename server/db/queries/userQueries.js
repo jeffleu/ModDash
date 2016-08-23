@@ -30,6 +30,13 @@ const getUserInfo = (id) => {
   });
 };
 
+const getRefreshToken = (id) => {
+  return User.findOne({
+    where: { id: id },
+    attributes: ['refreshToken']
+  });
+};
+
 const updateUserGeolocation = (id, geolocation) => {
   return User.update(
     { geolocation: geolocation },
@@ -54,6 +61,7 @@ module.exports = {
   findOrCreateUser,
   authUser,
   getUserInfo,
+  getRefreshToken,
   updateUserSettings,
   updateUserGeolocation
 };
