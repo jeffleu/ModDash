@@ -37,7 +37,7 @@ const getTransitMode = (req, res) => {
 
 const updateTransitMode = (req, res) => {
   return User.updateTransitMode(req.userId, req.body.transitMode)
-    .then((data) => { res.sendStatus(200); })
+    .then((data) => { res.send(data); })
     .catch((err) => { res.sendState(404); });
 };
 

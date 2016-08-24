@@ -53,15 +53,13 @@ class Setting extends React.Component {
         <Modal className="ModalForm" show={this.props.settingsIsOpen} onHide={this.props.toggleSettings}>
           <Modal.Header closeButton>
             <Modal.Title> 
-              <div className="settings-title">Settings</div>
+              <div className="modal-title">Settings</div>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body className="settings-body">
+          <Modal.Body className="modal-body">
             <form className="settings-form" onSubmit={this.handleSubmit}>
-              <div className="phone-number-input">
-                If you wish to receive text notifications for real-time traffic before getting to your event, please enter it below:<br/>
-                <input type="text" value={this.state.phoneNumber} placeholder="(ex. xxxxxxxxxx)" onChange={this.onPhoneNumberChange} />
-              </div>
+              If you wish to receive text notifications for real-time traffic before getting to your event, please enter it below:<br/>
+              <input type="text" value={this.state.phoneNumber} placeholder="(ex. xxxxxxxxxx)" onChange={this.onPhoneNumberChange} />
             </form>
           </Modal.Body>
           <Modal.Footer>

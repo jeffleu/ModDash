@@ -25,17 +25,6 @@ class Navigation extends React.Component {
 
   render() {
     var volumeIcon = (this.state.listening) ? <Glyphicon glyph="volume-up" /> : <Glyphicon glyph="volume-off" />;
-  
-    var transitIcon;
-    if (this.props.transitMode === 'walking') {
-      transitIcon = <Glyphicon glyph="person-walking" />;
-    } else if (this.props.transitMode === 'transit') {
-      transitIcon = <Glyphicon glyph="train" />;
-    } else if (this.props.transitMode === 'bicycling') {
-      transitIcon = <Glyphicon glyph="bicycle" />;
-    } else {
-      transitIcon = <Glyphicon glyph="car" />;
-    }
 
     return (
       <Navbar className="navigation" fixedTop={true}>

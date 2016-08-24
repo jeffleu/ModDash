@@ -9,10 +9,10 @@ class Commands extends React.Component {
         <Modal className="ModalForm" show={this.props.commandsIsOpen} onHide={this.props.toggleCommands}>
           <Modal.Header closeButton>
             <Modal.Title>
-              <div className="commands-modal-title">Voice Commands</div>
+              <div className="modal-title">Voice Commands</div>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body className="ModalFormBody">
+          <Modal.Body className="modal-body">
             <div>
               <p>
                 <b>Create an event</b><br/>

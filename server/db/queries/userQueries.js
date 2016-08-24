@@ -62,7 +62,13 @@ const updateTransitMode = (id, transitMode) => {
   return User.update(
     { transitmode: transitMode }, 
     { where: { id: id } })
-      .then((result) => result)
+      .then((result) => {
+        if (result[0] === 1) {
+          return transitMode;
+        } else {
+          throw new Error();
+        }
+      })
       .catch((err) => err);
 };
 

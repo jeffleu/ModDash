@@ -14,29 +14,18 @@ class Setting extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // componentDidUpdate() {
-  //   console.log('Updating this.state.selectedTransitMode');
-  //   this.updateSelectedTransitMode(this.props.transitMode);
-  // }
+  componentWillReceiveProps() {
+    this.setState({ selectedTransitMode: this.props.transitMode });
+  }
 
   updateSelectedTransitMode(value) {
     this.setState({ selectedTransitMode: value });
   }
-
-  // shouldComponentUpdate() {
-  //   if (this.props.transitMode) {
-  //     return true;
-  //   }
-
-  //   return false;
-  // }
   
   handleSubmit() {
     // e.preventDefault();
     var token = localStorage.getItem('token');
     var settings = { transitMode: this.state.selectedTransitMode };
-
-    console.log('[TransitMode - handleSubmit]: settings', settings);
 
     fetch('http://localhost:9000/api/users/updateTransit', {
       method: 'POST',
@@ -47,9 +36,9 @@ class Setting extends React.Component {
         'authorization': token
       }
     })
-    .then((res) => res.json())
+    .then((res) => res.text())
     .then((data) => {
-      this.props.transitChange(data.transitmode);
+      this.props.transitChange(data);
     })
     .catch((err) => {
       console.log('did not save mode to db', err);
@@ -64,10 +53,10 @@ class Setting extends React.Component {
         <Modal className="ModalForm" show={this.props.transitModeIsOpen} onHide={this.props.toggleTransitMode}>
           <Modal.Header closeButton>
             <Modal.Title> 
-              <div className="transit-mode-title">Transportation Mode</div>
+              <div className="modal-title">Transportation Mode</div>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body className="transit-mode-body">
+          <Modal.Body className="modal-body">
             <form className="transit-form" onSubmit={this.handleSubmit}>
               <RadioGroup name="transit" selectedValue={this.state.selectedTransitMode} onChange={this.updateSelectedTransitMode}>
                 <div className="transit-selection">Choose Your Transportation</div>
