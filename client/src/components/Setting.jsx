@@ -46,7 +46,7 @@ class Setting extends React.Component {
       phoneNumber: this.state.phoneNumber
     };
 
-    fetch('ec2-52-43-234-146.us-west-2.compute.amazonaws.com/api/users/updateSettings', {
+    fetch('http://ec2-52-43-234-146.us-west-2.compute.amazonaws.com/api/users/updateSettings', {
       method: 'POST',
       body: JSON.stringify(settings),
       mode: 'cors-with-forced-preflight',
