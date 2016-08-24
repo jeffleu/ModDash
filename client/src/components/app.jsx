@@ -5,7 +5,7 @@ import Calendar from './Calendar.jsx';
 import Form from './Form.jsx';
 import SignIn from './SignIn.jsx';
 import Setting from './Setting.jsx';
-import commands from '../scripts/commands.js';
+// import commands from '../scripts/commands.js';
 import Navigation from './Navigation.jsx';
 
 class App extends React.Component {
@@ -15,40 +15,27 @@ class App extends React.Component {
     this.state = {
       events: [],
       displayTransitMode: '',
-      eventFormIsOpen: false
+      eventFormIsOpen: false,
+      settingsIsOpen: false
     };
+
     this.toggleEventForm = this.toggleEventForm.bind(this);
-    // this.eventFormClosed = this.eventFormClosed.bind(this);
+    this.toggleSettings = this.toggleSettings.bind(this);
+    this.fetchAndUpdateEvents = this.fetchAndUpdateEvents.bind(this);
+    this.handleTransChange = this.handleTransChange.bind(this);
   }
 
   toggleEventForm() {
-    console.log('before setting', this.state.eventFormIsOpen);
-    this.setState({
-      eventFormIsOpen: true
-    }, function() {
-      console.log('toggle event form:', this.state.eventFormIsOpen);
-      this.forceUpdate();
-    });
-    // if (this.state.eventFormIsOpen) {
-    //   this.setState({
-    //     eventFormIsOpen: false
-    //   });
-    // } else {
-    //   this.setState({
-    //     eventFormIsOpen: true
-    //   })
-    // }
+    (!this.state.eventFormIsOpen) ? this.setState({ eventFormIsOpen: true }) : this.setState({ eventFormIsOpen: false });
   }
 
-  eventFormClosed() {
-    this.setState({
-      eventFormIsOpen: false
-    });
+  toggleSettings() {
+    (!this.state.settingsIsOpen) ? this.setState({ settingsIsOpen: true }) : this.setState({ settingsIsOpen: false });
   }
 
   fetchAndUpdateEvents() {
     var token = localStorage.getItem('token');
-    console.log('got token for fetch and update events', token);
+
     // Post event to Google Calendar API
     fetch('http://localhost:9000/api/calendar/getDayEvents', {
       method: 'GET',
@@ -77,11 +64,7 @@ class App extends React.Component {
   }
   
   handleTransChange(value) {
-    this.setState({
-      displayTransitMode: value
-    });
-
-    console.log('[App] App state transit mode set to', value);
+    this.setState({ displayTransitMode: value });
   }
 
   displayTransitMode() {
@@ -119,8 +102,7 @@ class App extends React.Component {
     // Sort event times in chronological order
     times.sort((a, b) => new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`));
 
-    // TO DO: Bug fix - if there are multiple events are at the same time, the last
-    // event with the same time will overwrite the first one
+    // TO DO: Bug fix - if there are multiple events are at the same time, the last event with the same time will overwrite the first one
 
     // Sort events based on start time
     let sortedEvents = eventList.reduce((sortedArray, event) => {
@@ -141,12 +123,12 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <Navigation toggleEventForm={this.toggleEventForm} />
+          <Navigation toggleEventForm={this.toggleEventForm} toggleSettings={this.toggleSettings} />
         </div>
         <div>
           <SignIn />
         </div>
-        <div>
+        <div className="transit-mode">
           Transportation Mode:&nbsp;
           {this.state.displayTransitMode}
         </div>
@@ -157,10 +139,10 @@ class App extends React.Component {
           <Calendar events={this.state.events} />
         </div>
         <div>
-          <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands} eventFormIsOpen={this.state.eventFormIsOpen} eventFormClosed={this.eventFormClosed} />
+          <Form refreshEvents={this.fetchAndUpdateEvents} eventFormIsOpen={this.state.eventFormIsOpen} toggleEventForm={this.toggleEventForm} />
         </div>
         <div>
-          <Setting transitChange={this.handleTransChange.bind(this)} transitMode={this.state.displayTransitMode} />
+          <Setting transitChange={this.handleTransChange} transitMode={this.state.displayTransitMode} settingsIsOpen={this.state.settingsIsOpen} toggleSettings={this.toggleSettings} />
         </div>
       </div>
     );

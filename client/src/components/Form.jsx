@@ -1,8 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-// import Modal from 'react-modal';
 import { Modal, closeButton, Button, Glyphicon } from 'react-bootstrap';
-import { artyomStart, artyomStop } from '../scripts/commands';
+import { addCommands, artyomStart, artyomStop, commands, onFillOutForm } from '../scripts/commands';
 
 class Form extends React.Component {
   constructor(props) {
@@ -15,7 +14,6 @@ class Form extends React.Component {
       startTime: '',
       endDate: '',
       endTime: '',
-      eventFormIsOpen: false,
       repeat: '',
       repeatEvery: '',
       days: [],
@@ -25,53 +23,33 @@ class Form extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.openForm = this.openForm.bind(this);
-    this.closeForm = this.closeForm.bind(this);
   }
 
   componentDidMount() {
     // Fill out calendar form with voice
-    this.props.commands.onFillOutForm((formData) => {
+    onFillOutForm((formData) => {
       this.openForm();
       this.setState(formData);
     });
 
     // Set up commands
-    this.props.commands.addCommands(this.props.commands.commands);
+    addCommands(commands);
 
     // Start artyom listener
-    this.props.commands.artyomStart();
-  }
-
-  componentWillReceiveProps() {
-    if (this.props.eventFormIsOpen === true) {
-      this.openForm();
-    }
+    artyomStart();
   }
 
   clickRecur() {
-    if (this.state.recIsOpen === false) {
-      this.setState({
-        recIsOpen: true
-      });
-    } else {
-      this.setState({
-        recIsOpen: false
-      });
-    }
+    (this.state.recIsOpen === false) ? this.setState({ recIsOpen: true }) : this.setState({ recIsOpen: false });
   }
 
   toggleArtyomListener() {
     if (this.state.artyomListening) {
       artyomStop();
-      this.setState({
-        artyomListening: false
-      });
+      this.setState({ artyomListening: false });
     } else {
       artyomStart();
-      this.setState({
-        artyomListening: true
-      });
+      this.setState({ artyomListening: true });
     }
   }
 
@@ -187,21 +165,8 @@ class Form extends React.Component {
       }
     }).catch((err) => { console.log('Error posting event to Google Calendar:\n', err); });
 
-    this.closeForm();
+    this.props.toggleEventForm();
   }
-
-  openForm() {
-    this.setState({
-      eventFormIsOpen: true
-    });
-  }
-
-  closeForm() {
-    this.setState({
-      eventFormIsOpen: false
-    });
-  }
-
 
   render() {
 
@@ -248,12 +213,7 @@ class Form extends React.Component {
 
     return (
       <div>
- 
-        <div className='add-event-glyph' onClick={this.openForm}>
-          <Glyphicon glyph="plus" />
-        </div>
-
-        <Modal className="ModalForm" show={this.state.eventFormIsOpen} onHide={this.closeForm}>
+        <Modal className="ModalForm" show={this.props.eventFormIsOpen} onHide={this.props.toggleEventForm}>
           <Modal.Header closeButton>
             <Modal.Title>
               <div className="calendar-form-title">Add an event</div>
@@ -280,8 +240,8 @@ class Form extends React.Component {
           <Modal.Footer>
             <div>
               <a onClick={this.clickRecur.bind(this)}>Repeat</a>
-              <Button bsSize="small" onClick={this.closeForm}> Nah </Button>
-              <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good </Button>
+              <Button bsSize="small" onClick={this.props.toggleEventForm}>Nah</Button>
+              <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good</Button>
             </div>
           </Modal.Footer>
         </Modal>
@@ -289,12 +249,5 @@ class Form extends React.Component {
     );
   }
 }
-
-
-  // TO DO: Turn on and off voice commands using the voice-glyph (volume-up and volume-off) icons
-    // var volumeIcon = (this.state.artyomListening) ? <Glyphicon glyph="volume-up" /> : <Glyphicon glyph="volume-off" />;
-        //    <div className='voice-glyph' onClick={this.toggleArtyomListener.bind(this)}>
-        //   {volumeIcon}
-        // </div>
 
 export default Form;
