@@ -37,10 +37,10 @@ router.get('/verified', AuthController.authCallback); // Google redirect after a
 router.post('/api/calendar/addEvent', EventController.addEventAndAddTravel);
 router.get('/api/calendar/getDayEvents', EventController.getDayEvents);
 
-
 // User Routes
 router.get('/api/users/getTransit', UserController.getTransitMode);
-router.post('/api/users/updateSettings', UserController.updateSettings);
+router.post('/api/users/updateTransit', UserController.updateTransitMode);
+router.post('/api/users/updatePhoneNumber', UserController.updatePhoneNumber);
 router.get('/api/users/getGeolocation', UserController.getGeolocation);
 router.post('/api/users/updateGeolocation', UserController.updateGeolocation);
 
