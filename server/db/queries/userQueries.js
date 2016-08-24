@@ -32,7 +32,7 @@ const getUser = (id) => {
 const getUserInfo = (id) => {
   return User.findOne({
     where: { id: id },
-    attributes: ['id', 'geolocation', 'transitmode', 'phone']
+    attributes: ['id', 'geolocation', 'transitmode', 'phone', 'pubnubid']
   });
 };
 
