@@ -23,6 +23,7 @@ class CalendarEntry extends React.Component {
       show: !this.state.show,
       gcalId: gcalId
     });
+    console.log(gcalId);
   }
 
   // handleDeleteEvent() {
@@ -33,6 +34,7 @@ class CalendarEntry extends React.Component {
     var token = localStorage.getItem('token');
     var deleteCalId = this.state.gcalId;
     var googleCalId = {eventId: deleteCalId};
+
     fetch('http://localhost:9000/api/calendar/deleteEvent', {
       method: 'DELETE',
       body: JSON.stringify(googleCalId),
@@ -52,10 +54,9 @@ class CalendarEntry extends React.Component {
     });
   }
 
-<<<<<<< 006f746812a22ab38008e63d3518725e5953153d
-
   render() {
     let displayButton = <span onClick={this.deleteEvent.bind(this)}className='glyphicon glyphicon-remove-circle' id='delete'></span>;
+    
     return (
         <div className='calendar-entry'>
           <div className='event-start' onClick={this.showDelete.bind(this)}>
@@ -66,24 +67,6 @@ class CalendarEntry extends React.Component {
             <a className='event-link' href={this.props.event.eventUrl} target='new'>{this.props.event.eventName} at {this.props.event.location}</a>
           </div>
         </div>
-=======
-  render() {
-    console.log('props', this.props);
-    var gcalId = this.props.event.eventId;
-    return (
-      <div className='calendar-entry'>
-        <div className='close'>
-
-        </div>
-        <div className='event-start'>
-          {this.props.event.startTime}
-        </div>
-        <div className='event-summary-location'>
-          {this.state.hover ? (<div><a onClick={this.deleteEvent(gcalId)}>Delete Event</a></div>) : null}
-          <a className='event-link' onMouseOver={this.mouseOver.bind(this)} onMouseOut={this.mouseOut.bind(this)} href={this.props.event.eventUrl} target='new'>{this.props.event.eventName} at {this.props.event.location}</a>
-        </div>
-      </div>
->>>>>>> mouse over event on each cal event and able to send gcal id to main app component
     );
   }
 }
