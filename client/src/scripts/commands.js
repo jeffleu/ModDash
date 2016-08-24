@@ -25,16 +25,9 @@ const artyomStop = () => {
 // Get current time
 const getTime = () => {
   const date = Date().slice(16, Date().length - 15);
-  let hours = date.slice(0, 2);
+  let hours = (date.slice(0, 2) > 12) ? date.slice(0, 2) - 12 : date.slice(0, 2);
   let minutes = date.slice(3, 5);
-  let amPm;
-
-  if (hours >= 12) {
-    hours = hours - 12;
-    amPm = 'PM';
-  } else {
-    amPm = 'AM';
-  }
+  let amPm = (date.slice(0, 2) < 12) ? 'AM' : 'PM';
 
   return `${hours} ${minutes} ${amPm}`;
 };
@@ -114,10 +107,11 @@ const fillOutForm = (wildcard) => {
   (date.month < 10) ? date.month = `0${date.month}` : date.month = `${date.month}`;
   (date.day < 10) ? date.day = `0${date.day}` : date.day = `${date.day}`;
 
-  // Add leading zeroes to hour/minute if less than 10
+  // Format time
   let time = '';
-  (date.hour < 10) ? time += `0${date.hour}:` : time += `${date.hour}:`;
-  (date.minute < 10) ? time += `0${date.minute}` : time += `${date.minute}`;
+  (date.hour > 12) ? time += `${Number(date.hour) - 12}:` : time += `${date.hour}:`;
+  (date.minute < 10) ? time += `0${date.minute} ` : time += `${date.minute} `;
+  (date.hour >= 12) ? time += 'PM' : time += 'AM';
 
   // Generate form data object to pass to this.setState
   let formInfo = {

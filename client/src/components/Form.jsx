@@ -23,12 +23,14 @@ class Form extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clickRecur = this.clickRecur.bind(this);
+    this.clearAndToggleForm = this.clearAndToggleForm.bind(this);
   }
 
   componentDidMount() {
     // Fill out calendar form with voice
     onFillOutForm((formData) => {
-      this.openForm();
+      this.props.toggleEventForm();
       this.setState(formData);
     });
 
@@ -41,6 +43,33 @@ class Form extends React.Component {
 
   clickRecur() {
     (this.state.recIsOpen === false) ? this.setState({ recIsOpen: true }) : this.setState({ recIsOpen: false });
+  }
+
+  clearAndToggleForm() {
+    this.props.toggleEventForm();
+
+    this.setState({
+      summary: '',
+      location: '',
+      startDate: '',
+      startTime: '',
+      endDate: '',
+      endTime: '',
+      repeat: '',
+      repeatEvery: '',
+      days: []
+    });
+  }
+
+  convertToMilitaryTime(time) {
+    let split = time.split(':');
+    let hours = Number(split.shift());
+    let minutes = Number(split.join('').split(' ')[0]);
+    let amPm = split.join('').split(' ')[1];
+    
+    if (amPm === 'PM') { hours += 12; }
+
+    return `${hours}:${minutes}`;
   }
 
   toggleArtyomListener() {
@@ -101,19 +130,20 @@ class Form extends React.Component {
     // TO DO: Use geolocation to update timeZone automatically
 
     // Create event object with Form's state
-    var recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;
-    console.log('recur', recur);
-    var event;
+    let time = this.convertToMilitaryTime(this.state.startTime);
+    let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;    
+    
+    let event;
     if (this.state.recIsOpen === false) {
       event = {
         summary: this.state.summary,
         location: this.state.location,
         start: {
-          dateTime: `${this.state.startDate}T${this.state.startTime}:00-07:00`,
+          dateTime: `${this.state.startDate}T${time}:00-07:00`,
           timeZone: 'America/Los_Angeles'
         },
         end: {
-          dateTime: `${this.state.endDate}T${this.state.endTime}:00-07:00`,
+          dateTime: `${this.state.endDate}T${time}:00-07:00`,
           timeZone: 'America/Los_Angeles'
         }
       };
@@ -133,21 +163,7 @@ class Form extends React.Component {
       };
     }
 
-    // Clear state which the form's values are pointing to
-    this.setState({
-      summary: '',
-      location: '',
-      startDate: '',
-      startTime: '',
-      endDate: '',
-      endTime: '',
-      repeat: '',
-      repeatEvery: '',
-      days: []
-    });
-
-    var token = localStorage.getItem('token');
-    console.log('got token for adding event', token);
+    let token = localStorage.getItem('token');
 
     // Post event to Google Calendar API
     fetch('http://localhost:9000/api/calendar/addEvent', {
@@ -159,13 +175,10 @@ class Form extends React.Component {
         'authorization': token
       }
     }).then((res) => {
-      if (res.status === 200) {
-        this.props.refreshEvents();
-      // Refreshes today's events in chronological order including new event that was just added
-      }
+      if (res.status === 200) { this.props.refreshEvents(); }
     }).catch((err) => { console.log('Error posting event to Google Calendar:\n', err); });
 
-    this.props.toggleEventForm();
+    this.clearAndToggleForm();
   }
 
   render() {
@@ -222,24 +235,24 @@ class Form extends React.Component {
           <Modal.Body className="modal-body">
             <form className="event-form" onSubmit={this.handleSubmit}>
               <div>
-                Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event" onChange={this.handleChange} />
+                Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event name" onChange={this.handleChange} />
               </div>
               <div>
-                Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location" onChange={this.handleChange} />
+                Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location of event" onChange={this.handleChange} />
               </div>
               <div>
-                Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="Date" onChange={this.handleChange} />
+                Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="YYYY-MM-DD" onChange={this.handleChange} />
               </div>
               <div>
-                Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="Time" onChange={this.handleChange} />
+                Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="HH:MM AM/PM" onChange={this.handleChange} />
               </div>
               {this.state.recIsOpen ? displayRecur : null}
             </form>
           </Modal.Body>
           <Modal.Footer>
             <div>
-              <a onClick={this.clickRecur.bind(this)}>Repeat</a>
-              <Button bsSize="small" onClick={this.props.toggleEventForm}>Nah</Button>
+              <a onClick={this.clickRecur}>Repeat</a>
+              <Button bsSize="small" onClick={this.clearAndToggleForm}>Nah</Button>
               <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good</Button>
             </div>
           </Modal.Footer>
