@@ -4,7 +4,7 @@ const User = require('../../db/queries').User;
 
 const publishEventAdded = (userId, message) => {
   message.messageType = 'eventAdded';
-  User.getUser(userId)
+  User.getUserChannel(userId)
   .then(user => {
     var channel = user.dataValues.pubnubid;
     pubnub.publish({
