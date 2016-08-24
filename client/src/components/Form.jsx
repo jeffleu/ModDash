@@ -216,11 +216,11 @@ class Form extends React.Component {
         <Modal className="ModalForm" show={this.props.eventFormIsOpen} onHide={this.props.toggleEventForm}>
           <Modal.Header closeButton>
             <Modal.Title>
-              <div className="calendar-form-title">Add an event</div>
+              <div className="modal-title">Add an event</div>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body className="ModalFormBody">
-            <form className="calendar-form" onSubmit={this.handleSubmit}>
+          <Modal.Body className="modal-body">
+            <form className="event-form" onSubmit={this.handleSubmit}>
               <div>
                 Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event" onChange={this.handleChange} />
               </div>
@@ -234,7 +234,6 @@ class Form extends React.Component {
                 Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="Time" onChange={this.handleChange} />
               </div>
               {this.state.recIsOpen ? displayRecur : null}
-
             </form>
           </Modal.Body>
           <Modal.Footer>

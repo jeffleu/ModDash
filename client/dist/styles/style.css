@@ -26,6 +26,12 @@ body {
 .glyphicon {
   font-size: 125%;
   color: white;
+  transition: color 0.75s;
+}
+
+.glyphicon:hover {
+  color: #50C8FF;
+  transition: color 0.75s;
 }
 
 .signin {
@@ -161,7 +167,17 @@ body {
   text-align: left;
 }
 
-.calendar-form-title {
+.modal-body {
+  font-size: 110%;
+  font-weight: 100;
+}
+
+.modal-title {
+  font-size: 150%;
+  font-weight: 100;
+}
+
+.commands-modal-title {
   font-size: 200%;
   font-weight: 100;
 }
@@ -212,10 +228,6 @@ input {
   padding-top: 25px;
 }
 
-.settings-form {
-  font-size: 125%;
-}
-
 .settings-glyph {
   position: absolute;
   left: 2%;
@@ -225,11 +237,6 @@ input {
 
 .settings-glyph:hover {
   cursor: pointer;
-}
-
-.settings-title {
-  font-size: 200%;
-  font-weight: 100;
 }
 
 .trans-mode{

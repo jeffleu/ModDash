@@ -132,6 +132,14 @@ const fillOutForm = (wildcard) => {
   handleFormData(formInfo);
 };
 
+const openCommandsModal = () => {
+  artyom.say('Here are a list of voice commands. You can doo things like create an event, opening websites and search YouTube.');
+};
+
+const openSettingsModal = () => {
+  artyom.say('Please select the type of transit mode and the number where you would like to get traffic text notifications. These can be changed at any time.');
+};
+
 /********************************************************
   ARTYOM COMMANDS
 ********************************************************/
@@ -211,5 +219,7 @@ module.exports = {
   commands,
   onFillOutForm: (callback) => {
     handleFormData = callback;
-  }
+  },
+  openCommandsModal,
+  openSettingsModal
 };

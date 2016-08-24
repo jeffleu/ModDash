@@ -1,25 +1,18 @@
 import React from 'react';
 import { RadioGroup, Radio } from 'react-radio-group';
 import { Button, closeButton, Glyphicon, Modal } from 'react-bootstrap';
+
 class Setting extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showSettings: false,
+      // showSettings: false,
       phoneNumber: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onPhoneNumberChange = this.onPhoneNumberChange.bind(this);
-  }
-
-  shouldComponentUpdate() {
-    if (this.props.transitMode) {
-      return true;
-    }
-
-    return false;
   }
   
   onPhoneNumberChange(e) {
@@ -28,13 +21,13 @@ class Setting extends React.Component {
 
   handleSubmit() {
     // e.preventDefault();
-    var token = localStorage.getItem('token');
-    var settings = {
-      transit: this.props.transitMode,
-      phoneNumber: this.state.phoneNumber
-    };
 
-    fetch('http://localhost:9000/api/users/updateSettings', {
+    // TO DO: Do not allow user to submit if phone number is null or not correctly formatted.
+
+    var token = localStorage.getItem('token');
+    var settings = { phoneNumber: this.state.phoneNumber };
+
+    fetch('http://localhost:9000/api/users/updatePhoneNumber', {
       method: 'POST',
       body: JSON.stringify(settings),
       mode: 'cors-with-forced-preflight',
@@ -60,23 +53,13 @@ class Setting extends React.Component {
         <Modal className="ModalForm" show={this.props.settingsIsOpen} onHide={this.props.toggleSettings}>
           <Modal.Header closeButton>
             <Modal.Title> 
-              <div className="settings-title">Settings</div>
+              <div className="modal-title">Settings</div>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body className="settings-body">
+          <Modal.Body className="modal-body">
             <form className="settings-form" onSubmit={this.handleSubmit}>
-              <RadioGroup name="transit" selectedValue={this.props.transitMode} onChange={this.props.transitChange}>
-                <div className="transit-selection">Choose Your Transportation</div>
-                <Radio value="driving" /> Driving <br/>
-                <Radio value="walking" /> Walking <br/>
-                <Radio value="transit" /> Transit <br/>
-                <Radio value="bicycling" /> Bicycling
-              </RadioGroup>
-
-              <div className="phone-number-input">
-                If you wish to receive text notifications for real-time traffic before getting to your event, please enter it below:<br/>
-                <input type="text" value={this.state.phoneNumber} placeholder="(ex. xxxxxxxxxx)" onChange={this.onPhoneNumberChange} />
-              </div>
+              If you wish to receive text notifications for real-time traffic before getting to your event, please enter it below:<br/>
+              <input type="text" value={this.state.phoneNumber} placeholder="(ex. xxxxxxxxxx)" onChange={this.onPhoneNumberChange} />
             </form>
           </Modal.Body>
           <Modal.Footer>

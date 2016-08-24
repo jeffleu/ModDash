@@ -5,8 +5,10 @@ import Calendar from './Calendar.jsx';
 import Form from './Form.jsx';
 import SignIn from './SignIn.jsx';
 import Setting from './Setting.jsx';
-// import commands from '../scripts/commands.js';
 import Navigation from './Navigation.jsx';
+import Commands from './Commands.jsx';
+import TransitMode from './TransitMode.jsx';
+import { openCommandsModal, openSettingsModal } from '../scripts/commands';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,15 +16,21 @@ class App extends React.Component {
 
     this.state = {
       events: [],
-      displayTransitMode: '',
+      transitMode: '',
       eventFormIsOpen: false,
-      settingsIsOpen: false
+      settingsIsOpen: false,
+      commandsIsOpen: false,
+      transitModeIsOpen: false,
+      openCommandsIntro: true,
+      openSettingsIntro: true
     };
 
     this.toggleEventForm = this.toggleEventForm.bind(this);
     this.toggleSettings = this.toggleSettings.bind(this);
+    this.toggleCommands = this.toggleCommands.bind(this);
+    this.toggleTransitMode = this.toggleTransitMode.bind(this);
     this.fetchAndUpdateEvents = this.fetchAndUpdateEvents.bind(this);
-    this.handleTransChange = this.handleTransChange.bind(this);
+    this.onTransitModeChange = this.onTransitModeChange.bind(this);
   }
 
   toggleEventForm() {
@@ -30,7 +38,48 @@ class App extends React.Component {
   }
 
   toggleSettings() {
-    (!this.state.settingsIsOpen) ? this.setState({ settingsIsOpen: true }) : this.setState({ settingsIsOpen: false });
+    if (!this.state.settingsIsOpen) {
+      this.setState({ settingsIsOpen: true });
+
+      if (this.state.openSettingsIntro) {
+        this.setState({ openSettingsIntro: false });
+        openSettingsModal();
+      }
+    } else {
+      this.setState({ settingsIsOpen: false });
+    }
+  }
+
+  toggleCommands() {
+    if (!this.state.commandsIsOpen) {
+      this.setState({ commandsIsOpen: true});
+
+      if (this.state.openCommandsIntro) {
+        this.setState({ openCommandsIntro: false });
+        openCommandsModal();
+      }
+
+    } else {
+      this.setState({ commandsIsOpen: false }); 
+    }
+  }
+
+  toggleTransitMode() {
+    if (!this.state.transitModeIsOpen) {
+      this.setState({ transitModeIsOpen: true});
+
+      // if (this.state.openCommandsIntro) {
+      //   this.setState({ openCommandsIntro: false });
+      //   openCommandsModal();
+      // }
+
+    } else {
+      this.setState({ transitModeIsOpen: false }); 
+    } 
+  }
+
+  onTransitModeChange(value) {
+    this.setState({ transitMode: value });
   }
 
   fetchAndUpdateEvents() {
@@ -62,10 +111,6 @@ class App extends React.Component {
       console.log('Error retrieving events', err);
     });
   }
-  
-  handleTransChange(value) {
-    this.setState({ displayTransitMode: value });
-  }
 
   displayTransitMode() {
     var token = localStorage.getItem('token');
@@ -79,14 +124,7 @@ class App extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        // this.setState({
-        //   selectedOption: data.transitmode
-        // })
-        // pass data back to app jsx
-        console.log('setting data', data);
-        this.setState({
-          displayTransitMode: data.transitmode
-        });
+        this.setState({ transitMode: data.transitmode });
       })
       .catch((err) => {
         console.log('Did not get User info', err);
@@ -123,14 +161,16 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <Navigation toggleEventForm={this.toggleEventForm} toggleSettings={this.toggleSettings} />
+          <Navigation 
+            toggleEventForm = {this.toggleEventForm} 
+            toggleSettings = {this.toggleSettings} 
+            toggleCommands = {this.toggleCommands} 
+            toggleTransitMode = {this.toggleTransitMode}
+            transitMode = {this.state.transitMode}
+          />
         </div>
         <div>
           <SignIn />
-        </div>
-        <div className="transit-mode">
-          Transportation Mode:&nbsp;
-          {this.state.displayTransitMode}
         </div>
         <div>
           <Time />
@@ -139,10 +179,31 @@ class App extends React.Component {
           <Calendar events={this.state.events} />
         </div>
         <div>
-          <Form refreshEvents={this.fetchAndUpdateEvents} eventFormIsOpen={this.state.eventFormIsOpen} toggleEventForm={this.toggleEventForm} />
+          <Form 
+            eventFormIsOpen = {this.state.eventFormIsOpen} 
+            toggleEventForm = {this.toggleEventForm} 
+            refreshEvents = {this.fetchAndUpdateEvents}
+          />
         </div>
         <div>
-          <Setting transitChange={this.handleTransChange} transitMode={this.state.displayTransitMode} settingsIsOpen={this.state.settingsIsOpen} toggleSettings={this.toggleSettings} />
+          <Setting
+            settingsIsOpen = {this.state.settingsIsOpen}
+            toggleSettings = {this.toggleSettings}
+          />
+        </div>
+        <div>
+          <Commands 
+            commandsIsOpen = {this.state.commandsIsOpen} 
+            toggleCommands = {this.toggleCommands}
+          />
+        </div>
+        <div>
+          <TransitMode 
+            transitModeIsOpen = {this.state.transitModeIsOpen}
+            toggleTransitMode = {this.toggleTransitMode} 
+            transitChange = {this.onTransitModeChange} 
+            transitMode = {this.state.transitMode}
+          />
         </div>
       </div>
     );

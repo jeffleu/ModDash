@@ -25,7 +25,7 @@ class Navigation extends React.Component {
 
   render() {
     var volumeIcon = (this.state.listening) ? <Glyphicon glyph="volume-up" /> : <Glyphicon glyph="volume-off" />;
-    
+
     return (
       <Navbar className="navigation" fixedTop={true}>
         <Navbar.Header className="nav-icons">
@@ -34,14 +34,20 @@ class Navigation extends React.Component {
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight={true} className="nav-icons">
-          <NavItem eventKey={1} href="#" onClick={this.props.toggleEventForm}>
+          <NavItem eventKey={1} onClick={this.props.toggleEventForm}>
             <Glyphicon glyph="plus" />
           </NavItem>
-          <NavItem eventKey={2} onClick={this.toggleArtyomListener}>
-            {volumeIcon}
+          <NavItem eventKey={2} onClick={this.props.toggleTransitMode}>
+            <Glyphicon glyph="road" />
           </NavItem>
-          <NavItem eventKey={3} href="#">
-            <Glyphicon glyph="cog" onClick={this.props.toggleSettings} />
+          <NavItem eventKey={3} onClick={this.toggleArtyomListener}>
+            { volumeIcon }
+          </NavItem>
+          <NavItem eventKey={4} onClick={this.props.toggleCommands}>
+            <Glyphicon glyph="question-sign" />
+          </NavItem>
+          <NavItem eventKey={5} onClick={this.props.toggleSettings} >
+            <Glyphicon glyph="cog" />
           </NavItem>
         </Nav>
       </Navbar>
