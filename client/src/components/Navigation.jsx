@@ -1,20 +1,26 @@
 import React from 'react';
 import { Navbar, Nav, NavItem, Glyphicon } from 'react-bootstrap';
+import { artyomStart, artyomStop } from '../scripts/commands';
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       listening: true
     };
+
     this.toggleArtyomListener = this.toggleArtyomListener.bind(this);
   }
 
   toggleArtyomListener() {
-    this.setState({
-      listening: !(this.state.listening)
-    });
-    // artyomStop or artyomStart needs to happen, see Form.jsx
+    if (this.state.listening) {
+      this.setState({ listening: false });
+      artyomStop();
+    } else {
+      this.setState({ listening: true });
+      artyomStart();
+    }
   }
 
   render() {
@@ -31,11 +37,11 @@ class Navigation extends React.Component {
           <NavItem eventKey={1} href="#" onClick={this.props.toggleEventForm}>
             <Glyphicon glyph="plus" />
           </NavItem>
-          <NavItem onClick={this.toggleArtyomListener}>
+          <NavItem eventKey={2} onClick={this.toggleArtyomListener}>
             {volumeIcon}
           </NavItem>
-          <NavItem eventKey={2} href="#">
-            <Glyphicon glyph="cog" />
+          <NavItem eventKey={3} href="#">
+            <Glyphicon glyph="cog" onClick={this.props.toggleSettings} />
           </NavItem>
         </Nav>
       </Navbar>

@@ -5,13 +5,14 @@ import { Glyphicon } from 'react-bootstrap';
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       date: moment().format('dddd, MMMM D')
-    }
+    };
   }
 
   render() {
-    return(
+    return (
       <div className='calendar'>
         <div className='calendar-title'>
           {this.state.date}
@@ -21,7 +22,7 @@ class Calendar extends React.Component {
         )}
         </div>
       </div>
-    )
+    );
   }
 }
 
