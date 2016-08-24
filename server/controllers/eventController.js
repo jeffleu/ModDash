@@ -27,8 +27,19 @@ const getDayEvents = (req, res) => {
   });
 };
 
+const deleteEventFromGcal = (req, res) => {
+  Event.deleteEvent(req.body)
+    .then(event => {
+      console.log(evemt);
+    })
+    .catch(err => {
+      console.log('did not delete event', err);
+    });
+};
+
 
 module.exports = {
   addEventAndAddTravel,
-  getDayEvents
+  getDayEvents,
+  deleteEventFromGcal
 };

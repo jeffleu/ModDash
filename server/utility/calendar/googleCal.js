@@ -52,12 +52,7 @@ const deleteEvent = (auth, event) => {
 };
 
 module.exports = {
-<<<<<<< HEAD
-  insertEvent,
+  addEventToGoogleCal,
+  getEventsFromGoogleCal,
   deleteEvent
 };
-=======
-  addEventToGoogleCal,
-  getEventsFromGoogleCal
-};
->>>>>>> master

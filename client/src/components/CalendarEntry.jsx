@@ -31,26 +31,27 @@ class CalendarEntry extends React.Component {
     var token = localStorage.getItem('token');
     console.log('id', deleteCalId);
     console.log('token', token);
-    var googleCalId = {event: event}
-    fetch('http://localhost:9000/api/calendar/deleteEvent', {
-      method: 'DELETE',
-      body: JSON.stringify(googleCalId),
-      mode: 'cors-with-forced-preflight',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': token
-      }
-    })
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      console.log('data'. data);
-      // use data to update state after success deletion
-    })
-    .then((err) => {
-      console.log('did not delete event from db and gcal');
-    });
+    var googleCalId = {event: event};
+    console.log('googleCalId', googleCalId);
+    // fetch('http://localhost:9000/api/calendar/deleteEvent', {
+    //   method: 'DELETE',
+    //   body: JSON.stringify(googleCalId),
+    //   mode: 'cors-with-forced-preflight',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'authorization': token
+    //   }
+    // })
+    // .then((res) => {
+    //   return res.json();
+    // })
+    // .then((data) => {
+    //   console.log('data'. data);
+    //   // use data to update state after success deletion
+    // })
+    // .then((err) => {
+    //   console.log('did not delete event from db and gcal');
+    // });
   }
   mouseOut() {
     this.setState({
