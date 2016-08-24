@@ -25,29 +25,18 @@ const recurringCheck = (event) => {
 
 // define the job
 agenda.define('query traffic', (job, done) => {
-  // this should probably be a setInterval to keep querying for Traffic time and then setting new notification job if it meets certain requirements. Interval ends when we pass the leave time.
-  // for now we are just going to query traffic once at the scheduled time, which is double the initial estimate
   var travel = job.attrs.data;
   var eventId = travel.eventId;
 
   return Event.retrieveEvent(eventId)
   .then(event => {
     recurringCheck(event);
-    // console.log('event', event);
-    // return getTrafficTime(event)
-    // .then(times => {
-    //   event.dataValues.traffic = times.traffic
-    //   sendLeaveNotification(times.notificationTime, event.dataValues);
-    //   // schedule notification for leaving
-    // });
-  })
-    // return getTrafficTime(event)
-    // .then(times => {
-      // event.dataValues.traffic = times.traffic
-      // sendLeaveNotification(times.notificationTime, event.dataValues);
-      // schedule notification for leaving
-    // });
-  // });  
+  });
+
+  setTimeout(() => {
+    removeJob(job.attrs._id);
+  }, 1000);
+    
   // then agenda.cancel({id: jobiD}) or some other kind of identifier of the job we were doing
   done();
 });
@@ -56,7 +45,23 @@ agenda.define('query traffic', (job, done) => {
 const queryTraffic = travel => {
   travel = travel.dataValues;
   console.log('scheduling a queryTraffic worker for destination', travel.destination,'to begin querying at', travel.queryTime)
-  agenda.schedule(travel.queryTime, 'query traffic', travel);
+  if (travel.queryTime <= Date.now()) {
+    // if queryTime is in the past, query now, or maybe don't query at all?
+    agenda.now('query traffic', travel);
+  } else {
+    agenda.schedule(travel.queryTime, 'query traffic', travel);
+  }
+};
+
+const removeJob = function(id) {
+  console.log('id in removeJob for queryTraffic', id);
+  agenda.cancel({_id: id}, (err, numRemoved) => {
+    if (err) {
+      console.warn('error in removing job:', err)
+    } else {
+      console.log(numRemoved, 'jobs removed');
+    }
+  });
 };
 
 module.exports = queryTraffic;

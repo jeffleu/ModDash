@@ -10,5 +10,6 @@ module.exports = db.define('user', {
   refreshToken: Sequelize.STRING,
   accessToken: Sequelize.STRING,
   geolocation: Sequelize.STRING,
-  transitmode: Sequelize.STRING
+  transitmode: Sequelize.STRING,
+  phone: Sequelize.STRING
 });

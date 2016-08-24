@@ -1,3 +1,5 @@
+const Chrono = require('../../dist/lib/chrono.min.js');
+
 /********************************************************
   HELPER FUNCTIONS
 ********************************************************/
@@ -128,18 +130,15 @@ const fillOutForm = (wildcard) => {
   };
 
   handleFormData(formInfo);
-
-  // artyom.say(`Added ${eventName} at ${location} to the calendar. If everything on the form looks good, say add to calendar.`);
 };
 
-// let handleVoiceSubmit = () => {
-//   throw new Error('Missing callback function for onVoiceSubmit!');
-// };
+const openCommandsModal = () => {
+  artyom.say('Here are a list of voice commands. You can doo things like create an event, opening websites and search YouTube.');
+};
 
-// const voiceSubmit = () => {
-//   console.log('Inside voiceSubmit');
-//   handleVoiceSubmit();
-// };
+const openSettingsModal = () => {
+  artyom.say('Please select the type of transit mode and the number where you would like to get traffic text notifications. These can be changed at any time.');
+};
 
 /********************************************************
   ARTYOM COMMANDS
@@ -148,7 +147,7 @@ const fillOutForm = (wildcard) => {
 const commands = [
   {
     indexes: ['stop listening'],
-    action: (i) => { artyomStop() }
+    action: (i) => { artyomStop(); }
   },
   {
     indexes: ['render spotify playlist'],
@@ -169,18 +168,18 @@ const commands = [
   },
   {
     indexes: ['what time is it'],
-    action: (i) => { artyom.say(`It is currently ${getTime()}.`) }
+    action: (i) => { artyom.say(`It is currently ${getTime()}.`); }
   },
   {
     indexes: ['what\'s the date today'],
-    action: (i) => { artyom.say(`Today is ${getDate()}.`) }
+    action: (i) => { artyom.say(`Today is ${getDate()}.`); }
   },
   {
     indexes: ['open *', 'go to *'],
     smart: true,
     action: (i, wildcard) => {
       artyom.say(`Opening ${wildcard.replace('.', ' dot ')}.`);
-      window.open(`http://${wildcard}`)
+      window.open(`http://${wildcard}`);
     }
   },
   {
@@ -188,7 +187,7 @@ const commands = [
     smart: true,
     action: (i, wildcard) => {
       artyom.say(`Searching YouTube for ${wildcard}.`);
-      window.open(`https://www.youtube.com/results?search_query=${wildcard}`)
+      window.open(`https://www.youtube.com/results?search_query=${wildcard}`);
     }
   },
   {
@@ -206,13 +205,6 @@ const commands = [
       fillOutForm(wildcard);
     }
   }
-  // {
-  //   indexes: ['looks good', 'add to calendar'],
-  //   action: (i) => {
-  //     console.log('Inside artyom command');
-  //     voiceSubmit();
-  //   }
-  // }
 ];
 
 /********************************************************
@@ -222,13 +214,12 @@ const commands = [
 module.exports = {
   artyomStart,
   artyomStop,
-  // fillOutForm: fillOutForm,
+  fillOutForm: fillOutForm,
   addCommands: artyom.addCommands,
   commands,
   onFillOutForm: (callback) => {
     handleFormData = callback;
-  }
-  // onVoiceSubmit: (callback) => {
-  //   handleVoiceSubmit = callback;
-  // }
+  },
+  openCommandsModal,
+  openSettingsModal
 };

@@ -12,12 +12,12 @@ router.use('/api', function(req, res, next) {
     // tried to refactor to be jwt.verifyJWT function (see utility/auth/jwt.js)
     jwt.verify(token, process.env.JWT_SECRET, {issuer: 'NeverMissOut'}, function(err, decoded) {
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token, please log-in again'})
+        return res.json({ success: false, message: 'Failed to authenticate token, please log-in again'});
       } else {
         req.userId = decoded.userId;
         next();
       }
-    })
+    });
   } else {
     return res.status(403).send({
       success: false,
@@ -38,12 +38,10 @@ router.delete('/api/calendar/deleteEvent', EventController.deleteEventFromCalend
 router.post('/api/calendar/addEvent', EventController.addEventAndAddTravel);
 router.get('/api/calendar/getDayEvents', EventController.getDayEvents);
 
-// this endpoint is not doing anything, it was just to trigger a function to fetch all of the user's events in the calendar, but we can do this on the auth callback page or elsewhere
-// router.get('/calendar/getAllEvents', getAllEventsFromCalendar);
-
 // User Routes
 router.get('/api/users/getTransit', UserController.getTransitMode);
 router.post('/api/users/updateTransit', UserController.updateTransitMode);
+router.post('/api/users/updatePhoneNumber', UserController.updatePhoneNumber);
 router.get('/api/users/getGeolocation', UserController.getGeolocation);
 router.post('/api/users/updateGeolocation', UserController.updateGeolocation);
 

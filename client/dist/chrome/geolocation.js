@@ -1,3 +1,5 @@
+// TODO: FIX BUGS.
+// It will attempt to make a fetch even if the user is not logged in yet. It also handles all responses as success even though if they have no token, the server will block the API endpoint and return an error status code.
 const getGeolocation = () => {
   let geoOptions = { timeout: 10000 };
   
@@ -58,6 +60,7 @@ const updateGeolocation = (geolocation) => {
     body: JSON.stringify({ geolocation })
   })
   .then((success) => {
+    // this is buggy, always returning success, ex: even if it doesn't have the token
     console.log('Geolocation was successfully updated!');
   })
   .catch((err) => {

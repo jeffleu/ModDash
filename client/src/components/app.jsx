@@ -1,24 +1,90 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Time from './Time.jsx';
-import Calendar from './Calendar.jsx'
+import Calendar from './Calendar.jsx';
 import Form from './Form.jsx';
 import SignIn from './SignIn.jsx';
 import Setting from './Setting.jsx';
-import commands from '../scripts/commands.js';
+import Navigation from './Navigation.jsx';
+import Commands from './Commands.jsx';
+import TransitMode from './TransitMode.jsx';
+import { openCommandsModal, openSettingsModal } from '../scripts/commands';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       events: [],
-      displayTransitMode: ''
+      transitMode: '',
+      eventFormIsOpen: false,
+      settingsIsOpen: false,
+      commandsIsOpen: false,
+      transitModeIsOpen: false,
+      openCommandsIntro: true,
+      openSettingsIntro: true
     };
+
+    this.toggleEventForm = this.toggleEventForm.bind(this);
+    this.toggleSettings = this.toggleSettings.bind(this);
+    this.toggleCommands = this.toggleCommands.bind(this);
+    this.toggleTransitMode = this.toggleTransitMode.bind(this);
+    this.fetchAndUpdateEvents = this.fetchAndUpdateEvents.bind(this);
+    this.onTransitModeChange = this.onTransitModeChange.bind(this);
+  }
+
+  toggleEventForm() {
+    (!this.state.eventFormIsOpen) ? this.setState({ eventFormIsOpen: true }) : this.setState({ eventFormIsOpen: false });
+  }
+
+  toggleSettings() {
+    if (!this.state.settingsIsOpen) {
+      this.setState({ settingsIsOpen: true });
+
+      if (this.state.openSettingsIntro) {
+        this.setState({ openSettingsIntro: false });
+        openSettingsModal();
+      }
+    } else {
+      this.setState({ settingsIsOpen: false });
+    }
+  }
+
+  toggleCommands() {
+    if (!this.state.commandsIsOpen) {
+      this.setState({ commandsIsOpen: true});
+
+      if (this.state.openCommandsIntro) {
+        this.setState({ openCommandsIntro: false });
+        openCommandsModal();
+      }
+
+    } else {
+      this.setState({ commandsIsOpen: false });
+    }
+  }
+
+  toggleTransitMode() {
+    if (!this.state.transitModeIsOpen) {
+      this.setState({ transitModeIsOpen: true});
+
+      // if (this.state.openCommandsIntro) {
+      //   this.setState({ openCommandsIntro: false });
+      //   openCommandsModal();
+      // }
+
+    } else {
+      this.setState({ transitModeIsOpen: false });
+    }
+  }
+
+  onTransitModeChange(value) {
+    this.setState({ transitMode: value });
   }
 
   fetchAndUpdateEvents() {
     var token = localStorage.getItem('token');
-    console.log('got token for fetch and update events', token);
+
     // Post event to Google Calendar API
     fetch('http://localhost:9000/api/calendar/getDayEvents', {
       method: 'GET',
@@ -46,12 +112,6 @@ class App extends React.Component {
       console.log('Error retrieving events', err);
     });
   }
-  //
-  handleTransChange(value) {
-    this.setState({
-      displayTransitMode: value
-    });
-  }
 
   displayTransitMode() {
     var token = localStorage.getItem('token');
@@ -63,18 +123,9 @@ class App extends React.Component {
         'authorization': token
       }
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
-        // this.setState({
-        //   selectedOption: data.transitmode
-        // })
-        // pass data back to app jsx
-        console.log('setting data', data);
-        this.setState({
-          displayTransitMode: data.transitmode
-        });
+        this.setState({ transitMode: data.transitmode });
       })
       .catch((err) => {
         console.log('Did not get User info', err);
@@ -90,8 +141,7 @@ class App extends React.Component {
     // Sort event times in chronological order
     times.sort((a, b) => new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`));
 
-    // TO DO: Bug fix - if there are multiple events are at the same time, the last
-    // event with the same time will overwrite the first one
+    // TO DO: Bug fix - if there are multiple events are at the same time, the last event with the same time will overwrite the first one
 
     // Sort events based on start time
     let sortedEvents = eventList.reduce((sortedArray, event) => {
@@ -131,18 +181,22 @@ class App extends React.Component {
   componentDidMount() {
     this.fetchAndUpdateEvents();
     this.displayTransitMode();
-
   }
 
   render() {
     return (
       <div>
         <div>
-          <SignIn />
+          <Navigation
+            toggleEventForm = {this.toggleEventForm}
+            toggleSettings = {this.toggleSettings}
+            toggleCommands = {this.toggleCommands}
+            toggleTransitMode = {this.toggleTransitMode}
+            transitMode = {this.state.transitMode}
+          />
         </div>
         <div>
-        Transportation Mode:
-        {this.state.displayTransitMode}
+          <SignIn />
         </div>
         <div>
           <Time />
@@ -151,10 +205,31 @@ class App extends React.Component {
           <Calendar events={this.state.events} />
         </div>
         <div>
-          <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands}/>
+          <Form
+            eventFormIsOpen = {this.state.eventFormIsOpen}
+            toggleEventForm = {this.toggleEventForm}
+            refreshEvents = {this.fetchAndUpdateEvents}
+          />
         </div>
         <div>
-          <Setting transitChange={this.handleTransChange.bind(this)}/>
+          <Setting
+            settingsIsOpen = {this.state.settingsIsOpen}
+            toggleSettings = {this.toggleSettings}
+          />
+        </div>
+        <div>
+          <Commands
+            commandsIsOpen = {this.state.commandsIsOpen}
+            toggleCommands = {this.toggleCommands}
+          />
+        </div>
+        <div>
+          <TransitMode
+            transitModeIsOpen = {this.state.transitModeIsOpen}
+            toggleTransitMode = {this.toggleTransitMode}
+            transitChange = {this.onTransitModeChange}
+            transitMode = {this.state.transitMode}
+          />
         </div>
       </div>
     );

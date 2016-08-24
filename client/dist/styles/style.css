@@ -8,6 +8,32 @@ body {
   cursor: default;
 }
 
+.navigation {
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar-default .navbar-brand {
+  color: gold;
+  font-size: 200%;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.glyphicon {
+  font-size: 125%;
+  color: white;
+  transition: color 0.75s;
+}
+
+.glyphicon:hover {
+  color: #50C8FF;
+  transition: color 0.75s;
+}
+
 .signin {
   width: 191px;
   height: 46px;
@@ -34,7 +60,7 @@ body {
 .today {
   position: absolute;
   /*display: block;*/
-  top: 15%;
+  top: 18%;
   left: 50%;
   width: 45%;
   text-align: center;
@@ -60,7 +86,7 @@ body {
 .calendar {
   position: absolute;
   /*display: block;*/
-  top: 25%;
+  top: 28%;
   left: 50%;
   transform: translateX(-50%);
   width: 40%;
@@ -71,6 +97,7 @@ body {
 
 .calendar-title {
   font-size: 350%;
+  padding-bottom: 35px;
 }
 
 .calendar-title:hover {
@@ -111,7 +138,6 @@ body {
   font-size: 150%;
 }
 
-
 .add-event-glyph:hover {
   cursor: pointer;
 }
@@ -137,11 +163,21 @@ body {
   /*top: 50%;*/
   /*transform: translateY(-50%);*/
   font-weight: 100;
-  font-size: 160%;
+  font-size: 125%;
   text-align: left;
 }
 
-.calendar-form-title {
+.modal-body {
+  font-size: 110%;
+  font-weight: 100;
+}
+
+.modal-title {
+  font-size: 150%;
+  font-weight: 100;
+}
+
+.commands-modal-title {
   font-size: 200%;
   font-weight: 100;
 }
@@ -188,7 +224,11 @@ input {
   opacity: .90;
 }
 
-.settings-glyph{
+.phone-number-input {
+  padding-top: 25px;
+}
+
+.settings-glyph {
   position: absolute;
   left: 2%;
   bottom: 2%;
