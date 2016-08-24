@@ -16,7 +16,7 @@ class App extends React.Component {
         <Navbar brand={brand}>
           <NavItem><a className="nav-link" href="https://github.com/ModDash/ModDash" target="_blank">Github</a></NavItem>
         </Navbar>
-        <Hero backgroundImage="./assets/tables_bg.jpg" className="text-xs-center">
+        <Hero backgroundImage="./assets/freeway_bg_large.jpg" className="text-xs-center">
           <h1 className="display-4"> Mod Dash </h1>
           <p className="lead">
           You're a busy professional and always need to be at places on time. <br/> Now you can integrate your Google calendar with Google Maps' traffic and travel data! <br />
