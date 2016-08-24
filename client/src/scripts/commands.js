@@ -132,12 +132,16 @@ const fillOutForm = (wildcard) => {
   handleFormData(formInfo);
 };
 
-const openCommandsModal = () => {
-  artyom.say('Here are a list of voice commands. You can doo things like create an event, opening websites and search YouTube.');
-};
-
-const openSettingsModal = () => {
-  artyom.say('Please select the type of transit mode and the number where you would like to get traffic text notifications. These can be changed at any time.');
+const speech = {
+  openCommandsModal: () => {
+    artyom.say('Here are a list of voice commands. You can doo things like create an event, opening websites and search YouTube.');
+  },
+  openTransitModal: () => {
+    artyom.say('Please select your transportation mode. I will notify you if there is traffic, and when you need to leave by, to arrive on time.');
+  },
+  openSettingsModal: () => {
+    artyom.say('Please enter the number where you would like to receive traffic text notifications. This can be changed at any time.');
+  }
 };
 
 /********************************************************
@@ -148,23 +152,6 @@ const commands = [
   {
     indexes: ['stop listening'],
     action: (i) => { artyomStop(); }
-  },
-  {
-    indexes: ['render spotify playlist'],
-    action: (i) => {
-      artyom.say('Rendering Spotify playlist.');
-
-      $playlist = $('<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Ababybluejeff%3Aplaylist%3A6toivxuv2M1tBLjLWZwf3d" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
-      $playlist.appendTo($('#main1'));
-    }
-  },
-  {
-    indexes: ['stop the music'],
-    action: (i) => {
-      $('#main1').empty();
-
-      artyom.say('Removing Spotify playlist.');
-    }
   },
   {
     indexes: ['what time is it'],
@@ -220,6 +207,5 @@ module.exports = {
   onFillOutForm: (callback) => {
     handleFormData = callback;
   },
-  openCommandsModal,
-  openSettingsModal
+  speech
 };
