@@ -18,17 +18,17 @@ agenda.define('send leave notification', (job, done) => {
     // Send notification through Pubnub
     pubnub.publishTimeToLeave(channel, message);
 
-    // after sending notification, agenda.cancel
-    // agenda.cancel({"_id": job._id}, function(err, jobs) {
-    //   console.log('canceled job after notification was sent', jobs);
-    // })
-
     // Send text message via Twilio
     console.log(`=============== [sendLeaveNotification]: Sending Twilio message\nPhone: ${message.phone}\nMessage: ${message.name}\nTraffic: ${message.traffic}\nLocation: ${message.location}`);
 
     newTwilioMessage(phoneNumber, message.name, message.traffic, message.location);
 
     console.log('Sending notification to user to leave now for event:', message.name);
+
+    // delete job after it runs
+    setTimeout(() => {
+      removeJob(job.attrs._id);
+    }, 1000);
 
     done();
   });
@@ -38,6 +38,17 @@ const sendLeaveNotification = (notificationTime, eventData) => {
   console.log('Scheduling a leave notification for event ', eventData.name, ' at ', notificationTime);
   // pubnub publish
   agenda.schedule(notificationTime, 'send leave notification', eventData);
+};
+
+const removeJob = function(id) {
+  console.log('id in removeJob for sendLeaveNotification', id);
+  agenda.cancel({_id: id}, (err, numRemoved) => {
+    if (err) {
+      console.warn('error in removing job:', err)
+    } else {
+      console.log(numRemoved, 'jobs removed');
+    }
+  });
 };
 
 module.exports = sendLeaveNotification;

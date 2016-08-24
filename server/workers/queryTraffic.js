@@ -32,6 +32,10 @@ agenda.define('query traffic', (job, done) => {
   .then(event => {
     recurringCheck(event);
   });
+
+  setTimeout(() => {
+    removeJob(job.attrs._id);
+  }, 1000);
     
   // then agenda.cancel({id: jobiD}) or some other kind of identifier of the job we were doing
   done();
@@ -41,7 +45,23 @@ agenda.define('query traffic', (job, done) => {
 const queryTraffic = travel => {
   travel = travel.dataValues;
   console.log('scheduling a queryTraffic worker for destination', travel.destination,'to begin querying at', travel.queryTime)
-  agenda.schedule(travel.queryTime, 'query traffic', travel);
+  if (travel.queryTime <= Date.now()) {
+    // if queryTime is in the past, query now, or maybe don't query at all?
+    agenda.now('query traffic', travel);
+  } else {
+    agenda.schedule(travel.queryTime, 'query traffic', travel);
+  }
+};
+
+const removeJob = function(id) {
+  console.log('id in removeJob for queryTraffic', id);
+  agenda.cancel({_id: id}, (err, numRemoved) => {
+    if (err) {
+      console.warn('error in removing job:', err)
+    } else {
+      console.log(numRemoved, 'jobs removed');
+    }
+  });
 };
 
 module.exports = queryTraffic;
