@@ -177,6 +177,11 @@ body {
   font-weight: 100;
 }
 
+.commands-modal-title {
+  font-size: 200%;
+  font-weight: 100;
+}
+
 input {
   font-weight: 100;
   font-size: 100%;

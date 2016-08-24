@@ -37,9 +37,7 @@ class Setting extends React.Component {
       }
     })
     .then((res) => res.text())
-    .then((data) => {
-      this.props.transitChange(data);
-    })
+    .then((data) => { this.props.transitChange(data); })
     .catch((err) => {
       console.log('did not save mode to db', err);
     });
