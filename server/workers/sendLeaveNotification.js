@@ -27,7 +27,7 @@ agenda.define('send leave notification', (job, done) => {
 
     // delete job after it runs
     setTimeout(() => {
-      removeJob(job.attrs._id);
+      removeSendNotification(job.attrs._id);
     }, 1000);
 
     done();
@@ -40,13 +40,12 @@ const sendLeaveNotification = (notificationTime, eventData) => {
   agenda.schedule(notificationTime, 'send leave notification', eventData);
 };
 
-const removeJob = function(id) {
-  console.log('id in removeJob for sendLeaveNotification', id);
+const removeSendNotification = function(id) {
   agenda.cancel({_id: id}, (err, numRemoved) => {
     if (err) {
       console.warn('error in removing job:', err)
     } else {
-      console.log(numRemoved, 'jobs removed');
+      console.log(numRemoved, '1 send notification job removed');
     }
   });
 };
