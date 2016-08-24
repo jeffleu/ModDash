@@ -30,6 +30,20 @@ const getUserInfo = (id) => {
   });
 };
 
+const getRefreshToken = (id) => {
+  return User.findOne({
+    where: { id: id },
+    attributes: ['refreshToken']
+  });
+};
+
+const getUserChannel = (id) => {
+  return User.findOne({
+    where: { id: id },
+    attributes: ['pubnubid']
+  })
+}
+
 const updateUserGeolocation = (id, geolocation) => {
   return User.update(
     { geolocation: geolocation },
@@ -54,6 +68,8 @@ module.exports = {
   findOrCreateUser,
   authUser,
   getUserInfo,
+  getRefreshToken,
+  getUserChannel,
   updateUserSettings,
   updateUserGeolocation
 };
