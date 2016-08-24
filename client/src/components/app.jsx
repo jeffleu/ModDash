@@ -103,30 +103,30 @@ class App extends React.Component {
     this.setState({ events: sortedEvents });
   }
 
-  deleteAndUpdateEvent(event) {
-    var token = localStorage.getItem('token');
-    console.log('app event id', event);
-    var googleCalId = {event: event}
-    fetch('http://localhost:9000/api/calendar/deleteEvent', {
-      method: 'DELETE',
-      body: JSON.stringify(googleCalId),
-      mode: 'cors-with-forced-preflight',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': token
-      }
-    })
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      console.log('data'. data);
-      // use data to update state after success deletion
-    })
-    .then((err) => {
-      console.log('did not delete event from db and gcal');
-    });
-  }
+  // deleteAndUpdateEvent(event) {
+  //   var token = localStorage.getItem('token');
+  //   console.log('app event id', event);
+  //   var googleCalId = {event: event}
+  //   fetch('http://localhost:9000/api/calendar/deleteEvent', {
+  //     method: 'DELETE',
+  //     body: JSON.stringify(googleCalId),
+  //     mode: 'cors-with-forced-preflight',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'authorization': token
+  //     }
+  //   })
+  //   .then((res) => {
+  //     return res.json();
+  //   })
+  //   .then((data) => {
+  //     console.log('data'. data);
+  //     // use data to update state after success deletion
+  //   })
+  //   .then((err) => {
+  //     console.log('did not delete event from db and gcal');
+  //   });
+  // }
 
   componentDidMount() {
     this.fetchAndUpdateEvents();
@@ -148,7 +148,7 @@ class App extends React.Component {
           <Time />
         </div>
         <div>
-          <Calendar deleteEvent={this.deleteAndUpdateEvent.bind(this)} events={this.state.events} />
+          <Calendar events={this.state.events} />
         </div>
         <div>
           <Form refreshEvents={this.fetchAndUpdateEvents.bind(this)} commands={commands}/>

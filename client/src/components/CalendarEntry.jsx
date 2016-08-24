@@ -7,22 +7,51 @@ class CalendarEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
+      gcalId: ''
     };
     this.handleDeleteEvent.bind(this);
   }
 
   mouseOver() {
+    var gcalId = this.props.event.eventId;
     this.setState({
-      hover: true
+      hover: true,
+      gcalId: gcalId
+    });
+    console.log(gcalId);
+  }
+
+  // handleDeleteEvent() {
+  //   this.props.deleteEvent(this.state.gcalId);
+  // }
+
+  deleteEvent() {
+    var deleteCalId = this.props.gcalId;
+    var token = localStorage.getItem('token');
+    console.log('id', deleteCalId);
+    console.log('token', token);
+    var googleCalId = {event: event}
+    fetch('http://localhost:9000/api/calendar/deleteEvent', {
+      method: 'DELETE',
+      body: JSON.stringify(googleCalId),
+      mode: 'cors-with-forced-preflight',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': token
+      }
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log('data'. data);
+      // use data to update state after success deletion
+    })
+    .then((err) => {
+      console.log('did not delete event from db and gcal');
     });
   }
-
-  handleDeleteEvent(event) {
-    console.log('eventid', event);
-    this.props.deleteEvent(event);
-  }
-
   mouseOut() {
     this.setState({
       hover: false
@@ -30,11 +59,10 @@ class CalendarEntry extends React.Component {
   }
 
   render() {
-    var gcalId = this.props.event.eventId;
     return (
       <div>
-      {this.state.hover ? (<Glyphicon onClick={this.handleDeleteEvent(gcalId)} glyph="remove" />) : null}
         <div className='calendar-entry'>
+        {this.state.hover ? (<Glyphicon onClick={this.handleDeleteEvent.bind(this)} glyph="remove" />) : null}
           <div className='calendar-container' onMouseOver={this.mouseOver.bind(this)} onMouseOut={this.mouseOut.bind(this)} >
             <div className='event-start'>
               {this.props.event.startTime}

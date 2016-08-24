@@ -20,7 +20,7 @@ class Calendar extends React.Component {
         </div>
         <div>
         {this.props.events.map((event, i) =>
-            <CalendarEntry deleteEvent={this.props.deleteEvent} key={i} event={event} />
+            <CalendarEntry key={i} event={event} />
         )}
         </div>
       </div>
