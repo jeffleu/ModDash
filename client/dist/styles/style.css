@@ -26,6 +26,12 @@ body {
 .glyphicon {
   font-size: 125%;
   color: white;
+  transition: color 0.75s;
+}
+
+.glyphicon:hover {
+  color: #50C8FF;
+  transition: color 0.75s;
 }
 
 .signin {
@@ -162,6 +168,11 @@ body {
 }
 
 .calendar-form-title {
+  font-size: 200%;
+  font-weight: 100;
+}
+
+.commands-modal-title {
   font-size: 200%;
   font-weight: 100;
 }

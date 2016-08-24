@@ -1,0 +1,93 @@
+import React from 'react';
+import { RadioGroup, Radio } from 'react-radio-group';
+import { Button, closeButton, Glyphicon, Modal } from 'react-bootstrap';
+
+class Setting extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedTransitMode: ''
+    };
+
+    this.updateSelectedTransitMode = this.updateSelectedTransitMode.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  // componentDidUpdate() {
+  //   console.log('Updating this.state.selectedTransitMode');
+  //   this.updateSelectedTransitMode(this.props.transitMode);
+  // }
+
+  updateSelectedTransitMode(value) {
+    this.setState({ selectedTransitMode: value });
+  }
+
+  // shouldComponentUpdate() {
+  //   if (this.props.transitMode) {
+  //     return true;
+  //   }
+
+  //   return false;
+  // }
+  
+  handleSubmit() {
+    // e.preventDefault();
+    var token = localStorage.getItem('token');
+    var settings = { transitMode: this.state.selectedTransitMode };
+
+    console.log('[TransitMode - handleSubmit]: settings', settings);
+
+    fetch('http://localhost:9000/api/users/updateTransit', {
+      method: 'POST',
+      body: JSON.stringify(settings),
+      mode: 'cors-with-forced-preflight',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': token
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      this.props.transitChange(data.transitmode);
+    })
+    .catch((err) => {
+      console.log('did not save mode to db', err);
+    });
+
+    this.props.toggleTransitMode();
+  }
+
+  render() {
+    return (
+      <div>
+        <Modal className="ModalForm" show={this.props.transitModeIsOpen} onHide={this.props.toggleTransitMode}>
+          <Modal.Header closeButton>
+            <Modal.Title> 
+              <div className="transit-mode-title">Transportation Mode</div>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="transit-mode-body">
+            <form className="transit-form" onSubmit={this.handleSubmit}>
+              <RadioGroup name="transit" selectedValue={this.state.selectedTransitMode} onChange={this.updateSelectedTransitMode}>
+                <div className="transit-selection">Choose Your Transportation</div>
+                <Radio value="driving" /> Driving <br/>
+                <Radio value="walking" /> Walking <br/>
+                <Radio value="transit" /> Transit <br/>
+                <Radio value="bicycling" /> Bicycling
+              </RadioGroup>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <div>
+              <Button bsSize="small" onClick={this.props.toggleTransitMode}>Cancel</Button>
+              <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Save Changes</Button>
+            </div>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  }
+}
+
+export default Setting;

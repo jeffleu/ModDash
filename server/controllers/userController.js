@@ -35,8 +35,14 @@ const getTransitMode = (req, res) => {
     .catch((err) => { res.sendStatus(404); });
 };
 
-const updateSettings = (req, res) => {
-  return User.updateUserSettings(req.userId, req.body.transit, req.body.phoneNumber)
+const updateTransitMode = (req, res) => {
+  return User.updateTransitMode(req.userId, req.body.transitMode)
+    .then((data) => { res.sendStatus(200); })
+    .catch((err) => { res.sendState(404); });
+};
+
+const updatePhoneNumber = (req, res) => {
+  return User.updatePhoneNumber(req.userId, req.body.phoneNumber)
     .then((result) => { res.sendStatus(200); })
     .catch((err) => { res.sendStatus(404); });
 };
@@ -45,5 +51,6 @@ module.exports = {
   getGeolocation,
   updateGeolocation,
   getTransitMode,
-  updateSettings
+  updateTransitMode,
+  updatePhoneNumber
 };

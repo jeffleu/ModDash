@@ -58,12 +58,17 @@ const updateUserGeolocation = (id, geolocation) => {
       .catch((err) => err);
 };
 
-const updateUserSettings = (id, transit, phoneNumber) => {
+const updateTransitMode = (id, transitMode) => {
   return User.update(
-    {
-      transitmode: transit,
-      phone: phoneNumber
-    }, 
+    { transitmode: transitMode }, 
+    { where: { id: id } })
+      .then((result) => result)
+      .catch((err) => err);
+};
+
+const updatePhoneNumber = (id, phoneNumber) => {
+  return User.update(
+    { phone: phoneNumber }, 
     { where: { id: id } }
   )
   .then((result) => result)
@@ -77,6 +82,7 @@ module.exports = {
   getUserInfo,
   getRefreshToken,
   getUserChannel,
-  updateUserSettings,
-  updateUserGeolocation
+  updateUserGeolocation,
+  updateTransitMode,
+  updatePhoneNumber
 };
