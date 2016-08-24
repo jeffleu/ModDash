@@ -11,5 +11,6 @@
 /server/.DS_STORE
 /server/utility/.DS_STORE
 /web/dist/bundle.js
+/web/dist/.DS_STORE
 
 npm-debug.log
