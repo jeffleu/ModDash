@@ -10,7 +10,7 @@ const getGeolocation = () => {
     let geolocation = `${position.coords.latitude} ${position.coords.longitude}`;
       // add token here too;
     var token = localStorage.getItem('token');
-    fetch('http://www.velocitydash.com/api/users/getGeolocation', {
+    fetch('http://ec2-52-43-234-146.us-west-2.compute.amazonaws.com/api/users/getGeolocation', {
       method: 'GET',
       headers: {
       'Accept': 'application/json',
@@ -50,7 +50,7 @@ const getGeolocation = () => {
 const updateGeolocation = (geolocation) => {
   var token = localStorage.getItem('token');
 
-  fetch('http://www.velocitydash.com/api/users/updateGeolocation', {
+  fetch('http://ec2-52-43-234-146.us-west-2.compute.amazonaws.com/api/users/updateGeolocation', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
