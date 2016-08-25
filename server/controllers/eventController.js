@@ -30,7 +30,6 @@ const getDayEvents = (req, res) => {
 };
 
 const deleteEventFromGcal = (req, res) => {
-  console.log('req body', req.body.eventId);
   removeEvent(req.userId, req.body.eventId)
     .then(() => {
       Event.deleteEvent(req.body.eventId);

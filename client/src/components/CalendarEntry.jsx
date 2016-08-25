@@ -31,9 +31,7 @@ class CalendarEntry extends React.Component {
 
   deleteEvent() {
     var deleteCalId = this.state.gcalId;
-    var token = localStorage.getItem('token');
     var googleCalId = {eventId: deleteCalId};
-    console.log('googleCalId', googleCalId);
     fetch('http://localhost:9000/api/calendar/deleteEvent', {
       method: 'DELETE',
       body: JSON.stringify(googleCalId),
@@ -55,7 +53,7 @@ class CalendarEntry extends React.Component {
 
 
   render() {
-    let displayButton = <span onClick={this.deleteEvent.bind(this)}className='glyphicon glyphicon-remove-circle' id='delete'></span>
+    let displayButton = <span onClick={this.deleteEvent.bind(this)}className='glyphicon glyphicon-remove-circle' id='delete'></span>;
     return (
         <div className='calendar-entry'>
           <div className='event-start' onClick={this.showDelete.bind(this)}>

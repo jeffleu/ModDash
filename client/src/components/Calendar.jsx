@@ -12,15 +12,7 @@ class Calendar extends React.Component {
     };
   }
 
-  // toggle() {
-  //   this.setState({
-  //     show: !this.state.show
-  //   });
-  // }
-
-
   render() {
-    // let pop = <div><strong>Holy guacamole!</strong> Check this info.</div>;
     return (
       <div className='calendar'>
         <div className='calendar-title'>
@@ -28,7 +20,7 @@ class Calendar extends React.Component {
         </div>
         <div>
         {this.props.events.map((event, i) =>
-            <CalendarEntry  fetch={this.props.fetch} key={i} event={event} />
+          <CalendarEntry fetch={this.props.fetch} key={i} event={event} />
           )}
         </div>
       </div>
