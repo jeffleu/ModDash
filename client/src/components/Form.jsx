@@ -14,7 +14,7 @@ class Form extends React.Component {
       startTime: '',
       endDate: '',
       endTime: '',
-      repeat: '',
+      repeat: 'DAILY',
       repeatEvery: '',
       days: [],
       recIsOpen: false,
@@ -27,8 +27,7 @@ class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clickRecur = this.clickRecur.bind(this);
     this.clearAndToggleForm = this.clearAndToggleForm.bind(this);
-    this.handleValidSubmit = this.handleValidSubmit.bind(this);
-    this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
+    // this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -82,7 +81,7 @@ class Form extends React.Component {
     let month = Number(dateSplit[0]);
     let day = Number(dateSplit[1]);
     let year = Number(dateSplit[2]);
-    
+
     if (month < 1 || month > 12) { return false; }
     if (day < 1 || day > 31) { return false; }
     if ((year.toString()).length !== 4) { return false; }
@@ -93,21 +92,21 @@ class Form extends React.Component {
   timeFormatValid(time) {
     if (time.indexOf(':') === -1) { return false; }
     if (time[time.length - 3] !== ' ') { return false; }
-    
+
     let timeSplit = time.split(':');
     let hour = Number(timeSplit[0]);
     let minute = Number(timeSplit[1].split(' ')[0]);
     let amPm = timeSplit[1].split(' ')[1];
-    
-    if (hour < 1 || hour > 12) { return false; }  
+
+    if (hour < 1 || hour > 12) { return false; }
     if (minute < 0 || minute > 59) { return false; }
-    
+
     if (amPm === 'AM' || amPm === 'PM') {
       // do nothing
     } else {
       return false;
     }
-    
+
     return true;
   }
 
@@ -116,7 +115,7 @@ class Form extends React.Component {
     let month = (dateSplit[0] < 10) ? `0${dateSplit[0]}` : `${dateSplit[0]}`;
     let day = (dateSplit[1] < 10) ? `0${dateSplit[1]}` : `${dateSplit[1]}`;
     let year = dateSplit[2];
-    
+
     return `${year}-${month}-${day}`;
   }
 
@@ -125,7 +124,7 @@ class Form extends React.Component {
     let hours = Number(split.shift());
     let minutes = Number(split.join('').split(' ')[0]);
     let amPm = (split.join('').split(' ')[1]).toUpperCase();
-    
+
     if (amPm === 'PM' && hours !== 12) { hours += 12; }
 
     return `${hours}:${minutes}`;
@@ -156,11 +155,11 @@ class Form extends React.Component {
         startTime: value,
         endTime: value
       });
-    } else if (className === 'Repeat') {
+    } else if (className === 'repeat') {
       this.setState({
         repeat: value
       });
-    } else if (className === 'Repeat-Every') {
+    } else if (className === 'repeat-every') {
       this.setState({
         repeatEvery: value
       });
@@ -178,15 +177,15 @@ class Form extends React.Component {
 
     // TO DO: Use geolocation to update timeZone automatically
 
-    
+
 
     // Run code below only if this.state.dateFormatError & this.state.timeFormatError is both false
 
     // Create event object with Form's state
     let date = this.convertDate(this.state.startDate);
     let time = this.convertToMilitaryTime(this.state.startTime);
-    let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;    
-    
+    let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;
+
     let event;
     if (this.state.recIsOpen === false) {
       event = {
@@ -251,14 +250,14 @@ class Form extends React.Component {
     };
 
     var displayRecur = <div> Repeats:
-                  <select className='Repeat' onChange={this.handleChange}>
+                  <select className='repeat' onChange={this.handleChange}>
                     <option value='DAILY'>Daily</option>
                     <option value='WEEKLY'>Weekly</option>
                     <option value='MONTHLY'>Monthly</option>
                     <option value='YEARLY'>Yearly</option>
                   </select>
                   Repeat Every:
-                  <select className='Repeat-Every' onChange={this.handleChange}>
+                  <select className='repeat-every' onChange={this.handleChange}>
                     <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
                     <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
                     <option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option>
@@ -268,14 +267,16 @@ class Form extends React.Component {
                     <option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option>
                     <option value="28">28</option><option value="29">29</option><option value="30">30</option>
                   </select>
-                  {day()}
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='MO'/>Monday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TU'/>Tuesday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='WE'/>Wednesday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TH'/>Thursday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='FR'/>Friday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SA'/>Saturday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SU'/>Sunday</label>
+                  {day()} <br/>
+                    <div>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='MO'/>Monday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TU'/>Tuesday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='WE'/>Wednesday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TH'/>Thursday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='FR'/>Friday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SA'/>Saturday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SU'/>Sunday</label>
+                    </div>
                 </div>;
 
     return (
@@ -305,7 +306,7 @@ class Form extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <div>
-              <a onClick={this.clickRecur}>Repeat</a>
+              <Button bsSize="small" className='repeat-button' onClick={this.clickRecur}>Add Recurence</Button>
               <Button bsSize="small" onClick={this.clearAndToggleForm}>Cancel</Button>
               <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Add Event</Button>
             </div>
