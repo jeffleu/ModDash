@@ -14,7 +14,7 @@ class Form extends React.Component {
       startTime: '',
       endDate: '',
       endTime: '',
-      repeat: '',
+      repeat: 'DAILY',
       repeatEvery: '',
       days: [],
       recIsOpen: false,
@@ -77,7 +77,7 @@ class Form extends React.Component {
     let month = (dateSplit[0] < 10) ? `0${dateSplit[0]}` : `${dateSplit[0]}`;
     let day = (dateSplit[1] < 10) ? `0${dateSplit[1]}` : `${dateSplit[1]}`;
     let year = dateSplit[2];
-    
+
     return `${year}-${month}-${day}`;
   }
 
@@ -263,7 +263,7 @@ class Form extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <div>
-              <a onClick={this.clickRecur}>Repeat</a>
+              <a className='repeat-button' onClick={this.clickRecur}>Repeat</a>
               <Button bsSize="small" onClick={this.clearAndToggleForm}>Cancel</Button>
               <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Add Event</Button>
             </div>

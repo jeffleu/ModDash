@@ -34,6 +34,16 @@ body {
   margin-right: 5px;
 }
 
+.repeat-button {
+  float: left;
+}
+
+label{
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 5px:
+}
+
 #delete {
   margin-left: 5px;
   font-size: 75%;
