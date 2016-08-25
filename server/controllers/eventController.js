@@ -30,6 +30,7 @@ const getDayEvents = (req, res) => {
 };
 
 const deleteEventFromGcal = (req, res) => {
+  // need to delete from travel table and from mongo
   removeEvent(req.userId, req.body.eventId)
     .then(() => {
       Event.deleteEvent(req.body.eventId);
