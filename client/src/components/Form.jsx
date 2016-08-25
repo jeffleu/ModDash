@@ -66,7 +66,7 @@ class Form extends React.Component {
     let hours = Number(split.shift());
     let minutes = Number(split.join('').split(' ')[0]);
     let amPm = split.join('').split(' ')[1];
-    
+
     if (amPm === 'PM') { hours += 12; }
 
     return `${hours}:${minutes}`;
@@ -131,8 +131,8 @@ class Form extends React.Component {
 
     // Create event object with Form's state
     let time = this.convertToMilitaryTime(this.state.startTime);
-    let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;    
-    
+    let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;
+
     let event;
     if (this.state.recIsOpen === false) {
       event = {
@@ -166,7 +166,7 @@ class Form extends React.Component {
     let token = localStorage.getItem('token');
 
     // Post event to Google Calendar API
-    fetch('http://ec2-52-43-234-146.us-west-2.compute.amazonaws.com/api/calendar/addEvent', {
+    fetch('http://www.velocitydash.com/api/calendar/addEvent', {
       method: 'POST',
       body: JSON.stringify(event),
       mode: 'cors-with-forced-preflight',
