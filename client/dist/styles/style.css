@@ -13,6 +13,14 @@ body {
   background-color: rgba(0, 0, 0, 0);
 }
 
+.Repeat{
+  margin-right: 10px;
+}
+
+.Repeat-Every{
+  margin-right: 5px;
+}
+
 #delete {
   margin-left: 5px;
   font-size: 75%;

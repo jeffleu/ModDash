@@ -66,7 +66,7 @@ class Form extends React.Component {
     let hours = Number(split.shift());
     let minutes = Number(split.join('').split(' ')[0]);
     let amPm = split.join('').split(' ')[1];
-    
+
     if (amPm === 'PM') { hours += 12; }
 
     return `${hours}:${minutes}`;
@@ -131,8 +131,8 @@ class Form extends React.Component {
 
     // Create event object with Form's state
     let time = this.convertToMilitaryTime(this.state.startTime);
-    let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;    
-    
+    let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;
+
     let event;
     if (this.state.recIsOpen === false) {
       event = {
@@ -214,14 +214,16 @@ class Form extends React.Component {
                     <option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option>
                     <option value="28">28</option><option value="29">29</option><option value="30">30</option>
                   </select>
-                  {day()}
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='MO'/>Monday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TU'/>Tuesday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='WE'/>Wednesday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TH'/>Thursday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='FR'/>Friday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SA'/>Saturday</label>
-                    <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SU'/>Sunday</label>
+                  {day()} <br/>
+                    <div>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='MO'/>Monday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TU'/>Tuesday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='WE'/>Wednesday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TH'/>Thursday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='FR'/>Friday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SA'/>Saturday</label>
+                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SU'/>Sunday</label>
+                    </div>
                 </div>;
 
     return (
