@@ -23,7 +23,6 @@ class CalendarEntry extends React.Component {
       show: !this.state.show,
       gcalId: gcalId
     });
-    console.log(gcalId);
   }
 
   // handleDeleteEvent() {
@@ -53,6 +52,7 @@ class CalendarEntry extends React.Component {
       console.log('did not delete event from db and gcal');
     });
   }
+
 
   render() {
     let displayButton = <span onClick={this.deleteEvent.bind(this)}className='glyphicon glyphicon-remove-circle' id='delete'></span>;
