@@ -30,6 +30,7 @@ class CalendarEntry extends React.Component {
   // }
 
   deleteEvent() {
+    var token = localStorage.getItem('token');
     var deleteCalId = this.state.gcalId;
     var googleCalId = {eventId: deleteCalId};
     fetch('http://localhost:9000/api/calendar/deleteEvent', {
