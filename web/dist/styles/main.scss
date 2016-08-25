@@ -1,4 +1,9 @@
-$neal-hero-padding-y: 5rem;
-$neal-section-padding-y: 2rem;
+$neal-hero-padding-y: 3.5rem;
+$neal-section-padding-y: 2.5rem;
+$neal-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$neal-navbar-bg-color: #fff;
+$neal-navbar-link-color: #666;
+$neal-header-link-color-hover: darken($neal-navbar-link-color, 25%);
+$neal-navbar-brand-color: #333;
 
 @import "../../../node_modules/neal-react/css/base";
