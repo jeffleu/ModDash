@@ -155,11 +155,11 @@ class Form extends React.Component {
         startTime: value,
         endTime: value
       });
-    } else if (className === 'Repeat') {
+    } else if (className === 'repeat') {
       this.setState({
         repeat: value
       });
-    } else if (className === 'Repeat-Every') {
+    } else if (className === 'repeat-every') {
       this.setState({
         repeatEvery: value
       });
@@ -250,14 +250,14 @@ class Form extends React.Component {
     };
 
     var displayRecur = <div> Repeats:
-                  <select className='Repeat' onChange={this.handleChange}>
+                  <select className='repeat' onChange={this.handleChange}>
                     <option value='DAILY'>Daily</option>
                     <option value='WEEKLY'>Weekly</option>
                     <option value='MONTHLY'>Monthly</option>
                     <option value='YEARLY'>Yearly</option>
                   </select>
                   Repeat Every:
-                  <select className='Repeat-Every' onChange={this.handleChange}>
+                  <select className='repeat-every' onChange={this.handleChange}>
                     <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
                     <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
                     <option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option>
@@ -306,7 +306,7 @@ class Form extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <div>
-              <a className='repeat-button' onClick={this.clickRecur}>Repeat</a>
+              <Button bsSize="small" className='repeat-button' onClick={this.clickRecur}>Add Recurence</Button>
               <Button bsSize="small" onClick={this.clearAndToggleForm}>Cancel</Button>
               <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Add Event</Button>
             </div>
