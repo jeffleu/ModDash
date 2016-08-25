@@ -61,7 +61,7 @@ class App extends React.Component {
       }
 
     } else {
-      this.setState({ commandsIsOpen: false }); 
+      this.setState({ commandsIsOpen: false });
     }
   }
 
@@ -75,8 +75,8 @@ class App extends React.Component {
       }
 
     } else {
-      this.setState({ transitModeIsOpen: false }); 
-    } 
+      this.setState({ transitModeIsOpen: false });
+    }
   }
 
   onTransitModeChange(value) {
@@ -102,7 +102,8 @@ class App extends React.Component {
             eventName: event.name,
             location: event.location,
             startTime: event.startdatetime,
-            eventUrl: event.eventUrl
+            eventUrl: event.eventUrl,
+            eventId: event.googleCalendarEventId
           };
         });
 
@@ -153,6 +154,31 @@ class App extends React.Component {
     this.setState({ events: sortedEvents });
   }
 
+  // deleteAndUpdateEvent(event) {
+  //   var token = localStorage.getItem('token');
+  //   console.log('app event id', event);
+  //   var googleCalId = {event: event}
+  //   fetch('http://localhost:9000/api/calendar/deleteEvent', {
+  //     method: 'DELETE',
+  //     body: JSON.stringify(googleCalId),
+  //     mode: 'cors-with-forced-preflight',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'authorization': token
+  //     }
+  //   })
+  //   .then((res) => {
+  //     return res.json();
+  //   })
+  //   .then((data) => {
+  //     console.log('data'. data);
+  //     // use data to update state after success deletion
+  //   })
+  //   .then((err) => {
+  //     console.log('did not delete event from db and gcal');
+  //   });
+  // }
+
   componentDidMount() {
     this.fetchAndUpdateEvents();
     this.displayTransitMode();
@@ -162,10 +188,10 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <Navigation 
-            toggleEventForm = {this.toggleEventForm} 
-            toggleSettings = {this.toggleSettings} 
-            toggleCommands = {this.toggleCommands} 
+          <Navigation
+            toggleEventForm = {this.toggleEventForm}
+            toggleSettings = {this.toggleSettings}
+            toggleCommands = {this.toggleCommands}
             toggleTransitMode = {this.toggleTransitMode}
             transitMode = {this.state.transitMode}
           />
@@ -177,12 +203,12 @@ class App extends React.Component {
           <Time />
         </div>
         <div>
-          <Calendar events={this.state.events} />
+          <Calendar fetch={this.fetchAndUpdateEvents.bind(this)} events={this.state.events} />
         </div>
         <div>
-          <Form 
-            eventFormIsOpen = {this.state.eventFormIsOpen} 
-            toggleEventForm = {this.toggleEventForm} 
+          <Form
+            eventFormIsOpen = {this.state.eventFormIsOpen}
+            toggleEventForm = {this.toggleEventForm}
             refreshEvents = {this.fetchAndUpdateEvents}
           />
         </div>
@@ -193,16 +219,16 @@ class App extends React.Component {
           />
         </div>
         <div>
-          <Commands 
-            commandsIsOpen = {this.state.commandsIsOpen} 
+          <Commands
+            commandsIsOpen = {this.state.commandsIsOpen}
             toggleCommands = {this.toggleCommands}
           />
         </div>
         <div>
-          <TransitMode 
+          <TransitMode
             transitModeIsOpen = {this.state.transitModeIsOpen}
-            toggleTransitMode = {this.toggleTransitMode} 
-            transitChange = {this.onTransitModeChange} 
+            toggleTransitMode = {this.toggleTransitMode}
+            transitChange = {this.onTransitModeChange}
             transitMode = {this.state.transitMode}
           />
         </div>

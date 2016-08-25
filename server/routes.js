@@ -34,6 +34,7 @@ router.post('/auth', AuthController.authHandler);
 router.get('/verified', AuthController.authCallback); // Google redirect after auth sign in to get code for access token/refresh token
 
 // Calendar Routes
+router.delete('/api/calendar/deleteEvent', EventController.deleteEventFromGcal);
 router.post('/api/calendar/addEvent', EventController.addEventAndAddTravel);
 router.get('/api/calendar/getDayEvents', EventController.getDayEvents);
 
