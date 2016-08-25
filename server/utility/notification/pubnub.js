@@ -34,6 +34,7 @@ const publishTimeToLeave = (channel, message) => {
   },
   (status, response) => {
     // Handle status and response
+    console.log(status, 'in publishTimeToLeave pubnub notification');
     console.log('Map notification was created.');
   });
 };

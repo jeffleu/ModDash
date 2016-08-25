@@ -5,6 +5,8 @@ const Promise = require('bluebird');
 
 calendar.events.insert = Promise.promisify(calendar.events.insert);
 calendar.events.list = Promise.promisify(calendar.events.list);
+// calendar.events.delete = Promise.promisify(calendar.events.delete);
+//
 
 const addEventToGoogleCal = (userId, eventDetails) => {
   return googleAuth.getUserTokens(userId)
@@ -40,7 +42,26 @@ const getEventsFromGoogleCal = (id) => {
   });
 };
 
+const deleteEvent = (id, event) => {
+  console.log('inside d event google cal', event);
+  return googleAuth.getUserTokens(id)
+  .then(oauth2Client => {
+    var params = {
+      auth: oauth2Client,
+      calendarId: 'primary',
+      eventId: event
+    };
+    return calendar.events.delete(params, function(res) {
+      console.log('deleted event from gcal', res);
+    });
+  })
+  .catch(err => {
+    console.warn('did not delete event from google calendar', err);
+  });
+};
+
 module.exports = {
   addEventToGoogleCal,
-  getEventsFromGoogleCal
+  getEventsFromGoogleCal,
+  deleteEvent
 };
