@@ -67,7 +67,7 @@ class Form extends React.Component {
     let minutes = Number(split.join('').split(' ')[0]);
     let amPm = split.join('').split(' ')[1];
     
-    if (amPm === 'PM') { hours += 12; }
+    if (amPm === 'PM' && hours !== 12) { hours += 12; }
 
     return `${hours}:${minutes}`;
   }
