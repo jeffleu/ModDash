@@ -13,6 +13,17 @@ body {
   background-color: rgba(0, 0, 0, 0);
 }
 
+#delete {
+  margin-left: 5px;
+  font-size: 75%;
+  color: red;
+}
+
+#delete:hover {
+  color: #50C8FF;
+  transition: color 0.75s;
+}
+
 .navbar-default .navbar-brand {
   color: gold;
   font-size: 200%;
@@ -23,9 +34,16 @@ body {
   cursor: pointer;
 }
 
+
 .glyphicon {
   font-size: 125%;
   color: white;
+  transition: color 0.75s;
+}
+
+.glyphicon:hover {
+  color: #50C8FF;
+  transition: color 0.75s;
 }
 
 .signin {
@@ -136,17 +154,6 @@ body {
   cursor: pointer;
 }
 
-.voice-glyph {
-  position: absolute;
-  left: 4.5%;
-  bottom: 2%;
-  font-size: 150%;
-}
-
-.voice-glyph:hover {
-  cursor: pointer;
-}
-
 .event-url {
   font-color: white;
 }
@@ -161,7 +168,17 @@ body {
   text-align: left;
 }
 
-.calendar-form-title {
+.modal-body {
+  font-size: 110%;
+  font-weight: 100;
+}
+
+.modal-title {
+  font-size: 150%;
+  font-weight: 100;
+}
+
+.commands-modal-title {
   font-size: 200%;
   font-weight: 100;
 }
@@ -186,6 +203,7 @@ input {
   bottom: 15%;
   color: black;
   font-weight: 100;
+  overflow: scroll;
 /*  top: 25%;
   left: 32.5%;
   right: 32.5%;
@@ -210,26 +228,6 @@ input {
 
 .phone-number-input {
   padding-top: 25px;
-}
-
-.settings-form {
-  font-size: 125%;
-}
-
-.settings-glyph {
-  position: absolute;
-  left: 2%;
-  bottom: 2%;
-  font-size: 150%;
-}
-
-.settings-glyph:hover {
-  cursor: pointer;
-}
-
-.settings-title {
-  font-size: 200%;
-  font-weight: 100;
 }
 
 .trans-mode{

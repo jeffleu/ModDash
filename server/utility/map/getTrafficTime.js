@@ -13,7 +13,8 @@ const getTrafficTime = (event) => {
     if (duration) {
       traffic = duration.value * 1000; // convert seconds to milliseconds
     }
-    var notificationTime = new Date(Date.parse(event.startdatetime) - (traffic + 300000));
+    var notificationTime = new Date(Date.parse(event.startdatetime) - (traffic + 1500000));
+    // 15 minutes
 
     return {
       traffic,

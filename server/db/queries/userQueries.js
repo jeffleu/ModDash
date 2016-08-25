@@ -32,7 +32,7 @@ const getUser = (id) => {
 const getUserInfo = (id) => {
   return User.findOne({
     where: { id: id },
-    attributes: ['id', 'geolocation', 'transitmode', 'phone']
+    attributes: ['id', 'geolocation', 'transitmode', 'phone', 'pubnubid']
   });
 };
 
@@ -58,12 +58,23 @@ const updateUserGeolocation = (id, geolocation) => {
       .catch((err) => err);
 };
 
-const updateUserSettings = (id, transit, phoneNumber) => {
+const updateTransitMode = (id, transitMode) => {
   return User.update(
-    {
-      transitmode: transit,
-      phone: phoneNumber
-    }, 
+    { transitmode: transitMode }, 
+    { where: { id: id } })
+      .then((result) => {
+        if (result[0] === 1) {
+          return transitMode;
+        } else {
+          throw new Error();
+        }
+      })
+      .catch((err) => err);
+};
+
+const updatePhoneNumber = (id, phoneNumber) => {
+  return User.update(
+    { phone: phoneNumber }, 
     { where: { id: id } }
   )
   .then((result) => result)
@@ -77,6 +88,7 @@ module.exports = {
   getUserInfo,
   getRefreshToken,
   getUserChannel,
-  updateUserSettings,
-  updateUserGeolocation
+  updateUserGeolocation,
+  updateTransitMode,
+  updatePhoneNumber
 };
