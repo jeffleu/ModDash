@@ -33,6 +33,7 @@ class CalendarEntry extends React.Component {
     var token = localStorage.getItem('token');
     var deleteCalId = this.state.gcalId;
     var googleCalId = {eventId: deleteCalId};
+
     fetch('http://localhost:9000/api/calendar/deleteEvent', {
       method: 'DELETE',
       body: JSON.stringify(googleCalId),
@@ -67,7 +68,6 @@ class CalendarEntry extends React.Component {
         </div>
     );
   }
-
 }
 
 export default CalendarEntry;
