@@ -4,6 +4,8 @@ const jwt = require('../utility/auth/jwt');
 const getAllEvents = require('../utility/calendar/getAllEvents');
 const checkCalendar = require('../workers/checkCalendar');
 const moment = require('moment');
+const path = require('path');
+
 
 
 const authHandler = (req, res) => {
@@ -49,30 +51,29 @@ const authHandler = (req, res) => {
 const authCallback = (req, res) => {
   googleAuth.googleCalAuthCallback(req.query.code)
   .then((user) => {
+    res.sendFile(path.join(__dirname, '../../web/dist/index.html'));
     // create new user
     User.findOrCreateUser(user.profile, user.tokens)
     .spread((user, created) => {
       if (created) { // this is for new users
       // NOTE: REDIRECT THEM TO SPLASH PAGE HERE. 
-        // res.redirect('/')
         // get all of the users events from googleCal
         getAllEvents(user.dataValues.id);
+        // res.redirect('/')
         
         // TO DO: Fix the recurring check
         // // schedule check at midnight
         // var midnightInUTC = moment().add(1, 'days').format('YYYY-MM-DD') + ' 06:59:00+00';
         // checkCalendar(midnightInUTC, user.dataValues.id);
-
-        res.send('splash page');
       } else {
       // Could redirect them to same splash page
         // res.redirect('/')
-        res.send('splash page');
       }
     })
   })
   .catch(err => {
     console.warn('Did not find user\'s profile in db for web oAuth', err);
+    res.sendFile(path.join(__dirname, '../../web/dist/index.html'));
   });
 };
 
