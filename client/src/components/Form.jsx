@@ -166,7 +166,7 @@ class Form extends React.Component {
     let token = localStorage.getItem('token');
 
     // Post event to Google Calendar API
-    fetch('http://ec2-52-43-234-146.us-west-2.compute.amazonaws.com/api/calendar/addEvent', {
+    fetch('http://velocitydash.com/api/calendar/addEvent', {
       method: 'POST',
       body: JSON.stringify(event),
       mode: 'cors-with-forced-preflight',
