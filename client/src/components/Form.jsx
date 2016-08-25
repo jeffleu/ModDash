@@ -18,13 +18,17 @@ class Form extends React.Component {
       repeatEvery: '',
       days: [],
       recIsOpen: false,
-      artyomListening: true
+      artyomListening: true,
+      dateFormatError: false,
+      timeFormatError: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clickRecur = this.clickRecur.bind(this);
     this.clearAndToggleForm = this.clearAndToggleForm.bind(this);
+    this.handleValidSubmit = this.handleValidSubmit.bind(this);
+    this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -61,15 +65,50 @@ class Form extends React.Component {
     });
   }
 
-  convertToMilitaryTime(time) {
-    let split = time.split(':');
-    let hours = Number(split.shift());
-    let minutes = Number(split.join('').split(' ')[0]);
-    let amPm = split.join('').split(' ')[1];
-    
-    if (amPm === 'PM') { hours += 12; }
+  toggleArtyomListener() {
+    if (this.state.artyomListening) {
+      artyomStop();
+      this.setState({ artyomListening: false });
+    } else {
+      artyomStart();
+      this.setState({ artyomListening: true });
+    }
+  }
 
-    return `${hours}:${minutes}`;
+  dateFormatValid(date) {
+    if (date.indexOf('/') === -1) { return false; }
+
+    let dateSplit = date.split('/');
+    let month = Number(dateSplit[0]);
+    let day = Number(dateSplit[1]);
+    let year = Number(dateSplit[2]);
+    
+    if (month < 1 || month > 12) { return false; }
+    if (day < 1 || day > 31) { return false; }
+    if ((year.toString()).length !== 4) { return false; }
+
+    return true;
+  }
+
+  timeFormatValid(time) {
+    if (time.indexOf(':') === -1) { return false; }
+    if (time[time.length - 3] !== ' ') { return false; }
+    
+    let timeSplit = time.split(':');
+    let hour = Number(timeSplit[0]);
+    let minute = Number(timeSplit[1].split(' ')[0]);
+    let amPm = timeSplit[1].split(' ')[1];
+    
+    if (hour < 1 || hour > 12) { return false; }  
+    if (minute < 0 || minute > 59) { return false; }
+    
+    if (amPm === 'AM' || amPm === 'PM') {
+      // do nothing
+    } else {
+      return false;
+    }
+    
+    return true;
   }
 
   convertDate(date) {
@@ -81,14 +120,15 @@ class Form extends React.Component {
     return `${year}-${month}-${day}`;
   }
 
-  toggleArtyomListener() {
-    if (this.state.artyomListening) {
-      artyomStop();
-      this.setState({ artyomListening: false });
-    } else {
-      artyomStart();
-      this.setState({ artyomListening: true });
-    }
+  convertToMilitaryTime(time) {
+    let split = time.split(':');
+    let hours = Number(split.shift());
+    let minutes = Number(split.join('').split(' ')[0]);
+    let amPm = (split.join('').split(' ')[1]).toUpperCase();
+    
+    if (amPm === 'PM' && hours !== 12) { hours += 12; }
+
+    return `${hours}:${minutes}`;
   }
 
   // Update Form's state on input form change
@@ -137,6 +177,10 @@ class Form extends React.Component {
     e.preventDefault();
 
     // TO DO: Use geolocation to update timeZone automatically
+
+    
+
+    // Run code below only if this.state.dateFormatError & this.state.timeFormatError is both false
 
     // Create event object with Form's state
     let date = this.convertDate(this.state.startDate);
@@ -251,10 +295,10 @@ class Form extends React.Component {
                 Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location of event" onChange={this.handleChange} />
               </div>
               <div>
-                Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="YYYY-MM-DD" onChange={this.handleChange} />
+                Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="M/D/YYYY" onChange={this.handleChange} />
               </div>
               <div>
-                Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="HH:MM AM/PM" onChange={this.handleChange} />
+                Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="h:mm am/pm" onChange={this.handleChange} />
               </div>
               {this.state.recIsOpen ? displayRecur : null}
             </form>
