@@ -15,8 +15,38 @@ class Commands extends React.Component {
           <Modal.Body className="modal-body">
             <div>
               <p>
-                <b>Create an event</b><br/>
-                <i>"Create event [event name] at [location] at [date and time]."</i>
+                <b>Creating an event</b><br/>
+                <i>"Create/Add/Make event [event name] at [location] at [date and time]."</i>
+              </p>
+
+              <p>
+                <b>Stopping voice recognition from listening</b><br/>
+                <i>"Stop listening."</i>
+              </p>
+
+              <p>
+                <b>Getting the time</b><br/>
+                <i>"What time is it?"</i>
+              </p>
+
+              <p>
+                <b>Getting the date</b><br/>
+                <i>"What's the date today?"</i>
+              </p>
+
+              <p>
+                <b>Opening websites</b><br/>
+                <i>"Open [website]"</i> (include ".com")
+              </p>
+
+              <p>
+                <b>Searching YouTube</b><br/>
+                <i>"Search YouTube for [something]"</i>
+              </p>
+
+              <p>
+                <b>Searching Amazon</b><br/>
+                <i>"Search Amazon for [item]"</i>
               </p>
             </div>
           </Modal.Body>

@@ -21,7 +21,7 @@ const insertEvent = (userId, data) => {
       description: data.description
     }
   });
-}
+};
 
 const retrieveEvent = (id) => {
   return Event.findOne({
@@ -30,7 +30,7 @@ const retrieveEvent = (id) => {
 };
 
 const getDayEvents = (userId) => {
-  var nowInUTC = moment().utcOffset(0000).subtract(7, 'hours').format('YYYY-MM-DD HH:mm') + ':00+00';
+  var nowInUTC = moment().utcOffset('0000').subtract(7, 'hours').format('YYYY-MM-DD HH:mm') + ':00+00';
   var midnightInUTC = moment().add(1, 'days').format('YYYY-MM-DD') + ' 06:59:00+00';
   return Event.findAll({
     where: {
@@ -42,16 +42,17 @@ const getDayEvents = (userId) => {
     events.forEach((event) => {
       event = event.dataValues;
       event.startdatetime = moment(event.startdatetime).format('LT');
-    })
+    });
+
     return events;
   });
-}
+};
 
 const getAllUserEvents = (userId) => {
   return Event.findAll({
     where: {userId}
   });
-}
+};
 
 module.exports = {
   insertEvent,
