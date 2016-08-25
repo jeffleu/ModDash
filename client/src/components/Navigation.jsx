@@ -12,7 +12,6 @@ class Navigation extends React.Component {
 
     this.toggleArtyomListener = this.toggleArtyomListener.bind(this);
   }
-
   toggleArtyomListener() {
     if (this.state.listening) {
       this.setState({ listening: false });
