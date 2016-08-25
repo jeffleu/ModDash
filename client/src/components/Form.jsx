@@ -252,8 +252,8 @@ class Form extends React.Component {
           <Modal.Footer>
             <div>
               <a onClick={this.clickRecur}>Repeat</a>
-              <Button bsSize="small" onClick={this.clearAndToggleForm}>Nah</Button>
-              <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Looks Good</Button>
+              <Button bsSize="small" onClick={this.clearAndToggleForm}>Cancel</Button>
+              <Button bsSize="small" type="submit" onClick={this.handleSubmit}>Add Event</Button>
             </div>
           </Modal.Footer>
         </Modal>
