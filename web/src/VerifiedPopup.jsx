@@ -16,7 +16,7 @@ class VerifiedPopup extends React.Component{
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div> If you want to find out more about Velocity Dashboard, check us out here! Otherwise, close this tab and proceed to your new digital life. </div>
+            <div> If you want to find out more about Velocity Dashboard, check us out here! Otherwise, close this tab to proceed. </div>
           </Modal.Body>
         
         </Modal>
@@ -26,9 +26,3 @@ class VerifiedPopup extends React.Component{
 };
 
 export default VerifiedPopup;
-
-//   <Modal.Footer>
-            // <div>
-              // <Button bsSize="small" onClick={this.props.togglePopUp}>Okay!</Button>
-            // </div>
-          // </Modal.Footer>

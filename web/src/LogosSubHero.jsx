@@ -7,7 +7,7 @@ class LogosSubHero extends React.Component {
       <Section className="subhero">
         <ImageList centered>
           <ImageListItem src="./assets/react_logo.png" url="http://facebook.github.io/react/"/>
-          <ImageListItem src="./assets/node_logo.png" url="http://www.hackreactor.com"/>
+          <ImageListItem src="./assets/node_logo.png" url="http://nodejs.org/en/"/>
           <ImageListItem src="./assets/chrome_logo.png" url="http://www.google.com/chrome"/>
           <ImageListItem src="./assets/aws_logo.png" url="http://www.aws.amazon.com"/>
         </ImageList>
