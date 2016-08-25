@@ -154,17 +154,6 @@ body {
   cursor: pointer;
 }
 
-.voice-glyph {
-  position: absolute;
-  left: 4.5%;
-  bottom: 2%;
-  font-size: 150%;
-}
-
-.voice-glyph:hover {
-  cursor: pointer;
-}
-
 .event-url {
   font-color: white;
 }
@@ -239,17 +228,6 @@ input {
 
 .phone-number-input {
   padding-top: 25px;
-}
-
-.settings-glyph {
-  position: absolute;
-  left: 2%;
-  bottom: 2%;
-  font-size: 150%;
-}
-
-.settings-glyph:hover {
-  cursor: pointer;
 }
 
 .trans-mode{
