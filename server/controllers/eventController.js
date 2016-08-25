@@ -1,11 +1,13 @@
 const Event = require('../db/queries').Event;
 const addEvent = require('../utility/calendar/addEvent');
 const addTravel = require('../utility/map/addTravel');
-const deleteEvent = require('../utility/calendar/deleteEvent');
+const removeEvent = require('../utility/calendar/removeEvent');
 const queryTraffic = require('../workers/queryTraffic');
 const google = require('googleapis');
 const googleAuth = require('../utility/auth/googleAuth');
 const Promise = require('bluebird');
+
+console.log('remove event func', removeEvent);
 
 const addEventAndAddTravel = (req, res) => {
   addEvent(req.userId, req.body)
@@ -28,12 +30,16 @@ const getDayEvents = (req, res) => {
 };
 
 const deleteEventFromGcal = (req, res) => {
-  Event.deleteEvent(req.body)
-    .then(event => {
-      console.log(evemt);
+  console.log('req body', req.body.eventId);
+  removeEvent(req.userId, req.body.eventId)
+    .then(() => {
+      Event.deleteEvent(req.body.eventId);
+    })
+    .then(data => {
+      console.log('successfulle removed event from db', data);
     })
     .catch(err => {
-      console.log('did not delete event', err);
+      console.log('did not delete event from db', err);
     });
 };
 

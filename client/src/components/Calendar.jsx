@@ -1,6 +1,7 @@
 import React from 'react';
 import CalendarEntry from './CalendarEntry.jsx';
-import { Glyphicon } from 'react-bootstrap';
+import { Glyphicon, Overlay } from 'react-bootstrap';
+
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -11,8 +12,15 @@ class Calendar extends React.Component {
     };
   }
 
+  // toggle() {
+  //   this.setState({
+  //     show: !this.state.show
+  //   });
+  // }
+
 
   render() {
+    // let pop = <div><strong>Holy guacamole!</strong> Check this info.</div>;
     return (
       <div className='calendar'>
         <div className='calendar-title'>
@@ -20,8 +28,8 @@ class Calendar extends React.Component {
         </div>
         <div>
         {this.props.events.map((event, i) =>
-            <CalendarEntry key={i} event={event} />
-        )}
+            <CalendarEntry  key={i} event={event} />
+          )}
         </div>
       </div>
     );

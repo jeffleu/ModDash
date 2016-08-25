@@ -53,9 +53,19 @@ const getAllUserEvents = (userId) => {
   });
 }
 
+const deleteEvent = (eventId) => {
+  return Event.destroy({
+    where: { googleCalendarEventId: eventId}
+  })
+  .catch(err => {
+    console.log('did not delete from db', err);
+  })
+}
+
 module.exports = {
   insertEvent,
   retrieveEvent,
   getDayEvents,
-  getAllUserEvents
+  getAllUserEvents,
+  deleteEvent
 };

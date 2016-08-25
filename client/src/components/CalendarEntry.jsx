@@ -1,25 +1,28 @@
 import React from 'react';
 import { Glyphicon } from 'react-bootstrap';
-
-
+//
+// const popoverRight = (
+//   <Popover id="popover-positioned-right" title="Popover right">
+//     <strong>Holy guacamole!</strong> Check this info.
+//   </Popover>
+// );
 
 class CalendarEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false,
+      show: false,
       gcalId: ''
     };
-    this.handleDeleteEvent.bind(this);
   }
 
-  mouseOver() {
+  showDelete() {
     var gcalId = this.props.event.eventId;
+    console.log('user gcal id', gcalId);
     this.setState({
-      hover: true,
+      show: !this.state.show,
       gcalId: gcalId
     });
-    console.log(gcalId);
   }
 
   // handleDeleteEvent() {
@@ -27,53 +30,44 @@ class CalendarEntry extends React.Component {
   // }
 
   deleteEvent() {
-    var deleteCalId = this.props.gcalId;
+    var deleteCalId = this.state.gcalId;
     var token = localStorage.getItem('token');
-    console.log('id', deleteCalId);
-    console.log('token', token);
-    var googleCalId = {event: event};
+    var googleCalId = {eventId: deleteCalId};
     console.log('googleCalId', googleCalId);
-    // fetch('http://localhost:9000/api/calendar/deleteEvent', {
-    //   method: 'DELETE',
-    //   body: JSON.stringify(googleCalId),
-    //   mode: 'cors-with-forced-preflight',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'authorization': token
-    //   }
-    // })
-    // .then((res) => {
-    //   return res.json();
-    // })
-    // .then((data) => {
-    //   console.log('data'. data);
-    //   // use data to update state after success deletion
-    // })
-    // .then((err) => {
-    //   console.log('did not delete event from db and gcal');
-    // });
-  }
-  mouseOut() {
-    this.setState({
-      hover: false
+    fetch('http://localhost:9000/api/calendar/deleteEvent', {
+      method: 'DELETE',
+      body: JSON.stringify(googleCalId),
+      mode: 'cors-with-forced-preflight',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': token
+      }
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log('data'. data);
+      // use data to update state after success deletion
+    })
+    .then((err) => {
+      console.log('did not delete event from db and gcal');
     });
   }
 
+
   render() {
+    let displayButton = <span onClick={this.deleteEvent.bind(this)}className='glyphicon glyphicon-remove-circle' id='delete'></span>
     return (
-      <div>
         <div className='calendar-entry'>
-        {this.state.hover ? (<Glyphicon onClick={this.handleDeleteEvent.bind(this)} glyph="remove" />) : null}
-          <div className='calendar-container' onMouseOver={this.mouseOver.bind(this)} onMouseOut={this.mouseOut.bind(this)} >
-            <div className='event-start'>
-              {this.props.event.startTime}
-            </div>
-            <div className='event-summary-location'>
-              <a className='event-link' href={this.props.event.eventUrl} target='new'>{this.props.event.eventName} at {this.props.event.location}</a>
-            </div>
+          <div className='event-start' onClick={this.showDelete.bind(this)}>
+            {this.props.event.startTime}
+            {this.state.show ? displayButton : null}
+          </div>
+          <div className='event-summary-location'>
+            <a className='event-link' href={this.props.event.eventUrl} target='new'>{this.props.event.eventName} at {this.props.event.location}</a>
           </div>
         </div>
-      </div>
     );
   }
 

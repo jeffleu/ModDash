@@ -8,9 +8,25 @@ body {
   cursor: default;
 }
 
+.{
+  margin: 10px;
+}
+
+
 .navigation {
   border: 0;
   background-color: rgba(0, 0, 0, 0);
+}
+
+#delete {
+  margin-left: 5px;
+  font-size: 75%;
+  color: red;
+}
+
+#delete:hover {
+  color: #50C8FF;
+  transition: color 0.75s;
 }
 
 .navbar-default .navbar-brand {
@@ -22,6 +38,7 @@ body {
   color: white;
   cursor: pointer;
 }
+
 
 .glyphicon {
   font-size: 125%;
