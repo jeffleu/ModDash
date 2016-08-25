@@ -37,7 +37,7 @@ const deleteEventFromGcal = (req, res) => {
     })
     .then(() => {
       console.log('successfulle removed event from db');
-      res.send(204);
+      res.sendStatus(204);
     })
     .catch(err => {
       console.log('did not delete event from db', err);
