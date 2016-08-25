@@ -202,7 +202,7 @@ class App extends React.Component {
           <Time />
         </div>
         <div>
-          <Calendar events={this.state.events} />
+          <Calendar fetch={this.fetchAndUpdateEvents.bind(this)} events={this.state.events} />
         </div>
         <div>
           <Form

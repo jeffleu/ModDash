@@ -43,14 +43,12 @@ class CalendarEntry extends React.Component {
         'authorization': token
       }
     })
-    .then((res) => {
-      return res.json();
+    .then(res => {
+      if (res.status === 204) {
+        this.props.fetch();
+      }
     })
-    .then((data) => {
-      console.log('data'. data);
-      // use data to update state after success deletion
-    })
-    .then((err) => {
+    .catch((err) => {
       console.log('did not delete event from db and gcal');
     });
   }
