@@ -25,16 +25,9 @@ const artyomStop = () => {
 // Get current time
 const getTime = () => {
   const date = Date().slice(16, Date().length - 15);
-  let hours = date.slice(0, 2);
+  let hours = (date.slice(0, 2) > 12) ? date.slice(0, 2) - 12 : date.slice(0, 2);
   let minutes = date.slice(3, 5);
-  let amPm;
-
-  if (hours >= 12) {
-    hours = hours - 12;
-    amPm = 'PM';
-  } else {
-    amPm = 'AM';
-  }
+  let amPm = (date.slice(0, 2) < 12) ? 'AM' : 'PM';
 
   return `${hours} ${minutes} ${amPm}`;
 };
@@ -114,10 +107,11 @@ const fillOutForm = (wildcard) => {
   (date.month < 10) ? date.month = `0${date.month}` : date.month = `${date.month}`;
   (date.day < 10) ? date.day = `0${date.day}` : date.day = `${date.day}`;
 
-  // Add leading zeroes to hour/minute if less than 10
+  // Format time
   let time = '';
-  (date.hour < 10) ? time += `0${date.hour}:` : time += `${date.hour}:`;
-  (date.minute < 10) ? time += `0${date.minute}` : time += `${date.minute}`;
+  (date.hour > 12) ? time += `${Number(date.hour) - 12}:` : time += `${date.hour}:`;
+  (date.minute < 10) ? time += `0${date.minute} ` : time += `${date.minute} `;
+  (date.hour >= 12) ? time += 'PM' : time += 'AM';
 
   // Generate form data object to pass to this.setState
   let formInfo = {
@@ -132,12 +126,16 @@ const fillOutForm = (wildcard) => {
   handleFormData(formInfo);
 };
 
-const openCommandsModal = () => {
-  artyom.say('Here are a list of voice commands. You can doo things like create an event, opening websites and search YouTube.');
-};
-
-const openSettingsModal = () => {
-  artyom.say('Please select the type of transit mode and the number where you would like to get traffic text notifications. These can be changed at any time.');
+const speech = {
+  openCommandsModal: () => {
+    artyom.say('Here are a list of voice commands. You can doo things like create an event, opening websites and search YouTube.');
+  },
+  openTransitModal: () => {
+    artyom.say('Please select your transportation mode. I will notify you if there is traffic, and when you need to leave by, to arrive on time.');
+  },
+  openSettingsModal: () => {
+    artyom.say('Please enter the number where you would like to receive traffic text notifications. This can be changed at any time.');
+  }
 };
 
 /********************************************************
@@ -148,23 +146,6 @@ const commands = [
   {
     indexes: ['stop listening'],
     action: (i) => { artyomStop(); }
-  },
-  {
-    indexes: ['render spotify playlist'],
-    action: (i) => {
-      artyom.say('Rendering Spotify playlist.');
-
-      $playlist = $('<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Ababybluejeff%3Aplaylist%3A6toivxuv2M1tBLjLWZwf3d" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
-      $playlist.appendTo($('#main1'));
-    }
-  },
-  {
-    indexes: ['stop the music'],
-    action: (i) => {
-      $('#main1').empty();
-
-      artyom.say('Removing Spotify playlist.');
-    }
   },
   {
     indexes: ['what time is it'],
@@ -220,6 +201,5 @@ module.exports = {
   onFillOutForm: (callback) => {
     handleFormData = callback;
   },
-  openCommandsModal,
-  openSettingsModal
+  speech
 };

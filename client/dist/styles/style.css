@@ -214,6 +214,7 @@ input {
   bottom: 15%;
   color: black;
   font-weight: 100;
+  overflow: scroll;
 /*  top: 25%;
   left: 32.5%;
   right: 32.5%;

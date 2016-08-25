@@ -8,7 +8,7 @@ import Setting from './Setting.jsx';
 import Navigation from './Navigation.jsx';
 import Commands from './Commands.jsx';
 import TransitMode from './TransitMode.jsx';
-import { openCommandsModal, openSettingsModal } from '../scripts/commands';
+import { speech } from '../scripts/commands';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,7 +22,8 @@ class App extends React.Component {
       commandsIsOpen: false,
       transitModeIsOpen: false,
       openCommandsIntro: true,
-      openSettingsIntro: true
+      openSettingsIntro: true,
+      openTransitIntro: true
     };
 
     this.toggleEventForm = this.toggleEventForm.bind(this);
@@ -43,7 +44,7 @@ class App extends React.Component {
 
       if (this.state.openSettingsIntro) {
         this.setState({ openSettingsIntro: false });
-        openSettingsModal();
+        speech.openSettingsModal();
       }
     } else {
       this.setState({ settingsIsOpen: false });
@@ -56,7 +57,7 @@ class App extends React.Component {
 
       if (this.state.openCommandsIntro) {
         this.setState({ openCommandsIntro: false });
-        openCommandsModal();
+        speech.openCommandsModal();
       }
 
     } else {
@@ -68,10 +69,10 @@ class App extends React.Component {
     if (!this.state.transitModeIsOpen) {
       this.setState({ transitModeIsOpen: true});
 
-      // if (this.state.openCommandsIntro) {
-      //   this.setState({ openCommandsIntro: false });
-      //   openCommandsModal();
-      // }
+      if (this.state.openTransitIntro) {
+        this.setState({ openTransitIntro: false });
+        speech.openTransitModal();
+      }
 
     } else {
       this.setState({ transitModeIsOpen: false });
