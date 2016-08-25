@@ -39,10 +39,12 @@ body {
 }
 
 label{
+  font-weight: 100;
   margin-top: 10px;
-  margin-left: 15px;
+  margin-left: 30px;
   margin-right: 5px:
 }
+
 
 #delete {
   margin-left: 5px;

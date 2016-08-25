@@ -27,8 +27,7 @@ class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clickRecur = this.clickRecur.bind(this);
     this.clearAndToggleForm = this.clearAndToggleForm.bind(this);
-    this.handleValidSubmit = this.handleValidSubmit.bind(this);
-    this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
+    // this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
   }
 
   componentDidMount() {
