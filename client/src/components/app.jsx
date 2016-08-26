@@ -10,7 +10,6 @@ import Navigation from './Navigation.jsx';
 import Commands from './Commands.jsx';
 import TransitMode from './TransitMode.jsx';
 import { addCommands, artyomStart, artyomStop, commands, speech } from '../scripts/commands';
-import { speech } from '../scripts/commands';
 
 
 class App extends React.Component {
@@ -130,11 +129,6 @@ class App extends React.Component {
               eventId: event.googleCalendarEventId
             };
           });
-
-          // console.log('dinner', eventList[0], moment(eventList[0].startdatetime).format('YYYY-MM-DD'));
-          // console.log('late night snack', eventList[1], moment(eventList[1].startdatetime).format('YYYY-MM-DD'));
-
-          // console.log('Is dinner less than late night snack?', moment(eventList[0].startdatetime).format('l') < moment(eventList[1].startdatetime).format('l'));
 
           // SORTING NEEDS TO SORT BY DATE AS WELL, NOT JUST TIME
           this.sortAndUpdateEvents(eventList);

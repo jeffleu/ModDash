@@ -29,8 +29,3 @@ class Calendar extends React.Component {
 }
 
 export default Calendar;
-
-        // <div className='add-event-glyph'><Glyphicon glyph="plus" />
-        // </div>
-
-// maybe make the add-event-glyph into load more calendar events, or can add an event from clicking on it, not sure which is more intuitive

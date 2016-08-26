@@ -7,14 +7,13 @@ class Setting extends React.Component {
     super(props);
 
     this.state = {
-      // showSettings: false,
       phoneNumber: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onPhoneNumberChange = this.onPhoneNumberChange.bind(this);
   }
-  
+
   onPhoneNumberChange(e) {
     this.setState({ phoneNumber: e.target.value });
   }
@@ -52,7 +51,7 @@ class Setting extends React.Component {
       <div>
         <Modal className="ModalForm" show={this.props.settingsIsOpen} onHide={this.props.toggleSettings}>
           <Modal.Header closeButton>
-            <Modal.Title> 
+            <Modal.Title>
               <div className="modal-title">Settings</div>
             </Modal.Title>
           </Modal.Header>

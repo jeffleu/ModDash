@@ -25,6 +25,6 @@ class Creators extends React.Component {
       </Section>
     );
   }
-};
+}
 
 export default Creators;

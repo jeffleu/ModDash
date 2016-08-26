@@ -1,11 +1,5 @@
 import React from 'react';
 import { Glyphicon } from 'react-bootstrap';
-//
-// const popoverRight = (
-//   <Popover id="popover-positioned-right" title="Popover right">
-//     <strong>Holy guacamole!</strong> Check this info.
-//   </Popover>
-// );
 
 class CalendarEntry extends React.Component {
   constructor(props) {
@@ -25,9 +19,6 @@ class CalendarEntry extends React.Component {
     });
   }
 
-  // handleDeleteEvent() {
-  //   this.props.deleteEvent(this.state.gcalId);
-  // }
 
   deleteEvent() {
     var token = localStorage.getItem('token');
