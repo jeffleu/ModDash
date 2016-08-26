@@ -13,7 +13,7 @@ const artyomStart = () => {
     listen: true
   });
 
-  artyom.say('Started listening.');
+  artyom.say("What's up?");
 };
 
 // Stop listening for voice commands
@@ -128,7 +128,7 @@ const fillOutForm = (wildcard) => {
 
 const speech = {
   openCommandsModal: () => {
-    artyom.say('Here are a list of voice commands. You can doo things like create an event, opening websites and search YouTube.');
+    artyom.say("Here's how to use Velocity. You can do things like create an event, open websites and search YouTube.");
   },
   openTransitModal: () => {
     artyom.say('Please select your transportation mode. I will notify you if there is traffic, and when you need to leave by, to arrive on time.');
