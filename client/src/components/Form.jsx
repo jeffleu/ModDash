@@ -241,7 +241,7 @@ class Form extends React.Component {
         };
       }
 
-  
+
     let token = localStorage.getItem('token');
 
     // Post event to Google Calendar API
@@ -297,10 +297,9 @@ class Form extends React.Component {
                   {day()} <br/>
                 </div>;
 
-<<<<<<< 688f302048c6b66343296787912f841fa8c9b0c2
     var dateErrorMessage = (this.state.dateFormatError) ? 'Date in incorrect format' : '';
     var timeErrorMessage = (this.state.timeFormatError) ? 'Time in incorrect format' : '';
-=======
+
     var displayDays = <div>
           <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='MO'/>Monday</label>
           <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TU'/>Tuesday</label>
@@ -310,7 +309,6 @@ class Form extends React.Component {
           <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SA'/>Saturday</label>
           <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SU'/>Sunday</label>
         </div>;
->>>>>>> fixed recurrence form
 
     return (
       <div>
