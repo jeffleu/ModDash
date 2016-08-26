@@ -20,11 +20,6 @@ class Commands extends React.Component {
               </p>
 
               <p>
-                <b>Stopping voice recognition from listening</b><br/>
-                <i>"Stop listening."</i>
-              </p>
-
-              <p>
                 <b>Getting the time</b><br/>
                 <i>"What time is it?"</i>
               </p>

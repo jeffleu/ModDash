@@ -18,7 +18,6 @@ class Form extends React.Component {
       repeatEvery: '',
       days: [],
       recIsOpen: false,
-      artyomListening: true,
       dateFormatError: false,
       timeFormatError: false
     };
@@ -35,12 +34,6 @@ class Form extends React.Component {
       this.props.toggleEventForm();
       this.setState(formData);
     });
-
-    // Set up commands
-    addCommands(commands);
-
-    // Start artyom listener
-    artyomStart();
   }
 
   clickRecur() {
@@ -61,16 +54,6 @@ class Form extends React.Component {
       repeatEvery: '',
       days: []
     });
-  }
-
-  toggleArtyomListener() {
-    if (this.state.artyomListening) {
-      artyomStop();
-      this.setState({ artyomListening: false });
-    } else {
-      artyomStart();
-      this.setState({ artyomListening: true });
-    }
   }
 
   dateFormatValid(date) {

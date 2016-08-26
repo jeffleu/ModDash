@@ -9,7 +9,7 @@ import Setting from './Setting.jsx';
 import Navigation from './Navigation.jsx';
 import Commands from './Commands.jsx';
 import TransitMode from './TransitMode.jsx';
-import { speech } from '../scripts/commands';
+import { addCommands, artyomStart, artyomStop, commands, speech } from '../scripts/commands';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +18,8 @@ class App extends React.Component {
     this.state = {
       events: [],
       transitMode: '',
+      signedIn: false,
+      artyomListening: false,
       eventFormIsOpen: false,
       settingsIsOpen: false,
       commandsIsOpen: false,
@@ -31,6 +33,8 @@ class App extends React.Component {
     this.toggleSettings = this.toggleSettings.bind(this);
     this.toggleCommands = this.toggleCommands.bind(this);
     this.toggleTransitMode = this.toggleTransitMode.bind(this);
+    this.toggleArtyomListener = this.toggleArtyomListener.bind(this);
+    this.userSignIn = this.userSignIn.bind(this);
     this.fetchAndUpdateEvents = this.fetchAndUpdateEvents.bind(this);
     this.onTransitModeChange = this.onTransitModeChange.bind(this);
   }
@@ -80,6 +84,20 @@ class App extends React.Component {
     }
   }
 
+  toggleArtyomListener() {
+    if (this.state.artyomListening) {
+      this.setState({ artyomListening: false });
+      artyomStop();
+    } else {
+      this.setState({ artyomListening: true });
+      artyomStart();
+    }
+  }
+
+  userSignIn() {
+    this.setState({ signedIn: true });
+  }
+
   onTransitModeChange(value) {
     this.setState({ transitMode: value });
   }
@@ -87,41 +105,42 @@ class App extends React.Component {
   fetchAndUpdateEvents() {
     var token = localStorage.getItem('token');
 
-    // Post event to Google Calendar API
-    fetch('http://localhost:9000/api/calendar/getDayEvents', {
-      method: 'GET',
-      mode: 'cors-with-forced-preflight',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': token
-      }
-    })
-    .then((res) => res.json())
-      .then((data) => {
-        let eventList = data.map((event) => {
-          console.log('event', event.startdatetime);
-
-          // event.startdatetime = moment(event.startdatetime).format('LT');
-          return {
-            eventName: event.name,
-            location: event.location,
-            startTime: event.startdatetime,
-            eventUrl: event.eventUrl,
-            eventId: event.googleCalendarEventId
-          };
-        });
-
-        console.log('dinner', eventList[0], moment(eventList[0].startdatetime).format('YYYY-MM-DD'));
-        console.log('late night snack', eventList[1], moment(eventList[1].startdatetime).format('YYYY-MM-DD'));
-
-        console.log('Is dinner less than late night snack?', moment(eventList[0].startdatetime).format('l') < moment(eventList[1].startdatetime).format('l'));
-
-        // SORTING NEEDS TO SORT BY DATE AS WELL, NOT JUST TIME
-        this.sortAndUpdateEvents(eventList);
+    // Gets Google Calendar events only if token exists
+    if (token !== null) {
+      // Post event to Google Calendar API
+      fetch('http://localhost:9000/api/calendar/getDayEvents', {
+        method: 'GET',
+        mode: 'cors-with-forced-preflight',
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': token
+        }
       })
-    .catch((err) => {
-      console.log('Error retrieving events', err);
-    });
+      .then((res) => res.json())
+        .then((data) => {
+          let eventList = data.map((event) => {
+            event.startdatetime = moment(event.startdatetime).format('LT');
+            return {
+              eventName: event.name,
+              location: event.location,
+              startTime: event.startdatetime,
+              eventUrl: event.eventUrl,
+              eventId: event.googleCalendarEventId
+            };
+          });
+
+          // console.log('dinner', eventList[0], moment(eventList[0].startdatetime).format('YYYY-MM-DD'));
+          // console.log('late night snack', eventList[1], moment(eventList[1].startdatetime).format('YYYY-MM-DD'));
+
+          // console.log('Is dinner less than late night snack?', moment(eventList[0].startdatetime).format('l') < moment(eventList[1].startdatetime).format('l'));
+
+          // SORTING NEEDS TO SORT BY DATE AS WELL, NOT JUST TIME
+          this.sortAndUpdateEvents(eventList);
+        })
+      .catch((err) => {
+        console.log('Error retrieving events', err);
+      });
+    }
   }
 
   // SORTING NEEDS TO SORT BY DATE AS WELL, NOT JUST TIME
@@ -190,12 +209,27 @@ class App extends React.Component {
   //   });
   // }
 
-  componentDidMount() {
+  componentWillUpdate() {
     this.fetchAndUpdateEvents();
+  }
+
+  componentDidMount() {
+    // Set up Artyom commands
+    addCommands(commands);
+
+    // artyomStart();
+
+    // this.fetchAndUpdateEvents();
     this.displayTransitMode();
+
+    if (localStorage.getItem('token') !== null) {
+      this.userSignIn();
+    }
   }
 
   render() {
+    let showSignInOrCalendar = (this.state.signedIn) ? <div><Calendar fetch={this.fetchAndUpdateEvents} events={this.state.events} /></div> : <div><SignIn userSignIn={this.userSignIn} artyomStart={artyomStart} toggleArtyomListener={this.toggleArtyomListener}/></div>;
+
     return (
       <div>
         <Background />
@@ -205,18 +239,15 @@ class App extends React.Component {
             toggleSettings = {this.toggleSettings}
             toggleCommands = {this.toggleCommands}
             toggleTransitMode = {this.toggleTransitMode}
+            toggleArtyomListener = {this.toggleArtyomListener}
+            listening = {this.state.artyomListening}
             transitMode = {this.state.transitMode}
           />
         </div>
         <div>
-          <SignIn />
-        </div>
-        <div>
           <Time />
         </div>
-        <div>
-          <Calendar fetch={this.fetchAndUpdateEvents.bind(this)} events={this.state.events} />
-        </div>
+        {showSignInOrCalendar}        
         <div>
           <Form
             eventFormIsOpen = {this.state.eventFormIsOpen}
