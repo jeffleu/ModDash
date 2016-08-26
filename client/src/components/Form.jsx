@@ -27,7 +27,6 @@ class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clickRecur = this.clickRecur.bind(this);
     this.clearAndToggleForm = this.clearAndToggleForm.bind(this);
-    // this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -112,10 +111,10 @@ class Form extends React.Component {
 
   convertDate(date) {
     let dateSplit = date.split('/');
-    let month = (dateSplit[0] < 10) ? `0${dateSplit[0]}` : `${dateSplit[0]}`;
-    let day = (dateSplit[1] < 10) ? `0${dateSplit[1]}` : `${dateSplit[1]}`;
-    let year = dateSplit[2];
-
+    let month = (Number(dateSplit[0]) < 10) ? `0${Number(dateSplit[0])}` : `${Number(dateSplit[0])}`;
+    let day = (Number(dateSplit[1]) < 10) ? `0${Number(dateSplit[1])}` : `${Number(dateSplit[1])}`;
+    let year = Number(dateSplit[2]);
+      
     return `${year}-${month}-${day}`;
   }
 
@@ -177,62 +176,83 @@ class Form extends React.Component {
 
     // TO DO: Use geolocation to update timeZone automatically
 
-
-
-    // Run code below only if this.state.dateFormatError & this.state.timeFormatError is both false
-
-    // Create event object with Form's state
-    let date = this.convertDate(this.state.startDate);
-    let time = this.convertToMilitaryTime(this.state.startTime);
-    let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;
-
-    let event;
-    if (this.state.recIsOpen === false) {
-      event = {
-        summary: this.state.summary,
-        location: this.state.location,
-        start: {
-          dateTime: `${date}T${time}:00-07:00`,
-          timeZone: 'America/Los_Angeles'
-        },
-        end: {
-          dateTime: `${date}T${time}:00-07:00`,
-          timeZone: 'America/Los_Angeles'
-        }
-      };
-    } else {
-      event = {
-        summary: this.state.summary,
-        location: this.state.location,
-        start: {
-          dateTime: `${date}T${time}:00-07:00`,
-          timeZone: 'America/Los_Angeles'
-        },
-        end: {
-          dateTime: `${date}T${time}:00-07:00`,
-          timeZone: 'America/Los_Angeles'
-        },
-        recurrence: [recur]
-      };
+    // If both date and time are invalid, set error for both to true
+    if (!this.dateFormatValid(this.state.startDate) && !this.timeFormatValid(this.state.startTime)) {
+      console.log('Error in both date and time format.');
+      this.setState({
+        dateFormatError: true,
+        timeFormatError: true
+      });
+    }
+    
+    if (!this.dateFormatValid(this.state.startDate) && !this.state.dateFormatError) {
+      this.setState({ dateFormatError: true });
+    } else if (this.dateFormatValid(this.state.startDate) && this.state.dateFormatError) {
+      this.setState({ dateFormatError: false });
     }
 
-    let token = localStorage.getItem('token');
+    if (!this.timeFormatValid(this.state.startTime) && !this.state.timeFormatError) {
+      this.setState({ timeFormatError: true });
+    } else if (this.timeFormatValid(this.state.startTime) && this.state.timeFormatError) {
+      this.setState({ timeFormatError: false });
+    }
 
-    // Post event to Google Calendar API
-    fetch('http://localhost:9000/api/calendar/addEvent', {
-      method: 'POST',
-      body: JSON.stringify(event),
-      mode: 'cors-with-forced-preflight',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': token
+    // If both date and time are valid, create event object and pass to postToGoogleCalendar
+    if (this.dateFormatValid(this.state.startDate) && this.timeFormatValid(this.state.startTime)) {
+      // Create event object with Form's state
+      let date = this.convertDate(this.state.startDate);
+      let time = this.convertToMilitaryTime(this.state.startTime);
+      let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;    
+      
+      let event;
+      if (this.state.recIsOpen === false) {
+        event = {
+          summary: this.state.summary,
+          location: this.state.location,
+          start: {
+            dateTime: `${date}T${time}:00-07:00`,
+            timeZone: 'America/Los_Angeles'
+          },
+          end: {
+            dateTime: `${date}T${time}:00-07:00`,
+            timeZone: 'America/Los_Angeles'
+          }
+        };
+      } else {
+        event = {
+          summary: this.state.summary,
+          location: this.state.location,
+          start: {
+            dateTime: `${date}T${time}:00-07:00`,
+            timeZone: 'America/Los_Angeles'
+          },
+          end: {
+            dateTime: `${date}T${time}:00-07:00`,
+            timeZone: 'America/Los_Angeles'
+          },
+          recurrence: [recur]
+        };
       }
-    }).then((res) => {
-      if (res.status === 200) { this.props.refreshEvents(); }
-    }).catch((err) => { console.log('Error posting event to Google Calendar:\n', err); });
 
-    this.clearAndToggleForm();
+      let token = localStorage.getItem('token');
+
+      // Post event to Google Calendar API
+      fetch('http://localhost:9000/api/calendar/addEvent', {
+        method: 'POST',
+        body: JSON.stringify(event),
+        mode: 'cors-with-forced-preflight',
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': token
+        }
+      }).then((res) => {
+        if (res.status === 200) { this.props.refreshEvents(); }
+      }).catch((err) => { console.log('Error posting event to Google Calendar:\n', err); });
+
+      this.clearAndToggleForm();
+    }
   }
+
 
   render() {
 
@@ -279,6 +299,9 @@ class Form extends React.Component {
                     </div>
                 </div>;
 
+    var dateErrorMessage = (this.state.dateFormatError) ? 'Date in incorrect format' : '';
+    var timeErrorMessage = (this.state.timeFormatError) ? 'Time in incorrect format' : '';
+
     return (
       <div>
         <Modal className="ModalForm" show={this.props.eventFormIsOpen} onHide={this.props.toggleEventForm}>
@@ -290,16 +313,22 @@ class Form extends React.Component {
           <Modal.Body className="modal-body">
             <form className="event-form" onSubmit={this.handleSubmit}>
               <div>
-                Event: <input type="text" className="form-event" value={this.state.summary} placeholder="Event name" onChange={this.handleChange} />
+                Event:<br/>
+                <input type="text" className="form-event" value={this.state.summary} placeholder="Event name" onChange={this.handleChange} />&nbsp;
               </div>
               <div>
-                Location: <input type="text" className="form-location" value={this.state.location} placeholder="Location of event" onChange={this.handleChange} />
+                Location:<br/>
+                <input type="text" className="form-location" value={this.state.location} placeholder="Location of event" onChange={this.handleChange} />&nbsp;
               </div>
               <div>
-                Date: <input type="text" className="form-date" value={this.state.startDate} placeholder="M/D/YYYY" onChange={this.handleChange} />
+                Date:<br/>
+                <input type="text" className="form-date" value={this.state.startDate} placeholder="M/D/YYYY" onChange={this.handleChange} />&nbsp;
+                {dateErrorMessage}
               </div>
               <div>
-                Time: <input type="text" className="form-time" value={this.state.startTime} placeholder="h:mm am/pm" onChange={this.handleChange} />
+                Time:<br/>
+                <input type="text" className="form-time" value={this.state.startTime} placeholder="h:mm am/pm" onChange={this.handleChange} />&nbsp;
+                {timeErrorMessage}
               </div>
               {this.state.recIsOpen ? displayRecur : null}
             </form>
