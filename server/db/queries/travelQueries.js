@@ -13,10 +13,6 @@ const initiateTravel = (event, initialEstimate) => {
   });
 };
 
-const getAllTravel = function() {
-  return Travel.findAll();
-};
-
 const getAllTravel = () => Travel.findAll();
 
 module.exports = {
