@@ -8,7 +8,7 @@ class Creators extends React.Component {
         <CustomerQuotes>
           <CustomerQuote name="Carl Chen" title="Velocity co-creator" imageUrl="./assets/carl_chen_square1.jpg">
             <p>
-            We know your new browser tab is something you see all the time so we made Velocity to be sleek and minimal. Most importantly, we made it load fast and accurately.
+            The new tab is something you see all the time so we designed Velocity to be sleek and minimal. Built in React, the dashboard loads and updates changes very quickly.
             </p>
           </CustomerQuote>
           <CustomerQuote name="Derek Hoang" title="Velocity co-creator" imageUrl="./assets/derek_hoang_square1.jpg">
