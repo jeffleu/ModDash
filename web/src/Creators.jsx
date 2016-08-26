@@ -18,7 +18,7 @@ class Creators extends React.Component {
           </CustomerQuote>
           <CustomerQuote name="Jeff Leu" title="Velocity co-creator" imageUrl="./assets/jeff_leu_square1.jpg">
             <p>
-            The Google Chrome browser's native APIs are so powerful, so it was very exciting to make a voice-activated dashboard that leveraged its technologies.
+            The Google Chrome browser's native APIs are quite powerful, so it was very exciting to make a voice-activated dashboard that leveraged its technologies.
             </p>
           </CustomerQuote>
         </CustomerQuotes>
