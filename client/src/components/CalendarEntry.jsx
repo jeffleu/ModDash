@@ -25,7 +25,7 @@ class CalendarEntry extends React.Component {
     var deleteCalId = this.state.gcalId;
     var googleCalId = {eventId: deleteCalId};
 
-    fetch('http://localhost:9000/api/calendar/deleteEvent', {
+    fetch('http://velocitydash.com/api/calendar/deleteEvent', {
       method: 'DELETE',
       body: JSON.stringify(googleCalId),
       mode: 'cors-with-forced-preflight',

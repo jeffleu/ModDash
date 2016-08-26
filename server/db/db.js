@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 
 // Connect to database
-const db = new Sequelize('nevermissout', process.env.PSQL_username, process.env.PSQL_password, {
+const db = new Sequelize('velocitydashdb', process.env.PSQL_username, process.env.PSQL_password, {
   dialect: 'postgres',
   protocol: 'postgres',
-  host: 'nevermissout.cqdxw6kmfwjk.us-west-2.rds.amazonaws.com',
+  host: process.env.AWS_PSQL,
   port: 5432,
   dialectOptions: { ssl: true },
   logging: false,

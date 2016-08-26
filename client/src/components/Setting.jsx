@@ -26,7 +26,7 @@ class Setting extends React.Component {
     var token = localStorage.getItem('token');
     var settings = { phoneNumber: this.state.phoneNumber };
 
-    fetch('http://localhost:9000/api/users/updatePhoneNumber', {
+    fetch('http://velocitydash.com/api/users/updatePhoneNumber', {
       method: 'POST',
       body: JSON.stringify(settings),
       mode: 'cors-with-forced-preflight',
