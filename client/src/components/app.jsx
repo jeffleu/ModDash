@@ -206,6 +206,7 @@ class App extends React.Component {
 
   render() {
     let showSignInOrCalendar = (this.state.signedIn) ? <div><Calendar fetch={this.fetchAndUpdateEvents} events={this.state.events} /></div> : <div><SignIn userSignIn={this.userSignIn} artyomStart={artyomStart} toggleArtyomListener={this.toggleArtyomListener}/></div>;
+
     return (
       <div>
         <Background />
