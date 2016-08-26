@@ -1,7 +1,7 @@
 const google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 
-var oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, 'http://localhost:9000/verified');
+var oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, 'http://velocitydash.com/verified');
 
 // generate consent page url with our required access scopes
 var url = oauth2Client.generateAuthUrl({

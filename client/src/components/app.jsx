@@ -109,7 +109,7 @@ class App extends React.Component {
     // Gets Google Calendar events only if token exists
     if (token !== null) {
       // Post event to Google Calendar API
-      fetch('http://localhost:9000/api/calendar/getDayEvents', {
+      fetch('http://velocitydash.com/api/calendar/getDayEvents', {
         method: 'GET',
         mode: 'cors-with-forced-preflight',
         headers: {
@@ -164,7 +164,7 @@ class App extends React.Component {
   displayTransitMode() {
     var token = localStorage.getItem('token');
 
-    fetch('http://localhost:9000/api/users/getTransit', {
+    fetch('http://velocitydash.com/api/users/getTransit', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

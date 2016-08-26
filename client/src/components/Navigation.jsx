@@ -14,7 +14,7 @@ class Navigation extends React.Component {
       <Navbar className="navigation" fixedTop={true}>
         <Navbar.Header className="nav-icons">
           <Navbar.Brand>
-            <a href="http://localhost:9000" target="_blank">
+            <a href="http://velocitydash.com" target="_blank">
             <Glyphicon glyph="list-alt" />
             </a>
           </Navbar.Brand>

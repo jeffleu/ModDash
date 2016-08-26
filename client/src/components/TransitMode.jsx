@@ -27,7 +27,7 @@ class Setting extends React.Component {
     var token = localStorage.getItem('token');
     var settings = { transitMode: this.state.selectedTransitMode };
 
-    fetch('http://localhost:9000/api/users/updateTransit', {
+    fetch('http://velocitydash.com/api/users/updateTransit', {
       method: 'POST',
       body: JSON.stringify(settings),
       mode: 'cors-with-forced-preflight',
