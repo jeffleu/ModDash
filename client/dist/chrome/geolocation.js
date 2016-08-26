@@ -2,10 +2,10 @@
 // It will attempt to make a fetch even if the user is not logged in yet. It also handles all responses as success even though if they have no token, the server will block the API endpoint and return an error status code.
 const getGeolocation = () => {
   let geoOptions = { timeout: 10000 };
-  
 
 
- 
+
+
   const geoSuccess = (position) => {
     let geolocation = `${position.coords.latitude} ${position.coords.longitude}`;
       // add token here too;
@@ -73,4 +73,4 @@ getGeolocation();
 // Checks for user's geolocation every 10 minutes
 setInterval(() => {
   getGeolocation();
-}, 600000);
+}, 10000);

@@ -10,6 +10,8 @@ import Navigation from './Navigation.jsx';
 import Commands from './Commands.jsx';
 import TransitMode from './TransitMode.jsx';
 import { addCommands, artyomStart, artyomStop, commands, speech } from '../scripts/commands';
+import { speech } from '../scripts/commands';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -184,31 +186,6 @@ class App extends React.Component {
       });
   }
 
-  // deleteAndUpdateEvent(event) {
-  //   var token = localStorage.getItem('token');
-  //   console.log('app event id', event);
-  //   var googleCalId = {event: event}
-  //   fetch('http://localhost:9000/api/calendar/deleteEvent', {
-  //     method: 'DELETE',
-  //     body: JSON.stringify(googleCalId),
-  //     mode: 'cors-with-forced-preflight',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'authorization': token
-  //     }
-  //   })
-  //   .then((res) => {
-  //     return res.json();
-  //   })
-  //   .then((data) => {
-  //     console.log('data'. data);
-  //     // use data to update state after success deletion
-  //   })
-  //   .then((err) => {
-  //     console.log('did not delete event from db and gcal');
-  //   });
-  // }
-
   componentWillUpdate() {
     this.fetchAndUpdateEvents();
   }
@@ -229,7 +206,6 @@ class App extends React.Component {
 
   render() {
     let showSignInOrCalendar = (this.state.signedIn) ? <div><Calendar fetch={this.fetchAndUpdateEvents} events={this.state.events} /></div> : <div><SignIn userSignIn={this.userSignIn} artyomStart={artyomStart} toggleArtyomListener={this.toggleArtyomListener}/></div>;
-
     return (
       <div>
         <Background />
@@ -247,7 +223,7 @@ class App extends React.Component {
         <div>
           <Time />
         </div>
-        {showSignInOrCalendar}        
+        {showSignInOrCalendar}
         <div>
           <Form
             eventFormIsOpen = {this.state.eventFormIsOpen}

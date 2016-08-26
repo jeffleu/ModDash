@@ -33,15 +33,14 @@ class SignIn extends React.Component {
       });
     });
   }
-  
-  // Logout functionality not currently used
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('channel');
-    // need to tell backend that we have logged out and that the current subscribed channel is no longer valid and to start polling for a new channel
-    // or no log out button and they just have to uninstall the extension
-    location.reload();
-  }
+
+  // logout() {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('channel');
+  //   // need to tell backend that we have logged out and that the current subscribed channel is no longer valid and to start polling for a new channel
+  //   // or no log out button and they just have to uninstall the extension
+  //   location.reload();
+  // }
 
   render() {
     return (
