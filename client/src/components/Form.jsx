@@ -18,7 +18,6 @@ class Form extends React.Component {
       repeatEvery: '',
       days: [],
       recIsOpen: false,
-      artyomListening: true,
       dateFormatError: false,
       timeFormatError: false
     };
@@ -35,17 +34,10 @@ class Form extends React.Component {
       this.props.toggleEventForm();
       this.setState(formData);
     });
-
-    // Set up commands
-    addCommands(commands);
-
-    // Start artyom listener
-    artyomStart();
   }
 
   clickRecur() {
     (this.state.recIsOpen === false) ? this.setState({ recIsOpen: true, repeat: 'DAILY' }) : this.setState({ recIsOpen: false, repeat: '' });
-
   }
 
   clearAndToggleForm() {
@@ -62,16 +54,6 @@ class Form extends React.Component {
       repeatEvery: '',
       days: []
     });
-  }
-
-  toggleArtyomListener() {
-    if (this.state.artyomListening) {
-      artyomStop();
-      this.setState({ artyomListening: false });
-    } else {
-      artyomStart();
-      this.setState({ artyomListening: true });
-    }
   }
 
   dateFormatValid(date) {
@@ -241,17 +223,16 @@ class Form extends React.Component {
         };
       }
 
+      let token = localStorage.getItem('token');
 
-    let token = localStorage.getItem('token');
-
-    // Post event to Google Calendar API
-    fetch('http://localhost:9000/api/calendar/addEvent', {
-      method: 'POST',
-      body: JSON.stringify(event),
-      mode: 'cors-with-forced-preflight',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': token
+      // Post event to Google Calendar API
+      fetch('http://localhost:9000/api/calendar/addEvent', {
+        method: 'POST',
+        body: JSON.stringify(event),
+        mode: 'cors-with-forced-preflight',
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': token
         }
       }).then((res) => {
         if (res.status === 200) { this.props.refreshEvents(); }

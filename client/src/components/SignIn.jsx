@@ -4,10 +4,13 @@ import { Button } from 'react-bootstrap';
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
+    this.login = this.login.bind(this);
   }
 
   login() {
-    chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+    var props = this.props;
+
+    chrome.identity.getAuthToken({ 'interactive': true }, (token) => {
       console.log('chrome identity token:', token);
       fetch('http://localhost:9000/auth', {
         method: 'POST',
@@ -15,22 +18,23 @@ class SignIn extends React.Component {
         mode: 'cors-with-forced-preflight',
         headers: {'Content-Type': 'application/json'}
       })
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.url) {
           // not found in database, so go to googleCal web auth url that is returned from server
           location.assign(data.url);
         } else {
           localStorage.setItem('token', data.token);
           localStorage.setItem('channel', data.channel);
-          location.reload();
+
+          props.userSignIn();
+          props.toggleArtyomListener();
         }
       });
     });
   }
   
+  // Logout functionality not currently used
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('channel');
@@ -40,13 +44,11 @@ class SignIn extends React.Component {
   }
 
   render() {
-    let signInButton = <img className="signin" src="/assets/google_signin.png" onClick={this.login}/>
-
     return (
       <div>
-        {localStorage.getItem('token') ? null : signInButton}
+        <img className="signin" src="/assets/google_signin.png" onClick={this.login}/>
       </div>
-    )
+    );
   }
 }
 
