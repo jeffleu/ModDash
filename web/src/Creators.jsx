@@ -13,7 +13,7 @@ class Creators extends React.Component {
           </CustomerQuote>
           <CustomerQuote name="Derek Hoang" title="Velocity co-creator" imageUrl="./assets/derek_hoang_square1.jpg">
             <p>
-            Apps should be useful for everyday users. Velocity utilizes the Google Maps API so you don't need to look up directions or traffic. We'll tell you when and where you'll need to be!
+            Our app efficiently saves users time from checking their google calendar and maps for directions, traffic, and arrival time. Users will never have to worry about arriving late to an event again. We'll tell you when and where you'll need to be!
             </p>
           </CustomerQuote>
           <CustomerQuote name="Jeff Leu" title="Velocity co-creator" imageUrl="./assets/jeff_leu_square1.jpg">
