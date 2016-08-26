@@ -23,9 +23,6 @@ class Time extends React.Component {
   }
 
   render() {
-    // console.log(this.state.date);
-    // const time = moment().format(this.state.date);
-    // const time = moment().format()
     return (
       <div className='today'>
         <div className='time'>
@@ -35,8 +32,5 @@ class Time extends React.Component {
     );
   }
 }
-      //  <div className='date'>
-        //  {this.state.date}
-        // </div>
-
+  
 export default Time;

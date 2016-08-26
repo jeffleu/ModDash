@@ -5,7 +5,7 @@ class Background extends React.Component {
     super(props);
     this.state = {
       background: 5
-    }
+    };
   }
 
   componentDidMount() {
@@ -21,7 +21,7 @@ class Background extends React.Component {
       <div>
         <div className="background" style={{"backgroundImage": `url(./assets/backgrounds/space${this.state.background}.jpeg)`}}>
         </div>
-      </div> 
+      </div>
     );
   }
 
