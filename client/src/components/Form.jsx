@@ -100,7 +100,7 @@ class Form extends React.Component {
     if (hour < 1 || hour > 12) { return false; }
     if (minute < 0 || minute > 59) { return false; }
 
-    if (amPm === 'AM' || amPm === 'PM') {
+    if (amPm === 'am' || amPm === 'AM' || amPm === 'pm' || amPm === 'PM') {
       // do nothing
     } else {
       return false;
@@ -176,7 +176,7 @@ class Form extends React.Component {
 
     // TO DO: Use geolocation to update timeZone automatically
 
-    // If both date and time are invalid, set error for both to true
+    // Form validation to check for date and/or time in incorrect format
     if (!this.dateFormatValid(this.state.startDate) && !this.timeFormatValid(this.state.startTime)) {
       console.log('Error in both date and time format.');
       this.setState({
@@ -197,7 +197,7 @@ class Form extends React.Component {
       this.setState({ timeFormatError: false });
     }
 
-    // If both date and time are valid, create event object and pass to postToGoogleCalendar
+    // If both date and time are valid, post to Google Calendar API
     if (this.dateFormatValid(this.state.startDate) && this.timeFormatValid(this.state.startTime)) {
       // Create event object with Form's state
       let date = this.convertDate(this.state.startDate);
@@ -252,7 +252,6 @@ class Form extends React.Component {
       this.clearAndToggleForm();
     }
   }
-
 
   render() {
 
