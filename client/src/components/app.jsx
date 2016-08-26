@@ -11,6 +11,8 @@ import Commands from './Commands.jsx';
 import TransitMode from './TransitMode.jsx';
 import { addCommands, artyomStart, artyomStop, commands, speech } from '../scripts/commands';
 import { speech } from '../scripts/commands';
+import getUserLocation from '../scripts/getCurrentLocation';
+
 
 
 class App extends React.Component {
