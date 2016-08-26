@@ -14,7 +14,7 @@ class Form extends React.Component {
       startTime: '',
       endDate: '',
       endTime: '',
-      repeat: 'DAILY',
+      repeat: '',
       repeatEvery: '',
       days: [],
       recIsOpen: false,
@@ -44,7 +44,8 @@ class Form extends React.Component {
   }
 
   clickRecur() {
-    (this.state.recIsOpen === false) ? this.setState({ recIsOpen: true }) : this.setState({ recIsOpen: false });
+    (this.state.recIsOpen === false) ? this.setState({ recIsOpen: true, repeat: 'DAILY' }) : this.setState({ recIsOpen: false, repeat: '' });
+
   }
 
   clearAndToggleForm() {
@@ -114,7 +115,7 @@ class Form extends React.Component {
     let month = (Number(dateSplit[0]) < 10) ? `0${Number(dateSplit[0])}` : `${Number(dateSplit[0])}`;
     let day = (Number(dateSplit[1]) < 10) ? `0${Number(dateSplit[1])}` : `${Number(dateSplit[1])}`;
     let year = Number(dateSplit[2]);
-      
+
     return `${year}-${month}-${day}`;
   }
 
@@ -184,7 +185,7 @@ class Form extends React.Component {
         timeFormatError: true
       });
     }
-    
+
     if (!this.dateFormatValid(this.state.startDate) && !this.state.dateFormatError) {
       this.setState({ dateFormatError: true });
     } else if (this.dateFormatValid(this.state.startDate) && this.state.dateFormatError) {
@@ -202,8 +203,14 @@ class Form extends React.Component {
       // Create event object with Form's state
       let date = this.convertDate(this.state.startDate);
       let time = this.convertToMilitaryTime(this.state.startTime);
-      let recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;    
-      
+      var recur;
+
+      if (this.state.repeat !== 'WEEKLY') {
+        recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};`;
+      } else {
+        recur = `RRULE:FREQ=${this.state.repeat};COUNT=${this.state.repeatEvery};BYDAY=${this.state.days.map((day) => day)}`;
+      }
+
       let event;
       if (this.state.recIsOpen === false) {
         event = {
@@ -234,16 +241,17 @@ class Form extends React.Component {
         };
       }
 
-      let token = localStorage.getItem('token');
 
-      // Post event to Google Calendar API
-      fetch('http://localhost:9000/api/calendar/addEvent', {
-        method: 'POST',
-        body: JSON.stringify(event),
-        mode: 'cors-with-forced-preflight',
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': token
+    let token = localStorage.getItem('token');
+
+    // Post event to Google Calendar API
+    fetch('http://localhost:9000/api/calendar/addEvent', {
+      method: 'POST',
+      body: JSON.stringify(event),
+      mode: 'cors-with-forced-preflight',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': token
         }
       }).then((res) => {
         if (res.status === 200) { this.props.refreshEvents(); }
@@ -287,19 +295,20 @@ class Form extends React.Component {
                     <option value="28">28</option><option value="29">29</option><option value="30">30</option>
                   </select>
                   {day()} <br/>
-                    <div>
-                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='MO'/>Monday</label>
-                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TU'/>Tuesday</label>
-                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='WE'/>Wednesday</label>
-                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TH'/>Thursday</label>
-                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='FR'/>Friday</label>
-                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SA'/>Saturday</label>
-                      <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SU'/>Sunday</label>
-                    </div>
                 </div>;
 
     var dateErrorMessage = (this.state.dateFormatError) ? 'Date in incorrect format' : '';
     var timeErrorMessage = (this.state.timeFormatError) ? 'Time in incorrect format' : '';
+
+    var displayDays = <div>
+          <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='MO'/>Monday</label>
+          <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TU'/>Tuesday</label>
+          <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='WE'/>Wednesday</label>
+          <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='TH'/>Thursday</label>
+          <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='FR'/>Friday</label>
+          <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SA'/>Saturday</label>
+          <label><input className='checkbox' onChange={this.handleChange} type='checkbox' value='SU'/>Sunday</label>
+        </div>;
 
     return (
       <div>
@@ -330,6 +339,7 @@ class Form extends React.Component {
                 {timeErrorMessage}
               </div>
               {this.state.recIsOpen ? displayRecur : null}
+              {this.state.repeat === 'WEEKLY' && this.state.recIsOpen ? displayDays : null }
             </form>
           </Modal.Body>
           <Modal.Footer>
