@@ -99,7 +99,9 @@ class App extends React.Component {
     .then((res) => res.json())
       .then((data) => {
         let eventList = data.map((event) => {
-          event.startdatetime = moment(event.startdatetime).format('LT');
+          console.log('event', event.startdatetime);
+
+          // event.startdatetime = moment(event.startdatetime).format('LT');
           return {
             eventName: event.name,
             location: event.location,
@@ -109,31 +111,17 @@ class App extends React.Component {
           };
         });
 
+        console.log('dinner', eventList[0], moment(eventList[0].startdatetime).format('YYYY-MM-DD'));
+        console.log('late night snack', eventList[1], moment(eventList[1].startdatetime).format('YYYY-MM-DD'));
+
+        console.log('Is dinner less than late night snack?', moment(eventList[0].startdatetime).format('l') < moment(eventList[1].startdatetime).format('l'));
+
         // SORTING NEEDS TO SORT BY DATE AS WELL, NOT JUST TIME
         this.sortAndUpdateEvents(eventList);
       })
     .catch((err) => {
       console.log('Error retrieving events', err);
     });
-  }
-
-  displayTransitMode() {
-    var token = localStorage.getItem('token');
-
-    fetch('http://localhost:9000/api/users/getTransit', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': token
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ transitMode: data.transitmode });
-      })
-      .catch((err) => {
-        console.log('Did not get User info', err);
-      });
   }
 
   // SORTING NEEDS TO SORT BY DATE AS WELL, NOT JUST TIME
@@ -156,6 +144,25 @@ class App extends React.Component {
 
     // Update the state with sorted events
     this.setState({ events: sortedEvents });
+  }
+
+  displayTransitMode() {
+    var token = localStorage.getItem('token');
+
+    fetch('http://localhost:9000/api/users/getTransit', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': token
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ transitMode: data.transitmode });
+      })
+      .catch((err) => {
+        console.log('Did not get User info', err);
+      });
   }
 
   // deleteAndUpdateEvent(event) {
