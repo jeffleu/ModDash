@@ -4,6 +4,8 @@ Velocity is a smart voice-activated dashboard. It integrates your Google Calenda
 
 Velocity is listening to your commands, just say what event you want to add and the dashboard will automatically insert it into your calendar. You can also search the whole internet just with your voice!
 
+![Velocity Dash screenshot](http://image-store.slidesharecdn.com/b518bc75-2c59-4299-941d-22be1ee036ec-large.png)
+
 [Download it in the Chrome store](https://chrome.google.com/webstore/detail/velocity-dashboard/fllacnobnahiecimbbehfbiilpmhnmkk?hl=en-US&gl=US&authuser=2)
 
 ## Team
